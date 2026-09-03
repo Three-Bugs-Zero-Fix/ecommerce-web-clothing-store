@@ -1,63 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login & Signup Form</title>
-  <link rel="stylesheet" href="auth.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Log in — Clothing Store</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../css/auth.css" />
 </head>
 <body>
 
-  <div class="wrapper">
-    <div class="title-text">
-      <div class="title login">Login Form</div>
-      <div class="title signup">Signup Form</div>
+<div class="auth-shell">
+  <div class="auth-side">
+    <div class="brand-mark">CLOTHING&nbsp;CO.</div>
+    <div>
+      <div class="auth-side-copy">Welcome back. Your cart and wishlist are exactly where you left them.</div>
+      <div class="auth-side-sub">Sign in to check order status, reorder favorites, and check out faster.</div>
     </div>
-    <div class="form-container">
-      <div class="slide-controls">
-        <input type="radio" name="slide" id="login" checked>
-        <input type="radio" name="slide" id="signup">
-        <label for="login" class="slide login">Login</label>
-        <label for="signup" class="slide signup">Signup</label>
-        <div class="slider-tab"></div>
-      </div>
-      <div class="form-inner">
-        
-        <form action="#" method="POST" class="login">
-          <div class="field">
-            <input type="email" name="email" placeholder="Email Address" required>
-          </div>
-          <div class="field">
-            <input type="password" name="password" placeholder="Password" required>
-          </div>
-          <div class="pass-link"><a href="#">Forgot password?</a></div>
-          <div class="field btn">
-            <div class="btn-layer"></div>
-            <input type="submit" value="Login">
-          </div>
-          <div class="signup-link">Not a member? <a href="#">Signup now</a></div>
-        </form>
-
-        <form action="#" method="POST" class="signup">
-          <div class="field">
-            <input type="email" name="email" placeholder="Email Address" required>
-          </div>
-          <div class="field">
-            <input type="password" name="password" placeholder="Password" required>
-          </div>
-          <div class="field">
-            <input type="password" name="confirm_password" placeholder="Confirm password" required>
-          </div>
-          <div class="field btn">
-            <div class="btn-layer"></div>
-            <input type="submit" value="Signup">
-          </div>
-        </form>
-
-      </div>
-    </div>
+    <div></div>
   </div>
 
-  <script src="auth.js"></script>
+  <div class="auth-main">
+    <div class="auth-title">Log in</div>
+    <div class="auth-subtitle">New here? <a href="register.html">Create an account</a></div>
+
+    <div class="error-msg" id="error-msg"></div>
+    <div class="success-msg" id="success-msg"></div>
+
+    <form id="login-form" novalidate>
+      <div class="field">
+        <label for="email">Email address</label>
+        <input type="email" id="email" autocomplete="email" required />
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <div class="field-input-wrap">
+          <input type="password" id="password" autocomplete="current-password" required />
+          <button type="button" class="toggle-pass" id="toggle-pass">Show</button>
+        </div>
+      </div>
+
+      <div class="field-row-between">
+        <span></span>
+        <button type="button" class="link-btn" id="forgot-btn">Forgot password?</button>
+      </div>
+
+      <button type="submit" class="btn-primary" id="login-btn">Log in</button>
+    </form>
+
+    <div class="divider">or</div>
+    <a href="../index.html" class="btn-outline">Continue as guest</a>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+<script src="../js/firebase.js"></script>
+<script src="../js/auth.js"></script>
+<script>
+  // If already logged in, skip straight to the profile page
+  redirectIfSignedIn("../index.html");
+
+  const form = document.getElementById("login-form");
+  const errorMsg = document.getElementById("error-msg");
+  const successMsg = document.getElementById("success-msg");
+  const loginBtn = document.getElementById("login-btn");
+  const togglePass = document.getElementById("toggle-pass");
+  const passwordInput = document.getElementById("password");
+  const forgotBtn = document.getElementById("forgot-btn");
+
+  togglePass.addEventListener("click", () => {
+    const isPassword = passwordInput.type === "password";
+    passwordInput.type = isPassword ? "text" : "password";
+    togglePass.textContent = isPassword ? "Hide" : "Show";
+  });
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    showError(errorMsg, "");
+    showError(successMsg, "");
+
+    const email = document.getElementById("email").value.trim();
+    const password = passwordInput.value;
+
+    setFormLoading(loginBtn, true, "Logging in…", "Log in");
+    try {
+      await loginUser({ email, password });
+      window.location.href = "../index.html";
+    } catch (err) {
+      showError(errorMsg, friendlyAuthError(err));
+    } finally {
+      setFormLoading(loginBtn, false, "Logging in…", "Log in");
+    }
+  });
+
+  forgotBtn.addEventListener("click", async () => {
+    const email = document.getElementById("email").value.trim();
+    showError(errorMsg, "");
+    showError(successMsg, "");
+    if (!email) {
+      showError(errorMsg, "Enter your email above first, then click 'Forgot password?' again.");
+      return;
+    }
+    try {
+      await sendResetEmail(email);
+      showError(successMsg, `Password reset email sent to ${email}.`);
+    } catch (err) {
+      showError(errorMsg, friendlyAuthError(err));
+    }
+  });
+</script>
 </body>
 </html>

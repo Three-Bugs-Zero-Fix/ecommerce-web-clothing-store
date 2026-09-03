@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My account — Clothing Store</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../css/auth.css" />
+</head>
+<body>
+
+<div id="loading" class="loading-shell">Checking your session…</div>
+
+<div class="profile-shell" id="profile-shell" style="display:none;">
+  <div class="profile-header">
+    <div class="avatar" id="avatar">?</div>
+    <div>
+      <div class="profile-name" id="profile-name">—</div>
+      <div class="profile-email" id="profile-email">—</div>
+    </div>
+  </div>
+
+  <div class="error-msg" id="error-msg"></div>
+  <div class="success-msg" id="success-msg"></div>
+
+  <div class="profile-section">
+    <div class="profile-section-title">Edit name</div>
+    <div class="field">
+      <label for="edit-name">Full name</label>
+      <input type="text" id="edit-name" />
+    </div>
+    <button class="btn-primary" id="save-name-btn" style="width:auto;padding:10px 22px;">Save changes</button>
+  </div>
+
+  <div class="profile-section">
+    <div class="profile-section-title">Orders</div>
+    <a href="orders.html" class="btn-outline">View order history</a>
+  </div>
+
+  <div class="profile-actions">
+    <button class="btn-danger-outline" id="logout-btn">Log out</button>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+<script src="../js/firebase.js"></script>
+<script src="../js/auth.js"></script>
+<script>
+  const loading = document.getElementById("loading");
+  const shell = document.getElementById("profile-shell");
+  const errorMsg = document.getElementById("error-msg");
+  const successMsg = document.getElementById("success-msg");
+
+  requireAuth("login.html").then((user) => {
+    loading.style.display = "none";
+    shell.style.display = "block";
+
+    const name = user.displayName || "";
+    document.getElementById("profile-name").textContent = name || "Unnamed customer";
+    document.getElementById("profile-email").textContent = user.email;
+    document.getElementById("edit-name").value = name;
+    document.getElementById("avatar").textContent = (name || user.email || "?").charAt(0).toUpperCase();
+  });
+
+  document.getElementById("save-name-btn").addEventListener("click", async () => {
+    showError(errorMsg, "");
+    showError(successMsg, "");
+    const newName = document.getElementById("edit-name").value.trim();
+    if (!newName) {
+      showError(errorMsg, "Name can't be empty.");
+      return;
+    }
+    try {
+      await updateDisplayName(newName);
+      document.getElementById("profile-name").textContent = newName;
+      document.getElementById("avatar").textContent = newName.charAt(0).toUpperCase();
+      showError(successMsg, "Profile updated.");
+    } catch (err) {
+      showError(errorMsg, friendlyAuthError(err));
+    }
+  });
+
+  document.getElementById("logout-btn").addEventListener("click", async () => {
+    await logoutUser();
+    window.location.href = "login.html";
+  });
+</script>
+</body>
+</html>
