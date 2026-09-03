@@ -187,28 +187,47 @@ button {
     background: #ffffff;
     border: 1px solid #d8e4ef;
 }
-
 .category-image {
+    position: relative;
     height: 230px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #eef7ff;
-    color: #7896ae;
-    font-size: 12px;
+    overflow: hidden;
+    background: #111;
 }
 
-.category-content {
-    padding: 15px;
+.category-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
-.category-content h3 {
+/* Dark overlay so text stays readable */
+.category-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.75),
+        rgba(0, 0, 0, 0.05)
+    );
+}
+
+.category-overlay {
+    position: absolute;
+    left: 20px;
+    bottom: 18px;
+    z-index: 2;
+    color: #ffffff;
+}
+
+.category-overlay h3 {
     margin-bottom: 4px;
-    font-size: 18px;
+    font-size: 22px;
 }
 
-.category-content p {
-    color: #1769aa;
+.category-overlay p {
+    color: #ffffff;
     font-size: 12px;
 }
 

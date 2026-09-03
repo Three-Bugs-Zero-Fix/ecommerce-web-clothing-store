@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Products - BlueWear Admin</title>
+
+<link rel="stylesheet" href="../css/admin-products.css">
+
+</head>
+
+<body>
+
+<!-- ADMIN HEADER -->
+<header class="admin-header">
+
+    <div class="admin-header-inner">
+
+        <a href="admin-products.html" class="admin-logo">
+            BLUEWEAR
+        </a>
+
+        <div class="admin-title">
+            Admin Panel
+        </div>
+
+        <a href="../index.html" class="view-store-btn">
+            View Store
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- MAIN -->
+<main class="admin-main">
+
+    <div class="admin-container">
+
+        <!-- PAGE HEADER -->
+        <div class="page-header">
+
+            <div>
+                <p class="page-label">PRODUCT MANAGEMENT</p>
+
+                <h1>Products</h1>
+
+                <p class="page-description">
+                    Add, edit and manage all products in your store.
+                </p>
+            </div>
+
+            <a href="admin-add-product.html" class="add-product-btn">
+                + Add Product
+            </a>
+
+        </div>
+
+
+        <!-- TOOLBAR -->
+        <div class="products-toolbar">
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="product-search"
+                    placeholder="Search products..."
+                >
+
+            </div>
+
+
+            <div class="filter-box">
+
+                <select id="category-filter">
+
+                    <option value="all">
+                        All Categories
+                    </option>
+
+                    <option value="Men">
+                        Men
+                    </option>
+
+                    <option value="Women">
+                        Women
+                    </option>
+
+                    <option value="Kids">
+                        Kids
+                    </option>
+
+                    <option value="Accessories">
+                        Accessories
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT COUNT -->
+        <div class="products-info">
+
+            <p id="product-count">
+                Loading products...
+            </p>
+
+        </div>
+
+
+        <!-- PRODUCTS TABLE -->
+        <div class="products-table-wrapper">
+
+            <table class="products-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Product</th>
+
+                        <th>Category</th>
+
+                        <th>Price</th>
+
+                        <th>Stock</th>
+
+                        <th>Status</th>
+
+                        <th>Actions</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="products-table-body">
+
+                    <tr>
+
+                        <td colspan="6" class="loading-cell">
+                            Loading products...
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- EMPTY STATE -->
+        <div class="empty-products" id="empty-products">
+
+            <h2>No products found</h2>
+
+            <p>
+                There are no products matching your search.
+            </p>
+
+            <a href="admin-add-product.html" class="add-product-btn">
+                Add Your First Product
+            </a>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- DELETE CONFIRMATION -->
+<div class="delete-modal-overlay" id="delete-modal">
+
+    <div class="delete-modal">
+
+        <h2>Delete Product?</h2>
+
+        <p>
+            Are you sure you want to delete this product?
+            This action cannot be undone.
+        </p>
+
+        <div class="delete-modal-actions">
+
+            <button
+                type="button"
+                class="cancel-delete-btn"
+                id="cancel-delete"
+            >
+                Cancel
+            </button>
+
+            <button
+                type="button"
+                class="confirm-delete-btn"
+                id="confirm-delete"
+            >
+                Delete
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+
+<script src="../js/firebase.js"></script>
+
+<script src="../js/auth.js"></script>
+
+<!-- ADMIN PRODUCTS JS -->
+<script src="../js/admin-products.js"></script>
+
+</body> </html>

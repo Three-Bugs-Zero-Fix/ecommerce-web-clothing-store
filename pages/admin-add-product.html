@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Add Product - BlueWear Admin</title>
+
+<link rel="stylesheet" href="../css/admin-add-product.css">
+
+</head>
+
+<body>
+
+<!-- ADMIN HEADER -->
+<header class="admin-header">
+
+    <div class="admin-header-inner">
+
+        <a href="admin-products.html" class="admin-logo">
+            BLUEWEAR
+        </a>
+
+        <div class="admin-title">
+            Add Product
+        </div>
+
+        <a href="admin-products.html" class="view-store-btn">
+            Back to Products
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- MAIN -->
+<main class="admin-main">
+
+    <div class="admin-container">
+
+        <div class="page-header">
+
+            <div>
+                <p class="page-label">PRODUCT MANAGEMENT</p>
+
+                <h1>Add Product</h1>
+
+                <p class="page-description">
+                    Add a new product to your BlueWear store.
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT FORM -->
+        <form id="product-form" class="product-form">
+
+            <!-- BASIC INFORMATION -->
+            <div class="form-section">
+
+                <h2>Basic Information</h2>
+
+                <div class="form-group">
+
+                    <label for="product-name">
+                        Product Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="product-name"
+                        placeholder="Example: Classic Blue T-Shirt"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="product-description">
+                        Description
+                    </label>
+
+                    <textarea
+                        id="product-description"
+                        rows="5"
+                        placeholder="Describe the product..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="product-category">
+                            Category
+                        </label>
+
+                        <select id="product-category" required>
+
+                            <option value="">
+                                Select category
+                            </option>
+
+                            <option value="Men">
+                                Men
+                            </option>
+
+                            <option value="Women">
+                                Women
+                            </option>
+
+                            <option value="Kids">
+                                Kids
+                            </option>
+
+                            <option value="Accessories">
+                                Accessories
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="product-price">
+                            Price (৳)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="product-price"
+                            min="0"
+                            step="1"
+                            placeholder="650"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT OPTIONS -->
+            <div class="form-section">
+
+                <h2>Product Options</h2>
+
+                <div class="form-group">
+
+                    <label>
+                        Sizes
+                    </label>
+
+                    <div class="checkbox-group">
+
+                        <label>
+                            <input type="checkbox" name="sizes" value="S">
+                            S
+                        </label>
+
+                        <label>
+                            <input type="checkbox" name="sizes" value="M">
+                            M
+                        </label>
+
+                        <label>
+                            <input type="checkbox" name="sizes" value="L">
+                            L
+                        </label>
+
+                        <label>
+                            <input type="checkbox" name="sizes" value="XL">
+                            XL
+                        </label>
+
+                        <label>
+                            <input type="checkbox" name="sizes" value="XXL">
+                            XXL
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="product-colors">
+                        Colors
+                    </label>
+
+                    <input
+                        type="text"
+                        id="product-colors"
+                        placeholder="Blue, Black, White"
+                    >
+
+                    <small>
+                        Separate multiple colors with commas.
+                    </small>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="product-stock">
+                        Stock
+                    </label>
+
+                    <input
+                        type="number"
+                        id="product-stock"
+                        min="0"
+                        step="1"
+                        placeholder="50"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- IMAGES -->
+            <div class="form-section">
+
+                <h2>Product Images</h2>
+
+                <div class="form-group">
+
+                    <label for="product-images">
+                        Image URLs
+                    </label>
+
+                    <textarea
+                        id="product-images"
+                        rows="4"
+                        placeholder="https://example.com/image1.jpg
+
+https://example.com/image2.jpg"
+></textarea>
+
+                    <small>
+                        Add one image URL per line.
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT STATUS -->
+            <div class="form-section">
+
+                <h2>Product Status</h2>
+
+                <div class="checkbox-single">
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            id="product-featured"
+                        >
+
+                        Featured product
+                    </label>
+
+                </div>
+
+
+                <div class="checkbox-single">
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            id="product-sale"
+                        >
+
+                        On sale
+                    </label>
+
+                </div>
+
+
+                <div
+                    class="form-group"
+                    id="sale-price-group"
+                    style="display: none;"
+                >
+
+                    <label for="product-sale-price">
+                        Sale Price (৳)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="product-sale-price"
+                        min="0"
+                        step="1"
+                        placeholder="500"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- MESSAGES -->
+            <div
+                class="form-message error-message"
+                id="error-message"
+            ></div>
+
+            <div
+                class="form-message success-message"
+                id="success-message"
+            ></div>
+
+
+            <!-- ACTIONS -->
+            <div class="form-actions">
+
+                <a
+                    href="admin-products.html"
+                    class="cancel-btn"
+                >
+                    Cancel
+                </a>
+
+                <button
+                    type="submit"
+                    class="save-product-btn"
+                    id="save-product-btn"
+                >
+                    Add Product
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</main>
+
+
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+
+<script src="../js/firebase.js"></script>
+
+<script src="../js/auth.js"></script>
+
+<script src="../js/admin-add-product.js"></script>
+
+</body>
+
+</html>

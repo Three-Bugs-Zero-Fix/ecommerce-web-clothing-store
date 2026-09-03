@@ -185,6 +185,19 @@
     font-weight: 700;
 }
 
+.old-price {
+    text-decoration: line-through;
+    color: #888;
+    margin-right: 8px;
+    font-size: 14px;
+}
+
+.sale-price {
+    color: #1769aa;
+    font-weight: 700;
+}
+
+
 
 /* ================================
    TABLET
@@ -200,6 +213,7 @@
     .shop-products .product-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
 
 }
 
@@ -251,4 +265,3 @@
     }
 
 }
-
