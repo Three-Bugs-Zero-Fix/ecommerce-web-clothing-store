@@ -235,7 +235,7 @@ function applySorting() {
 
 
 /* =========================
-    DISPLAY PRODUCTS 
+   DISPLAY PRODUCTS 
 ========================= */
 
 function displayProducts() {
