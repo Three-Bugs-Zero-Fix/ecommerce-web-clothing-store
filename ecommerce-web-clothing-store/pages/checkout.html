@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - BlueWear</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/checkout.css">
+</head>
+<body>
+
+    <!-- NAVBAR (Standard Layout) -->
+    <header class="navbar">
+        <div class="container navbar-inner">
+            <a href="../index.html" class="logo">BLUEWEAR</a>
+            <div class="nav-actions">
+                <a href="cart.html" class="cart-btn" style="text-decoration: none; display: flex; align-items: center;">
+                    Cart (<span id="nav-cart-count">0</span>)
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- CHECKOUT MAIN SECTION -->
+    <main class="container checkout-page" style="display: none;" id="checkout-main">
+        <div class="checkout-header">
+            <h1>Checkout</h1>
+        </div>
+
+        <div class="checkout-layout">
+            
+            <!-- Left Side: Shipping & Payment Form -->
+            <div class="checkout-form-section">
+                <form id="checkout-form">
+                    
+                    <h3>Shipping Information</h3>
+                    
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="ship-name" required placeholder="e.g. John Doe">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="ship-phone" required placeholder="017XXXXXXXX">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Delivery Address</label>
+                        <textarea id="ship-address" rows="3" required placeholder="House, Road, Area"></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>City</label>
+                            <input type="text" id="ship-city" required placeholder="Dhaka">
+                        </div>
+                        <div class="form-group">
+                            <label>Postal Code</label>
+                            <input type="text" id="ship-zip" required placeholder="1200">
+                        </div>
+                    </div>
+
+                    <!-- Updated Payment Methods -->
+                    <h3>Payment Method</h3>
+                    <div class="payment-methods-container">
+    
+                        <label class="payment-method">
+                        <input type="radio" name="payment" value="COD" checked>
+                            Cash on Delivery (COD)
+                        </label>
+
+                        <label class="payment-method">
+                        <input type="radio" name="payment" value="bKash">
+                            bKash
+                        </label>
+
+                        <label class="payment-method">
+                        <input type="radio" name="payment" value="SSLCOMMERZ">
+                            SSLCOMMERZ (Visa / MasterCard)
+                        </label>
+
+                    </div>
+
+                    <button type="submit" class="primary-btn place-order-btn" id="place-order-btn">
+                        Place Order
+                    </button>
+                </form>
+            </div>
+
+            <!-- Right Side: Order Summary -->
+            <div class="checkout-summary-section">
+                <h3>Order Summary</h3>
+                <div id="checkout-items-container">
+                    <!-- JS will load items here -->
+                </div>
+                
+                <hr class="summary-divider">
+
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="checkout-subtotal">৳0</span>
+                </div>
+                
+                <div class="summary-row">
+                    <span>Shipping Fee</span>
+                    <span id="checkout-shipping">৳60</span>
+                </div>
+                
+                <hr class="summary-divider">
+                
+                <div class="summary-row summary-total">
+                    <span>Total</span>
+                    <span id="checkout-total">৳0</span>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Loading Screen (Shows while checking auth) -->
+    <div id="auth-loading" style="text-align: center; padding: 100px 0; font-size: 18px; color: #666;">
+        Checking secure connection...
+    </div>
+
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+    <script src="../js/firebase.js"></script>
+    
+    <!-- To get cart items -->
+    <script src="../js/cart.js"></script> 
+
+    <!-- Checkout logic -->
+    <script src="../js/checkout.js"></script> 
+    
+</body>
+</html>

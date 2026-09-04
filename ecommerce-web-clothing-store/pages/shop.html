@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shop - BlueWear</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/shop.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="container navbar-inner">
+
+            <a href="../index.html" class="logo">BLUEWEAR</a>
+
+            <nav class="nav-menu">
+                <a href="../index.html">Home</a>
+                <a href="shop.html" class="active">Shop</a>
+                <a href="../index.html#categories">Categories</a>
+                <a href="../index.html#about">About</a>
+            </nav>
+
+            <div class="nav-actions">
+
+                <button class="nav-btn" id="search-btn">
+                    Search
+                </button>
+
+                <!-- cart button updated -->
+                <a href="cart.html" class="cart-btn" id="cart-btn" style="text-decoration: none; display: flex; align-items: center;">
+                Cart (<span id="nav-cart-count">0</span>)
+                </a>
+
+                <a href="login.html" class="profile-btn">
+                    👤
+                </a>
+
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- SHOP HEADER -->
+    <main>
+
+        <section class="shop-header">
+
+            <div class="container">
+
+                <p class="label">OUR COLLECTION</p>
+
+                <h1>Shop All Products</h1>
+
+                <p>
+                    Explore our latest clothing collection for everyday style.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- SHOP CONTENT -->
+        <section class="shop-section">
+
+            <div class="container shop-layout">
+
+                <!-- SIDEBAR -->
+                <aside class="shop-sidebar">
+
+                    <!-- SEARCH -->
+                    <div class="filter-group">
+
+                        <h3>Search</h3>
+
+                        <input type="text" id="shop-search" class="shop-search" placeholder="Search products...">
+
+                    </div>
+
+
+                    <!-- CATEGORY FILTER -->
+                    <div class="filter-group">
+
+                        <h3>Categories</h3>
+
+                        <label>
+                            <input type="checkbox" name="category" class="category-filter" value="Men">
+                            Men
+                        </label>
+
+                        <label>
+                            <input type="checkbox" name="category" class="category-filter" value="Women">
+                            Women
+                        </label>
+
+                        <label>
+                            <input type="checkbox" name="category" class="category-filter" value="Kids">
+                            Kids
+                        </label>
+
+                        <label>
+                            <input type="checkbox" name="category" class="category-filter" value="Accessories">
+                            Accessories
+                        </label>
+
+                    </div>
+
+
+                    <!-- PRICE FILTER -->
+                    <div class="filter-group">
+
+                        <h3>Price</h3>
+
+                        <label>
+                            <input type="radio" name="price" class="price-filter" value="under-500">
+                            Under ৳500
+                        </label>
+
+                        <label>
+                            <input type="radio" name="price" class="price-filter" value="500-1000">
+                            ৳500 - ৳1000
+                        </label>
+
+                        <label>
+                            <input type="radio" name="price" class="price-filter" value="1000-2000">
+                            ৳1000 - ৳2000
+                        </label>
+
+                        <label>
+                            <input type="radio" name="price" class="price-filter" value="above-2000">
+                            Above ৳2000
+                        </label>
+
+                    </div>
+
+
+                    <!-- CLEAR FILTERS -->
+                    <button type="button" id="clear-filters" class="clear-filter-btn">
+                        Clear Filters
+                    </button>
+
+                </aside>
+
+
+                <!-- PRODUCTS -->
+                <div class="shop-products">
+
+                    <!-- TOOLBAR -->
+                    <div class="shop-toolbar">
+
+                        <p id="product-count">
+                            Loading products...
+                        </p>
+
+                        <select id="sort-products">
+
+                            <option value="default">
+                                Sort by
+                            </option>
+
+                            <option value="newest">
+                                Newest
+                            </option>
+
+                            <option value="price-low">
+                                Price: Low to High
+                            </option>
+
+                            <option value="price-high">
+                                Price: High to Low
+                            </option>
+
+                            <option value="name">
+                                Name: A-Z
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- PRODUCT GRID -->
+                    <div class="product-grid" id="product-grid">
+
+                        <!-- Products loaded from Firebase -->
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        <div class="container footer-inner">
+
+            <div class="footer-brand">
+
+                <h2>BLUEWEAR</h2>
+
+                <p>
+                    Simple clothing for everyday life.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>Shop</h3>
+
+                <a href="#">Men</a>
+                <a href="#">Women</a>
+                <a href="#">Kids</a>
+                <a href="#">Accessories</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>Help</h3>
+
+                <a href="#">Contact</a>
+                <a href="#">Shipping</a>
+                <a href="#">Returns</a>
+                <a href="#">FAQ</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>Company</h3>
+
+                <a href="#">About Us</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms</a>
+
+            </div>
+
+        </div>
+
+
+        <div class="container footer-bottom">
+
+            <p>
+                © 2026 BlueWear. All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    
+    <!-- FIREBASE -->
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+
+    <script src="../js/firebase.js"></script>
+
+    <script src="../js/shop.js"></script>
+
+    <!-- Added cart.js -->
+    <script src="../js/cart.js"></script>
+
+</body>
+
+</html>

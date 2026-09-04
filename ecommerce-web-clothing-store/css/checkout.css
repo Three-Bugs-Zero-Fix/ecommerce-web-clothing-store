@@ -1,0 +1,161 @@
+/* ============================================================
+   Styles for the secure checkout page.
+   ============================================================ */
+
+.checkout-page {
+    padding: 50px 0;
+}
+
+.checkout-header h1 {
+    font-size: 32px;
+    margin-bottom: 30px;
+    color: #172033;
+}
+
+.checkout-layout {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 40px;
+}
+
+/* ----- Form Section ----- */
+.checkout-form-section {
+    background: #ffffff;
+    padding: 30px;
+    border: 1px solid #d8e4ef;
+    border-radius: 8px;
+}
+
+.checkout-form-section h3 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #1769aa;
+    border-bottom: 1px solid #d8e4ef;
+    padding-bottom: 10px;
+    margin-top: 25px;
+}
+
+.checkout-form-section h3:first-child {
+    margin-top: 0;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #172033;
+}
+
+.form-group input, 
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d8e4ef;
+    border-radius: 4px;
+    font-family: inherit;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* =====================================
+    Payment Methods Styling
+   ===================================== */
+.payment-methods-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.payment-method {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+    border: 1px solid #d8e4ef;
+    border-radius: 4px;
+    background: #f7fbff;
+    cursor: pointer;
+    font-size: 14px;
+    color: #172033;
+    transition: all 0.2s ease;
+}
+
+.payment-method:hover {
+    border-color: #1769aa;
+    background: #eef7ff;
+}
+
+.payment-method input[type="radio"] {
+    width: auto; /* Fixes input stretching issue */
+    cursor: pointer;
+}
+
+.place-order-btn {
+    width: 100%;
+    font-size: 16px;
+    padding: 15px;
+}
+
+/* ----- Summary Section ----- */
+.checkout-summary-section {
+    background: #f7fbff;
+    padding: 30px;
+    border: 1px solid #d8e4ef;
+    border-radius: 8px;
+    height: fit-content;
+}
+
+.checkout-summary-section h3 {
+    margin-bottom: 20px;
+}
+
+.checkout-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.checkout-item-name {
+    color: #172033;
+    font-weight: 600;
+}
+
+.checkout-item-qty {
+    color: #667085;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    color: #667085;
+}
+
+.summary-divider {
+    border: 0;
+    border-top: 1px solid #d8e4ef;
+    margin: 20px 0;
+}
+
+.summary-total {
+    font-size: 18px;
+    font-weight: 700;
+    color: #172033;
+}
+
+@media (max-width: 900px) {
+    .checkout-layout {
+        grid-template-columns: 1fr;
+    }
+}

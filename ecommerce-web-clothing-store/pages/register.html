@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Create account — Clothing Store</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../css/auth.css" />
+</head>
+<body>
+
+<div class="auth-shell">
+  <div class="auth-side">
+    <div class="brand-mark">CLOTHING&nbsp;CO.</div>
+    <div>
+      <div class="auth-side-copy">Create an account to track orders and check out in seconds next time.</div>
+      <div class="auth-side-sub">You can also check out as a guest — an account is never required to buy.</div>
+    </div>
+    <div></div>
+  </div>
+
+  <div class="auth-main">
+    <div class="auth-title">Create your account</div>
+    <div class="auth-subtitle">Already have one? <a href="login.html">Log in</a></div>
+
+    <div class="error-msg" id="error-msg"></div>
+
+    <form id="register-form" novalidate>
+      <div class="field">
+        <label for="name">Full name</label>
+        <input type="text" id="name" autocomplete="name" required />
+      </div>
+
+      <div class="field">
+        <label for="email">Email address</label>
+        <input type="email" id="email" autocomplete="email" required />
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <div class="field-input-wrap">
+          <input type="password" id="password" autocomplete="new-password" minlength="6" required />
+          <button type="button" class="toggle-pass" id="toggle-pass">Show</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="confirm-password">Confirm password</label>
+        <input type="password" id="confirm-password" autocomplete="new-password" minlength="6" required />
+      </div>
+
+      <button type="submit" class="btn-primary" id="register-btn">Create account</button>
+    </form>
+
+    <div class="divider">or</div>
+    <a href="shop.html" class="btn-outline">Continue as guest</a>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+<script src="../js/firebase.js"></script>
+<script src="../js/auth.js"></script>
+<script>
+  redirectIfSignedIn("profile.html");
+
+  const form = document.getElementById("register-form");
+  const errorMsg = document.getElementById("error-msg");
+  const registerBtn = document.getElementById("register-btn");
+  const passwordInput = document.getElementById("password");
+  const confirmInput = document.getElementById("confirm-password");
+  const togglePass = document.getElementById("toggle-pass");
+
+  togglePass.addEventListener("click", () => {
+    const isPassword = passwordInput.type === "password";
+    passwordInput.type = isPassword ? "text" : "password";
+    confirmInput.type = isPassword ? "text" : "password";
+    togglePass.textContent = isPassword ? "Hide" : "Show";
+  });
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    showError(errorMsg, "");
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = passwordInput.value;
+    const confirmPassword = confirmInput.value;
+
+    if (password !== confirmPassword) {
+      showError(errorMsg, "Passwords don't match.");
+      return;
+    }
+    if (password.length < 6) {
+      showError(errorMsg, "Password should be at least 6 characters.");
+      return;
+    }
+
+    setFormLoading(registerBtn, true, "Creating account…", "Create account");
+    try {
+      await registerUser({ name, email, password });
+      window.location.href = "profile.html";
+    } catch (err) {
+      showError(errorMsg, friendlyAuthError(err));
+    } finally {
+      setFormLoading(registerBtn, false, "Creating account…", "Create account");
+    }
+  });
+</script>
+</body>
+</html>
