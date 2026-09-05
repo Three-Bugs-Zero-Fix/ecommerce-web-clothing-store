@@ -235,7 +235,7 @@ function applySorting() {
 
 
 /* =========================
-   DISPLAY PRODUCTS
+   DISPLAY PRODUCTS 
 ========================= */
 
 function displayProducts() {
@@ -383,11 +383,14 @@ function displayProducts() {
             /* STOCK */
 
             let stockHTML = "";
+            
+            // To prevent adding out of stock items to cart
+            let isOutOfStock = false; 
 
             if (stock === 0) {
-
+                isOutOfStock = true;
                 stockHTML = `
-                    <p class="product-stock out-of-stock">
+                    <p class="product-stock out-of-stock" style="color: #d12e2e; font-size: 13px; margin-top:5px;">
                         Out of stock
                     </p>
                 `;
@@ -395,11 +398,20 @@ function displayProducts() {
             } else if (stock <= 5) {
 
                 stockHTML = `
-                    <p class="product-stock low-stock">
+                    <p class="product-stock low-stock" style="color: #e59700; font-size: 13px; margin-top:5px;">
                         Only ${stock} left
                     </p>
                 `;
             }
+
+            /* 
+             * ==============================
+             * UPDATE: ADD TO CART BUTTON 
+             * ==============================
+             */
+            const cartButtonHTML = isOutOfStock 
+                ? `<button class="primary-btn" style="width: 100%; margin-top: 15px; opacity: 0.5; cursor: not-allowed;" disabled>Out of Stock</button>`
+                : `<button class="primary-btn" style="width: 100%; margin-top: 15px;" onclick="addToCart('${escapeHtml(product.id)}', '${escapeHtml(name)}', ${currentPrice}, '${escapeHtml(image)}')">Add to Cart</button>`;
 
 
             return `
@@ -433,6 +445,9 @@ function displayProducts() {
                         </p>
 
                         ${stockHTML}
+                        
+                        <!-- The Cart Button is injected here -->
+                        ${cartButtonHTML}
 
                     </div>
 

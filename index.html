@@ -1,5 +1,4 @@
 <!doctype html>
-
 <html lang="en">
 
 <head>
@@ -17,13 +16,19 @@
 
       <nav class="nav-menu">
         <a href="#" class="active">Home</a>
-        <a href="pages/shop.html">Shop</a> <a href="#categories">Categories</a>
+        <a href="pages/shop.html">Shop</a> 
+        <a href="#categories">Categories</a>
         <a href="#about">About</a>
       </nav>
 
       <div class="nav-actions">
         <button class="nav-btn">Search</button>
-        <button class="cart-btn">Cart (0)</button>
+        
+        <!-- UPDATE: Changed Cart button to link to cart.html and added span for JS -->
+        <a href="pages/cart.html" class="cart-btn" style="text-decoration: none; display: flex; align-items: center;">
+          Cart (<span id="nav-cart-count">0</span>)
+        </a>
+        
         <button class="profile-btn profile-btn-guest" id="profile-btn">
           <span id="profile-btn-content">👤</span>
         </button>
@@ -74,7 +79,6 @@
         </div>
 
         <div class="category-grid">
-
           <a href="pages/shop.html?category=Men" class="category-card">
             <div class="category-image">
               <img src="assets/image/men.jpg" alt="Men's Collection">
@@ -114,7 +118,6 @@
               </div>
             </div>
           </a>
-
         </div>
       </div>
     </section>
@@ -134,6 +137,8 @@
         </div>
 
         <div class="product-grid">
+          
+          <!-- PRODUCT 1 -->
           <article class="product-card">
             <div class="product-image">
               <span class="product-badge">NEW</span>
@@ -144,9 +149,12 @@
               <p class="product-category">T-SHIRT</p>
               <h3>Classic Blue T-Shirt</h3>
               <p class="price">৳650</p>
+              <!-- UPDATE: Added Add to Cart button -->
+              <button class="primary-btn" style="width: 100%; margin-top: 10px;" onclick="addToCart('feat_01', 'Classic Blue T-Shirt', 650, '')">Add to Cart</button>
             </div>
           </article>
 
+          <!-- PRODUCT 2 -->
           <article class="product-card">
             <div class="product-image">PRODUCT IMAGE</div>
 
@@ -154,9 +162,12 @@
               <p class="product-category">SHIRT</p>
               <h3>Casual Linen Shirt</h3>
               <p class="price">৳1,200</p>
+              <!-- UPDATE: Added Add to Cart button -->
+              <button class="primary-btn" style="width: 100%; margin-top: 10px;" onclick="addToCart('feat_02', 'Casual Linen Shirt', 1200, '')">Add to Cart</button>
             </div>
           </article>
 
+          <!-- PRODUCT 3 -->
           <article class="product-card">
             <div class="product-image">
               <span class="product-badge">SALE</span>
@@ -167,9 +178,12 @@
               <p class="product-category">JEANS</p>
               <h3>Regular Fit Jeans</h3>
               <p class="price">৳1,350</p>
+              <!-- UPDATE: Added Add to Cart button -->
+              <button class="primary-btn" style="width: 100%; margin-top: 10px;" onclick="addToCart('feat_03', 'Regular Fit Jeans', 1350, '')">Add to Cart</button>
             </div>
           </article>
 
+          <!-- PRODUCT 4 -->
           <article class="product-card">
             <div class="product-image">PRODUCT IMAGE</div>
 
@@ -177,6 +191,8 @@
               <p class="product-category">HOODIE</p>
               <h3>Everyday Hoodie</h3>
               <p class="price">৳1,500</p>
+              <!-- UPDATE: Added Add to Cart button -->
+              <button class="primary-btn" style="width: 100%; margin-top: 10px;" onclick="addToCart('feat_04', 'Everyday Hoodie', 1500, '')">Add to Cart</button>
             </div>
           </article>
         </div>
@@ -216,9 +232,7 @@
 
             <h3>Quality Products</h3>
 
-            <p>
-              Carefully selected clothing made for comfort and everyday use.
-            </p>
+            <p>Carefully selected clothing made for comfort and everyday use.</p>
           </div>
 
           <div class="feature-card">
@@ -226,9 +240,7 @@
 
             <h3>Fast Delivery</h3>
 
-            <p>
-              Get your favorite products delivered straight to your doorstep.
-            </p>
+            <p>Get your favorite products delivered straight to your doorstep.</p>
           </div>
 
           <div class="feature-card">
@@ -283,6 +295,7 @@
       <p>© 2026 BlueWear. All rights reserved.</p>
     </div>
   </footer>
+  
   <!-- PROFILE DRAWER -->
   <div class="drawer-overlay" id="drawer-overlay"></div>
   <div class="profile-drawer" id="profile-drawer">
@@ -298,9 +311,12 @@
   <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+  
   <script src="/js/firebase.js"></script>
   <script src="/js/auth.js"></script>
   <script src="/js/profile_drawer.js"></script>
+  <!-- Added cart.js -->
+  <script src="/js/cart.js"></script>
 </body>
 
 </html>

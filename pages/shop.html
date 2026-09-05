@@ -32,9 +32,10 @@
                     Search
                 </button>
 
-                <button class="cart-btn" id="cart-btn">
-                    Cart (0)
-                </button>
+                <!-- cart button updated -->
+                <a href="cart.html" class="cart-btn" id="cart-btn" style="text-decoration: none; display: flex; align-items: center;">
+                Cart (<span id="nav-cart-count">0</span>)
+                </a>
 
                 <a href="login.html" class="profile-btn">
                     👤
@@ -264,19 +265,16 @@
 
     </footer>
 
-
-    <!-- FIREBASE -->
     <!-- FIREBASE -->
     <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
-
     <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
-
     <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
 
     <script src="../js/firebase.js"></script>
-
     <script src="../js/shop.js"></script>
 
-</body>
+    <!-- Added cart.js -->
+    <script src="../js/cart.js"></script>
 
+</body>
 </html>
