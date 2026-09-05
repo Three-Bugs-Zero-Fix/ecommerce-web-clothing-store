@@ -51,13 +51,34 @@
     color: #172033;
 }
 
+/* UPDATE: Added .form-group select to match text inputs perfectly */
 .form-group input, 
-.form-group textarea {
+.form-group textarea,
+.form-group select {
     width: 100%;
     padding: 12px;
     border: 1px solid #d8e4ef;
     border-radius: 4px;
     font-family: inherit;
+    box-sizing: border-box; /* This ensures padding doesn't break the layout */
+}
+
+/* UPDATE: Specific styling for the dropdown */
+select#ship-city {
+    height: 43px; /* Standardizes the height with adjacent text inputs */
+    background-color: #ffffff;
+    color: #172033;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+select#ship-city:focus,
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #1769aa;
+    outline: none;
 }
 
 .form-row {
