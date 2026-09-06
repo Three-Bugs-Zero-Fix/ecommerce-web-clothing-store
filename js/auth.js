@@ -10,17 +10,24 @@
 /* ---------- Friendly error messages ---------- */
 function friendlyAuthError(error) {
   const map = {
-    "auth/email-already-in-use": "That email is already registered. Try logging in instead.",
+    "auth/email-already-in-use":
+      "That email is already registered. Try logging in instead.",
     "auth/invalid-email": "That doesn't look like a valid email address.",
     "auth/weak-password": "Password should be at least 6 characters.",
     "auth/user-not-found": "No account found with that email.",
     "auth/wrong-password": "Incorrect password. Please try again.",
     "auth/invalid-credential": "Incorrect email or password.",
-    "auth/too-many-requests": "Too many attempts. Please wait a moment and try again.",
-    "auth/network-request-failed": "Network error — check your connection and try again.",
+    "auth/too-many-requests":
+      "Too many attempts. Please wait a moment and try again.",
+    "auth/network-request-failed":
+      "Network error — check your connection and try again.",
     "auth/missing-password": "Please enter a password.",
   };
-  return map[error.code] || error.message || "Something went wrong. Please try again.";
+  return (
+    map[error.code] ||
+    error.message ||
+    "Something went wrong. Please try again."
+  );
 }
 
 /* ---------- Register ---------- */
@@ -89,4 +96,20 @@ function setFormLoading(button, loading, loadingText, defaultText) {
 function showError(el, message) {
   el.textContent = message;
   el.style.display = message ? "block" : "none";
+}
+
+/* ---------- Admin access control (Option A — hardcoded emails) ---------- */
+const ADMIN_EMAILS = ["alawol@gmail.com"]; // <-- এখানে আপনার admin email(গুলো) বসান
+
+function requireAdmin(redirectTo = "../pages/login.html") {
+  return new Promise((resolve) => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      unsubscribe();
+      if (!user || !ADMIN_EMAILS.includes(user.email)) {
+        window.location.href = redirectTo;
+      } else {
+        resolve(user);
+      }
+    });
+  });
 }

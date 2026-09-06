@@ -110,8 +110,7 @@ function renderCartPage() {
     cart.forEach(item => {
         subtotal += item.price * item.quantity;
 
-        const imageHTML = item.image ? `<img src="${item.image}" alt="${item.name}" style="width:100%; height:100%; object-fit:cover;">` : `IMAGE`;
-
+        const imageHTML = item.image ? `<img src="${item.image}" alt="${item.name}">` : `IMAGE`;
         container.innerHTML += `
             <div class="cart-item">
                 <div class="cart-item-info">
