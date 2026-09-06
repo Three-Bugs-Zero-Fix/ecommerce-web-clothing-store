@@ -16,27 +16,27 @@ let shippingFee = 0; // Default is 0 until a city is selected
 // ========================================
 // This automatically checks if the user is logged in
 auth.onAuthStateChanged((user) => {
-    if (!user) {
-        // If no user is logged in, redirect to login page immediately
-        alert("Please login to proceed to checkout.");
-        window.location.href = "login.html"; 
-    } else {
-        // User is logged in
-        currentUser = user;
-        
-        // If cart is empty, send them back to shop
-        if (cartItems.length === 0) {
-            alert("Your cart is empty!");
-            window.location.href = "shop.html";
-            return;
-        }
+  if (!user) {
+    // If no user is logged in, redirect to login page immediately
+    alert("Please login to proceed to checkout.");
+    window.location.href = "login.html";
+  } else {
+    // User is logged in
+    currentUser = user;
 
-        // Show the checkout page and hide the loading screen
-        authLoading.style.display = "none";
-        checkoutMain.style.display = "block";
-
-        loadOrderSummary();
+    // If cart is empty, send them back to shop
+    if (cartItems.length === 0) {
+      alert("Your cart is empty!");
+      window.location.href = "shop.html";
+      return;
     }
+
+    // Show the checkout page and hide the loading screen
+    authLoading.style.display = "none";
+    checkoutMain.style.display = "block";
+
+    loadOrderSummary();
+  }
 });
 
 
@@ -64,25 +64,28 @@ if (shipCity) {
 // 3. LOAD ORDER SUMMARY
 // ========================================
 function loadOrderSummary() {
-    const container = document.getElementById("checkout-items-container");
-    let subtotal = 0;
+  const container = document.getElementById("checkout-items-container");
+  let subtotal = 0;
 
-    container.innerHTML = "";
+  container.innerHTML = "";
 
-    cartItems.forEach(item => {
-        const itemTotal = item.price * item.quantity;
-        subtotal += itemTotal;
+  cartItems.forEach((item) => {
+    const itemTotal = item.price * item.quantity;
+    subtotal += itemTotal;
 
-        container.innerHTML += `
-            <div class="checkout-item">
-                <div>
-                    <span class="checkout-item-name">${item.name}</span>
-                    <span class="checkout-item-qty">x ${item.quantity}</span>
-                </div>
-                <span>৳${itemTotal.toLocaleString()}</span>
-            </div>
-        `;
-    });
+    // Main branch's UI update with image is kept here!
+    container.innerHTML += `
+    <div class="checkout-item">
+        <img src="${item.image || ""}" alt="${item.name}" class="checkout-item-img" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px; margin-right: 10px;" />
+        <div class="checkout-item-info" style="flex: 1;">
+            <span class="checkout-item-name">${item.name}</span>
+            <br>
+            <span class="checkout-item-qty" style="color: #666; font-size: 12px;">x ${item.quantity}</span>
+        </div>
+        <span class="checkout-item-price" style="font-weight: 600;">৳${itemTotal.toLocaleString()}</span>
+    </div>
+    `;
+  });
 
     const total = subtotal + shippingFee;
 
@@ -96,7 +99,7 @@ function loadOrderSummary() {
 // 4. HANDLE FORM SUBMISSION (PLACE ORDER)
 // ========================================
 checkoutForm.addEventListener("submit", async (e) => {
-    e.preventDefault(); // Prevent page reload
+  e.preventDefault(); // Prevent page reload
 
     if (!currentUser) return;
     
@@ -106,8 +109,8 @@ checkoutForm.addEventListener("submit", async (e) => {
         return;
     }
 
-    placeOrderBtn.disabled = true;
-    placeOrderBtn.textContent = "Processing Order...";
+  placeOrderBtn.disabled = true;
+  placeOrderBtn.textContent = "Processing Order...";
 
     try {
         // Calculate subtotal for the database
@@ -131,8 +134,8 @@ checkoutForm.addEventListener("submit", async (e) => {
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         };
 
-        // Save order to Firestore "orders" collection
-        await db.collection("orders").add(orderData);
+    // Save order to Firestore "orders" collection
+    await db.collection("orders").add(orderData);
 
         // ==========================================
         // UPDATE: UI CHANGES & REDIRECT LOGIC
@@ -176,10 +179,10 @@ checkoutForm.addEventListener("submit", async (e) => {
             window.location.href = "profile.html";
         }, 2000);
 
-    } catch (error) {
-        console.error("Error placing order:", error);
-        alert("Failed to place order. Please try again.");
-        placeOrderBtn.disabled = false;
-        placeOrderBtn.textContent = "Place Order";
-    }
+  } catch (error) {
+    console.error("Error placing order:", error);
+    alert("Failed to place order. Please try again.");
+    placeOrderBtn.disabled = false;
+    placeOrderBtn.textContent = "Place Order";
+  }
 });

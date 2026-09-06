@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products — Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link rel="stylesheet" href="../css/admin.css" />
+  </head>
+  <body>
+    <div id="admin-loading" class="admin-loading">Checking admin access…</div>
+
+    <div class="admin-shell" id="admin-shell" style="display: none">
+      <div class="admin-drawer-overlay" id="admin-drawer-overlay"></div>
+      <aside class="admin-drawer" id="admin-drawer">
+        <div class="admin-drawer-head">
+          <span class="admin-logo">BLUEWEAR</span>
+          <button class="admin-drawer-close" id="admin-drawer-close">✕</button>
+        </div>
+        <nav class="admin-nav">
+          <a href="index.html">Dashboard</a>
+          <a href="products.html" class="active">Add Products</a>
+          <a href="orders.html">Orders</a>
+          <a href="customers.html">Customers</a>
+          <a href="coupons.html">Coupons</a>
+        </nav>
+        <div class="admin-sidebar-bottom">
+          <button id="logout-btn">Logout</button>
+          <a href="../index.html">‹ View store</a>
+        </div>
+      </aside>
+
+      <div class="admin-main">
+        <!-- TOPBAR HEADER -->
+        <div class="admin-topbar" style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 12px 20px;">
+          
+          <!-- Left Side: Hamburger, Title & Nav Links (Shifted right) -->
+          <div style="display: flex; align-items: center;">
+            <button class="admin-hamburger" id="admin-hamburger">☰</button>
+            <div class="admin-page-title" style="margin-left: 8px;">Products</div>
+            
+            <!-- Links moved further to the right -->
+            <nav style="display: flex; gap: 20px; align-items: center; margin-left: 45px;">
+              <a href="../index.html" style="text-decoration: none; color: #475467; font-weight: 500; font-size: 14.5px;">Home</a>
+              <a href="../pages/shop.html" style="text-decoration: none; color: #475467; font-weight: 500; font-size: 14.5px;">Shop</a>
+              <a href="about.html" style="text-decoration: none; color: #475467; font-weight: 500; font-size: 14.5px;">About Us</a>
+            </nav>
+          </div>
+
+          <!-- Right Side: Search Bar + Add Product + Profile Icon -->
+          <div style="display: flex; align-items: center; gap: 18px;">
+            
+            <!-- Search Box with Magnifying Glass Icon -->
+            <div style="position: relative; display: flex; align-items: center;">
+              <input
+                type="text"
+                id="search-input"
+                class="search-input"
+                placeholder="Search products..."
+                style="padding: 8px 36px 8px 16px; border-radius: 20px; border: 1px solid #e4e7ec; background: #f9fafb; outline: none; font-size: 13.5px; width: 230px; margin: 0;"
+              />
+              <span style="position: absolute; right: 12px; pointer-events: none; color: #667085; font-size: 14px;">🔍</span>
+            </div>
+
+            <!-- Add Product Button -->
+            <a
+              href="add_products.html"
+              class="btn-admin-primary"
+              style="text-decoration: none; display: inline-block; white-space: nowrap;"
+              >+ Add Product</a
+            >
+            
+            <!-- Profile Icon Only (No Email Text) -->
+            <a href="profile.html" title="Profile Account" style="display: flex; align-items: center; justify-content: center; text-decoration: none; background: #f2f4f7; width: 38px; height: 38px; border-radius: 50%; font-size: 18px; transition: background 0.2s;">
+              <span>👤</span>
+              <!-- Hidden span to prevent JS email errors -->
+              <span id="admin-email" style="display: none;"></span>
+            </a>
+          </div>
+
+        </div>
+
+        <div class="admin-content">
+          <div class="card-block">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Name</th>
+                  <th>SKU</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Stock</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="products-body">
+                <tr>
+                  <td colspan="8" style="color: #999">Loading…</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit modal -->
+    <div class="modal-overlay" id="edit-overlay">
+      <div class="modal-box">
+        <div class="modal-head">
+          <div class="modal-title">Edit Product</div>
+          <button id="edit-close">✕</button>
+        </div>
+
+        <div class="form-error" id="edit-error"></div>
+        <div class="form-success" id="edit-success"></div>
+
+        <div class="form-row">
+          <label>Product image</label>
+          <div class="image-upload-box" id="edit-upload-box">
+            <span id="edit-upload-label">Click to change image</span>
+            <input
+              type="file"
+              id="edit-image-input"
+              accept="image/*"
+              style="display: none"
+            />
+          </div>
+          <img
+            id="edit-image-preview"
+            class="image-preview"
+            style="display: block"
+          />
+          <div class="upload-status" id="edit-upload-status"></div>
+        </div>
+
+        <div class="form-row">
+          <label>Product name</label>
+          <input type="text" id="edit-name" />
+        </div>
+
+        <div class="form-grid">
+          <div class="form-row">
+            <label>Category</label>
+            <select id="edit-category">
+              <option>T-Shirt</option>
+              <option>Shirt</option>
+              <option>Jeans</option>
+              <option>Hoodie</option>
+              <option>Accessories</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>Stock quantity</label>
+            <input type="number" id="edit-stock" />
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-row">
+            <label>Price (৳)</label>
+            <input type="number" id="edit-price" />
+          </div>
+          <div class="form-row">
+            <label>Discount price (৳, optional)</label>
+            <input type="number" id="edit-discountPrice" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label>Sizes</label>
+          <div class="chip-row" id="edit-sizes-row"></div>
+        </div>
+
+        <div class="form-row">
+          <label>Colors (comma separated)</label>
+          <input type="text" id="edit-colors" />
+        </div>
+
+        <div class="form-row">
+          <label>Description</label>
+          <textarea id="edit-description" rows="3"></textarea>
+        </div>
+
+        <div class="form-row">
+          <label>Status</label>
+          <select id="edit-status">
+            <option value="active">Active</option>
+            <option value="draft">Draft</option>
+          </select>
+        </div>
+
+        <div style="display: flex; gap: 10px">
+          <button class="btn-admin-primary" id="edit-save-btn">
+            Save changes
+          </button>
+          <button class="btn-admin-outline" id="edit-cancel-btn">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+    <script src="../js/firebase.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/admin.js"></script>
+    <script>
+      let allProducts = [];
+      const ALL_SIZES = ["S", "M", "L", "XL", "XXL"];
+      const editSelectedSizes = new Set();
+      let editingId = null;
+      let editUploadedImageUrl = null;
+
+      requireAdmin().then(async (user) => {
+        document.getElementById("admin-loading").style.display = "none";
+        document.getElementById("admin-shell").style.display = "block";
+        document.getElementById("admin-email").textContent = user.email;
+        await loadProducts();
+      });
+
+      // drawer toggle
+      const drawer = document.getElementById("admin-drawer");
+      const overlay = document.getElementById("admin-drawer-overlay");
+      document
+        .getElementById("admin-hamburger")
+        .addEventListener("click", () => {
+          drawer.classList.add("open");
+          overlay.classList.add("open");
+        });
+      document
+        .getElementById("admin-drawer-close")
+        .addEventListener("click", closeAdminDrawer);
+      overlay.addEventListener("click", closeAdminDrawer);
+      function closeAdminDrawer() {
+        drawer.classList.remove("open");
+        overlay.classList.remove("open");
+      }
+
+      document
+        .getElementById("logout-btn")
+        .addEventListener("click", async () => {
+          await logoutUser();
+          window.location.href = "../pages/login.html";
+        });
+
+      // ---------- load & render ----------
+      async function loadProducts() {
+        const snap = await db
+          .collection("products")
+          .orderBy("createdAt", "desc")
+          .get();
+        allProducts = snap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        renderTable(allProducts);
+      }
+
+      function totalStockLabel(p) {
+        return p.stock ?? 0;
+      }
+
+      function renderTable(list) {
+        const body = document.getElementById("products-body");
+        if (!list.length) {
+          body.innerHTML = `<tr><td colspan="8" style="color:#999;">No products found.</td></tr>`;
+          return;
+        }
+        body.innerHTML = list
+          .map((p) => {
+            const stock = totalStockLabel(p);
+            const stockColor =
+              stock === 0
+                ? "var(--a-danger)"
+                : stock <= 5
+                  ? "var(--a-warning)"
+                  : "var(--a-ink)";
+            return `
+        <tr>
+          <td><img src="${p.image}" style="width:34px;height:40px;object-fit:cover;border-radius:4px;" /></td>
+          <td style="font-weight:600;">${escapeHtml(p.name)}</td>
+          <td style="color:var(--a-ink-soft);">${escapeHtml(p.sku || "")}</td>
+          <td>${escapeHtml(p.category)}</td>
+          <td>${p.discountPrice ? `৳${p.discountPrice} <span style="color:var(--a-ink-soft);text-decoration:line-through;font-size:11px;">৳${p.price}</span>` : `৳${p.price}`}</td>
+          <td style="color:${stockColor};">${stock}</td>
+          <td><span class="pill ${p.status === "active" ? "pill-active" : "pill-pending"}">${p.status || "active"}</span></td>
+          <td style="white-space:nowrap;">
+            <button onclick="openEdit('${p.id}')" title="Edit" style="background:none;border:none;cursor:pointer;font-size:22px;margin-right:12px;vertical-align:middle;">✎</button>
+            <button onclick="deleteProduct('${p.id}')" title="Delete" style="background:none;border:none;cursor:pointer;color:var(--a-danger);font-size:22px;vertical-align:middle;">🗑</button>
+          </td>
+        </tr>`;
+          })
+          .join("");
+      }
+
+      document.getElementById("search-input").addEventListener("input", (e) => {
+        const q = e.target.value.toLowerCase();
+        const filtered = allProducts.filter(
+          (p) =>
+            p.name.toLowerCase().includes(q) ||
+            (p.sku || "").toLowerCase().includes(q),
+        );
+        renderTable(filtered);
+      });
+
+      // ---------- delete ----------
+      async function deleteProduct(id) {
+        if (!confirm("Delete this product? This can't be undone.")) return;
+        await db.collection("products").doc(id).delete();
+        allProducts = allProducts.filter((p) => p.id !== id);
+        renderTable(allProducts);
+      }
+
+      // ---------- edit modal ----------
+      const editOverlay = document.getElementById("edit-overlay");
+      const editSizesRow = document.getElementById("edit-sizes-row");
+      editSizesRow.innerHTML = ALL_SIZES.map(
+        (s) => `<div class="chip" data-size="${s}">${s}</div>`,
+      ).join("");
+      editSizesRow.querySelectorAll(".chip").forEach((chip) => {
+        chip.addEventListener("click", () => {
+          const s = chip.dataset.size;
+          if (editSelectedSizes.has(s)) {
+            editSelectedSizes.delete(s);
+            chip.classList.remove("selected");
+          } else {
+            editSelectedSizes.add(s);
+            chip.classList.add("selected");
+          }
+        });
+      });
+
+      function openEdit(id) {
+        const p = allProducts.find((x) => x.id === id);
+        if (!p) return;
+        editingId = id;
+        editUploadedImageUrl = p.image;
+
+        showError(document.getElementById("edit-error"), "");
+        showError(document.getElementById("edit-success"), "");
+
+        document.getElementById("edit-name").value = p.name || "";
+        document.getElementById("edit-category").value =
+          p.category || "T-Shirt";
+        document.getElementById("edit-stock").value = p.stock ?? 0;
+        document.getElementById("edit-price").value = p.price ?? "";
+        document.getElementById("edit-discountPrice").value =
+          p.discountPrice ?? "";
+        document.getElementById("edit-colors").value = (p.colors || []).join(
+          ", ",
+        );
+        document.getElementById("edit-description").value = p.description || "";
+        document.getElementById("edit-status").value = p.status || "active";
+
+        const preview = document.getElementById("edit-image-preview");
+        preview.src = p.image;
+        document.getElementById("edit-upload-status").textContent = "";
+        document.getElementById("edit-upload-label").textContent =
+          "Click to change image";
+
+        editSelectedSizes.clear();
+        editSizesRow.querySelectorAll(".chip").forEach((c) => {
+          c.classList.toggle(
+            "selected",
+            (p.sizes || []).includes(c.dataset.size),
+          );
+          if ((p.sizes || []).includes(c.dataset.size))
+            editSelectedSizes.add(c.dataset.size);
+        });
+
+        editOverlay.classList.add("open");
+      }
+
+      document
+        .getElementById("edit-close")
+        .addEventListener("click", closeEdit);
+      document
+        .getElementById("edit-cancel-btn")
+        .addEventListener("click", closeEdit);
+      function closeEdit() {
+        editOverlay.classList.remove("open");
+        editingId = null;
+      }
+
+      document
+        .getElementById("edit-upload-box")
+        .addEventListener("click", () => {
+          document.getElementById("edit-image-input").click();
+        });
+      document
+        .getElementById("edit-image-input")
+        .addEventListener("change", async (e) => {
+          const file = e.target.files[0];
+          if (!file) return;
+          const preview = document.getElementById("edit-image-preview");
+          const status = document.getElementById("edit-upload-status");
+          preview.src = URL.createObjectURL(file);
+          document.getElementById("edit-upload-label").textContent = file.name;
+          status.textContent = "Optimizing image…";
+          try {
+            const jpegFile = await resizeAndConvertToJPEG(file);
+            status.textContent = "Uploading…";
+            editUploadedImageUrl = await uploadToImgBB(jpegFile);
+            status.textContent = "Uploaded ✓";
+          } catch (err) {
+            status.textContent = "Upload failed: " + err.message;
+          }
+        });
+
+      document
+        .getElementById("edit-save-btn")
+        .addEventListener("click", async () => {
+          const errorEl = document.getElementById("edit-error");
+          const successEl = document.getElementById("edit-success");
+          showError(errorEl, "");
+          showError(successEl, "");
+
+          const name = document.getElementById("edit-name").value.trim();
+          const price = Number(document.getElementById("edit-price").value);
+          const discountPrice =
+            document.getElementById("edit-discountPrice").value;
+          const category = document.getElementById("edit-category").value;
+          const stock = Number(document.getElementById("edit-stock").value);
+          const colors = document
+            .getElementById("edit-colors")
+            .value.split(",")
+            .map((c) => c.trim())
+            .filter(Boolean);
+          const description = document
+            .getElementById("edit-description")
+            .value.trim();
+          const status = document.getElementById("edit-status").value;
+
+          if (!name || !price) {
+            showError(errorEl, "Name and price are required.");
+            return;
+          }
+          if (editSelectedSizes.size === 0) {
+            showError(errorEl, "Select at least one size.");
+            return;
+          }
+
+          const btn = document.getElementById("edit-save-btn");
+          btn.disabled = true;
+          btn.textContent = "Saving…";
+
+          try {
+            await db
+              .collection("products")
+              .doc(editingId)
+              .update({
+                name,
+                price,
+                discountPrice: discountPrice ? Number(discountPrice) : null,
+                category,
+                stock,
+                sizes: Array.from(editSelectedSizes),
+                colors,
+                description,
+                status,
+                image: editUploadedImageUrl,
+              });
+            showError(successEl, "Product updated.");
+            await loadProducts();
+            setTimeout(closeEdit, 700);
+          } catch (err) {
+            showError(errorEl, err.message);
+          } finally {
+            btn.disabled = false;
+            btn.textContent = "Save changes";
+          }
+        });
+
+      function escapeHtml(str) {
+        return String(str || "").replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[c],
+        );
+      }
+    </script>
+  </body>
+</html>

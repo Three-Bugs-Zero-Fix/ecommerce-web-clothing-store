@@ -104,7 +104,14 @@
 .shop-products .product-card {
     overflow: hidden;
     background: #ffffff;
-    border: 1px solid #d8e4ef;
+    border: 1px solid #e7ecf2;
+    border-radius: 12px;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.shop-products .product-card:hover {
+    box-shadow: 0 8px 24px rgba(23, 32, 51, 0.08);
+    transform: translateY(-2px);
 }
 
 
@@ -114,45 +121,36 @@
 
 .shop-products .product-image {
     position: relative;
-
-    height: 340px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #edf6fd;
-
-    color: #7896ae;
-    font-size: 12px;
-
+    display: block;
+    height: 250px;
+    background: #F2F4F7;
+    overflow: hidden;
     text-decoration: none;
 }
 
-.shop-products .product-image:hover {
-    background: #e5f2fc;
+.shop-products .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 
 /* ================================
-   PRODUCT BADGE
+   PRODUCT BADGE (discount %)
 ================================ */
 
 .shop-products .product-badge {
     position: absolute;
-
     top: 10px;
     left: 10px;
-
-    padding: 4px 8px;
-
-    background: #1769aa;
+    padding: 5px 10px;
+    background: #F43F7A;
     color: #ffffff;
-
-    font-size: 9px;
+    font-size: 11px;
     font-weight: 700;
-
-    letter-spacing: 1px;
+    letter-spacing: 0.3px;
+    border-radius: 999px;
 }
 
 
@@ -185,17 +183,68 @@
     font-weight: 700;
 }
 
-.old-price {
-    text-decoration: line-through;
-    color: #888;
-    margin-right: 8px;
-    font-size: 14px;
+
+/* ================================
+   SAVE BADGE + PRICE ROW + CART ICON
+================================ */
+
+.save-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #E7F6EC;
+    color: #1E8A4A;
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin: 8px 0;
 }
 
-.sale-price {
-    color: #1769aa;
-    font-weight: 700;
+.price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
 }
+
+.price-current {
+    font-size: 17px;
+    font-weight: 700;
+    color: #172033;
+}
+
+.price-old {
+    font-size: 13px;
+    color: #98A2B3;
+    text-decoration: line-through;
+    margin-left: 6px;
+}
+
+.price-discount {
+    font-size: 12.5px;
+    color: #F43F7A;
+    font-weight: 700;
+    margin-left: 6px;
+}
+
+.cart-icon-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #172033;
+    color: #fff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.15s ease;
+}
+.cart-icon-btn:hover { background: #1769aa; }
+.cart-icon-btn:disabled { background: #D0D5DD; cursor: not-allowed; }
 
 
 
@@ -264,4 +313,9 @@
         gap: 15px;
     }
 
+}
+@media (max-width: 600px) {
+    .shop-products .product-image {
+        height: 280px; /* ৩৮০px থেকে কমিয়ে ২৮০px করা হয়েছে */
+    }
 }
