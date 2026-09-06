@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Product — Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link rel="stylesheet" href="../css/admin.css" />
+  </head>
+  <body>
+    <div id="admin-loading" class="admin-loading">Checking admin access…</div>
+
+    <div class="admin-shell" id="admin-shell" style="display: none">
+      <div class="admin-drawer-overlay" id="admin-drawer-overlay"></div>
+      <aside class="admin-drawer" id="admin-drawer">
+        <div class="admin-drawer-head">
+          <span class="admin-logo">CLOTHING CO.</span>
+          <button class="admin-drawer-close" id="admin-drawer-close">✕</button>
+        </div>
+        <nav class="admin-nav">
+          <a href="index.html">Dashboard</a>
+          <a href="products.html" class="active">Products</a>
+          <a href="orders.html">Orders</a>
+          <a href="customers.html">Customers</a>
+          <a href="coupons.html">Coupons</a>
+        </nav>
+        <div class="admin-sidebar-bottom">
+          <button id="logout-btn">Logout</button>
+          <a href="../index.html">‹ View store</a>
+        </div>
+      </aside>
+
+      <div class="admin-main">
+        <div class="admin-topbar">
+          <div style="display: flex; align-items: center">
+            <button class="admin-hamburger" id="admin-hamburger">☰</button>
+            <div class="admin-page-title">Add Product</div>
+          </div>
+          <div class="admin-avatar" id="admin-avatar">?</div>
+        </div>
+
+        <div class="admin-content">
+          <div class="card-block form-center">
+            <div class="form-error" id="form-error"></div>
+            <div class="form-success" id="form-success"></div>
+
+            <div class="form-row">
+              <label>Product image</label>
+              <div class="image-upload-box" id="upload-box">
+                <span id="upload-label">Click to choose an image</span>
+                <input
+                  type="file"
+                  id="image-input"
+                  accept="image/*"
+                  style="display: none"
+                />
+              </div>
+              <img id="image-preview" class="image-preview" />
+              <div class="upload-status" id="upload-status"></div>
+            </div>
+
+            <div class="form-row">
+              <label>Product name</label>
+              <input type="text" id="name" />
+            </div>
+
+            <div class="form-grid">
+              <div class="form-row">
+                <label>Category</label>
+                <select id="category">
+                  <option>T-Shirt</option>
+                  <option>Shirt</option>
+                  <option>Jeans</option>
+                  <option>Hoodie</option>
+                  <option>Accessories</option>
+                  <option>Shari</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <label>Stock quantity</label>
+                <input type="number" id="stock" value="10" />
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-row">
+                <label>Price (৳)</label>
+                <input type="number" id="price" />
+              </div>
+              <div class="form-row">
+                <label>Discount price (৳, optional)</label>
+                <input type="number" id="discountPrice" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label>Sizes</label>
+              <div class="chip-row" id="sizes-row"></div>
+            </div>
+
+            <div class="form-row">
+              <label>Colors (comma separated)</label>
+              <input type="text" id="colors" placeholder="Black, White, Navy" />
+            </div>
+
+            <div class="form-row">
+              <label>Description</label>
+              <textarea id="description" rows="3"></textarea>
+            </div>
+
+            <button class="btn-admin-primary" id="submit-btn">
+              Save Product
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+    <script src="../js/firebase.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/admin.js"></script>
+    <script>
+      requireAdmin().then((user) => {
+        document.getElementById("admin-loading").style.display = "none";
+        document.getElementById("admin-shell").style.display = "block";
+        const avatar = document.getElementById("admin-avatar");
+        avatar.textContent = (user.email || "?").charAt(0).toUpperCase();
+        avatar.title = user.email;
+      });
+
+      // drawer toggle
+      const drawer = document.getElementById("admin-drawer");
+      const overlay = document.getElementById("admin-drawer-overlay");
+      document
+        .getElementById("admin-hamburger")
+        .addEventListener("click", () => {
+          drawer.classList.add("open");
+          overlay.classList.add("open");
+        });
+      document
+        .getElementById("admin-drawer-close")
+        .addEventListener("click", closeAdminDrawer);
+      overlay.addEventListener("click", closeAdminDrawer);
+      function closeAdminDrawer() {
+        drawer.classList.remove("open");
+        overlay.classList.remove("open");
+      }
+
+      document
+        .getElementById("logout-btn")
+        .addEventListener("click", async () => {
+          await logoutUser();
+          window.location.href = "../pages/login.html";
+        });
+
+      // size chip selector
+      const ALL_SIZES = ["S", "M", "L", "XL", "XXL"];
+      const selectedSizes = new Set();
+      const sizesRow = document.getElementById("sizes-row");
+      sizesRow.innerHTML = ALL_SIZES.map(
+        (s) => `<div class="chip" data-size="${s}">${s}</div>`,
+      ).join("");
+      sizesRow.querySelectorAll(".chip").forEach((chip) => {
+        chip.addEventListener("click", () => {
+          const s = chip.dataset.size;
+          if (selectedSizes.has(s)) {
+            selectedSizes.delete(s);
+            chip.classList.remove("selected");
+          } else {
+            selectedSizes.add(s);
+            chip.classList.add("selected");
+          }
+        });
+      });
+
+      // image upload
+      const uploadBox = document.getElementById("upload-box");
+      const imageInput = document.getElementById("image-input");
+      const imagePreview = document.getElementById("image-preview");
+      const uploadStatus = document.getElementById("upload-status");
+      const uploadLabel = document.getElementById("upload-label");
+      let uploadedImageUrl = null;
+
+      uploadBox.addEventListener("click", () => imageInput.click());
+      imageInput.addEventListener("change", async () => {
+        const file = imageInput.files[0];
+        if (!file) return;
+
+        imagePreview.src = URL.createObjectURL(file);
+        imagePreview.style.display = "block";
+        uploadLabel.textContent = file.name;
+        uploadStatus.textContent = "Optimizing image…";
+
+        try {
+          const jpegFile = await resizeAndConvertToJPEG(file);
+          uploadStatus.textContent = "Uploading…";
+          uploadedImageUrl = await uploadToImgBB(jpegFile);
+          uploadStatus.textContent = "Uploaded ✓";
+        } catch (err) {
+          uploadStatus.textContent = "Upload failed: " + err.message;
+          uploadedImageUrl = null;
+        }
+      });
+
+      // submit
+      document
+        .getElementById("submit-btn")
+        .addEventListener("click", async () => {
+          const errorEl = document.getElementById("form-error");
+          const successEl = document.getElementById("form-success");
+          showError(errorEl, "");
+          showError(successEl, "");
+
+          const name = document.getElementById("name").value.trim();
+          const price = Number(document.getElementById("price").value);
+          const discountPrice = document.getElementById("discountPrice").value;
+          const category = document.getElementById("category").value;
+          const stock = Number(document.getElementById("stock").value);
+          const colors = document
+            .getElementById("colors")
+            .value.split(",")
+            .map((c) => c.trim())
+            .filter(Boolean);
+          const description = document
+            .getElementById("description")
+            .value.trim();
+
+          if (!name || !price) {
+            showError(errorEl, "Name and price are required.");
+            return;
+          }
+          if (!uploadedImageUrl) {
+            showError(
+              errorEl,
+              "Please wait for the image to finish uploading.",
+            );
+            return;
+          }
+          if (selectedSizes.size === 0) {
+            showError(errorEl, "Select at least one size.");
+            return;
+          }
+
+          const btn = document.getElementById("submit-btn");
+          btn.disabled = true;
+          btn.textContent = "Saving…";
+
+          try {
+            await db.collection("products").add({
+              name,
+              price,
+              discountPrice: discountPrice ? Number(discountPrice) : null,
+              category,
+              stock,
+              sizes: Array.from(selectedSizes),
+              colors,
+              description,
+              image: uploadedImageUrl,
+              sku: `BW-${category.slice(0, 3).toUpperCase()}-${Math.floor(1000 + Math.random() * 9000)}`,
+              status: "active",
+              createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            });
+            showError(successEl, "Product saved.");
+            document.getElementById("name").value = "";
+            document.getElementById("price").value = "";
+            document.getElementById("discountPrice").value = "";
+            document.getElementById("colors").value = "";
+            document.getElementById("description").value = "";
+            imagePreview.style.display = "none";
+            uploadedImageUrl = null;
+            selectedSizes.clear();
+            sizesRow
+              .querySelectorAll(".chip")
+              .forEach((c) => c.classList.remove("selected"));
+          } catch (err) {
+            showError(errorEl, err.message);
+          } finally {
+            btn.disabled = false;
+            btn.textContent = "Save Product";
+          }
+        });
+    </script>
+  </body>
+</html>

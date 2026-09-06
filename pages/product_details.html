@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product - BlueWear</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/shop.css">
+    <link rel="stylesheet" href="../css/product_details.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="container navbar-inner">
+            <a href="../index.html" class="logo">BLUEWEAR</a>
+            <nav class="nav-menu">
+                <a href="../index.html">Home</a>
+                <a href="shop.html">Shop</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="cart.html" class="cart-btn" style="text-decoration: none; display: flex; align-items: center;">
+                    Cart (<span id="nav-cart-count">0</span>)
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN PRODUCT SECTION -->
+    <main class="container">
+
+        <div id="product-loading" class="product-loading">Loading product…</div>
+
+        <div id="product-main" class="product-main" style="display:none;">
+
+            <div class="product-layout">
+
+                <!-- LEFT: Image -->
+                <div class="product-gallery">
+                    <div class="product-gallery-image" id="product-gallery-image"></div>
+                </div>
+
+                <!-- RIGHT: Info -->
+                <div class="product-info">
+
+                    <!-- Title & Wishlist Heart Row -->
+                    <div class="product-header-row">
+                        <h1 class="product-title" id="product-title-name">Loading…</h1>
+                        <button class="wishlist-heart-btn" id="wishlist-btn" title="Add to wishlist">♡</button>
+                    </div>
+
+                    <!-- Price Block -->
+                    <div class="product-price-block" id="product-price-block"></div>
+
+                    <!-- Stock Note -->
+                    <div class="product-stock-note" id="product-stock-note"></div>
+
+                    <!-- Colors -->
+                    <div class="product-option-group" id="color-group" style="display:none;">
+                        <label>Color</label>
+                        <div class="option-row" id="color-row"></div>
+                    </div>
+
+                    <!-- Sizes -->
+                    <div class="product-option-group">
+                        <label>Select Size:</label>
+                        <div class="option-row size-box-row" id="size-row"></div>
+                        <p class="size-error" id="size-error"></p>
+                    </div>
+
+                    <!-- Quantity & Cart Button -->
+                    <div class="qty-and-cart">
+                        <div class="qty-box">
+                            <button type="button" id="qty-minus">−</button>
+                            <input type="text" id="qty-value" value="1" readonly>
+                            <button type="button" id="qty-plus">+</button>
+                        </div>
+                        <button class="add-to-cart-btn-dark" id="add-to-cart-btn">
+                            <span class="plus-icon">+</span> Add To Cart
+                        </button>
+                    </div>
+
+                    <!-- Return Policy Box -->
+                    <div class="return-policy-box">
+                        <div class="return-policy-head">
+                            <span class="check-circle">✓</span>
+                            <strong>Easy Returns &amp; Exchange</strong>
+                            <span class="chev">›</span>
+                        </div>
+                        <div class="return-policy-items">
+                            <span><span class="check-circle-sm">✓</span> Tell us within 7 days</span>
+                            <span><span class="check-circle-sm">✓</span> Free return shipping*</span>
+                            <span><span class="check-circle-sm">✓</span> Instant refund on receipt</span>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="product-description" id="product-description"></div>
+
+                </div>
+
+            </div>
+
+            <!-- Related Products -->
+            <section class="related-section">
+                <h2>You may also like</h2>
+                <div class="product-grid shop-products" id="related-grid"></div>
+            </section>
+
+        </div>
+
+        <div id="product-not-found" class="product-loading" style="display:none;">
+            Product not found. <a href="shop.html">Back to shop</a>
+        </div>
+
+    </main>
+
+    <!-- FIREBASE & JS -->
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+    <script src="../js/firebase.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/products.js"></script>
+
+</body>
+</html>

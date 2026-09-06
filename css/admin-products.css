@@ -314,13 +314,31 @@ align-items: center;
 gap: 7px;
 }
 
+/* ১. এডিট ও ডিলিট বাটন এবং আইকনের ফন্ট সাইজ বাড়ানো */
 .edit-btn,
 .delete-btn {
-padding: 7px 11px;
-border: 1px solid #d8e4ef;
-background: #ffffff;
-font-size: 12px;
-cursor: pointer;
+    padding: 8px 12px;          /* বাটনের ভেতরের স্পেস */
+    font-size: 18px;             /* আইকন যদি ইমোজি বা টেক্সট আইকন হয় */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* ২. আইকন যদি FontAwesome বা Font Icon (<i>) হয় */
+.edit-btn i,
+.delete-btn i {
+    font-size: 20px;             /* আইকন সাইজ */
+}
+
+/* ৩. আইকন যদি SVG বা Image (<img>) হয় */
+.edit-btn svg,
+.delete-btn svg,
+.edit-btn img,
+.delete-btn img {
+    width: 200px;                 /* আইকনের চওড়া */
+    height: 200px;                /* আইকনের উচ্চতা */
+    object-fit: contain;
 }
 
 .edit-btn {
