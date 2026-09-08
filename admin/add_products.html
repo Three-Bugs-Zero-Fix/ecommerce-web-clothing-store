@@ -72,12 +72,7 @@
               <div class="form-row">
                 <label>Category</label>
                 <select id="category">
-                  <option>T-Shirt</option>
-                  <option>Shirt</option>
-                  <option>Jeans</option>
-                  <option>Hoodie</option>
-                  <option>Accessories</option>
-                  <option>Shari</option>
+                  <option value="">Select category</option>
                 </select>
               </div>
               <div class="form-row">
@@ -160,6 +155,81 @@
           window.location.href = "../pages/login.html";
         });
 
+      /* ============================================================
+         CATEGORY (single dropdown, grouped by Main Category)
+         ============================================================ */
+      const CATEGORY_MAP = {
+        Men: [
+          "Half Sleeve T-Shirt",
+          "Full Sleeve T-Shirt",
+          "Maggie",
+          "Shirt",
+          "Polo T-Shirt",
+          "Hoodie",
+          "Jacket",
+          "Joggers",
+          "Sweatshirt",
+          "Comfy Trouser",
+          "Sports Trouser",
+          "Shorts",
+          "Underwear",
+          "Socks",
+          "Panjabi",
+          "Tupi",
+          "Jeans",
+          "Pajama",
+          "Chino Pants",
+          "Cargo Pants",
+          "Formal Pants",
+          "Sando & Tank Top",
+          "Waistcoats",
+        ],
+        Women: [
+          "T-Shirt",
+          "Comfy Trouser",
+          "Kurti Tunic And Tops",
+          "Pajamas",
+          "Pants",
+          "Palazzo",
+          "Leggings",
+          "Hoodie",
+          "Sweatshirt",
+          "Cargo Pants",
+          "Shrug",
+          "Co-Ords",
+          "Tops",
+          "Kurti",
+          "2pc Salwar Kameez",
+          "3pc Salwar Kameez",
+          "Denim Pants",
+        ],
+        Teens: ["Boys", "Girls"],
+        Kids: ["Boys", "Girls"],
+        Sports: ["Sports T-Shirt", "Football Jersey"],
+        "Face Mask": [
+          "Professional 7 Layer Mask",
+          "Sports Edition",
+          "Womens Designer Edition",
+          "Womens Embroidery Edition",
+          "Kids Mask",
+          "Anti Dust & Anti Pollen Mask",
+        ],
+      };
+
+      function buildCategoryOptions(selectEl) {
+        selectEl.innerHTML =
+          `<option value="">Select category</option>` +
+          Object.entries(CATEGORY_MAP)
+            .map(
+              ([main, subs]) =>
+                `<optgroup label="${main}">${subs.map((s) => `<option value="${s}">${s}</option>`).join("")}</optgroup>`,
+            )
+            .join("");
+      }
+
+      const categorySelect = document.getElementById("category");
+      buildCategoryOptions(categorySelect);
+
       // size chip selector
       const ALL_SIZES = ["S", "M", "L", "XL", "XXL"];
       const selectedSizes = new Set();
@@ -221,7 +291,12 @@
           const name = document.getElementById("name").value.trim();
           const price = Number(document.getElementById("price").value);
           const discountPrice = document.getElementById("discountPrice").value;
-          const category = document.getElementById("category").value;
+
+          const category = categorySelect.value;
+          const selectedOption =
+            categorySelect.options[categorySelect.selectedIndex];
+          const mainCategory = selectedOption.parentElement.label || "";
+
           const stock = Number(document.getElementById("stock").value);
           const colors = document
             .getElementById("colors")
@@ -234,6 +309,10 @@
 
           if (!name || !price) {
             showError(errorEl, "Name and price are required.");
+            return;
+          }
+          if (!category) {
+            showError(errorEl, "Please select a category.");
             return;
           }
           if (!uploadedImageUrl) {
@@ -257,13 +336,14 @@
               name,
               price,
               discountPrice: discountPrice ? Number(discountPrice) : null,
+              mainCategory,
               category,
               stock,
               sizes: Array.from(selectedSizes),
               colors,
               description,
               image: uploadedImageUrl,
-              sku: `BW-${category.slice(0, 3).toUpperCase()}-${Math.floor(1000 + Math.random() * 9000)}`,
+              sku: `BW-${mainCategory.slice(0, 3).toUpperCase()}-${Math.floor(1000 + Math.random() * 9000)}`,
               status: "active",
               createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             });
@@ -273,6 +353,7 @@
             document.getElementById("discountPrice").value = "";
             document.getElementById("colors").value = "";
             document.getElementById("description").value = "";
+            categorySelect.value = "";
             imagePreview.style.display = "none";
             uploadedImageUrl = null;
             selectedSizes.clear();
