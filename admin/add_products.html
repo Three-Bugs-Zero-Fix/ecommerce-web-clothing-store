@@ -18,7 +18,7 @@
       <div class="admin-drawer-overlay" id="admin-drawer-overlay"></div>
       <aside class="admin-drawer" id="admin-drawer">
         <div class="admin-drawer-head">
-          <span class="admin-logo">CLOTHING CO.</span>
+          <span class="admin-logo">BLUEWEAR</span>
           <button class="admin-drawer-close" id="admin-drawer-close">✕</button>
         </div>
         <nav class="admin-nav">
@@ -40,7 +40,31 @@
             <button class="admin-hamburger" id="admin-hamburger">☰</button>
             <div class="admin-page-title">Add Product</div>
           </div>
-          <div class="admin-avatar" id="admin-avatar">?</div>
+          <div class="admin-topbar-right">
+            <a href="products.html" class="back-to-products-link"
+              >Back to Products</a
+            >
+            <div class="admin-avatar" id="admin-avatar">
+              <svg viewBox="0 0 24 24" width="20" height="20">
+                <defs>
+                  <linearGradient
+                    id="avatarGradient"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="100%"
+                  >
+                    <stop offset="0%" stop-color="#6D5BD0" />
+                    <stop offset="100%" stop-color="#2E1F7A" />
+                  </linearGradient>
+                </defs>
+                <path
+                  fill="url(#avatarGradient)"
+                  d="M12 12c2.7 0 4.9-2.2 4.9-4.9S14.7 2.2 12 2.2 7.1 4.4 7.1 7.1 9.3 12 12 12zm0 2.5c-3.3 0-9.8 1.6-9.8 4.9V22h19.6v-2.6c0-3.3-6.5-4.9-9.8-4.9z"
+                />
+              </svg>
+            </div>
+          </div>
         </div>
 
         <div class="admin-content">
@@ -92,9 +116,30 @@
               </div>
             </div>
 
-            <div class="form-row">
-              <label>Sizes</label>
-              <div class="chip-row" id="sizes-row"></div>
+            <div class="form-row sizes-featured-row">
+              <div class="sizes-col">
+                <label>Sizes</label>
+                <div class="chip-row" id="sizes-row"></div>
+              </div>
+              <div class="featured-col">
+                <label>Product Type</label>
+                <div class="featured-toggle-box" id="featured-toggle-box">
+                  <button
+                    type="button"
+                    class="featured-option selected"
+                    data-value="false"
+                  >
+                    Regular
+                  </button>
+                  <button
+                    type="button"
+                    class="featured-option"
+                    data-value="true"
+                  >
+                    Featured
+                  </button>
+                </div>
+              </div>
             </div>
 
             <div class="form-row">
@@ -107,9 +152,11 @@
               <textarea id="description" rows="3"></textarea>
             </div>
 
-            <button class="btn-admin-primary" id="submit-btn">
-              Save Product
-            </button>
+            <div class="form-submit-row">
+              <button class="btn-admin-primary" id="submit-btn">
+                Save Product
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -126,7 +173,6 @@
         document.getElementById("admin-loading").style.display = "none";
         document.getElementById("admin-shell").style.display = "block";
         const avatar = document.getElementById("admin-avatar");
-        avatar.textContent = (user.email || "?").charAt(0).toUpperCase();
         avatar.title = user.email;
       });
 
@@ -250,6 +296,19 @@
         });
       });
 
+      // featured / regular toggle
+      const featuredBox = document.getElementById("featured-toggle-box");
+      let isFeatured = false;
+      featuredBox.querySelectorAll(".featured-option").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          featuredBox
+            .querySelectorAll(".featured-option")
+            .forEach((b) => b.classList.remove("selected"));
+          btn.classList.add("selected");
+          isFeatured = btn.dataset.value === "true";
+        });
+      });
+
       // image upload
       const uploadBox = document.getElementById("upload-box");
       const imageInput = document.getElementById("image-input");
@@ -342,6 +401,7 @@
               sizes: Array.from(selectedSizes),
               colors,
               description,
+              featured: isFeatured,
               image: uploadedImageUrl,
               sku: `BW-${mainCategory.slice(0, 3).toUpperCase()}-${Math.floor(1000 + Math.random() * 9000)}`,
               status: "active",
@@ -360,6 +420,13 @@
             sizesRow
               .querySelectorAll(".chip")
               .forEach((c) => c.classList.remove("selected"));
+            isFeatured = false;
+            featuredBox
+              .querySelectorAll(".featured-option")
+              .forEach((b) => b.classList.remove("selected"));
+            featuredBox
+              .querySelector('[data-value="false"]')
+              .classList.add("selected");
           } catch (err) {
             showError(errorEl, err.message);
           } finally {

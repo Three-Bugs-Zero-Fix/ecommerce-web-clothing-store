@@ -63,8 +63,8 @@
                 margin-left: 45px;
               "
             >
-              <a
-                href="../index.html"
+              
+                <a href="../index.html"
                 style="
                   text-decoration: none;
                   color: #475467;
@@ -73,8 +73,8 @@
                 "
                 >Home</a
               >
-              <a
-                href="../pages/shop.html"
+              
+                <a href="../pages/shop.html"
                 style="
                   text-decoration: none;
                   color: #475467;
@@ -83,8 +83,8 @@
                 "
                 >Shop</a
               >
-              <a
-                href="about.html"
+              
+                <a href="about.html"
                 style="
                   text-decoration: none;
                   color: #475467;
@@ -130,8 +130,8 @@
 
             <!-- Add Product Button -->
 
-            <a
-              href="add_products.html"
+            
+              <a href="add_products.html"
               class="btn-admin-primary"
               style="
                 text-decoration: none;
@@ -142,8 +142,8 @@
             >
 
             <!-- Profile Icon Only (No Email Text) -->
-            <a
-              href="profile.html"
+            
+              <a href="profile.html"
               title="Profile Account"
               style="
                 display: flex;
@@ -177,7 +177,28 @@
                   <th>Price</th>
                   <th>Stock</th>
                   <th>Status</th>
-                  <th></th>
+                  <th>
+                    <select
+                      id="sort-select"
+                      style="
+                        padding: 5px 8px;
+                        border-radius: 6px;
+                        border: 1px solid #e4e7ec;
+                        background: #f9fafb;
+                        outline: none;
+                        font-size: 11.5px;
+                        color: #172033;
+                        text-transform: none;
+                        font-weight: 500;
+                      "
+                    >
+                      <option value="default">Sort by</option>
+                      <option value="stock">Stock</option>
+                      <option value="featured">Featured Product</option>
+                      <option value="regular">Regular Product</option>
+                      <option value="name">Name: A-Z</option>
+                    </select>
+                  </th>
                 </tr>
               </thead>
               <tbody id="products-body">
@@ -233,7 +254,7 @@
           </div>
           <div class="form-row">
             <label>Stock quantity</label>
-            <input type="number" id="edit-stock" />
+            <input type="number" id="edit-stock" min="0" />
           </div>
         </div>
 
@@ -447,15 +468,40 @@
           .join("");
       }
 
-      document.getElementById("search-input").addEventListener("input", (e) => {
-        const q = e.target.value.toLowerCase();
-        const filtered = allProducts.filter(
+      function applySortAndSearch() {
+        const q = document.getElementById("search-input").value.toLowerCase();
+        const sortValue = document.getElementById("sort-select").value;
+
+        let list = allProducts.filter(
           (p) =>
             p.name.toLowerCase().includes(q) ||
             (p.sku || "").toLowerCase().includes(q),
         );
-        renderTable(filtered);
-      });
+
+        if (sortValue === "stock") {
+          list = [...list].sort((a, b) => (a.stock ?? 0) - (b.stock ?? 0));
+        } else if (sortValue === "featured") {
+          list = list.filter((p) => p.featured === true);
+        } else if (sortValue === "regular") {
+          list = list.filter((p) => !p.featured);
+        } else if (sortValue === "name") {
+          list = [...list].sort((a, b) => a.name.localeCompare(b.name));
+        }
+
+        renderTable(list);
+      }
+
+      document
+        .getElementById("search-input")
+        .addEventListener("input", () => {
+          applySortAndSearch();
+        });
+
+      document
+        .getElementById("sort-select")
+        .addEventListener("change", () => {
+          applySortAndSearch();
+        });
 
       // ---------- delete ----------
       async function deleteProduct(id) {
@@ -495,7 +541,7 @@
 
         document.getElementById("edit-name").value = p.name || "";
         editCategorySelect.value = p.category || "";
-        document.getElementById("edit-stock").value = p.stock ?? 0;
+        document.getElementById("edit-stock").value = Math.max(0, p.stock ?? 0);
         document.getElementById("edit-price").value = p.price ?? "";
         document.getElementById("edit-discountPrice").value =
           p.discountPrice ?? "";
@@ -599,6 +645,10 @@
           }
           if (editSelectedSizes.size === 0) {
             showError(errorEl, "Select at least one size.");
+            return;
+          }
+          if (isNaN(stock) || stock < 0) {
+            showError(errorEl, "Stock quantity can't be negative.");
             return;
           }
 
