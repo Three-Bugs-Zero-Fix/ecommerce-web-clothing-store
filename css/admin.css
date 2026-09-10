@@ -375,7 +375,7 @@ table.admin-table td {
   margin-bottom: 8px;
 }
 .chip {
-  padding: 6px 12px;
+  padding: 11px 12px;
   border: 1.5px solid var(--a-line);
   border-radius: 999px;
   font-size: 12px;
@@ -472,20 +472,12 @@ table.admin-table td {
 }
 
 /* ---------- admin avatar (topbar) ---------- */
-.admin-avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--a-blue), var(--a-blue-deep));
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 14px;
-  cursor: default;
-  box-shadow: 0 3px 8px rgba(36, 82, 217, 0.3);
-  flex-shrink: 0;
+.admin-avatar{
+  width:38px; height:38px; border-radius:50%;
+  background:#F2F4F7;
+  display:flex; align-items:center; justify-content:center;
+  cursor:default;
+  flex-shrink:0;
 }
 
 
@@ -623,4 +615,86 @@ table.admin-table td {
         width: 100%;
         margin-top: 8px;
     }
+}
+
+/* ---------- Sizes + Featured toggle side by side ---------- */
+.sizes-featured-row {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.sizes-col {
+  flex: 1;
+  min-width: 220px;
+}
+
+.featured-col {
+  flex: 1;
+  min-width: 220px;
+}
+
+.featured-toggle-box {
+  display: flex;
+  border: 1.5px solid var(--a-line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.featured-option {
+  flex: 1;
+  padding: 12px 2px;
+  border: none;
+  background: #fff;
+  color: var(--a-ink-soft);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.featured-option:first-child {
+  border-right: 1.5px solid var(--a-line);
+}
+
+.featured-option.selected {
+  background: var(--a-accent);
+  color: #fff;
+}
+
+/* ---------- Center the save button ---------- */
+.form-submit-row {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.form-submit-row .btn-admin-primary {
+  display: inline-block;
+  padding: 12px 48px;
+}
+
+/* ---------- Topbar: back-to-products + avatar ---------- */
+.admin-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.back-to-products-link {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1.5px solid #000000;
+  border-radius: 10px;
+  background: none;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--a-ink-soft);
+  text-decoration: none;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.back-to-products-link:hover {
+  border-color: var(--a-accent);
+  color: var(--a-accent);
 }
