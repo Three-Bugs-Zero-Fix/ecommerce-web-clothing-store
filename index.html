@@ -16,19 +16,33 @@
 
       <nav class="nav-menu">
         <a href="#" class="active">Home</a>
-        <a href="pages/shop.html">Shop</a> 
+        <a href="pages/shop.html">Shop</a>
         <a href="#categories">Categories</a>
         <a href="#about">About</a>
       </nav>
 
       <div class="nav-actions">
-        <button class="nav-btn">Search</button>
-        
-        <!-- UPDATE: Changed Cart button to link to cart.html and added span for JS -->
-        <a href="pages/cart.html" class="cart-btn" style="text-decoration: none; display: flex; align-items: center;">
-          Cart (<span id="nav-cart-count">0</span>)
+        <a href="pages/cart.html" class="cart-btn" id="cart-btn" style="
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    ">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-shopping-cart-plus">
+            <path d="M16 5h6" />
+            <path d="M19 2v6" />
+            <path d="m2.05 2.05 1.099-.028a1 1 0 011.008.815l2.69 14.347A1 1 0 007.83 18H18" />
+            <path d="M4.564 5H12" />
+            <path d="M6.25 14h12.712a2 2 0 001.991-1.57l.172-1.041" />
+            <circle cx="18" cy="20" r="2" />
+            <circle cx="8" cy="20" r="2" />
+          </svg>
+
+          <span>Cart (<span id="nav-cart-count">0</span>)</span>
         </a>
-        
+
         <button class="profile-btn profile-btn-guest" id="profile-btn">
           <span id="profile-btn-content">👤</span>
         </button>
@@ -63,6 +77,19 @@
         </div>
       </div>
     </section>
+
+    <!-- PROMOTIONAL BANNER -->
+<section class="promo-banner-section">
+  <div class="container">
+    <div class="promo-banner" id="promo-banner">
+      <div class="promo-banner-loading">
+        Loading offers...
+      </div>
+    </div>
+
+    <div class="promo-dots" id="promo-dots"></div>
+  </div>
+</section>
 
     <!-- CATEGORIES -->
     <section class="section" id="categories">
@@ -238,7 +265,7 @@
       <p>© 2026 BlueWear. All rights reserved.</p>
     </div>
   </footer>
-  
+
   <!-- PROFILE DRAWER -->
   <div class="drawer-overlay" id="drawer-overlay"></div>
   <div class="profile-drawer" id="profile-drawer">
@@ -254,7 +281,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
-  
+
   <script src="/js/firebase.js"></script>
   <script src="/js/auth.js"></script>
   <script src="/js/profile_drawer.js"></script>
@@ -262,6 +289,7 @@
   <script src="/js/cart.js"></script>
   <!-- Added featured.js -->
   <script src="/js/featured.js"></script>
+  <script src="/js/banners.js"></script>
 </body>
 
 </html>

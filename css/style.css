@@ -92,7 +92,6 @@ button {
   border-color: #1769aa;
   color: #ffffff;
 }
-
 /* Hero */
 
 .hero {
@@ -454,9 +453,7 @@ button {
     font-size: 19px;
   }
 
-  .nav-btn {
-    display: none;
-  }
+  
 
   .hero-inner {
     padding: 50px 0;
@@ -1011,4 +1008,92 @@ button {
     color: #667085;
     font-size: 14px;
     grid-column: 1 / -1;
+}
+
+/* ============================================================
+   PROMOTIONAL BANNER CAROUSEL
+============================================================ */
+
+.promo-banner-section {
+  padding: 24px 0 0;
+  background: #ffffff;
+}
+
+.promo-banner {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  background: #eef7ff;
+  border-radius: 12px;
+}
+
+.promo-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease;
+}
+
+.promo-slide.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.promo-slide img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  background: #eef7ff;
+}
+
+.promo-banner-loading {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #667085;
+  font-size: 13px;
+}
+
+.promo-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  padding: 12px 0 0;
+}
+
+.promo-dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #cbd5e1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.promo-dot.active {
+  width: 20px;
+  border-radius: 10px;
+  background: #1769aa;
+}
+
+@media (max-width: 600px) {
+  .promo-banner-section {
+    padding-top: 15px;
+  }
+
+  .promo-banner {
+    height: 180px;
+    border-radius: 8px;
+  }
+
+  .promo-dots {
+    padding-top: 9px;
+  }
 }
