@@ -35,7 +35,7 @@ async function loadPromoBanners() {
     bannerSection.style.display = "none";
   }
 }
-
+// Render the promotional banners and navigation dots
 function renderPromoBanners() {
   const bannerContainer = document.getElementById("promo-banner");
   const dotsContainer = document.getElementById("promo-dots");
@@ -71,7 +71,7 @@ function renderPromoBanners() {
           .join("")
       : "";
 }
-
+// Show the specified promo slide and update active dot
 function showPromoSlide(index) {
   if (!promoBanners.length) return;
 
@@ -110,7 +110,7 @@ function escapeHtml(value) {
       })[character],
   );
 }
-
+// Escape banner URL to prevent XSS and ensure valid navigation
 function escapeBannerUrl(url) {
   const value = String(url || "").trim();
 
