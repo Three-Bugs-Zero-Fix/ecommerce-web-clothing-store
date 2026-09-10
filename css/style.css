@@ -885,3 +885,130 @@ button {
 .menu-item-danger:hover {
   background: #fbeae9;
 }
+
+/* ================================
+   FEATURED PRODUCTS CARD (shop.css style)
+================================ */
+
+.products-section .product-card {
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #e7ecf2;
+    border-radius: 12px;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.products-section .product-card:hover {
+    box-shadow: 0 8px 24px rgba(23, 32, 51, 0.08);
+    transform: translateY(-2px);
+}
+
+.products-section .product-image {
+    position: relative;
+    display: block;
+    height: 300px;
+    background: #F2F4F7;
+    overflow: hidden;
+    text-decoration: none;
+}
+
+.products-section .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.products-section .product-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 5px 10px;
+    background: #F43F7A;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    border-radius: 999px;
+}
+
+.products-section .product-details {
+    padding: 15px;
+}
+
+.products-section .product-category {
+    margin-bottom: 4px;
+    color: #1769aa;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.products-section .product-details h3 {
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.save-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #E7F6EC;
+    color: #1E8A4A;
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin: 8px 0;
+}
+
+.price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+}
+
+.price-current {
+    font-size: 17px;
+    font-weight: 700;
+    color: #172033;
+}
+
+.price-old {
+    font-size: 13px;
+    color: #98A2B3;
+    text-decoration: line-through;
+    margin-left: 6px;
+}
+
+.price-discount {
+    font-size: 12.5px;
+    color: #F43F7A;
+    font-weight: 700;
+    margin-left: 6px;
+}
+
+.cart-icon-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #172033;
+    color: #fff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.15s ease;
+}
+.cart-icon-btn:hover { background: #1769aa; }
+.cart-icon-btn:disabled { background: #D0D5DD; cursor: not-allowed; }
+
+.loading-text {
+    color: #667085;
+    font-size: 14px;
+    grid-column: 1 / -1;
+}

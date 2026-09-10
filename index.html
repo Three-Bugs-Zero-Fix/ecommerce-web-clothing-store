@@ -136,65 +136,8 @@
           </a>
         </div>
 
-        <div class="product-grid">
-          
-          <!-- PRODUCT 1 -->
-          <article class="product-card">
-            <div class="product-image">
-              <span class="product-badge">NEW</span>
-              PRODUCT IMAGE
-            </div>
-
-            <div class="product-details">
-              <p class="product-category">T-SHIRT</p>
-              <h3>Classic Blue T-Shirt</h3>
-              <p class="price">৳650</p>
-              <!-- UPDATE: Added Add to Cart button -->
-              <button class="primary-btn" style="width: 100%; margin-top: 10px;" onclick="addToCart('feat_01', 'Classic Blue T-Shirt', 650, '')">Add to Cart</button>
-            </div>
-          </article>
-
-          <!-- PRODUCT 2 -->
-          <article class="product-card">
-            <div class="product-image">PRODUCT IMAGE</div>
-
-            <div class="product-details">
-              <p class="product-category">SHIRT</p>
-              <h3>Casual Linen Shirt</h3>
-              <p class="price">৳1,200</p>
-              <!-- UPDATE: Added Add to Cart button -->
-              <button class="primary-btn" style="width: 100%; margin-top: 10px;" onclick="addToCart('feat_02', 'Casual Linen Shirt', 1200, '')">Add to Cart</button>
-            </div>
-          </article>
-
-          <!-- PRODUCT 3 -->
-          <article class="product-card">
-            <div class="product-image">
-              <span class="product-badge">SALE</span>
-              PRODUCT IMAGE
-            </div>
-
-            <div class="product-details">
-              <p class="product-category">JEANS</p>
-              <h3>Regular Fit Jeans</h3>
-              <p class="price">৳1,350</p>
-              <!-- UPDATE: Added Add to Cart button -->
-              <button class="primary-btn" style="width: 100%; margin-top: 10px;" onclick="addToCart('feat_03', 'Regular Fit Jeans', 1350, '')">Add to Cart</button>
-            </div>
-          </article>
-
-          <!-- PRODUCT 4 -->
-          <article class="product-card">
-            <div class="product-image">PRODUCT IMAGE</div>
-
-            <div class="product-details">
-              <p class="product-category">HOODIE</p>
-              <h3>Everyday Hoodie</h3>
-              <p class="price">৳1,500</p>
-              <!-- UPDATE: Added Add to Cart button -->
-              <button class="primary-btn" style="width: 100%; margin-top: 10px;" onclick="addToCart('feat_04', 'Everyday Hoodie', 1500, '')">Add to Cart</button>
-            </div>
-          </article>
+        <div class="product-grid" id="featured-grid">
+          <p class="loading-text">Loading featured products…</p>
         </div>
       </div>
     </section>
@@ -317,6 +260,8 @@
   <script src="/js/profile_drawer.js"></script>
   <!-- Added cart.js -->
   <script src="/js/cart.js"></script>
+  <!-- Added featured.js -->
+  <script src="/js/featured.js"></script>
 </body>
 
 </html>

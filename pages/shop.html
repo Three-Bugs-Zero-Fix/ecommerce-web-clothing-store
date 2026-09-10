@@ -1,268 +1,224 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Shop - BlueWear</title>
 
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/shop.css">
-</head>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/shop.css" />
+  </head>
 
-<body>
-
+  <body>
     <!-- NAVBAR -->
     <header class="navbar">
-        <div class="container navbar-inner">
+      <div class="container navbar-inner">
+        <a href="../index.html" class="logo">BLUEWEAR</a>
 
-            <a href="../index.html" class="logo">BLUEWEAR</a>
+        <nav class="nav-menu">
+          <a href="../index.html">Home</a>
+          <a href="shop.html" class="active">Shop</a>
+          <a href="../index.html#categories">Categories</a>
+          <a href="../index.html#about">About</a>
+        </nav>
 
-            <nav class="nav-menu">
-                <a href="../index.html">Home</a>
-                <a href="shop.html" class="active">Shop</a>
-                <a href="../index.html#categories">Categories</a>
-                <a href="../index.html#about">About</a>
-            </nav>
+        <div class="nav-actions">
+          <!-- SEARCH BAR AT HEADER -->
+          <div class="header-search-wrapper">
+            <input
+              type="text"
+              id="shop-search"
+              class="header-search-input"
+              placeholder="Search products..."
+            />
+            <span class="search-icon-inside">🔍</span>
+          </div>
 
-            <div class="nav-actions">
+          <!-- CART BUTTON WITH SVG ICON -->
+          <a
+            href="cart.html"
+            class="cart-btn"
+            id="cart-btn"
+            style="
+              text-decoration: none;
+              display: inline-flex;
+              align-items: center;
+              gap: 8px;
+            "
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-shopping-cart-plus"
+            >
+              <path d="M16 5h6" />
+              <path d="M19 2v6" />
+              <path
+                d="m2.05 2.05 1.099-.028a1 1 0 011.008.815l2.69 14.347A1 1 0 007.83 18H18"
+              />
+              <path d="M4.564 5H12" />
+              <path d="M6.25 14h12.712a2 2 0 001.991-1.57l.172-1.041" />
+              <circle cx="18" cy="20" r="2" />
+              <circle cx="8" cy="20" r="2" />
+            </svg>
+            <span>Cart (<span id="nav-cart-count">0</span>)</span>
+          </a>
 
-                <button class="nav-btn" id="search-btn">
-                    Search
-                </button>
-
-                <!-- cart button updated -->
-                <a href="cart.html" class="cart-btn" id="cart-btn" style="text-decoration: none; display: flex; align-items: center;">
-                Cart (<span id="nav-cart-count">0</span>)
-                </a>
-
-                <a href="login.html" class="profile-btn">
-                    👤
-                </a>
-
-            </div>
-
+          <a href="login.html" class="profile-btn"> 👤 </a>
         </div>
+      </div>
     </header>
-
 
     <!-- SHOP HEADER -->
     <main>
+      <section class="shop-header">
+        <div class="container">
+          <p class="label">OUR COLLECTION</p>
 
-        <section class="shop-header">
+          <h1>Shop All Products</h1>
 
-            <div class="container">
+          <p>Explore our latest clothing collection for everyday style.</p>
+        </div>
+      </section>
 
-                <p class="label">OUR COLLECTION</p>
+      <!-- SHOP CONTENT -->
+      <section class="shop-section">
+        <div class="container shop-layout">
+          <!-- SIDEBAR -->
+          <aside class="shop-sidebar">
+            <!-- CATEGORY FILTER (built dynamically by shop.js) -->
+            <div class="filter-group">
+              <h3>Categories</h3>
 
-                <h1>Shop All Products</h1>
-
-                <p>
-                    Explore our latest clothing collection for everyday style.
-                </p>
-
+              <div id="category-filter-list"></div>
             </div>
 
-        </section>
+            <!-- PRICE FILTER -->
+            <div class="filter-group">
+              <h3>Price</h3>
 
+              <label>
+                <input
+                  type="radio"
+                  name="price"
+                  class="price-filter"
+                  value="under-500"
+                />
+                Under ৳500
+              </label>
 
-        <!-- SHOP CONTENT -->
-        <section class="shop-section">
+              <label>
+                <input
+                  type="radio"
+                  name="price"
+                  class="price-filter"
+                  value="500-1000"
+                />
+                ৳500 - ৳1000
+              </label>
 
-            <div class="container shop-layout">
+              <label>
+                <input
+                  type="radio"
+                  name="price"
+                  class="price-filter"
+                  value="1000-2000"
+                />
+                ৳1000 - ৳2000
+              </label>
 
-                <!-- SIDEBAR -->
-                <aside class="shop-sidebar">
-
-                    <!-- SEARCH -->
-                    <div class="filter-group">
-
-                        <h3>Search</h3>
-
-                        <input type="text" id="shop-search" class="shop-search" placeholder="Search products...">
-
-                    </div>
-
-
-                    <!-- CATEGORY FILTER -->
-                    <div class="filter-group">
-
-                        <h3>Categories</h3>
-
-                        <label>
-                            <input type="checkbox" name="category" class="category-filter" value="Men">
-                            Men
-                        </label>
-
-                        <label>
-                            <input type="checkbox" name="category" class="category-filter" value="Women">
-                            Women
-                        </label>
-
-                        <label>
-                            <input type="checkbox" name="category" class="category-filter" value="Kids">
-                            Kids
-                        </label>
-
-                        <label>
-                            <input type="checkbox" name="category" class="category-filter" value="Accessories">
-                            Accessories
-                        </label>
-
-                    </div>
-
-
-                    <!-- PRICE FILTER -->
-                    <div class="filter-group">
-
-                        <h3>Price</h3>
-
-                        <label>
-                            <input type="radio" name="price" class="price-filter" value="under-500">
-                            Under ৳500
-                        </label>
-
-                        <label>
-                            <input type="radio" name="price" class="price-filter" value="500-1000">
-                            ৳500 - ৳1000
-                        </label>
-
-                        <label>
-                            <input type="radio" name="price" class="price-filter" value="1000-2000">
-                            ৳1000 - ৳2000
-                        </label>
-
-                        <label>
-                            <input type="radio" name="price" class="price-filter" value="above-2000">
-                            Above ৳2000
-                        </label>
-
-                    </div>
-
-
-                    <!-- CLEAR FILTERS -->
-                    <button type="button" id="clear-filters" class="clear-filter-btn">
-                        Clear Filters
-                    </button>
-
-                </aside>
-
-
-                <!-- PRODUCTS -->
-                <div class="shop-products">
-
-                    <!-- TOOLBAR -->
-                    <div class="shop-toolbar">
-
-                        <p id="product-count">
-                            Loading products...
-                        </p>
-
-                        <select id="sort-products">
-
-                            <option value="default">
-                                Sort by
-                            </option>
-
-                            <option value="newest">
-                                Newest
-                            </option>
-
-                            <option value="price-low">
-                                Price: Low to High
-                            </option>
-
-                            <option value="price-high">
-                                Price: High to Low
-                            </option>
-
-                            <option value="name">
-                                Name: A-Z
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <!-- PRODUCT GRID -->
-                    <div class="product-grid" id="product-grid">
-
-                        <!-- Products loaded from Firebase -->
-
-                    </div>
-
-                </div>
-
+              <label>
+                <input
+                  type="radio"
+                  name="price"
+                  class="price-filter"
+                  value="above-2000"
+                />
+                Above ৳2000
+              </label>
             </div>
 
-        </section>
+            <!-- CLEAR FILTERS -->
+            <button type="button" id="clear-filters" class="clear-filter-btn">
+              Clear Filters
+            </button>
+          </aside>
 
+          <!-- PRODUCTS -->
+          <div class="shop-products">
+            <!-- TOOLBAR -->
+            <div class="shop-toolbar">
+              <p id="product-count">Loading products...</p>
+
+              <select id="sort-products">
+                <option value="default">Sort by</option>
+
+                <option value="newest">Newest</option>
+
+                <option value="price-low">Price: Low to High</option>
+
+                <option value="price-high">Price: High to Low</option>
+
+                <option value="name">Name: A-Z</option>
+              </select>
+            </div>
+
+            <!-- PRODUCT GRID -->
+            <div class="product-grid" id="product-grid">
+              <!-- Products loaded from Firebase -->
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
-
 
     <!-- FOOTER -->
     <footer class="footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <h2>BLUEWEAR</h2>
 
-        <div class="container footer-inner">
-
-            <div class="footer-brand">
-
-                <h2>BLUEWEAR</h2>
-
-                <p>
-                    Simple clothing for everyday life.
-                </p>
-
-            </div>
-
-
-            <div class="footer-column">
-
-                <h3>Shop</h3>
-
-                <a href="#">Men</a>
-                <a href="#">Women</a>
-                <a href="#">Kids</a>
-                <a href="#">Accessories</a>
-
-            </div>
-
-
-            <div class="footer-column">
-
-                <h3>Help</h3>
-
-                <a href="#">Contact</a>
-                <a href="#">Shipping</a>
-                <a href="#">Returns</a>
-                <a href="#">FAQ</a>
-
-            </div>
-
-
-            <div class="footer-column">
-
-                <h3>Company</h3>
-
-                <a href="#">About Us</a>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms</a>
-
-            </div>
-
+          <p>Simple clothing for everyday life.</p>
         </div>
 
+        <div class="footer-column">
+          <h3>Shop</h3>
 
-        <div class="container footer-bottom">
-
-            <p>
-                © 2026 BlueWear. All rights reserved.
-            </p>
-
+          <a href="#">Men</a>
+          <a href="#">Women</a>
+          <a href="#">Kids</a>
+          <a href="#">Accessories</a>
         </div>
 
+        <div class="footer-column">
+          <h3>Help</h3>
+
+          <a href="#">Contact</a>
+          <a href="#">Shipping</a>
+          <a href="#">Returns</a>
+          <a href="#">FAQ</a>
+        </div>
+
+        <div class="footer-column">
+          <h3>Company</h3>
+
+          <a href="#">About Us</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms</a>
+        </div>
+      </div>
+
+      <div class="container footer-bottom">
+        <p>© 2026 BlueWear. All rights reserved.</p>
+      </div>
     </footer>
 
     <!-- FIREBASE -->
@@ -273,8 +229,7 @@
     <script src="../js/firebase.js"></script>
     <script src="../js/shop.js"></script>
 
-    <!-- Added cart.js -->
+    <!-- Cart.js -->
     <script src="../js/cart.js"></script>
-
-</body>
+  </body>
 </html>
