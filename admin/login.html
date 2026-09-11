@@ -1,216 +1,88 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Admin Login — BlueWear</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap"
-    />
+  <title>Admin Login — BlueWear</title>
 
-    <link rel="stylesheet" href="../css/admin.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" />
 
-    <style>
-      .admin-login-page {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 24px;
-        background: var(--a-bg);
-      }
+  <link rel="stylesheet" href="../css/auth.css" />
 
-      .admin-login-card {
-        width: 100%;
-        max-width: 420px;
-        background: #fff;
-        border: 1px solid var(--a-line);
-        border-radius: 14px;
-        padding: 32px;
-        box-shadow: 0 8px 30px rgba(34, 34, 31, 0.06);
-      }
+</head>
 
-      .admin-login-brand {
-        font-family: var(--a-head-font);
-        font-size: 22px;
-        color: var(--a-blue-deep);
-        margin-bottom: 28px;
-      }
+<body>
 
-      .admin-login-title {
-        font-family: var(--a-head-font);
-        font-size: 25px;
-        margin-bottom: 6px;
-      }
+  
 
-      .admin-login-subtitle {
-        font-size: 13px;
-        color: var(--a-ink-soft);
-        margin-bottom: 24px;
-      }
+    <div class="auth-shell">
 
-      .admin-login-field {
-        margin-bottom: 16px;
-      }
+      <div class="auth-side">
+        <div class="brand-mark">BLUEWEAR&nbsp;</div>
 
-      .admin-login-field label {
-        display: block;
-        font-size: 12px;
-        font-weight: 700;
-        margin-bottom: 6px;
-      }
+        <div>
+          <div class="auth-side-copy">
+            Admin access. Manage your store from one place.
+          </div>
 
-      .admin-login-field input {
-        width: 100%;
-        padding: 11px 12px;
-        border: 1.5px solid var(--a-line);
-        border-radius: 8px;
-        font-family: var(--a-body-font);
-        font-size: 13.5px;
-        background: #fff;
-      }
+          <div class="auth-side-sub">
+            Sign in securely to access the BlueWear administration panel.
+          </div>
+        </div>
 
-      .admin-login-field input:focus {
-        outline: none;
-        border-color: var(--a-blue);
-        box-shadow: 0 0 0 3px var(--a-blue-tint);
-      }
+        <div></div>
+      </div>
 
-      .admin-password-wrap {
-        position: relative;
-      }
+      <div class="auth-main">
 
-      .admin-password-wrap input {
-        padding-right: 58px;
-      }
+        <div class="auth-title">Admin Login</div>
 
-      .admin-show-password {
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        border: none;
-        background: none;
-        color: var(--a-blue);
-        font-size: 12px;
-        font-weight: 600;
-        cursor: pointer;
-      }
-
-      .admin-login-error {
-        display: none;
-        background: #fbeae9;
-        color: var(--a-danger);
-        border: 1px solid #f1c7c4;
-        padding: 10px 12px;
-        border-radius: 8px;
-        font-size: 12.5px;
-        margin-bottom: 16px;
-      }
-
-      .admin-login-btn {
-        width: 100%;
-        padding: 12px;
-        border: none;
-        border-radius: 8px;
-        background: var(--a-blue);
-        color: #fff;
-        font-family: var(--a-body-font);
-        font-size: 13.5px;
-        font-weight: 700;
-        cursor: pointer;
-      }
-
-      .admin-login-btn:hover {
-        background: var(--a-blue-deep);
-      }
-
-      .admin-login-btn:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-      }
-
-      .admin-login-back {
-        display: block;
-        text-align: center;
-        margin-top: 20px;
-        color: var(--a-ink-soft);
-        font-size: 12.5px;
-        text-decoration: none;
-      }
-
-      .admin-login-back:hover {
-        color: var(--a-blue);
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="admin-login-page">
-      <div class="admin-login-card">
-
-        <div class="admin-login-brand">BLUEWEAR ADMIN</div>
-
-        <div class="admin-login-title">Admin Login</div>
-
-        <div class="admin-login-subtitle">
+        <div class="auth-subtitle">
           Sign in to access the administration panel.
         </div>
 
-        <div class="admin-login-error" id="login-error"></div>
+        <div class="error-msg" id="login-error"></div>
 
-        <form id="admin-login-form">
+        <form id="admin-login-form" novalidate>
 
-          <div class="admin-login-field">
+          <div class="field">
             <label for="email">Email address</label>
-            <input
-              type="email"
-              id="email"
-              autocomplete="username"
-              required
-            />
+
+            <input type="email" id="email" autocomplete="username" required />
           </div>
 
-          <div class="admin-login-field">
+          <div class="field">
             <label for="password">Password</label>
 
-            <div class="admin-password-wrap">
-              <input
-                type="password"
-                id="password"
-                autocomplete="current-password"
-                required
-              />
+            <div class="field-input-wrap">
 
-              <button
-                type="button"
-                class="admin-show-password"
-                id="show-password"
-              >
+              <input type="password" id="password" autocomplete="current-password" required />
+
+              <button type="button" class="toggle-pass" id="show-password">
                 Show
               </button>
+
             </div>
           </div>
 
-          <button
-            type="submit"
-            class="admin-login-btn"
-            id="login-btn"
-          >
+          <button type="submit" class="btn-primary" id="login-btn">
             Log in
           </button>
 
         </form>
 
-        <a href="../index.html" class="admin-login-back">
-          ‹ Back to store
+        <div class="divider">or</div>
+
+        <a href="../index.html" class="btn-outline">
+          Back to store
         </a>
 
       </div>
+
     </div>
 
     <!-- Firebase -->
@@ -313,4 +185,5 @@
       });
     </script>
   </body>
+
 </html>
