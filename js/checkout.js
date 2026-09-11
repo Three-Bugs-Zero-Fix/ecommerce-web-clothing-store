@@ -121,7 +121,7 @@ checkoutForm.addEventListener("submit", async (e) => {
     alert("Order placed successfully! Thank you for shopping with BlueWear.");
 
     // Redirect to profile page to view order history
-    window.location.href = "profile.html";
+    window.location.href = "shop.html";
   } catch (error) {
     console.error("Error placing order:", error);
     alert("Failed to place order. Please try again.");
