@@ -197,6 +197,24 @@ select#ship-city:focus,
     color: #172033;
 }
 
+
+/* ============================================================
+   Checkout Layout Adjustments & Sticky Summary
+   ============================================================ */
+.checkout-summary-section {
+    position: sticky;
+    top: 90px; /* Keeps the summary visible while scrolling */
+    align-self: start;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.checkout-item-name {
+    display: block;
+    line-height: 1.4;
+    margin-bottom: 4px;
+}
+
+
 @media (max-width: 900px) {
     .checkout-layout {
         grid-template-columns: 1fr;

@@ -12,7 +12,7 @@ let cartItems = JSON.parse(localStorage.getItem("blueWearCart")) || [];
 let shippingFee = 0; // Default is 0 until a city is selected
 
 // ========================================
-// 1. AUTHENTICATION GUARD
+// 1. AUTHENTICATION GUARD & AUTO-FILL
 // ========================================
 // This automatically checks if the user is logged in
 auth.onAuthStateChanged((user) => {
@@ -34,6 +34,12 @@ auth.onAuthStateChanged((user) => {
     // Show the checkout page and hide the loading screen
     authLoading.style.display = "none";
     checkoutMain.style.display = "block";
+
+    // 🌟 AUTO-FILL LOGIC: ইউজারের নাম থাকলে ফর্মে বসিয়ে দেবে
+    const shipNameInput = document.getElementById("ship-name");
+    if (shipNameInput && user.displayName) {
+        shipNameInput.value = user.displayName;
+    }
 
     loadOrderSummary();
   }
