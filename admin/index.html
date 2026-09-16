@@ -25,6 +25,7 @@
         <nav class="admin-nav">
           <a href="index.html" class="active">Dashboard</a>
           <a href="products.html">Add Products</a>
+          <a href="banners.html">Banners</a>
           <a href="orders.html">Orders</a>
           <a href="customers.html">Customers</a>
           <a href="coupons.html">Coupons</a>
@@ -125,7 +126,7 @@
         .getElementById("logout-btn")
         .addEventListener("click", async () => {
           await logoutUser();
-          window.location.href = "../pages/login.html";
+          window.location.href = "login.html";
         });
 
       async function loadDashboard() {

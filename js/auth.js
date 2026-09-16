@@ -98,18 +98,56 @@ function showError(el, message) {
   el.style.display = message ? "block" : "none";
 }
 
-/* ---------- Admin access control (Option A — hardcoded emails) ---------- */
-const ADMIN_EMAILS = ["alawol@gmail.com"]; // <-- এখানে আপনার admin email(গুলো) বসান
+/* ---------- Secured Admin access control ---------- */
 
-function requireAdmin(redirectTo = "../pages/login.html") {
+/*
+  Admin users are stored in Firestore:
+
+  admins/{userUid}
+    role: "admin"
+
+  The user's email is NOT used for authorization.
+*/
+
+async function checkIsAdmin(user) {
+  if (!user) return false;
+
+  try {
+    const adminDoc = await db
+      .collection("admins")
+      .doc(user.uid)
+      .get();
+
+    if (!adminDoc.exists) return false;
+
+    const data = adminDoc.data();
+
+    return data.role === "admin";
+  } catch (error) {
+    console.error("Error checking admin access:", error);
+    return false;
+  }
+}
+
+function requireAdmin(redirectTo = "login.html") {
   return new Promise((resolve) => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
       unsubscribe();
-      if (!user || !ADMIN_EMAILS.includes(user.email)) {
+
+      if (!user) {
         window.location.href = redirectTo;
-      } else {
-        resolve(user);
+        return;
       }
+
+      const isAdmin = await checkIsAdmin(user);
+
+      if (!isAdmin) {
+        await auth.signOut();
+        window.location.href = redirectTo;
+        return;
+      }
+
+      resolve(user);
     });
   });
 }

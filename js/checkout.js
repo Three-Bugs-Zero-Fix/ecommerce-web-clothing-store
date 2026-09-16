@@ -169,14 +169,14 @@ checkoutForm.addEventListener("submit", async (e) => {
                     Your order has been placed successfully!
                 </p>
                 <p style="color: #666; font-size: 13px; margin-top: 5px;">
-                    Redirecting to your profile...
+                    Redirecting to shop...
                 </p>
             </div>
         `;
 
-        // 5. Wait 2 seconds (2000 milliseconds) then redirect to profile page
+        // 5. Wait 2 seconds (2000 milliseconds) then redirect to shop page
         setTimeout(() => {
-            window.location.href = "profile.html";
+            window.location.href = "shop.html";
         }, 2000);
 
   } catch (error) {

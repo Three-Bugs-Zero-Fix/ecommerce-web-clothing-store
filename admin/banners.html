@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Banners — Admin</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" />
+
+    <link rel="stylesheet" href="../css/admin.css" />
+</head>
+
+<body>
+    <div id="admin-loading" class="admin-loading">
+        Checking admin access…
+    </div>
+
+    <div class="admin-shell" id="admin-shell" style="display: none">
+
+        <!-- DRAWER -->
+        <div class="admin-drawer-overlay" id="admin-drawer-overlay"></div>
+
+        <aside class="admin-drawer" id="admin-drawer">
+            <div class="admin-drawer-head">
+                <span class="admin-logo">BLUEWEAR</span>
+                <button class="admin-drawer-close" id="admin-drawer-close">
+                    ✕
+                </button>
+            </div>
+
+            <nav class="admin-nav">
+                <a href="index.html">Dashboard</a>
+                <a href="products.html">Products</a>
+                <a href="banners.html" class="active">Banners</a>
+                <a href="orders.html">Orders</a>
+                <a href="customers.html">Customers</a>
+                <a href="coupons.html">Coupons</a>
+            </nav>
+
+            <div class="admin-sidebar-bottom">
+                <button id="logout-btn">Logout</button>
+                <a href="../index.html">‹ View store</a>
+            </div>
+        </aside>
+
+        <!-- MAIN -->
+        <div class="admin-main">
+
+            <div class="admin-topbar">
+                <div style="display: flex; align-items: center">
+                    <button class="admin-hamburger" id="admin-hamburger">
+                        ☰
+                    </button>
+
+                    <div class="admin-page-title">
+                        Promotional Banners
+                    </div>
+                </div>
+
+                <div class="admin-user-chip" id="admin-email">
+                    —
+                </div>
+            </div>
+
+            <div class="admin-content">
+
+                <!-- ADD BANNER -->
+                <div class="card-block banner-admin-form">
+
+                    <div class="admin-section-title">
+                        Add Promotional Banner
+                    </div>
+
+                    <div class="form-error" id="banner-error"></div>
+                    <div class="form-success" id="banner-success"></div>
+
+                    <div class="form-row">
+                        <label>Banner image</label>
+
+                        <div class="image-upload-box" id="banner-upload-box">
+                            <span id="banner-upload-label">
+                                Click to select banner image
+                            </span>
+
+                            <input type="file" id="banner-image-input" accept="image/*" style="display: none" />
+                        </div>
+
+                        <img id="banner-image-preview" class="banner-image-preview" alt="Banner preview" />
+
+                        <div class="upload-status" id="banner-upload-status"></div>
+                        <div class="banner-size-hint">
+                            Recommended banner size: <strong>1600 × 600 px</strong>
+                            (aspect ratio <strong>8:3</strong>)
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <label>Banner title</label>
+
+                        <input type="text" id="banner-title" placeholder="Summer Collection" />
+                    </div>
+
+                    <div class="form-row">
+                        <label>Description</label>
+
+                        <textarea id="banner-description" rows="2"
+                            placeholder="Up to 30% off selected products"></textarea>
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="form-row">
+                            <label>Button text</label>
+
+                            <input type="text" id="banner-button-text" placeholder="Shop Now" />
+                        </div>
+
+                        <div class="form-row">
+                            <label>Button link</label>
+
+                            <input type="text" id="banner-button-link" placeholder="pages/shop.html" />
+                        </div>
+
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="form-row">
+                            <label>Display order</label>
+
+                            <input type="number" id="banner-order" min="0" value="0" />
+                        </div>
+
+                        <div class="form-row">
+                            <label>Status</label>
+
+                            <select id="banner-active">
+                                <option value="true">Active</option>
+                                <option value="false">Inactive</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="form-submit-row">
+                        <button class="btn-admin-primary" id="save-banner-btn">
+                            Add Banner
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- EXISTING BANNERS -->
+                <div class="admin-section-title" style="margin-top: 32px">
+                    Existing Banners
+                </div>
+
+                <div class="banner-admin-list" id="banner-list">
+                    <div class="banner-admin-empty">
+                        Loading banners…
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- FIREBASE -->
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+
+    <script src="../js/firebase.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/admin.js"></script>
+
+    <script>
+        let uploadedBannerUrl = "";
+        let editingBannerId = null;
+
+        const uploadBox =
+            document.getElementById("banner-upload-box");
+
+        const imageInput =
+            document.getElementById("banner-image-input");
+
+        const imagePreview =
+            document.getElementById("banner-image-preview");
+
+        const uploadLabel =
+            document.getElementById("banner-upload-label");
+
+        const uploadStatus =
+            document.getElementById("banner-upload-status");
+
+        const errorEl =
+            document.getElementById("banner-error");
+
+        const successEl =
+            document.getElementById("banner-success");
+
+        /* ---------- ADMIN GUARD ---------- */
+
+        requireAdmin().then(async (user) => {
+            document.getElementById("admin-loading").style.display =
+                "none";
+
+            document.getElementById("admin-shell").style.display =
+                "block";
+
+            document.getElementById("admin-email").textContent =
+                user.email;
+
+            await loadBanners();
+        });
+
+        /* ---------- DRAWER ---------- */
+
+        const drawer =
+            document.getElementById("admin-drawer");
+
+        const overlay =
+            document.getElementById("admin-drawer-overlay");
+
+        document
+            .getElementById("admin-hamburger")
+            .addEventListener("click", () => {
+                drawer.classList.add("open");
+                overlay.classList.add("open");
+            });
+
+        document
+            .getElementById("admin-drawer-close")
+            .addEventListener("click", closeDrawer);
+
+        overlay.addEventListener("click", closeDrawer);
+
+        function closeDrawer() {
+            drawer.classList.remove("open");
+            overlay.classList.remove("open");
+        }
+
+        /* ---------- LOGOUT ---------- */
+
+        document
+            .getElementById("logout-btn")
+            .addEventListener("click", async () => {
+                await logoutUser();
+                window.location.href = "login.html";
+            });
+
+        /* ---------- IMAGE UPLOAD ---------- */
+
+        uploadBox.addEventListener("click", () => {
+            imageInput.click();
+        });
+
+        imageInput.addEventListener("change", async (event) => {
+            const file = event.target.files[0];
+
+            if (!file) return;
+
+            imagePreview.src = URL.createObjectURL(file);
+            imagePreview.style.display = "block";
+
+            uploadLabel.textContent = file.name;
+            uploadStatus.textContent = "Optimizing image…";
+
+            try {
+                const jpegFile =
+                    await resizeAndConvertToJPEG(file);
+
+                uploadStatus.textContent = "Uploading…";
+
+                uploadedBannerUrl =
+                    await uploadToImgBB(jpegFile);
+
+                uploadStatus.textContent =
+                    "Image uploaded successfully.";
+            } catch (error) {
+                uploadedBannerUrl = "";
+
+                uploadStatus.textContent =
+                    "Upload failed: " + error.message;
+            }
+        });
+
+        /* ---------- SAVE BANNER ---------- */
+
+        document
+            .getElementById("save-banner-btn")
+            .addEventListener("click", async () => {
+
+                showError(errorEl, "");
+                showError(successEl, "");
+
+                const title =
+                    document
+                        .getElementById("banner-title")
+                        .value
+                        .trim();
+
+                const description =
+                    document
+                        .getElementById("banner-description")
+                        .value
+                        .trim();
+
+                const buttonText =
+                    document
+                        .getElementById("banner-button-text")
+                        .value
+                        .trim();
+
+                const buttonLink =
+                    document
+                        .getElementById("banner-button-link")
+                        .value
+                        .trim();
+
+                const order =
+                    Number(
+                        document
+                            .getElementById("banner-order")
+                            .value
+                    ) || 0;
+
+                const active =
+                    document
+                        .getElementById("banner-active")
+                        .value === "true";
+
+                if (!uploadedBannerUrl) {
+                    showError(
+                        errorEl,
+                        "Please upload a banner image."
+                    );
+                    return;
+                }
+
+                if (!title) {
+                    showError(
+                        errorEl,
+                        "Please enter a banner title."
+                    );
+                    return;
+                }
+
+                const button =
+                    document.getElementById("save-banner-btn");
+
+                button.disabled = true;
+                button.textContent = "Saving…";
+
+                try {
+                    await db.collection("banners").add({
+                        image: uploadedBannerUrl,
+                        title,
+                        description,
+                        buttonText,
+                        buttonLink,
+                        order,
+                        active,
+                        createdAt:
+                            firebase.firestore.FieldValue.serverTimestamp(),
+                    });
+
+                    showError(
+                        successEl,
+                        "Banner added successfully."
+                    );
+
+                    resetBannerForm();
+
+                    await loadBanners();
+
+                } catch (error) {
+                    showError(errorEl, error.message);
+                } finally {
+                    button.disabled = false;
+                    button.textContent = "Add Banner";
+                }
+            });
+
+        /* ---------- LOAD BANNERS ---------- */
+
+        async function loadBanners() {
+            const list =
+                document.getElementById("banner-list");
+
+            try {
+                const snapshot =
+                    await db
+                        .collection("banners")
+                        .orderBy("order", "asc")
+                        .get();
+
+                if (snapshot.empty) {
+                    list.innerHTML = `
+              <div class="banner-admin-empty">
+                No banners added yet.
+              </div>
+            `;
+
+                    return;
+                }
+
+                list.innerHTML = snapshot.docs
+                    .map((doc) => {
+                        const banner = doc.data();
+
+                        return `
+                <div class="banner-admin-card">
+
+                  <img
+                    src="${escapeHtml(banner.image || "")}"
+                    alt=""
+                    class="banner-admin-thumb"
+                  />
+
+                  <div class="banner-admin-info">
+
+                    <div class="banner-admin-title">
+                      ${escapeHtml(banner.title || "Untitled")}
+                    </div>
+
+                    <div class="banner-admin-description">
+                      ${escapeHtml(
+                            banner.description || ""
+                        )}
+                    </div>
+
+                    <div class="banner-admin-meta">
+                      Order: ${banner.order ?? 0}
+                      ·
+                      ${banner.active
+                                ? "Active"
+                                : "Inactive"
+                            }
+                    </div>
+
+                  </div>
+
+                  <div class="banner-admin-actions">
+
+                    <button
+                      class="btn-admin-outline"
+                      onclick="toggleBanner('${doc.id}', ${!banner.active})"
+                    >
+                      ${banner.active
+                                ? "Deactivate"
+                                : "Activate"
+                            }
+                    </button>
+
+                    <button
+                      class="btn-admin-outline"
+                      onclick="deleteBanner('${doc.id}')"
+                    >
+                      Delete
+                    </button>
+
+                  </div>
+
+                </div>
+              `;
+                    })
+                    .join("");
+
+            } catch (error) {
+                list.innerHTML = `
+            <div class="banner-admin-empty">
+              Failed to load banners.
+            </div>
+          `;
+
+                console.error(error);
+            }
+        }
+
+        /* ---------- TOGGLE ---------- */
+
+        async function toggleBanner(id, active) {
+            try {
+                await db
+                    .collection("banners")
+                    .doc(id)
+                    .update({ active });
+
+                await loadBanners();
+
+            } catch (error) {
+                alert(error.message);
+            }
+        }
+
+        /* ---------- DELETE ---------- */
+
+        async function deleteBanner(id) {
+            if (
+                !confirm(
+                    "Delete this banner? This can't be undone."
+                )
+            ) {
+                return;
+            }
+
+            try {
+                await db
+                    .collection("banners")
+                    .doc(id)
+                    .delete();
+
+                await loadBanners();
+
+            } catch (error) {
+                alert(error.message);
+            }
+        }
+
+        /* ---------- RESET ---------- */
+
+        function resetBannerForm() {
+            uploadedBannerUrl = "";
+
+            imageInput.value = "";
+            imagePreview.src = "";
+            imagePreview.style.display = "none";
+
+            uploadLabel.textContent =
+                "Click to select banner image";
+
+            uploadStatus.textContent = "";
+
+            document.getElementById("banner-title").value = "";
+            document.getElementById("banner-description").value = "";
+            document.getElementById("banner-button-text").value = "";
+            document.getElementById("banner-button-link").value = "";
+            document.getElementById("banner-order").value = "0";
+            document.getElementById("banner-active").value = "true";
+        }
+
+        /* ---------- HTML ESCAPE ---------- */
+
+        function escapeHtml(str) {
+            return String(str || "").replace(
+                /[&<>"']/g,
+                (c) =>
+                    ({
+                        "&": "&amp;",
+                        "<": "&lt;",
+                        ">": "&gt;",
+                        '"': "&quot;",
+                        "'": "&#39;",
+                    })[c]
+            );
+        }
+    </script>
+</body>
+
+</html>
