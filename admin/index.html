@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Dashboard — Clothing Store</title>
+    <title>Dashboard — Admin</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
       rel="stylesheet"
@@ -14,78 +14,593 @@
   <body>
     <div id="admin-loading" class="admin-loading">Checking admin access…</div>
 
-    <div class="admin-shell" id="admin-shell" style="display: none">
-      <!-- Drawer -->
-      <div class="admin-drawer-overlay" id="admin-drawer-overlay"></div>
-      <aside class="admin-drawer" id="admin-drawer">
-        <div class="admin-drawer-head">
-          <span class="admin-logo" style="padding: 0">BLUEWEAR</span>
-          <button class="admin-drawer-close" id="admin-drawer-close">✕</button>
+    <div class="dt-shell" id="admin-shell" style="display: none">
+      <!-- SIDEBAR -->
+      <aside class="dt-sidebar" id="dt-sidebar">
+        <div class="dt-logo">
+          <div class="dt-logo-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M6 2l1.5 4h9L18 2" />
+              <path
+                d="M3.5 6h17l-1.2 13a2 2 0 0 1-2 1.8H6.7a2 2 0 0 1-2-1.8L3.5 6z"
+              />
+              <path d="M8.5 10a3.5 3.5 0 0 0 7 0" />
+            </svg>
+          </div>
+          <span class="dt-logo-text">BlueWear</span>
         </div>
-        <nav class="admin-nav">
-          <a href="index.html" class="active">Dashboard</a>
-          <a href="products.html">Add Products</a>
-          <a href="banners.html">Banners</a>
-          <a href="orders.html">Orders</a>
-          <a href="customers.html">Customers</a>
-          <a href="coupons.html">Coupons</a>
-        </nav>
-        <div class="admin-sidebar-bottom">
-          <button id="logout-btn">Logout</button>
-          <a href="../index.html">‹ View store</a>
+
+        <div class="dt-nav-section-title">General</div>
+        <a href="index.html" class="dt-nav-item active">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <rect x="3" y="3" width="8" height="8" rx="1.5" />
+            <rect x="13" y="3" width="8" height="8" rx="1.5" />
+            <rect x="3" y="13" width="8" height="8" rx="1.5" />
+            <rect x="13" y="13" width="8" height="8" rx="1.5" />
+          </svg>
+          <span class="nav-label">Dashboard</span>
+        </a>
+
+        <div class="dt-nav-section-title">Catalog</div>
+        <a href="products.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M4 8h16l-1 12H5L4 8z" />
+            <path d="M8 8V6a4 4 0 0 1 8 0v2" />
+          </svg>
+          <span class="nav-label">Products</span>
+        </a>
+        <a href="banners.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <circle cx="8.5" cy="8.5" r="1.5" />
+            <path d="M21 15l-5-5L5 21" />
+          </svg>
+          <span class="nav-label">Banners</span>
+        </a>
+        <a href="categories.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path
+              d="M20.6 12.6L12.7 4.7a2 2 0 0 0-1.4-.6H5a1 1 0 0 0-1 1v6.3c0 .5.2 1 .6 1.4l7.9 7.9a2 2 0 0 0 2.8 0l5.3-5.3a2 2 0 0 0 0-2.8z"
+            />
+            <circle cx="8" cy="8" r="1.2" />
+          </svg>
+          <span class="nav-label">Categories</span>
+        </a>
+        <a href="attributes.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M3 3h18v6H3z" />
+            <path d="M3 15h18v6H3z" />
+          </svg>
+          <span class="nav-label">Attributes</span>
+        </a>
+        <a href="coupons.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path
+              d="M21 12a2 2 0 0 1 0-4V5a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v3a2 2 0 0 1 0 4v3a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-3z"
+            />
+          </svg>
+          <span class="nav-label">Coupons</span>
+        </a>
+        <a href="campaigns.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" />
+          </svg>
+          <span class="nav-label">Campaigns</span>
+        </a>
+        <a href="sliders.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <rect x="3" y="5" width="18" height="14" rx="2" />
+            <path d="M8 21h8" />
+          </svg>
+          <span class="nav-label">Product Sliders</span>
+        </a>
+
+        <div class="dt-nav-section-title">Sales</div>
+        <a href="orders.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 7v5l3 3" />
+          </svg>
+          <span class="nav-label">Orders</span>
+        </a>
+        <a href="delivery-boys.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <rect x="1" y="7" width="13" height="9" rx="1" />
+            <path d="M14 10h4l3 3v3h-7z" />
+            <circle cx="6" cy="18" r="1.6" />
+            <circle cx="17" cy="18" r="1.6" />
+          </svg>
+          <span class="nav-label">Delivery Boys</span>
+        </a>
+        <a href="customers.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+          <span class="nav-label">Customers</span>
+        </a>
+        <a href="staff.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          <span class="nav-label">Our Staff</span>
+        </a>
+        <div class="dt-nav-section-title">Settings</div>
+        <a href="settings.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <circle cx="12" cy="12" r="3" />
+            <path
+              d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"
+            />
+          </svg>
+          <span class="nav-label">Settings</span>
+        </a>
+        <a href="store-customization.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M3 8h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z" />
+            <path d="M3 8l2-5h14l2 5" />
+            <path d="M12 8v12" />
+          </svg>
+          <span class="nav-label">Store Customization</span>
+        </a>
+        <a href="localization.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <circle cx="12" cy="12" r="9" />
+            <path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18" />
+          </svg>
+          <span class="nav-label">Localization</span>
+        </a>
+        <a href="../pages/shop.html" class="dt-nav-item" target="_blank">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+            <circle cx="12" cy="12" r="3" />
+          </svg>
+          <span class="nav-label">View Store</span>
+        </a>
+
+        <div class="dt-sidebar-profile-wrap">
+          <div class="dt-profile-popup" id="profile-popup">
+            <div class="dt-profile-popup-head">
+              <div class="dt-sidebar-avatar" id="popup-avatar">?</div>
+              <div>
+                <div class="dt-sidebar-profile-name" id="popup-name">Admin</div>
+                <div class="dt-sidebar-profile-email" id="popup-email">—</div>
+              </div>
+            </div>
+            <a href="index.html" class="dt-profile-popup-item">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <rect x="3" y="3" width="8" height="8" rx="1.5" />
+                <rect x="13" y="3" width="8" height="8" rx="1.5" />
+                <rect x="3" y="13" width="8" height="8" rx="1.5" />
+                <rect x="13" y="13" width="8" height="8" rx="1.5" />
+              </svg>
+              Dashboard
+            </a>
+            <a href="profile.html" class="dt-profile-popup-item">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <circle cx="12" cy="12" r="3" />
+                <path
+                  d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"
+                />
+              </svg>
+              Edit Profile
+            </a>
+            <div class="dt-profile-popup-divider"></div>
+            <button
+              type="button"
+              class="dt-profile-popup-item danger"
+              id="popup-logout"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                <path d="M16 17l5-5-5-5" />
+                <path d="M21 12H9" />
+              </svg>
+              Log out
+            </button>
+          </div>
+
+          <button type="button" class="dt-sidebar-profile" id="profile-trigger">
+            <div class="dt-sidebar-avatar" id="sidebar-avatar">?</div>
+            <div>
+              <div class="dt-sidebar-profile-name" id="sidebar-name">Admin</div>
+              <div class="dt-sidebar-profile-email" id="sidebar-email">—</div>
+            </div>
+            <span class="dt-profile-chevron">
+              <svg
+                viewBox="0 0 24 24"
+                width="14"
+                height="14"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M8 9l4-4 4 4M8 15l4 4 4-4" />
+              </svg>
+            </span>
+          </button>
         </div>
       </aside>
 
-      <div class="admin-main">
-        <div class="admin-topbar">
-          <div style="display: flex; align-items: center">
-            <button class="admin-hamburger" id="admin-hamburger">☰</button>
-            <div class="admin-page-title">Dashboard</div>
+      <!-- MAIN -->
+      <div class="dt-main">
+        <div class="dt-topbar">
+          <div class="dt-topbar-left">
+            <button
+              class="dt-icon-btn"
+              id="sidebar-toggle"
+              title="Toggle sidebar"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <rect x="3" y="4" width="18" height="16" rx="2" />
+                <path d="M9 4v16" />
+              </svg>
+            </button>
+            <div class="dt-search-box">
+              <svg
+                viewBox="0 0 24 24"
+                width="15"
+                height="15"
+                fill="none"
+                stroke="#98A2B3"
+                stroke-width="2"
+              >
+                <circle cx="11" cy="11" r="7" />
+                <path d="M21 21l-4.3-4.3" />
+              </svg>
+              <input type="text" placeholder="Search" disabled />
+              <span class="dt-search-kbd">⌘K</span>
+            </div>
           </div>
-          <div class="admin-user-chip" id="admin-email">—</div>
+          <div class="dt-topbar-right">
+            <button class="dt-lang-pill" title="Language (coming soon)">
+              EN
+            </button>
+
+            <button class="dt-theme-btn light active" title="Light mode">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <circle cx="12" cy="12" r="4" />
+                <path
+                  d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+                />
+              </svg>
+            </button>
+            <button class="dt-theme-btn dark" title="Dark mode (coming soon)">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M21 12.5A9 9 0 1 1 11.5 3a7 7 0 0 0 9.5 9.5z" />
+              </svg>
+            </button>
+
+            <div class="dt-bell-wrap">
+              <button class="dt-icon-btn" title="Notifications (coming soon)">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
+                  <path d="M13.7 21a2 2 0 0 1-3.4 0" />
+                </svg>
+              </button>
+              <span class="dt-bell-badge" id="pending-badge">0</span>
+            </div>
+
+            <div class="dt-topbar-avatar" id="topbar-avatar">?</div>
+          </div>
         </div>
-        <div class="admin-content">
-          <div class="stat-grid" id="stat-grid">
-            <div class="stat-card">
-              <div class="stat-label">Total Products</div>
-              <div class="stat-value" id="stat-products">—</div>
+
+        <div class="dt-content">
+          <div class="dt-page-heading">Dashboard Overview</div>
+
+          <!-- GRADIENT STAT CARDS -->
+          <div class="dt-stat-grid" id="stat-grid">
+            <div class="dt-stat-card c1">
+              <div class="dt-stat-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path d="M4 8h16l-1 12H5L4 8z" />
+                  <path d="M8 8V6a4 4 0 0 1 8 0v2" />
+                </svg>
+              </div>
+              <div>
+                <div class="dt-stat-amount" id="stat-today">৳0</div>
+                <div class="dt-stat-label">Today Orders</div>
+                <div class="dt-stat-breakdown" id="stat-today-breakdown"></div>
+              </div>
             </div>
-            <div class="stat-card">
-              <div class="stat-label">Total Orders</div>
-              <div class="stat-value" id="stat-orders">—</div>
+            <div class="dt-stat-card c2">
+              <div class="dt-stat-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <rect x="3" y="3" width="18" height="18" rx="2" />
+                  <path d="M3 9h18" />
+                </svg>
+              </div>
+              <div>
+                <div class="dt-stat-amount" id="stat-yesterday">৳0</div>
+                <div class="dt-stat-label">Yesterday Orders</div>
+                <div
+                  class="dt-stat-breakdown"
+                  id="stat-yesterday-breakdown"
+                ></div>
+              </div>
             </div>
-            <div class="stat-card">
-              <div class="stat-label">Total Sales</div>
-              <div class="stat-value" id="stat-sales">—</div>
+            <div class="dt-stat-card c3">
+              <div class="dt-stat-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <rect x="3" y="4" width="18" height="18" rx="2" />
+                  <path d="M16 2v4M8 2v4M3 10h18" />
+                </svg>
+              </div>
+              <div>
+                <div class="dt-stat-amount" id="stat-this-month">৳0</div>
+                <div class="dt-stat-label">This Month</div>
+              </div>
             </div>
-            <div class="stat-card">
-              <div class="stat-label">Pending Orders</div>
-              <div class="stat-value warning" id="stat-pending">—</div>
+            <div class="dt-stat-card c4">
+              <div class="dt-stat-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M12 7v5l3 3" />
+                </svg>
+              </div>
+              <div>
+                <div class="dt-stat-amount" id="stat-last-month">৳0</div>
+                <div class="dt-stat-label">Last Month</div>
+              </div>
             </div>
-            <div class="stat-card">
-              <div class="stat-label">Low Stock Items</div>
-              <div class="stat-value danger" id="stat-lowstock">—</div>
+            <div class="dt-stat-card c5">
+              <div class="dt-stat-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path d="M3 17l6-6 4 4 8-8" />
+                  <path d="M15 7h6v6" />
+                </svg>
+              </div>
+              <div>
+                <div class="dt-stat-amount" id="stat-alltime">৳0</div>
+                <div class="dt-stat-label">All-Time Sales</div>
+              </div>
             </div>
           </div>
 
-          <div class="admin-section-title">Recent Orders</div>
-          <div class="card-block">
-            <table class="admin-table">
-              <thead>
-                <tr>
-                  <th>Order</th>
-                  <th>Customer</th>
-                  <th>Total</th>
-                  <th>Status</th>
-                  <th>Date</th>
-                </tr>
-              </thead>
-              <tbody id="recent-orders-body">
-                <tr>
-                  <td colspan="5" style="color: #999">Loading…</td>
-                </tr>
-              </tbody>
-            </table>
+          <!-- SUMMARY CARDS -->
+          <div class="dt-summary-grid">
+            <div class="dt-summary-card">
+              <div class="dt-summary-icon orange">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <rect x="3" y="7" width="18" height="14" rx="2" />
+                  <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                </svg>
+              </div>
+              <div>
+                <div class="dt-summary-label">Total Order</div>
+                <div class="dt-summary-value" id="summary-total">0</div>
+              </div>
+            </div>
+            <div class="dt-summary-card">
+              <div class="dt-summary-icon blue">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M12 7v5l3 3" />
+                </svg>
+              </div>
+              <div>
+                <div class="dt-summary-label">
+                  Orders Pending
+                  <span class="dt-summary-pill" id="summary-pending-amount"
+                    >৳0</span
+                  >
+                </div>
+                <div class="dt-summary-value" id="summary-pending">0</div>
+              </div>
+            </div>
+            <div class="dt-summary-card">
+              <div class="dt-summary-icon purple">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path d="M21 12a9 9 0 1 1-6.2-8.6" />
+                  <path d="M21 3v6h-6" />
+                </svg>
+              </div>
+              <div>
+                <div class="dt-summary-label">Orders Processing</div>
+                <div class="dt-summary-value" id="summary-processing">0</div>
+              </div>
+            </div>
+            <div class="dt-summary-card">
+              <div class="dt-summary-icon green">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path d="M20 6L9 17l-5-5" />
+                </svg>
+              </div>
+              <div>
+                <div class="dt-summary-label">Orders Delivered</div>
+                <div class="dt-summary-value" id="summary-delivered">0</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CHARTS -->
+          <div class="dt-chart-grid">
+            <div class="dt-chart-card">
+              <div class="dt-chart-title">Weekly Sales</div>
+              <div class="dt-chart-tabs">
+                <button class="dt-chart-tab active" data-mode="sales">
+                  Sales
+                </button>
+                <button class="dt-chart-tab" data-mode="orders">Orders</button>
+              </div>
+              <canvas id="weekly-chart" height="160"></canvas>
+            </div>
+
+            <div class="dt-chart-card">
+              <div class="dt-chart-title">Best Selling Products</div>
+              <div class="dt-legend" id="best-selling-legend"></div>
+              <canvas id="best-selling-chart" height="220"></canvas>
+              <div
+                id="best-selling-empty"
+                class="dt-empty-note"
+                style="display: none"
+              >
+                No sales data yet.
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -94,101 +609,287 @@
     <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
     <script src="../js/firebase.js"></script>
     <script src="../js/auth.js"></script>
     <script>
       requireAdmin().then(async (user) => {
         document.getElementById("admin-loading").style.display = "none";
-        document.getElementById("admin-shell").style.display = "block";
-        document.getElementById("admin-email").textContent = user.email;
+        document.getElementById("admin-shell").style.display = "flex";
+
+        const initial = (user.email || "?").charAt(0).toUpperCase();
+        document.getElementById("sidebar-avatar").textContent = initial;
+        document.getElementById("topbar-avatar").textContent = initial;
+        document.getElementById("sidebar-name").textContent =
+          user.email.split("@")[0];
+        document.getElementById("sidebar-email").textContent = user.email;
+
+        document.getElementById("popup-avatar").textContent = initial;
+        document.getElementById("popup-name").textContent =
+          user.email.split("@")[0];
+        document.getElementById("popup-email").textContent = user.email;
         await loadDashboard();
       });
 
-      // drawer toggle
-      const drawer = document.getElementById("admin-drawer");
-      const overlay = document.getElementById("admin-drawer-overlay");
-      document
-        .getElementById("admin-hamburger")
-        .addEventListener("click", () => {
-          drawer.classList.add("open");
-          overlay.classList.add("open");
-        });
-      document
-        .getElementById("admin-drawer-close")
-        .addEventListener("click", closeAdminDrawer);
-      overlay.addEventListener("click", closeAdminDrawer);
-      function closeAdminDrawer() {
-        drawer.classList.remove("open");
-        overlay.classList.remove("open");
-      }
+      const profileTrigger = document.getElementById("profile-trigger");
+      const profilePopup = document.getElementById("profile-popup");
+
+      profileTrigger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        profilePopup.classList.toggle("open");
+      });
+
+      document.addEventListener("click", (e) => {
+        if (
+          !profilePopup.contains(e.target) &&
+          !profileTrigger.contains(e.target)
+        ) {
+          profilePopup.classList.remove("open");
+        }
+      });
 
       document
-        .getElementById("logout-btn")
+        .getElementById("popup-logout")
         .addEventListener("click", async () => {
           await logoutUser();
-          window.location.href = "login.html";
+          window.location.href = "./login.html";
         });
+
+      document
+        .getElementById("sidebar-toggle")
+        .addEventListener("click", () => {
+          document.getElementById("dt-sidebar").classList.toggle("collapsed");
+          document
+            .querySelector(".dt-topbar")
+            .classList.toggle("sidebar-collapsed");
+          document
+            .querySelector(".dt-main")
+            .classList.toggle("sidebar-collapsed");
+        });
+
+      function money(n) {
+        return `৳${Number(n || 0).toLocaleString("en-BD", { maximumFractionDigits: 0 })}`;
+      }
+
+      function startOfDay(d) {
+        const x = new Date(d);
+        x.setHours(0, 0, 0, 0);
+        return x;
+      }
 
       async function loadDashboard() {
-        const [productsSnap, ordersSnap, lowStockSnap] = await Promise.all([
-          db.collection("products").get(),
-          db.collection("orders").orderBy("createdAt", "desc").get(),
-          db.collection("products").where("stock", "<=", 5).get(),
-        ]);
-
-        document.getElementById("stat-products").textContent =
-          productsSnap.size;
-        document.getElementById("stat-orders").textContent = ordersSnap.size;
-        document.getElementById("stat-lowstock").textContent =
-          lowStockSnap.size;
-
-        let totalSales = 0,
-          pending = 0;
-        ordersSnap.forEach((doc) => {
+        const snap = await db
+          .collection("orders")
+          .orderBy("createdAt", "desc")
+          .get();
+        const orders = snap.docs.map((doc) => {
           const o = doc.data();
-          totalSales += Number(o.total) || 0;
-          if (o.status === "Pending") pending++;
+          const created = o.createdAt?.toDate
+            ? o.createdAt.toDate()
+            : new Date();
+          return { ...o, id: doc.id, createdDate: created };
         });
-        document.getElementById("stat-sales").textContent =
-          `৳${totalSales.toLocaleString("en-BD")}`;
-        document.getElementById("stat-pending").textContent = pending;
 
-        const body = document.getElementById("recent-orders-body");
-        const recent = ordersSnap.docs.slice(0, 6);
-        if (!recent.length) {
-          body.innerHTML = `<tr><td colspan="5" style="color:#999;">No orders yet.</td></tr>`;
-          return;
-        }
-        body.innerHTML = recent
-          .map((doc) => {
-            const o = doc.data();
-            const date = o.createdAt?.toDate
-              ? o.createdAt.toDate().toLocaleDateString()
-              : "";
-            return `
-        <tr>
-          <td>#${doc.id.slice(0, 6)}</td>
-          <td>${escapeHtml(o.customerName || "—")}</td>
-          <td>৳${o.total || 0}</td>
-          <td><span class="pill ${o.status === "Pending" ? "pill-pending" : "pill-active"}">${o.status || "Pending"}</span></td>
-          <td>${date}</td>
-        </tr>`;
-          })
+        const now = new Date();
+        const todayStart = startOfDay(now);
+        const yesterdayStart = new Date(todayStart);
+        yesterdayStart.setDate(yesterdayStart.getDate() - 1);
+        const thisMonthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+        const lastMonthStart = new Date(
+          now.getFullYear(),
+          now.getMonth() - 1,
+          1,
+        );
+        const lastMonthEnd = thisMonthStart;
+
+        const todayOrders = orders.filter((o) => o.createdDate >= todayStart);
+        const yesterdayOrders = orders.filter(
+          (o) => o.createdDate >= yesterdayStart && o.createdDate < todayStart,
+        );
+        const thisMonthOrders = orders.filter(
+          (o) => o.createdDate >= thisMonthStart,
+        );
+        const lastMonthOrders = orders.filter(
+          (o) =>
+            o.createdDate >= lastMonthStart && o.createdDate < lastMonthEnd,
+        );
+
+        const sum = (list) =>
+          list.reduce((a, o) => a + Number(o.totalAmount || o.total || 0), 0);
+
+        document.getElementById("stat-today").textContent = money(
+          sum(todayOrders),
+        );
+        document.getElementById("stat-yesterday").textContent = money(
+          sum(yesterdayOrders),
+        );
+        document.getElementById("stat-this-month").textContent = money(
+          sum(thisMonthOrders),
+        );
+        document.getElementById("stat-last-month").textContent = money(
+          sum(lastMonthOrders),
+        );
+        document.getElementById("stat-alltime").textContent = money(
+          sum(orders),
+        );
+
+        renderPaymentBreakdown("stat-today-breakdown", todayOrders);
+        renderPaymentBreakdown("stat-yesterday-breakdown", yesterdayOrders);
+
+        // summary cards
+        const pending = orders.filter(
+          (o) => (o.status || "pending") === "pending",
+        );
+        const processing = orders.filter((o) => o.status === "processing");
+        const delivered = orders.filter((o) => o.status === "delivered");
+
+        document.getElementById("summary-total").textContent = orders.length;
+        document.getElementById("summary-pending").textContent = pending.length;
+        document.getElementById("summary-pending-amount").textContent = money(
+          sum(pending),
+        );
+        document.getElementById("summary-processing").textContent =
+          processing.length;
+        document.getElementById("summary-delivered").textContent =
+          delivered.length;
+        document.getElementById("pending-badge").textContent = pending.length;
+
+        renderWeeklyChart(orders);
+        renderBestSelling(orders);
+      }
+
+      function renderPaymentBreakdown(elId, list) {
+        const methods = { "Cash on Delivery": 0, bKash: 0, SSLCOMMERZ: 0 };
+        list.forEach((o) => {
+          const m = o.paymentMethod || "Cash on Delivery";
+          if (methods[m] === undefined) methods[m] = 0;
+          methods[m] += Number(o.totalAmount || o.total || 0);
+        });
+        const labels = {
+          "Cash on Delivery": "COD",
+          bKash: "bKash",
+          SSLCOMMERZ: "Card",
+        };
+        document.getElementById(elId).innerHTML = Object.entries(methods)
+          .map(([k, v]) => `<div>${labels[k] || k}<b>${money(v)}</b></div>`)
           .join("");
       }
 
-      function escapeHtml(str) {
-        return String(str || "").replace(
-          /[&<>"']/g,
-          (c) =>
-            ({
-              "&": "&amp;",
-              "<": "&lt;",
-              ">": "&gt;",
-              '"': "&quot;",
-              "'": "&#39;",
-            })[c],
-        );
+      let weeklyChartInstance = null;
+      let weeklyMode = "sales";
+
+      function renderWeeklyChart(orders) {
+        const days = [];
+        const labels = [];
+        for (let i = 6; i >= 0; i--) {
+          const d = new Date();
+          d.setDate(d.getDate() - i);
+          days.push(startOfDay(d));
+          labels.push(d.toLocaleDateString("en-US", { weekday: "short" }));
+        }
+
+        function dataFor(mode) {
+          return days.map((dayStart) => {
+            const dayEnd = new Date(dayStart);
+            dayEnd.setDate(dayEnd.getDate() + 1);
+            const dayOrders = orders.filter(
+              (o) => o.createdDate >= dayStart && o.createdDate < dayEnd,
+            );
+            return mode === "sales"
+              ? dayOrders.reduce(
+                  (a, o) => a + Number(o.totalAmount || o.total || 0),
+                  0,
+                )
+              : dayOrders.length;
+          });
+        }
+
+        const ctx = document.getElementById("weekly-chart").getContext("2d");
+        if (weeklyChartInstance) weeklyChartInstance.destroy();
+        weeklyChartInstance = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels,
+            datasets: [
+              {
+                label: weeklyMode === "sales" ? "Sales (৳)" : "Orders",
+                data: dataFor(weeklyMode),
+                borderColor: "#16C08C",
+                backgroundColor: "rgba(22,192,140,0.08)",
+                tension: 0.35,
+                fill: true,
+                pointRadius: 3,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: { y: { beginAtZero: true } },
+          },
+        });
+
+        document.querySelectorAll(".dt-chart-tab").forEach((tab) => {
+          tab.onclick = () => {
+            document
+              .querySelectorAll(".dt-chart-tab")
+              .forEach((t) => t.classList.remove("active"));
+            tab.classList.add("active");
+            weeklyMode = tab.dataset.mode;
+            renderWeeklyChart(orders);
+          };
+        });
+      }
+
+      function renderBestSelling(orders) {
+        const counts = {};
+        orders.forEach((o) => {
+          (o.items || []).forEach((item) => {
+            const name = item.name || "Unknown";
+            counts[name] =
+              (counts[name] || 0) + Number(item.quantity || item.qty || 1);
+          });
+        });
+
+        const sorted = Object.entries(counts)
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 5);
+        const canvas = document.getElementById("best-selling-chart");
+        const emptyNote = document.getElementById("best-selling-empty");
+        const legendEl = document.getElementById("best-selling-legend");
+
+        if (sorted.length === 0) {
+          canvas.style.display = "none";
+          emptyNote.style.display = "block";
+          legendEl.innerHTML = "";
+          return;
+        }
+
+        canvas.style.display = "block";
+        emptyNote.style.display = "none";
+
+        const colors = ["#16C08C", "#2E90FA", "#F97066", "#F79009", "#7A5AF8"];
+        const labels = sorted.map((s) => s[0]);
+        const data = sorted.map((s) => s[1]);
+
+        legendEl.innerHTML = labels
+          .map(
+            (l, i) =>
+              `<span><i style="background:${colors[i]}"></i>${l}</span>`,
+          )
+          .join("");
+
+        new Chart(canvas.getContext("2d"), {
+          type: "doughnut",
+          data: {
+            labels,
+            datasets: [{ data, backgroundColor: colors, borderWidth: 0 }],
+          },
+          options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+          },
+        });
       }
     </script>
   </body>
