@@ -172,7 +172,7 @@ body {
   min-width: 0;
 }
 .admin-topbar {
-  background: #fff;
+  background: #ffff;
   border-bottom: 1px solid var(--a-line);
   padding: 16px 28px;
   display: flex;

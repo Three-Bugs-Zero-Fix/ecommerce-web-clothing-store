@@ -314,3 +314,60 @@ table.dt-table tbody tr:hover {
   color: #98a2b3;
   padding: 40px 0 !important;
 }
+
+.dt-main {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+}
+.dt-content {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+}
+.dt-page-actions,
+.dt-filter-row,
+.dt-table-card {
+  width: 100% !important;
+  box-sizing: border-box;
+}
+.dt-table {
+  width: 100% !important;
+  table-layout: auto;
+}
+.dt-filter-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.dt-filter-search {
+  flex: 1;
+  min-width: 240px;
+}
+
+/* ================================
+   MOBILE VIEW
+================================ */
+
+@media (max-width: 820px) {
+  .dt-sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+  }
+  .dt-sidebar:not(.collapsed) {
+    transform: translateX(0);
+  }
+
+  /* Overlay Active Class */
+  .dt-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .dt-main,
+  .dt-topbar {
+    margin-left: 0 !important;
+    left: 0 !important;
+  }
+}

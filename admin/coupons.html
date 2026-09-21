@@ -1,473 +1,807 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Coupons — Admin</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" />
-  <link rel="stylesheet" href="../css/admin_drawer.css" />
-  <link rel="stylesheet" href="../css/admin.css" />
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coupons — Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link rel="stylesheet" href="../css/admin_drawer.css" />
+    <link rel="stylesheet" href="../css/admin.css" />
+  </head>
+  <body>
+    <div id="admin-loading" class="admin-loading">Checking admin access…</div>
 
-  <div id="admin-loading" class="admin-loading">Checking admin access…</div>
-
-  <div class="dt-shell" id="admin-shell" style="display: none">
-
-    <!-- SIDEBAR -->
-    <aside class="dt-sidebar" id="dt-sidebar">
-      <div class="dt-logo">
-        <div class="dt-logo-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2l1.5 4h9L18 2"/><path d="M3.5 6h17l-1.2 13a2 2 0 0 1-2 1.8H6.7a2 2 0 0 1-2-1.8L3.5 6z"/><path d="M8.5 10a3.5 3.5 0 0 0 7 0"/></svg>
+    <div class="dt-shell" id="admin-shell" style="display: none">
+      <!-- SIDEBAR -->
+      <aside class="dt-sidebar" id="dt-sidebar">
+        <div class="dt-logo">
+          <div class="dt-logo-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M6 2l1.5 4h9L18 2" />
+              <path
+                d="M3.5 6h17l-1.2 13a2 2 0 0 1-2 1.8H6.7a2 2 0 0 1-2-1.8L3.5 6z"
+              />
+              <path d="M8.5 10a3.5 3.5 0 0 0 7 0" />
+            </svg>
+          </div>
+          <span class="dt-logo-text">BlueWear</span>
         </div>
-        <span class="dt-logo-text">BlueWear</span>
-      </div>
 
-      <div class="dt-nav-section-title">General</div>
-      <a href="index.html" class="dt-nav-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg>
-        <span class="nav-label">Dashboard</span>
-      </a>
+        <div class="dt-nav-section-title">General</div>
+        <a href="index.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <rect x="3" y="3" width="8" height="8" rx="1.5" />
+            <rect x="13" y="3" width="8" height="8" rx="1.5" />
+            <rect x="3" y="13" width="8" height="8" rx="1.5" />
+            <rect x="13" y="13" width="8" height="8" rx="1.5" />
+          </svg>
+          <span class="nav-label">Dashboard</span>
+        </a>
 
-      <div class="dt-nav-section-title">Catalog</div>
-      <a href="products.html" class="dt-nav-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 8h16l-1 12H5L4 8z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg>
-        <span class="nav-label">Products</span>
-      </a>
-      <a href="categories.html" class="dt-nav-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.6 12.6L12.7 4.7a2 2 0 0 0-1.4-.6H5a1 1 0 0 0-1 1v6.3c0 .5.2 1 .6 1.4l7.9 7.9a2 2 0 0 0 2.8 0l5.3-5.3a2 2 0 0 0 0-2.8z"/><circle cx="8" cy="8" r="1.2"/></svg>
-        <span class="nav-label">Categories</span>
-      </a>
-      <a href="attributes.html" class="dt-nav-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3h18v6H3z"/><path d="M3 15h18v6H3z"/></svg>
-        <span class="nav-label">Attributes</span>
-      </a>
-      <a href="coupons.html" class="dt-nav-item active">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12a2 2 0 0 1 0-4V5a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v3a2 2 0 0 1 0 4v3a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-3z"/></svg>
-        <span class="nav-label">Coupons</span>
-      </a>
-      <a href="campaigns.html" class="dt-nav-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
-        <span class="nav-label">Campaigns</span>
-      </a>
-      <a href="banners.html" class="dt-nav-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-        <span class="nav-label">Banners</span>
-      </a>
-      <a href="sliders.html" class="dt-nav-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M8 21h8"/></svg>
-        <span class="nav-label">Product Sliders</span>
-      </a>
+        <div class="dt-nav-section-title">Catalog</div>
+        <a href="products.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M4 8h16l-1 12H5L4 8z" />
+            <path d="M8 8V6a4 4 0 0 1 8 0v2" />
+          </svg>
+          <span class="nav-label">Products</span>
+        </a>
+        <a href="categories.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path
+              d="M20.6 12.6L12.7 4.7a2 2 0 0 0-1.4-.6H5a1 1 0 0 0-1 1v6.3c0 .5.2 1 .6 1.4l7.9 7.9a2 2 0 0 0 2.8 0l5.3-5.3a2 2 0 0 0 0-2.8z"
+            />
+            <circle cx="8" cy="8" r="1.2" />
+          </svg>
+          <span class="nav-label">Categories</span>
+        </a>
+        <a href="attributes.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M3 3h18v6H3z" />
+            <path d="M3 15h18v6H3z" />
+          </svg>
+          <span class="nav-label">Attributes</span>
+        </a>
+        <a href="coupons.html" class="dt-nav-item active">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path
+              d="M21 12a2 2 0 0 1 0-4V5a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v3a2 2 0 0 1 0 4v3a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-3z"
+            />
+          </svg>
+          <span class="nav-label">Coupons</span>
+        </a>
+        <a href="campaigns.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" />
+          </svg>
+          <span class="nav-label">Campaigns</span>
+        </a>
+        <a href="banners.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <circle cx="8.5" cy="8.5" r="1.5" />
+            <path d="M21 15l-5-5L5 21" />
+          </svg>
+          <span class="nav-label">Banners</span>
+        </a>
+        <a href="sliders.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <rect x="3" y="5" width="18" height="14" rx="2" />
+            <path d="M8 21h8" />
+          </svg>
+          <span class="nav-label">Product Sliders</span>
+        </a>
 
-      <div class="dt-nav-section-title">Sales</div>
-      <a href="orders.html" class="dt-nav-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-        <span class="nav-label">Orders</span>
-      </a>
-      <a href="delivery-boys.html" class="dt-nav-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="7" width="13" height="9" rx="1"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="6" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>
-        <span class="nav-label">Delivery Boys</span>
-      </a>
-      <a href="customers.html" class="dt-nav-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        <span class="nav-label">Customers</span>
-      </a>
-      <a href="staff.html" class="dt-nav-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        <span class="nav-label">Our Staff</span>
-      </a>
+        <div class="dt-nav-section-title">Sales</div>
+        <a href="orders.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 7v5l3 3" />
+          </svg>
+          <span class="nav-label">Orders</span>
+        </a>
+        <a href="delivery-boys.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <rect x="1" y="7" width="13" height="9" rx="1" />
+            <path d="M14 10h4l3 3v3h-7z" />
+            <circle cx="6" cy="18" r="1.6" />
+            <circle cx="17" cy="18" r="1.6" />
+          </svg>
+          <span class="nav-label">Delivery Boys</span>
+        </a>
+        <a href="customers.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+          <span class="nav-label">Customers</span>
+        </a>
+        <a href="staff.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          <span class="nav-label">Our Staff</span>
+        </a>
 
-      <div class="dt-nav-section-title">Settings</div>
-      <a href="settings.html" class="dt-nav-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
-        <span class="nav-label">Settings</span>
-      </a>
-      <a href="store-customization.html" class="dt-nav-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"/><path d="M3 8l2-5h14l2 5"/><path d="M12 8v12"/></svg>
-        <span class="nav-label">Store Customization</span>
-      </a>
-      <a href="localization.html" class="dt-nav-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
-        <span class="nav-label">Localization</span>
-      </a>
-      <a href="../index.html" class="dt-nav-item" target="_blank">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
-        <span class="nav-label">View Store</span>
-      </a>
+        <div class="dt-nav-section-title">Settings</div>
+        <a href="settings.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <circle cx="12" cy="12" r="3" />
+            <path
+              d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"
+            />
+          </svg>
+          <span class="nav-label">Settings</span>
+        </a>
+        <a href="store-customization.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M3 8h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z" />
+            <path d="M3 8l2-5h14l2 5" />
+            <path d="M12 8v12" />
+          </svg>
+          <span class="nav-label">Store Customization</span>
+        </a>
+        <a href="localization.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <circle cx="12" cy="12" r="9" />
+            <path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18" />
+          </svg>
+          <span class="nav-label">Localization</span>
+        </a>
+        <a href="../index.html" class="dt-nav-item" target="_blank">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+            <circle cx="12" cy="12" r="3" />
+          </svg>
+          <span class="nav-label">View Store</span>
+        </a>
 
-      <div class="dt-sidebar-profile-wrap">
-        <div class="dt-profile-popup" id="profile-popup">
-          <div class="dt-profile-popup-head">
-            <div class="dt-sidebar-avatar" id="popup-avatar">?</div>
+        <div class="dt-sidebar-profile-wrap">
+          <div class="dt-profile-popup" id="profile-popup">
+            <div class="dt-profile-popup-head">
+              <div class="dt-sidebar-avatar" id="popup-avatar">?</div>
+              <div>
+                <div class="dt-sidebar-profile-name" id="popup-name">Admin</div>
+                <div class="dt-sidebar-profile-email" id="popup-email">—</div>
+              </div>
+            </div>
+            <a href="index.html" class="dt-profile-popup-item">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <rect x="3" y="3" width="8" height="8" rx="1.5" />
+                <rect x="13" y="3" width="8" height="8" rx="1.5" />
+                <rect x="3" y="13" width="8" height="8" rx="1.5" />
+                <rect x="13" y="13" width="8" height="8" rx="1.5" />
+              </svg>
+              Dashboard
+            </a>
+            <a href="profile.html" class="dt-profile-popup-item">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <circle cx="12" cy="12" r="3" />
+                <path
+                  d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"
+                />
+              </svg>
+              Edit Profile
+            </a>
+            <div class="dt-profile-popup-divider"></div>
+            <button
+              type="button"
+              class="dt-profile-popup-item danger"
+              id="popup-logout"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                <path d="M16 17l5-5-5-5" />
+                <path d="M21 12H9" />
+              </svg>
+              Log out
+            </button>
+          </div>
+
+          <button type="button" class="dt-sidebar-profile" id="profile-trigger">
+            <div class="dt-sidebar-avatar" id="sidebar-avatar">?</div>
             <div>
-              <div class="dt-sidebar-profile-name" id="popup-name">Admin</div>
-              <div class="dt-sidebar-profile-email" id="popup-email">—</div>
+              <div class="dt-sidebar-profile-name" id="sidebar-name">Admin</div>
+              <div class="dt-sidebar-profile-email" id="sidebar-email">—</div>
+            </div>
+            <span class="dt-profile-chevron">
+              <svg
+                viewBox="0 0 24 24"
+                width="14"
+                height="14"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M8 9l4-4 4 4M8 15l4 4 4-4" />
+              </svg>
+            </span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- MAIN -->
+      <div class="dt-main" id="dt-main">
+        <div class="dt-topbar" id="dt-topbar">
+          <div class="dt-topbar-left">
+            <button
+              class="dt-icon-btn"
+              id="sidebar-toggle"
+              title="Toggle sidebar"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <rect x="3" y="4" width="18" height="16" rx="2" />
+                <path d="M9 4v16" />
+              </svg>
+            </button>
+            <div class="dt-search-box">
+              <svg
+                viewBox="0 0 24 24"
+                width="15"
+                height="15"
+                fill="none"
+                stroke="#98A2B3"
+                stroke-width="2"
+              >
+                <circle cx="11" cy="11" r="7" />
+                <path d="M21 21l-4.3-4.3" />
+              </svg>
+              <input type="text" placeholder="Search" disabled />
+              <span class="dt-search-kbd">⌘K</span>
             </div>
           </div>
-          <a href="index.html" class="dt-profile-popup-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg>
-            Dashboard
-          </a>
-          <a href="profile.html" class="dt-profile-popup-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
-            Edit Profile
-          </a>
-          <div class="dt-profile-popup-divider"></div>
-          <button type="button" class="dt-profile-popup-item danger" id="popup-logout">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
-            Log out
-          </button>
-        </div>
-
-        <button type="button" class="dt-sidebar-profile" id="profile-trigger">
-          <div class="dt-sidebar-avatar" id="sidebar-avatar">?</div>
-          <div>
-            <div class="dt-sidebar-profile-name" id="sidebar-name">Admin</div>
-            <div class="dt-sidebar-profile-email" id="sidebar-email">—</div>
-          </div>
-          <span class="dt-profile-chevron">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 9l4-4 4 4M8 15l4 4 4-4"/></svg>
-          </span>
-        </button>
-      </div>
-    </aside>
-
-    <!-- MAIN -->
-    <div class="dt-main" id="dt-main">
-      <div class="dt-topbar" id="dt-topbar">
-        <div class="dt-topbar-left">
-          <button class="dt-icon-btn" id="sidebar-toggle" title="Toggle sidebar">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/></svg>
-          </button>
-          <div class="dt-search-box">
-            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#98A2B3" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-            <input type="text" placeholder="Search" disabled />
-            <span class="dt-search-kbd">⌘K</span>
-          </div>
-        </div>
-        <div class="dt-topbar-right">
-          <button class="dt-lang-pill" title="Language (coming soon)">EN</button>
-          <button class="dt-theme-btn light active" title="Light mode">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-          </button>
-          <button class="dt-theme-btn dark" title="Dark mode (coming soon)">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.5A9 9 0 1 1 11.5 3a7 7 0 0 0 9.5 9.5z"/></svg>
-          </button>
-          <div class="dt-bell-wrap">
-            <button class="dt-icon-btn" title="Notifications (coming soon)">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+          <div class="dt-topbar-right">
+            <button class="dt-lang-pill" title="Language (coming soon)">
+              EN
             </button>
-          </div>
-          <div class="dt-topbar-avatar" id="topbar-avatar">?</div>
-        </div>
-      </div>
-
-      <div class="dt-content">
-        <div class="dt-page-actions">
-          <div>
-            <div class="dt-page-heading">Coupon</div>
-            <div class="dt-page-subheading">Manage discount coupons</div>
-          </div>
-          <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <button class="dt-btn" id="btn-export">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 21h16"/></svg>
-              Export
+            <button class="dt-theme-btn light active" title="Light mode">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <circle cx="12" cy="12" r="4" />
+                <path
+                  d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+                />
+              </svg>
             </button>
-            <button class="dt-btn" id="btn-import">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 15V3M7 8l5-5 5 5"/><path d="M4 21h16"/></svg>
-              Import
+            <button class="dt-theme-btn dark" title="Dark mode (coming soon)">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M21 12.5A9 9 0 1 1 11.5 3a7 7 0 0 0 9.5 9.5z" />
+              </svg>
             </button>
-            <button class="dt-btn warn" id="btn-bulk">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
-              Bulk Action
-            </button>
-            <button class="dt-btn danger-outline" id="btn-delete-selected">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
-              Delete
-            </button>
-            <button class="dt-btn primary" id="btn-add-coupon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-              Add Coupon
-            </button>
+            <div class="dt-bell-wrap">
+              <button class="dt-icon-btn" title="Notifications (coming soon)">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
+                  <path d="M13.7 21a2 2 0 0 1-3.4 0" />
+                </svg>
+              </button>
+            </div>
+            <div class="dt-topbar-avatar" id="topbar-avatar">?</div>
           </div>
         </div>
 
-        <div class="dt-filter-row">
-          <div class="dt-filter-search">
-            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#98A2B3" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-            <input type="text" id="search-input" placeholder="Search by name or code..." />
+        <div class="dt-content">
+          <div class="dt-page-actions">
+            <div>
+              <div class="dt-page-heading">Coupon</div>
+              <div class="dt-page-subheading">Manage discount coupons</div>
+            </div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap">
+              <button class="dt-btn" id="btn-export">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path d="M12 3v12M7 10l5 5 5-5" />
+                  <path d="M4 21h16" />
+                </svg>
+                Export
+              </button>
+              <button class="dt-btn" id="btn-import">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path d="M12 15V3M7 8l5-5 5 5" />
+                  <path d="M4 21h16" />
+                </svg>
+                Import
+              </button>
+              <button class="dt-btn warn" id="btn-bulk">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path d="M12 20h9" />
+                  <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z" />
+                </svg>
+                Bulk Action
+              </button>
+              <button class="dt-btn danger-outline" id="btn-delete-selected">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path d="M3 6h18" />
+                  <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                  <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+                </svg>
+                Delete
+              </button>
+              <button class="dt-btn primary" id="btn-add-coupon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M12 5v14M5 12h14" />
+                </svg>
+                Add Coupon
+              </button>
+            </div>
           </div>
-          <label class="dt-filter-pill">
-            Published
-            <select id="published-filter">
-              <option value="all">All</option>
-              <option value="true">Published</option>
-              <option value="false">Unpublished</option>
-            </select>
-          </label>
-          <label class="dt-filter-pill">
-            Status
-            <select id="status-filter">
-              <option value="all">All</option>
-              <option value="active">Active</option>
-              <option value="expired">Expired</option>
-            </select>
-          </label>
-        </div>
 
-        <div class="dt-table-card">
-          <table class="dt-table">
-            <thead>
-              <tr>
-                <th><input type="checkbox" id="select-all" /></th>
-                <th>Campaign Name</th>
-                <th>Code</th>
-                <th>Discount</th>
-                <th>Published</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="coupons-body">
-              <tr class="dt-empty-row"><td colspan="9">Loading…</td></tr>
-            </tbody>
-          </table>
+          <div class="dt-filter-row">
+            <div class="dt-filter-search">
+              <svg
+                viewBox="0 0 24 24"
+                width="15"
+                height="15"
+                fill="none"
+                stroke="#98A2B3"
+                stroke-width="2"
+              >
+                <circle cx="11" cy="11" r="7" />
+                <path d="M21 21l-4.3-4.3" />
+              </svg>
+              <input
+                type="text"
+                id="search-input"
+                placeholder="Search by name or code..."
+              />
+            </div>
+            <label class="dt-filter-pill">
+              Published
+              <select id="published-filter">
+                <option value="all">All</option>
+                <option value="true">Published</option>
+                <option value="false">Unpublished</option>
+              </select>
+            </label>
+            <label class="dt-filter-pill">
+              Status
+              <select id="status-filter">
+                <option value="all">All</option>
+                <option value="active">Active</option>
+                <option value="expired">Expired</option>
+              </select>
+            </label>
+          </div>
 
-          <div class="dt-table-footer">
-            <span id="selection-label">0 of 0 row(s) selected.</span>
-            <div style="display:flex; align-items:center; gap:14px;">
-              <span>Rows per page
-                <select class="dt-rows-select" id="rows-per-page">
-                  <option>10</option>
-                  <option selected>20</option>
-                  <option>50</option>
-                </select>
-              </span>
-              <span id="page-label">Page 1 of 1</span>
-              <div class="dt-pagination">
-                <button class="dt-page-btn" id="page-first">«</button>
-                <button class="dt-page-btn" id="page-prev">‹</button>
-                <button class="dt-page-btn" id="page-next">›</button>
-                <button class="dt-page-btn" id="page-last">»</button>
+          <div class="dt-table-card">
+            <table class="dt-table">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="select-all" /></th>
+                  <th>Campaign Name</th>
+                  <th>Code</th>
+                  <th>Discount</th>
+                  <th>Published</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="coupons-body">
+                <tr class="dt-empty-row">
+                  <td colspan="9">Loading…</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="dt-table-footer">
+              <span id="selection-label">0 of 0 row(s) selected.</span>
+              <div style="display: flex; align-items: center; gap: 14px">
+                <span
+                  >Rows per page
+                  <select class="dt-rows-select" id="rows-per-page">
+                    <option>10</option>
+                    <option selected>20</option>
+                    <option>50</option>
+                  </select>
+                </span>
+                <span id="page-label">Page 1 of 1</span>
+                <div class="dt-pagination">
+                  <button class="dt-page-btn" id="page-first">«</button>
+                  <button class="dt-page-btn" id="page-prev">‹</button>
+                  <button class="dt-page-btn" id="page-next">›</button>
+                  <button class="dt-page-btn" id="page-last">»</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Add/Edit Coupon modal -->
-  <div class="modal-overlay" id="coupon-modal-overlay">
-    <div class="modal-box">
-      <div class="modal-head">
-        <div class="modal-title" id="coupon-modal-title">Add Coupon</div>
-        <button id="coupon-modal-close">✕</button>
-      </div>
-
-      <div class="form-error" id="coupon-form-error"></div>
-      <div class="form-success" id="coupon-form-success"></div>
-
-      <div class="form-row">
-        <label>Campaign image (optional)</label>
-        <div class="image-upload-box" id="coupon-upload-box">
-          <span id="coupon-upload-label">Click to choose an image</span>
-          <input type="file" id="coupon-image-input" accept="image/*" style="display:none;" />
+    <!-- Add/Edit Coupon modal -->
+    <div class="modal-overlay" id="coupon-modal-overlay">
+      <div class="modal-box">
+        <div class="modal-head">
+          <div class="modal-title" id="coupon-modal-title">Add Coupon</div>
+          <button id="coupon-modal-close">✕</button>
         </div>
-        <img id="coupon-image-preview" class="image-preview" />
-        <div class="upload-status" id="coupon-upload-status"></div>
-      </div>
 
-      <div class="form-row">
-        <label>Campaign name</label>
-        <input type="text" id="coupon-name" />
-      </div>
+        <div class="form-error" id="coupon-form-error"></div>
+        <div class="form-success" id="coupon-form-success"></div>
 
-      <div class="form-grid">
         <div class="form-row">
-          <label>Code</label>
-          <input type="text" id="coupon-code" placeholder="e.g. SUMMER26" />
+          <label>Campaign image (optional)</label>
+          <div class="image-upload-box" id="coupon-upload-box">
+            <span id="coupon-upload-label">Click to choose an image</span>
+            <input
+              type="file"
+              id="coupon-image-input"
+              accept="image/*"
+              style="display: none"
+            />
+          </div>
+          <img id="coupon-image-preview" class="image-preview" />
+          <div class="upload-status" id="coupon-upload-status"></div>
         </div>
-        <div class="form-row">
-          <label>Discount (%)</label>
-          <input type="number" id="coupon-discount" min="1" max="100" />
-        </div>
-      </div>
 
-      <div class="form-grid">
         <div class="form-row">
-          <label>Start date</label>
-          <input type="date" id="coupon-start" />
+          <label>Campaign name</label>
+          <input type="text" id="coupon-name" />
         </div>
+
+        <div class="form-grid">
+          <div class="form-row">
+            <label>Code</label>
+            <input type="text" id="coupon-code" placeholder="e.g. SUMMER26" />
+          </div>
+          <div class="form-row">
+            <label>Discount (%)</label>
+            <input type="number" id="coupon-discount" min="1" max="100" />
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-row">
+            <label>Start date</label>
+            <input type="date" id="coupon-start" />
+          </div>
+          <div class="form-row">
+            <label>End date</label>
+            <input type="date" id="coupon-end" />
+          </div>
+        </div>
+
         <div class="form-row">
-          <label>End date</label>
-          <input type="date" id="coupon-end" />
+          <label>Published</label>
+          <label class="dt-toggle">
+            <input type="checkbox" id="coupon-published" checked />
+            <span class="dt-toggle-track"
+              ><span class="dt-toggle-thumb"></span
+            ></span>
+          </label>
         </div>
-      </div>
 
-      <div class="form-row">
-        <label>Published</label>
-        <label class="dt-toggle">
-          <input type="checkbox" id="coupon-published" checked />
-          <span class="dt-toggle-track"><span class="dt-toggle-thumb"></span></span>
-        </label>
-      </div>
-
-      <div style="display:flex; gap:10px; margin-top:10px;">
-        <button class="btn-admin-primary" id="coupon-save-btn">Save Coupon</button>
-        <button class="btn-admin-outline" id="coupon-cancel-btn">Cancel</button>
+        <div style="display: flex; gap: 10px; margin-top: 10px">
+          <button class="btn-admin-primary" id="coupon-save-btn">
+            Save Coupon
+          </button>
+          <button class="btn-admin-outline" id="coupon-cancel-btn">
+            Cancel
+          </button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
-  <script src="../js/firebase.js"></script>
-  <script src="../js/auth.js"></script>
-  <script src="../js/admin.js"></script>
-  <script>
-    let allCoupons = [];
-    let selectedIds = new Set();
-    let currentPage = 1;
-    let editingCouponId = null;
-    let uploadedCouponImageUrl = null;
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+    <script src="../js/firebase.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/admin.js"></script>
+    <script>
+      let allCoupons = [];
+      let selectedIds = new Set();
+      let currentPage = 1;
+      let editingCouponId = null;
+      let uploadedCouponImageUrl = null;
 
-    function showError(el, msg) {
-      if (!el) return;
-      el.textContent = msg;
-      el.style.display = msg ? "block" : "none";
-    }
+      function showError(el, msg) {
+        if (!el) return;
+        el.textContent = msg;
+        el.style.display = msg ? "block" : "none";
+      }
 
-    // Require admin Access & Initial Setup
-    requireAdmin("login.html").then(async (user) => {
-      const loadingEl = document.getElementById("admin-loading");
-      const shellEl = document.getElementById("admin-shell");
+      requireAdmin("login.html")
+        .then(async (user) => {
+          const loadingEl = document.getElementById("admin-loading");
+          const shellEl = document.getElementById("admin-shell");
 
-      if (loadingEl) loadingEl.style.display = "none";
-      if (shellEl) shellEl.style.display = "flex";
+          if (loadingEl) loadingEl.style.display = "none";
+          if (shellEl) shellEl.style.display = "flex";
 
-      const setElText = (id, val) => {
-        const el = document.getElementById(id);
-        if (el) el.textContent = val;
-      };
+          const setElText = (id, val) => {
+            const el = document.getElementById(id);
+            if (el) el.textContent = val;
+          };
 
-      const email = user.email || "";
-      const initial = email.charAt(0).toUpperCase() || "?";
-      const name = email.split("@")[0] || "Admin";
+          const email = user.email || "";
+          const initial = email.charAt(0).toUpperCase() || "?";
+          const name = email.split("@")[0] || "Admin";
 
-      setElText("sidebar-avatar", initial);
-      setElText("topbar-avatar", initial);
-      setElText("popup-avatar", initial);
-      setElText("sidebar-name", name);
-      setElText("popup-name", name);
-      setElText("sidebar-email", email);
-      setElText("popup-email", email);
+          setElText("sidebar-avatar", initial);
+          setElText("topbar-avatar", initial);
+          setElText("popup-avatar", initial);
+          setElText("sidebar-name", name);
+          setElText("popup-name", name);
+          setElText("sidebar-email", email);
+          setElText("popup-email", email);
 
-      await loadCoupons();
-    }).catch(err => {
-      console.error("Admin verification error:", err);
-    });
+          await loadCoupons();
+        })
+        .catch((err) => {
+          console.error("Admin verification error:", err);
+        });
 
-    // Sidebar Toggle
-    document.getElementById("sidebar-toggle")?.addEventListener("click", () => {
-      document.getElementById("dt-sidebar")?.classList.toggle("collapsed");
-      document.getElementById("dt-topbar")?.classList.toggle("sidebar-collapsed");
-      document.getElementById("dt-main")?.classList.toggle("sidebar-collapsed");
-    });
+      document
+        .getElementById("sidebar-toggle")
+        ?.addEventListener("click", () => {
+          document.getElementById("dt-sidebar")?.classList.toggle("collapsed");
+          document
+            .getElementById("dt-topbar")
+            ?.classList.toggle("sidebar-collapsed");
+          document
+            .getElementById("dt-main")
+            ?.classList.toggle("sidebar-collapsed");
+        });
 
-    // Profile Popup
-    const profileTrigger = document.getElementById("profile-trigger");
-    const profilePopup = document.getElementById("profile-popup");
-    if (profileTrigger && profilePopup) {
-      profileTrigger.addEventListener("click", (e) => {
-        e.stopPropagation();
-        profilePopup.classList.toggle("open");
-      });
-      document.addEventListener("click", (e) => {
-        if (!profilePopup.contains(e.target) && !profileTrigger.contains(e.target)) {
-          profilePopup.classList.remove("open");
-        }
-      });
-    }
+      const profileTrigger = document.getElementById("profile-trigger");
+      const profilePopup = document.getElementById("profile-popup");
+      if (profileTrigger && profilePopup) {
+        profileTrigger.addEventListener("click", (e) => {
+          e.stopPropagation();
+          profilePopup.classList.toggle("open");
+        });
+        document.addEventListener("click", (e) => {
+          if (
+            !profilePopup.contains(e.target) &&
+            !profileTrigger.contains(e.target)
+          ) {
+            profilePopup.classList.remove("open");
+          }
+        });
+      }
 
-    document.getElementById("popup-logout")?.addEventListener("click", async () => {
-      if (typeof logoutUser === "function") await logoutUser();
-      window.location.href = "login.html";
-    });
+      document
+        .getElementById("popup-logout")
+        ?.addEventListener("click", async () => {
+          if (typeof logoutUser === "function") await logoutUser();
+          window.location.href = "login.html";
+        });
 
-    // Load Coupons
-    async function loadCoupons() {
-      try {
-        const snap = await db.collection("coupons").orderBy("createdAt", "desc").get();
-        allCoupons = snap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-        currentPage = 1;
-        selectedIds.clear();
-        render();
-      } catch (err) {
-        console.error("Error loading coupons:", err);
-        const body = document.getElementById("coupons-body");
-        if (body) {
-          body.innerHTML = `<tr class="dt-empty-row"><td colspan="9">Failed to load coupons. Check Firestore permissions.</td></tr>`;
+      async function loadCoupons() {
+        try {
+          const snap = await db
+            .collection("coupons")
+            .orderBy("createdAt", "desc")
+            .get();
+          allCoupons = snap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+          currentPage = 1;
+          selectedIds.clear();
+          render();
+        } catch (err) {
+          console.error("Error loading coupons:", err);
+          const body = document.getElementById("coupons-body");
+          if (body) {
+            body.innerHTML = `<tr class="dt-empty-row"><td colspan="9">Failed to load coupons. Check Firestore permissions.</td></tr>`;
+          }
         }
       }
-    }
 
-    function isExpired(coupon) {
-      if (!coupon.endDate) return false;
-      return new Date(coupon.endDate + "T23:59:59") < new Date();
-    }
+      function isExpired(coupon) {
+        if (!coupon.endDate) return false;
+        return new Date(coupon.endDate + "T23:59:59") < new Date();
+      }
 
-    function formatDate(str) {
-      if (!str) return "—";
-      const d = new Date(str + "T00:00:00");
-      return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
-    }
+      function formatDate(str) {
+        if (!str) return "—";
+        const d = new Date(str + "T00:00:00");
+        return d.toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        });
+      }
 
-    function getFiltered() {
-      const q = document.getElementById("search-input")?.value.toLowerCase() || "";
-      const publishedFilter = document.getElementById("published-filter")?.value || "all";
-      const statusFilter = document.getElementById("status-filter")?.value || "all";
+      function getFiltered() {
+        const q =
+          document.getElementById("search-input")?.value.toLowerCase() || "";
+        const publishedFilter =
+          document.getElementById("published-filter")?.value || "all";
+        const statusFilter =
+          document.getElementById("status-filter")?.value || "all";
 
-      return allCoupons.filter((c) => {
-        const matchesSearch =
-          !q || (c.name || "").toLowerCase().includes(q) || (c.code || "").toLowerCase().includes(q);
-        const matchesPublished =
-          publishedFilter === "all" || String(!!c.published) === publishedFilter;
-        const expired = isExpired(c);
-        const matchesStatus =
-          statusFilter === "all" ||
-          (statusFilter === "expired" && expired) ||
-          (statusFilter === "active" && !expired);
-        return matchesSearch && matchesPublished && matchesStatus;
-      });
-    }
-
-    function render() {
-      const filtered = getFiltered();
-      const rowsPerPage = Number(document.getElementById("rows-per-page")?.value || 20);
-      const totalPages = Math.max(1, Math.ceil(filtered.length / rowsPerPage));
-      currentPage = Math.min(currentPage, totalPages);
-
-      const start = (currentPage - 1) * rowsPerPage;
-      const pageItems = filtered.slice(start, start + rowsPerPage);
-      const body = document.getElementById("coupons-body");
-
-      if (!body) return;
-
-      if (pageItems.length === 0) {
-        body.innerHTML = `<tr class="dt-empty-row"><td colspan="9">No coupons found.</td></tr>`;
-      } else {
-        body.innerHTML = pageItems.map((c) => {
+        return allCoupons.filter((c) => {
+          const matchesSearch =
+            !q ||
+            (c.name || "").toLowerCase().includes(q) ||
+            (c.code || "").toLowerCase().includes(q);
+          const matchesPublished =
+            publishedFilter === "all" ||
+            String(!!c.published) === publishedFilter;
           const expired = isExpired(c);
-          const thumb = c.image
-            ? `<img class="dt-campaign-thumb" src="${escapeHtml(c.image)}" alt="">`
-            : `<div class="dt-campaign-thumb" style="display:flex;align-items:center;justify-content:center;color:#98A2B3;font-size:14px;">🎟</div>`;
+          const matchesStatus =
+            statusFilter === "all" ||
+            (statusFilter === "expired" && expired) ||
+            (statusFilter === "active" && !expired);
+          return matchesSearch && matchesPublished && matchesStatus;
+        });
+      }
 
-          return `
+      function render() {
+        const filtered = getFiltered();
+        const rowsPerPage = Number(
+          document.getElementById("rows-per-page")?.value || 20,
+        );
+        const totalPages = Math.max(
+          1,
+          Math.ceil(filtered.length / rowsPerPage),
+        );
+        currentPage = Math.min(currentPage, totalPages);
+
+        const start = (currentPage - 1) * rowsPerPage;
+        const pageItems = filtered.slice(start, start + rowsPerPage);
+        const body = document.getElementById("coupons-body");
+
+        if (!body) return;
+
+        if (pageItems.length === 0) {
+          body.innerHTML = `<tr class="dt-empty-row"><td colspan="9">No coupons found.</td></tr>`;
+        } else {
+          body.innerHTML = pageItems
+            .map((c) => {
+              const expired = isExpired(c);
+              const thumb = c.image
+                ? `<img class="dt-campaign-thumb" src="${escapeHtml(c.image)}" alt="">`
+                : `<div class="dt-campaign-thumb" style="display:flex;align-items:center;justify-content:center;color:#98A2B3;font-size:14px;">🎟</div>`;
+
+              return `
             <tr>
               <td><input type="checkbox" class="row-checkbox" data-id="${c.id}" ${selectedIds.has(c.id) ? "checked" : ""}></td>
               <td>
@@ -497,232 +831,354 @@
                 </div>
               </td>
             </tr>`;
-        }).join("");
-      }
-
-      // Wire Row Events
-      body.querySelectorAll(".row-checkbox").forEach((cb) => {
-        cb.addEventListener("change", () => {
-          if (cb.checked) selectedIds.add(cb.dataset.id);
-          else selectedIds.delete(cb.dataset.id);
-          updateSelectionLabel();
-        });
-      });
-
-      body.querySelectorAll(".published-toggle").forEach((cb) => {
-        cb.addEventListener("change", async () => {
-          const id = cb.dataset.id;
-          await db.collection("coupons").doc(id).update({ published: cb.checked });
-          const c = allCoupons.find((x) => x.id === id);
-          if (c) c.published = cb.checked;
-        });
-      });
-
-      body.querySelectorAll(".row-menu-toggle").forEach((btn) => {
-        btn.addEventListener("click", (e) => {
-          e.stopPropagation();
-          const menu = document.getElementById(`menu-${btn.dataset.id}`);
-          document.querySelectorAll(".dt-row-menu.open").forEach((m) => { if (m !== menu) m.classList.remove("open"); });
-          menu?.classList.toggle("open");
-        });
-      });
-
-      body.querySelectorAll(".row-edit-btn").forEach((btn) => {
-        btn.addEventListener("click", () => openCouponModal(btn.dataset.id));
-      });
-
-      body.querySelectorAll(".row-delete-btn").forEach((btn) => {
-        btn.addEventListener("click", () => deleteCoupon(btn.dataset.id));
-      });
-
-      const pageLabel = document.getElementById("page-label");
-      if (pageLabel) pageLabel.textContent = `Page ${currentPage} of ${totalPages}`;
-
-      document.getElementById("page-first").disabled = currentPage === 1;
-      document.getElementById("page-prev").disabled = currentPage === 1;
-      document.getElementById("page-next").disabled = currentPage === totalPages;
-      document.getElementById("page-last").disabled = currentPage === totalPages;
-
-      updateSelectionLabel(filtered.length);
-      window._couponsTotalPages = totalPages;
-    }
-
-    function updateSelectionLabel(totalCount) {
-      const total = totalCount ?? getFiltered().length;
-      const lbl = document.getElementById("selection-label");
-      if (lbl) lbl.textContent = `${selectedIds.size} of ${total} row(s) selected.`;
-      const selectAll = document.getElementById("select-all");
-      if (selectAll) selectAll.checked = selectedIds.size > 0 && selectedIds.size === total;
-    }
-
-    document.addEventListener("click", () => {
-      document.querySelectorAll(".dt-row-menu.open").forEach((m) => m.classList.remove("open"));
-    });
-
-    // Filters
-    document.getElementById("search-input")?.addEventListener("input", () => { currentPage = 1; render(); });
-    document.getElementById("published-filter")?.addEventListener("change", () => { currentPage = 1; render(); });
-    document.getElementById("status-filter")?.addEventListener("change", () => { currentPage = 1; render(); });
-    document.getElementById("rows-per-page")?.addEventListener("change", () => { currentPage = 1; render(); });
-
-    // Select All
-    document.getElementById("select-all")?.addEventListener("change", (e) => {
-      const filtered = getFiltered();
-      if (e.target.checked) filtered.forEach((c) => selectedIds.add(c.id));
-      else selectedIds.clear();
-      render();
-    });
-
-    // Pagination
-    document.getElementById("page-first")?.addEventListener("click", () => { currentPage = 1; render(); });
-    document.getElementById("page-prev")?.addEventListener("click", () => { currentPage = Math.max(1, currentPage - 1); render(); });
-    document.getElementById("page-next")?.addEventListener("click", () => { currentPage = Math.min(window._couponsTotalPages || 1, currentPage + 1); render(); });
-    document.getElementById("page-last")?.addEventListener("click", () => { currentPage = window._couponsTotalPages || 1; render(); });
-
-    // Export & Bulk Actions
-    document.getElementById("btn-export")?.addEventListener("click", () => {
-      const rows = allCoupons.map((c) => `${c.name},${c.code},${c.discount}%,${c.startDate},${c.endDate},${c.published ? "Published" : "Unpublished"}`);
-      const csv = "Name,Code,Discount,Start,End,Published\n" + rows.join("\n");
-      const blob = new Blob([csv], { type: "text/csv" });
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(blob);
-      a.download = "coupons.csv";
-      a.click();
-    });
-    document.getElementById("btn-import")?.addEventListener("click", () => alert("Import isn't built yet — coming soon."));
-    document.getElementById("btn-bulk")?.addEventListener("click", () => alert("Bulk actions aren't built yet — coming soon."));
-
-    // Delete Selected
-    document.getElementById("btn-delete-selected")?.addEventListener("click", async () => {
-      if (selectedIds.size === 0) { alert("Select at least one coupon first."); return; }
-      if (!confirm(`Delete ${selectedIds.size} coupon(s)? This can't be undone.`)) return;
-      const batch = db.batch();
-      selectedIds.forEach((id) => batch.delete(db.collection("coupons").doc(id)));
-      await batch.commit();
-      allCoupons = allCoupons.filter((c) => !selectedIds.has(c.id));
-      selectedIds.clear();
-      render();
-    });
-
-    async function deleteCoupon(id) {
-      if (!confirm("Delete this coupon?")) return;
-      await db.collection("coupons").doc(id).delete();
-      allCoupons = allCoupons.filter((c) => c.id !== id);
-      selectedIds.delete(id);
-      render();
-    }
-
-    // Modal Operations
-    const couponModalOverlay = document.getElementById("coupon-modal-overlay");
-    const couponUploadBox = document.getElementById("coupon-upload-box");
-    const couponImageInput = document.getElementById("coupon-image-input");
-    const couponImagePreview = document.getElementById("coupon-image-preview");
-
-    document.getElementById("btn-add-coupon")?.addEventListener("click", () => openCouponModal(null));
-    document.getElementById("coupon-modal-close")?.addEventListener("click", closeCouponModal);
-    document.getElementById("coupon-cancel-btn")?.addEventListener("click", closeCouponModal);
-
-    function closeCouponModal() {
-      couponModalOverlay?.classList.remove("open");
-      editingCouponId = null;
-    }
-
-    function openCouponModal(id) {
-      editingCouponId = id;
-      showError(document.getElementById("coupon-form-error"), "");
-      showError(document.getElementById("coupon-form-success"), "");
-
-      const c = id ? allCoupons.find((x) => x.id === id) : null;
-
-      document.getElementById("coupon-modal-title").textContent = id ? "Edit Coupon" : "Add Coupon";
-      document.getElementById("coupon-name").value = c?.name || "";
-      document.getElementById("coupon-code").value = c?.code || "";
-      document.getElementById("coupon-discount").value = c?.discount || "";
-      document.getElementById("coupon-start").value = c?.startDate || "";
-      document.getElementById("coupon-end").value = c?.endDate || "";
-      document.getElementById("coupon-published").checked = c ? !!c.published : true;
-
-      uploadedCouponImageUrl = c?.image || null;
-      if (couponImagePreview) {
-        couponImagePreview.style.display = c?.image ? "block" : "none";
-        couponImagePreview.src = c?.image || "";
-      }
-      document.getElementById("coupon-upload-label").textContent = c?.image ? "Click to change image" : "Click to choose an image";
-      document.getElementById("coupon-upload-status").textContent = "";
-
-      couponModalOverlay?.classList.add("open");
-    }
-
-    couponUploadBox?.addEventListener("click", () => couponImageInput?.click());
-    couponImageInput?.addEventListener("change", async () => {
-      const file = couponImageInput.files[0];
-      if (!file) return;
-      if (couponImagePreview) {
-        couponImagePreview.src = URL.createObjectURL(file);
-        couponImagePreview.style.display = "block";
-      }
-      document.getElementById("coupon-upload-label").textContent = file.name;
-      const status = document.getElementById("coupon-upload-status");
-      status.textContent = "Uploading image…";
-
-      try {
-        if (typeof uploadToImgBB === "function") {
-          const jpegFile = typeof resizeAndConvertToJPEG === "function" ? await resizeAndConvertToJPEG(file) : file;
-          uploadedCouponImageUrl = await uploadToImgBB(jpegFile);
-          status.textContent = "Uploaded ✓";
-        } else {
-          status.textContent = "Image preview attached";
+            })
+            .join("");
         }
-      } catch (err) {
-        status.textContent = "Upload failed: " + err.message;
-        uploadedCouponImageUrl = null;
+
+        body.querySelectorAll(".row-checkbox").forEach((cb) => {
+          cb.addEventListener("change", () => {
+            if (cb.checked) selectedIds.add(cb.dataset.id);
+            else selectedIds.delete(cb.dataset.id);
+            updateSelectionLabel();
+          });
+        });
+
+        body.querySelectorAll(".published-toggle").forEach((cb) => {
+          cb.addEventListener("change", async () => {
+            const id = cb.dataset.id;
+            await db
+              .collection("coupons")
+              .doc(id)
+              .update({ published: cb.checked });
+            const c = allCoupons.find((x) => x.id === id);
+            if (c) c.published = cb.checked;
+          });
+        });
+
+        body.querySelectorAll(".row-menu-toggle").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const menu = document.getElementById(`menu-${btn.dataset.id}`);
+            document.querySelectorAll(".dt-row-menu.open").forEach((m) => {
+              if (m !== menu) m.classList.remove("open");
+            });
+            menu?.classList.toggle("open");
+          });
+        });
+
+        body.querySelectorAll(".row-edit-btn").forEach((btn) => {
+          btn.addEventListener("click", () => openCouponModal(btn.dataset.id));
+        });
+
+        body.querySelectorAll(".row-delete-btn").forEach((btn) => {
+          btn.addEventListener("click", () => deleteCoupon(btn.dataset.id));
+        });
+
+        const pageLabel = document.getElementById("page-label");
+        if (pageLabel)
+          pageLabel.textContent = `Page ${currentPage} of ${totalPages}`;
+
+        document.getElementById("page-first").disabled = currentPage === 1;
+        document.getElementById("page-prev").disabled = currentPage === 1;
+        document.getElementById("page-next").disabled =
+          currentPage === totalPages;
+        document.getElementById("page-last").disabled =
+          currentPage === totalPages;
+
+        updateSelectionLabel(filtered.length);
+        window._couponsTotalPages = totalPages;
       }
-    });
 
-    document.getElementById("coupon-save-btn")?.addEventListener("click", async () => {
-      const errorEl = document.getElementById("coupon-form-error");
-      const successEl = document.getElementById("coupon-form-success");
-      showError(errorEl, "");
-      showError(successEl, "");
+      function updateSelectionLabel(totalCount) {
+        const total = totalCount ?? getFiltered().length;
+        const lbl = document.getElementById("selection-label");
+        if (lbl)
+          lbl.textContent = `${selectedIds.size} of ${total} row(s) selected.`;
+        const selectAll = document.getElementById("select-all");
+        if (selectAll)
+          selectAll.checked =
+            selectedIds.size > 0 && selectedIds.size === total;
+      }
 
-      const name = document.getElementById("coupon-name").value.trim();
-      const code = document.getElementById("coupon-code").value.trim().toUpperCase();
-      const discount = Number(document.getElementById("coupon-discount").value);
-      const startDate = document.getElementById("coupon-start").value;
-      const endDate = document.getElementById("coupon-end").value;
-      const published = document.getElementById("coupon-published").checked;
+      document.addEventListener("click", () => {
+        document
+          .querySelectorAll(".dt-row-menu.open")
+          .forEach((m) => m.classList.remove("open"));
+      });
 
-      if (!name || !code) { showError(errorEl, "Campaign name and code are required."); return; }
-      if (!discount || discount <= 0 || discount > 100) { showError(errorEl, "Discount must be between 1 and 100."); return; }
-      if (!startDate || !endDate) { showError(errorEl, "Start and end dates are required."); return; }
+      document.getElementById("search-input")?.addEventListener("input", () => {
+        currentPage = 1;
+        render();
+      });
+      document
+        .getElementById("published-filter")
+        ?.addEventListener("change", () => {
+          currentPage = 1;
+          render();
+        });
+      document
+        .getElementById("status-filter")
+        ?.addEventListener("change", () => {
+          currentPage = 1;
+          render();
+        });
+      document
+        .getElementById("rows-per-page")
+        ?.addEventListener("change", () => {
+          currentPage = 1;
+          render();
+        });
 
-      const btn = document.getElementById("coupon-save-btn");
-      btn.disabled = true; btn.textContent = "Saving…";
+      document.getElementById("select-all")?.addEventListener("change", (e) => {
+        const filtered = getFiltered();
+        if (e.target.checked) filtered.forEach((c) => selectedIds.add(c.id));
+        else selectedIds.clear();
+        render();
+      });
 
-      const payload = { name, code, discount, startDate, endDate, published, image: uploadedCouponImageUrl || null };
+      document.getElementById("page-first")?.addEventListener("click", () => {
+        currentPage = 1;
+        render();
+      });
+      document.getElementById("page-prev")?.addEventListener("click", () => {
+        currentPage = Math.max(1, currentPage - 1);
+        render();
+      });
+      document.getElementById("page-next")?.addEventListener("click", () => {
+        currentPage = Math.min(window._couponsTotalPages || 1, currentPage + 1);
+        render();
+      });
+      document.getElementById("page-last")?.addEventListener("click", () => {
+        currentPage = window._couponsTotalPages || 1;
+        render();
+      });
 
-      try {
-        if (editingCouponId) {
-          await db.collection("coupons").doc(editingCouponId).update(payload);
-        } else {
-          await db.collection("coupons").add({ ...payload, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
+      document.getElementById("btn-export")?.addEventListener("click", () => {
+        const rows = allCoupons.map(
+          (c) =>
+            `${c.name},${c.code},${c.discount}%,${c.startDate},${c.endDate},${c.published ? "Published" : "Unpublished"}`,
+        );
+        const csv =
+          "Name,Code,Discount,Start,End,Published\n" + rows.join("\n");
+        const blob = new Blob([csv], { type: "text/csv" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "coupons.csv";
+        a.click();
+      });
+      document
+        .getElementById("btn-import")
+        ?.addEventListener("click", () =>
+          alert("Import isn't built yet — coming soon."),
+        );
+      document
+        .getElementById("btn-bulk")
+        ?.addEventListener("click", () =>
+          alert("Bulk actions aren't built yet — coming soon."),
+        );
+
+      document
+        .getElementById("btn-delete-selected")
+        ?.addEventListener("click", async () => {
+          if (selectedIds.size === 0) {
+            alert("Select at least one coupon first.");
+            return;
+          }
+          if (
+            !confirm(
+              `Delete ${selectedIds.size} coupon(s)? This can't be undone.`,
+            )
+          )
+            return;
+          const batch = db.batch();
+          selectedIds.forEach((id) =>
+            batch.delete(db.collection("coupons").doc(id)),
+          );
+          await batch.commit();
+          allCoupons = allCoupons.filter((c) => !selectedIds.has(c.id));
+          selectedIds.clear();
+          render();
+        });
+
+      async function deleteCoupon(id) {
+        if (!confirm("Delete this coupon?")) return;
+        await db.collection("coupons").doc(id).delete();
+        allCoupons = allCoupons.filter((c) => c.id !== id);
+        selectedIds.delete(id);
+        render();
+      }
+
+      const couponModalOverlay = document.getElementById(
+        "coupon-modal-overlay",
+      );
+      const couponUploadBox = document.getElementById("coupon-upload-box");
+      const couponImageInput = document.getElementById("coupon-image-input");
+      const couponImagePreview = document.getElementById(
+        "coupon-image-preview",
+      );
+
+      document
+        .getElementById("btn-add-coupon")
+        ?.addEventListener("click", () => openCouponModal(null));
+      document
+        .getElementById("coupon-modal-close")
+        ?.addEventListener("click", closeCouponModal);
+      document
+        .getElementById("coupon-cancel-btn")
+        ?.addEventListener("click", closeCouponModal);
+
+      function closeCouponModal() {
+        couponModalOverlay?.classList.remove("open");
+        editingCouponId = null;
+      }
+
+      function openCouponModal(id) {
+        editingCouponId = id;
+        showError(document.getElementById("coupon-form-error"), "");
+        showError(document.getElementById("coupon-form-success"), "");
+
+        const c = id ? allCoupons.find((x) => x.id === id) : null;
+
+        document.getElementById("coupon-modal-title").textContent = id
+          ? "Edit Coupon"
+          : "Add Coupon";
+        document.getElementById("coupon-name").value = c?.name || "";
+        document.getElementById("coupon-code").value = c?.code || "";
+        document.getElementById("coupon-discount").value = c?.discount || "";
+        document.getElementById("coupon-start").value = c?.startDate || "";
+        document.getElementById("coupon-end").value = c?.endDate || "";
+        document.getElementById("coupon-published").checked = c
+          ? !!c.published
+          : true;
+
+        uploadedCouponImageUrl = c?.image || null;
+        if (couponImagePreview) {
+          couponImagePreview.style.display = c?.image ? "block" : "none";
+          couponImagePreview.src = c?.image || "";
         }
-        showError(successEl, "Coupon saved successfully!");
-        await loadCoupons();
-        setTimeout(closeCouponModal, 800);
-      } catch (err) {
-        console.error("Firebase Save Error:", err);
-        showError(errorEl, "Firebase Error: " + err.message);
-      } finally {
-        btn.disabled = false; btn.textContent = "Save Coupon";
-      }
-    });
+        document.getElementById("coupon-upload-label").textContent = c?.image
+          ? "Click to change image"
+          : "Click to choose an image";
+        document.getElementById("coupon-upload-status").textContent = "";
 
-    function escapeHtml(str) {
-      return String(str || "").replace(/[&<>"']/g, (c) => ({
-        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
-      }[c]));
-    }
-  </script>
-</body>
+        couponModalOverlay?.classList.add("open");
+      }
+
+      couponUploadBox?.addEventListener("click", () =>
+        couponImageInput?.click(),
+      );
+      couponImageInput?.addEventListener("change", async () => {
+        const file = couponImageInput.files[0];
+        if (!file) return;
+        if (couponImagePreview) {
+          couponImagePreview.src = URL.createObjectURL(file);
+          couponImagePreview.style.display = "block";
+        }
+        document.getElementById("coupon-upload-label").textContent = file.name;
+        const status = document.getElementById("coupon-upload-status");
+        status.textContent = "Uploading image…";
+
+        try {
+          if (typeof uploadToImgBB === "function") {
+            const jpegFile =
+              typeof resizeAndConvertToJPEG === "function"
+                ? await resizeAndConvertToJPEG(file)
+                : file;
+            uploadedCouponImageUrl = await uploadToImgBB(jpegFile);
+            status.textContent = "Uploaded ✓";
+          } else {
+            status.textContent = "Image preview attached";
+          }
+        } catch (err) {
+          status.textContent = "Upload failed: " + err.message;
+          uploadedCouponImageUrl = null;
+        }
+      });
+
+      document
+        .getElementById("coupon-save-btn")
+        ?.addEventListener("click", async () => {
+          const errorEl = document.getElementById("coupon-form-error");
+          const successEl = document.getElementById("coupon-form-success");
+          showError(errorEl, "");
+          showError(successEl, "");
+
+          const name = document.getElementById("coupon-name").value.trim();
+          const code = document
+            .getElementById("coupon-code")
+            .value.trim()
+            .toUpperCase();
+          const discount = Number(
+            document.getElementById("coupon-discount").value,
+          );
+          const startDate = document.getElementById("coupon-start").value;
+          const endDate = document.getElementById("coupon-end").value;
+          const published = document.getElementById("coupon-published").checked;
+
+          if (!name || !code) {
+            showError(errorEl, "Campaign name and code are required.");
+            return;
+          }
+          if (!discount || discount <= 0 || discount > 100) {
+            showError(errorEl, "Discount must be between 1 and 100.");
+            return;
+          }
+          if (!startDate || !endDate) {
+            showError(errorEl, "Start and end dates are required.");
+            return;
+          }
+
+          const btn = document.getElementById("coupon-save-btn");
+          btn.disabled = true;
+          btn.textContent = "Saving…";
+
+          const payload = {
+            name,
+            code,
+            discount,
+            startDate,
+            endDate,
+            published,
+            image: uploadedCouponImageUrl || null,
+          };
+
+          try {
+            if (editingCouponId) {
+              await db
+                .collection("coupons")
+                .doc(editingCouponId)
+                .update(payload);
+            } else {
+              await db.collection("coupons").add({
+                ...payload,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+              });
+            }
+            showError(successEl, "Coupon saved successfully!");
+            await loadCoupons();
+            setTimeout(closeCouponModal, 800);
+          } catch (err) {
+            console.error("Firebase Save Error:", err);
+            showError(errorEl, "Firebase Error: " + err.message);
+          } finally {
+            btn.disabled = false;
+            btn.textContent = "Save Coupon";
+          }
+        });
+
+      function escapeHtml(str) {
+        return String(str || "").replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[c],
+        );
+      }
+    </script>
+  </body>
 </html>
