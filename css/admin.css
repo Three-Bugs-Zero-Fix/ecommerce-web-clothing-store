@@ -1538,3 +1538,405 @@ table.admin-table td {
 .dt-sidebar.collapsed .dt-profile-popup {
   left: 8px;
 }
+
+/* =========================================================
+    BANNER 
+========================================================= */
+
+.banner-admin-page {
+  max-width: 1200px;
+}
+
+/* ---------- page intro ---------- */
+
+.banner-page-intro {
+  margin-bottom: 24px;
+}
+
+.banner-page-intro h2 {
+  margin: 0 0 6px;
+  font-family: var(--a-head-font);
+  font-size: 25px;
+  color: #172033;
+}
+
+.banner-page-intro p {
+  margin: 0;
+  color: #667085;
+  font-size: 13px;
+}
+
+/* ---------- add banner card ---------- */
+
+.banner-admin-form {
+  max-width: 100%;
+  background: #ffffff;
+  border: 1px solid #e7eaf0;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 8px 25px rgba(23, 32, 51, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.banner-admin-form::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    #2452d9,
+    #16c08c,
+    #6941c6,
+    #f79009
+  );
+}
+
+.banner-admin-form .admin-section-title {
+  font-size: 19px;
+  margin-bottom: 22px;
+  color: #172033;
+}
+
+/* ---------- upload area ---------- */
+
+.banner-admin-form .image-upload-box {
+  border: 2px dashed #cdd6e5;
+  border-radius: 14px;
+  padding: 30px 20px;
+  background: linear-gradient(
+    145deg,
+    #f8faff,
+    #f5fbf9
+  );
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.banner-admin-form .image-upload-box:hover {
+  border-color: #2452d9;
+  background: #f3f7ff;
+  transform: translateY(-1px);
+}
+
+.banner-admin-form #banner-upload-label {
+  color: #475467;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.banner-image-preview {
+  width: 100%;
+  max-width: 100%;
+  height: 250px;
+  max-height: none;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-top: 14px;
+  border: 1px solid #e4e7ec;
+  background: #f8fafc;
+}
+
+.banner-size-hint {
+  margin-top: 9px;
+  font-size: 11.5px;
+  color: #98a2b3;
+}
+
+.banner-size-hint strong {
+  color: #475467;
+}
+
+/* ---------- upload status ---------- */
+
+.banner-admin-form .upload-status {
+  padding: 7px 10px;
+  min-height: 30px;
+  color: #667085;
+  background: #f8fafc;
+  border-radius: 7px;
+}
+
+/* ---------- form fields ---------- */
+
+.banner-admin-form .form-row label {
+  color: #344054;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.banner-admin-form .form-row input,
+.banner-admin-form .form-row select,
+.banner-admin-form .form-row textarea {
+  border: 1.5px solid #e4e7ec;
+  border-radius: 9px;
+  background: #fcfcfd;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.banner-admin-form .form-row input:hover,
+.banner-admin-form .form-row select:hover,
+.banner-admin-form .form-row textarea:hover {
+  border-color: #c7ced9;
+}
+
+.banner-admin-form .form-row input:focus,
+.banner-admin-form .form-row select:focus,
+.banner-admin-form .form-row textarea:focus {
+  border-color: #2452d9;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(36, 82, 217, 0.1);
+}
+
+/* ---------- save button ---------- */
+
+.banner-admin-form .form-submit-row {
+  margin-top: 12px;
+  padding-top: 18px;
+  border-top: 1px solid #eef0f3;
+}
+
+.banner-admin-form .btn-admin-primary {
+  min-width: 180px;
+  border-radius: 9px;
+  background: linear-gradient(
+    135deg,
+    #2452d9,
+    #6941c6
+  );
+  box-shadow: 0 6px 16px rgba(36, 82, 217, 0.18);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.banner-admin-form .btn-admin-primary:hover {
+  background: linear-gradient(
+    135deg,
+    #1b3fa8,
+    #5933ad
+  );
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(36, 82, 217, 0.23);
+}
+
+/* ---------- section heading ---------- */
+
+.banner-existing-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 32px 0 14px;
+}
+
+.banner-existing-heading .admin-section-title {
+  margin: 0;
+}
+
+.banner-existing-count {
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: #eaf0fe;
+  color: #2452d9;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* ---------- banner list ---------- */
+
+.banner-admin-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+/* ---------- banner card ---------- */
+
+.banner-admin-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #e7eaf0;
+  border-radius: 16px;
+  box-shadow: 0 6px 22px rgba(23, 32, 51, 0.045);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.banner-admin-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(23, 32, 51, 0.08);
+}
+
+/* ---------- banner image ---------- */
+
+.banner-admin-thumb {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  border-radius: 0;
+  background: #f2f4f7;
+}
+
+/* ---------- banner information ---------- */
+
+.banner-admin-info {
+  padding: 17px 18px 10px;
+}
+
+.banner-admin-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #172033;
+  margin-bottom: 6px;
+}
+
+.banner-admin-description {
+  color: #667085;
+  font-size: 12.5px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  min-height: 19px;
+}
+
+.banner-admin-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #98a2b3;
+  font-size: 11px;
+}
+
+/* ---------- status colors ---------- */
+
+.banner-admin-meta::first-letter {
+  color: #667085;
+}
+
+/* ---------- action area ---------- */
+
+.banner-admin-actions {
+  display: flex;
+  gap: 8px;
+  padding: 12px 18px 17px;
+  border-top: 1px solid #f0f1f4;
+}
+
+.banner-admin-actions .btn-admin-outline {
+  flex: 1;
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.banner-admin-actions .btn-admin-outline:first-child {
+  border-color: #cdd8f8;
+  color: #2452d9;
+  background: #f5f7ff;
+}
+
+.banner-admin-actions .btn-admin-outline:first-child:hover {
+  background: #eaf0fe;
+  border-color: #2452d9;
+}
+
+.banner-admin-actions .btn-admin-outline:last-child {
+  border-color: #f1cccc;
+  color: #c62f2f;
+  background: #fff8f8;
+}
+
+.banner-admin-actions .btn-admin-outline:last-child:hover {
+  background: #fdeaea;
+  border-color: #c62f2f;
+}
+
+/* ---------- empty state ---------- */
+
+.banner-admin-empty {
+  grid-column: 1 / -1;
+  background: #ffffff;
+  border: 1px dashed #d5dae3;
+  border-radius: 16px;
+  padding: 45px 25px;
+  text-align: center;
+  color: #98a2b3;
+  font-size: 13px;
+}
+
+/* ---------- alerts ---------- */
+
+.banner-admin-form .form-error {
+  border-radius: 9px;
+  background: #fff4f2;
+  border-color: #f5c7c2;
+}
+
+.banner-admin-form .form-success {
+  border-radius: 9px;
+  background: #effaf4;
+  border-color: #c7e7d2;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 900px) {
+  .banner-admin-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .banner-admin-form {
+    padding: 18px;
+    border-radius: 14px;
+  }
+
+  .banner-admin-form .form-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .banner-image-preview {
+    height: 190px;
+  }
+
+  .banner-admin-thumb {
+    height: 170px;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner-admin-form .btn-admin-primary {
+    width: 100%;
+  }
+
+  .banner-admin-actions {
+    flex-direction: column;
+  }
+
+  .banner-admin-actions .btn-admin-outline {
+    width: 100%;
+  }
+}
