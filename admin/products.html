@@ -9,202 +9,1043 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap"
     />
+    <link rel="stylesheet" href="../css/admin_drawer.css" />
     <link rel="stylesheet" href="../css/admin.css" />
+    <style>
+      /* Page Header Styling */
+      .dt-page-header-wrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 14px;
+        flex-wrap: wrap;
+        gap: 10px;
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: auto;
+      }
+
+      .dt-page-heading {
+        font-size: 22px;
+        font-weight: 700;
+        color: #1827;
+        margin: 0 0 2px 0;
+      }
+
+      .dt-page-subheading {
+        font-size: 12.5px;
+        color: #6b7280;
+        margin: 0;
+      }
+
+      .dt-header-buttons {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      /* Header Action Buttons */
+      .btn-dt-action {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 14px;
+        border-radius: 8px;
+        font-size: 12.5px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border: 1px solid #e5e7eb;
+        background: #ffffff;
+        color: #374151;
+        white-space: nowrap;
+      }
+
+      .btn-dt-action:hover {
+        background: #f9fafb;
+      }
+
+      .btn-dt-bulk {
+        background: #fdba74;
+        color: #ffffff;
+        border: none;
+      }
+
+      .btn-dt-bulk:hover {
+        background: #f97316;
+      }
+
+      .btn-dt-delete {
+        background: #ffffff;
+        color: #0f0f10;
+        border: none;
+      }
+
+      .btn-dt-delete:hover {
+        background: #fee2e2;
+        color: #ef4444;
+      }
+
+      .btn-dt-add {
+        background: #10b981;
+        color: #ffffff;
+        border: none;
+        font-weight: 600;
+      }
+
+      .btn-dt-add:hover {
+        background: #059669;
+      }
+
+      /* Filter Row — compact, single line */
+      .dt-filter-card {
+        background: #ffffff;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid #e5e7eb;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 8px;
+        margin-bottom: 14px;
+        flex-wrap: wrap;
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: auto;
+      }
+
+      .dt-filter-left {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex: 1;
+        flex-wrap: wrap;
+      }
+
+      .dt-search-input-wrap {
+        position: relative;
+        flex: 1;
+        min-width: 160px;
+        max-width: 220px;
+      }
+
+      .dt-search-input-wrap svg {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 14px;
+        height: 14px;
+        color: #9ca3af;
+      }
+
+      .dt-search-input-wrap input {
+        width: 100%;
+        padding: 7px 10px 7px 30px;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        font-size: 12.5px;
+        outline: none;
+        background: #f9fafb;
+      }
+
+      .dt-filter-select {
+        padding: 7px 10px;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        font-size: 12.5px;
+        background: #ffffff;
+        color: #374151;
+        cursor: pointer;
+        outline: none;
+        max-width: 130px;
+      }
+
+      /* Toggle Switches for Published & Featured */
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 34px;
+        height: 18px;
+      }
+
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #e5e7eb;
+        transition: 0.3s;
+        border-radius: 20px;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 12px;
+        width: 12px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: 0.3s;
+        border-radius: 50%;
+      }
+
+      input:checked + .slider {
+        background-color: #06b6d4;
+      }
+
+      input:checked + .slider.featured-slider {
+        background-color: #ec4899;
+      }
+
+      input:checked + .slider:before {
+        transform: translateX(16px);
+      }
+
+      /* Table Adjustments */
+      .dt-table {
+        table-layout: auto;
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .dt-table-card {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Table cell padding fix: right side 50px gap fixing */
+      table th,
+      table td {
+        padding: 12px 10px !important;
+        vertical-align: middle;
+      }
+
+      .dt-table th {
+        font-size: 10px;
+        font-weight: 700;
+        color: #80746b;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+        white-space: nowrap;
+      }
+
+      .dt-table td {
+        font-size: 12px;
+      }
+      .dt-table th:nth-child(1),
+      .dt-table td:nth-child(1) {
+        width: 35px;
+      } /* Checkbox */
+      .dt-table th:nth-child(2),
+      .dt-table td:nth-child(2) {
+        width: 280px;
+      } /* Product Name (বড় জায়গা পেয়েছে) */
+      .dt-table th:nth-child(3),
+      .dt-table td:nth-child(3) {
+        width: 110px;
+      } /* Category */
+      .dt-table th:nth-child(4),
+      .dt-table td:nth-child(4) {
+        width: 80px;
+      } /* Price */
+      .dt-table th:nth-child(5),
+      .dt-table td:nth-child(5) {
+        width: 80px;
+      } /* Sale */
+      .dt-table th:nth-child(6),
+      .dt-table td:nth-child(6) {
+        width: 70px;
+      } /* Stock */
+      .dt-table th:nth-child(7),
+      .dt-table td:nth-child(7) {
+        width: 90px;
+      } /* Status */
+      .dt-table th:nth-child(8),
+      .dt-table td:nth-child(8) {
+        width: 60px;
+      } /* View */
+      .dt-table th:nth-child(9),
+      .dt-table td:nth-child(9) {
+        width: 80px;
+      } /* Publish */
+      .dt-table th:nth-child(10),
+      .dt-table td:nth-child(10) {
+        width: 80px;
+      } /* Feature */
+      .dt-table th:nth-child(11),
+      .dt-table td:nth-child(11) {
+        width: 70px;
+      }
+
+      /* Product Name Cell min-width fix */
+      .prod-name-cell {
+        display: block;
+        white-space: normal;
+        word-break: break-word;
+        font-weight: 500;
+        line-height: 1.25;
+        min-width: 200px;
+      }
+
+      .dt-campaign-cell {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .view-icon-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #6b7280;
+        padding: 3px;
+        border-radius: 4px;
+      }
+
+      .view-icon-btn:hover {
+        color: #111827;
+        background: #f3f4f6;
+      }
+
+      /* Row action ("...") menu */
+      .dt-row-menu button {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+        text-align: left;
+      }
+
+      .dt-row-menu button svg {
+        flex-shrink: 0;
+      }
+
+      /* View Modal details */
+      .view-details-grid {
+        display: flex;
+        gap: 30px;
+        flex-wrap: wrap;
+      }
+
+      .view-details-grid > div {
+        flex: 1;
+        min-width: 260px;
+      }
+
+      .view-image {
+        width: 100%;
+        border-radius: 10px;
+        object-fit: cover;
+        max-height: 320px;
+        background: #f3f4f6;
+      }
+
+      .view-top-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .view-sku-chip {
+        background: #f3f4f6;
+        padding: 2px 8px;
+        border-radius: 6px;
+        font-weight: 600;
+      }
+
+      .view-meta-block {
+        display: flex;
+        gap: 30px;
+        margin-top: 18px;
+        padding-top: 16px;
+        border-top: 1px solid #eef0f3;
+        flex-wrap: wrap;
+      }
+
+      .view-meta-label {
+        font-size: 11px;
+        font-weight: 700;
+        color: #98a2b3;
+        text-transform: uppercase;
+      }
+
+      .view-color-chip {
+        display: inline-block;
+        padding: 3px 10px;
+        border: 1px solid #e5e7eb;
+        border-radius: 999px;
+        font-size: 12px;
+        margin: 4px 4px 0 0;
+      }
+
+      @media (max-width: 820px) {
+        .dt-page-header-wrap {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .dt-header-buttons {
+          width: 100%;
+        }
+
+        .dt-header-buttons .btn-dt-action {
+          flex: 1;
+          justify-content: center;
+          padding: 8px 6px;
+          font-size: 11.5px;
+        }
+
+        .dt-filter-card {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .dt-filter-left {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .dt-search-input-wrap,
+        .dt-filter-select {
+          max-width: none;
+        }
+
+        .dt-table thead {
+          display: none;
+        }
+
+        .dt-table,
+        .dt-table tbody,
+        .dt-table tr,
+        .dt-table td {
+          display: block;
+          width: 100% !important;
+        }
+
+        .dt-table tr {
+          border: 1px solid #eef0f3;
+          border-radius: 12px;
+          margin-bottom: 12px;
+          padding: 10px 12px;
+          background: #fff;
+        }
+
+        .dt-table td {
+          padding: 6px 0 !important;
+          border: none;
+          text-align: left !important;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 10px;
+        }
+
+        .dt-table td::before {
+          content: attr(data-label);
+          font-size: 10.5px;
+          font-weight: 700;
+          color: #98a2b3;
+          text-transform: uppercase;
+          letter-spacing: 0.3px;
+          flex-shrink: 0;
+        }
+
+        .dt-table td[data-label="Select"] {
+          justify-content: flex-start;
+        }
+
+        .dt-table td[data-label="Select"]::before {
+          display: none;
+        }
+
+        .dt-table td[data-label="Product"] {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .dt-table td[data-label="Product"] .dt-campaign-cell {
+          width: 100%;
+        }
+
+        .dt-table td .dt-row-menu-wrap {
+          position: static;
+        }
+
+        .dt-table td .dt-row-menu {
+          right: 12px;
+        }
+      }
+    </style>
   </head>
   <body>
     <div id="admin-loading" class="admin-loading">Checking admin access…</div>
 
-    <div class="admin-shell" id="admin-shell" style="display: none">
-      <div class="admin-drawer-overlay" id="admin-drawer-overlay"></div>
-      <aside class="admin-drawer" id="admin-drawer">
-        <div class="admin-drawer-head">
-          <span class="admin-logo">BLUEWEAR</span>
-          <button class="admin-drawer-close" id="admin-drawer-close">✕</button>
+    <div class="dt-shell" id="admin-shell" style="display: none">
+      <!-- SIDEBAR DRAWER -->
+      <aside class="dt-sidebar" id="dt-sidebar">
+        <div class="dt-logo">
+          <div class="dt-logo-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M6 2l1.5 4h9L18 2" />
+              <path
+                d="M3.5 6h17l-1.2 13a2 2 0 0 1-2 1.8H6.7a2 2 0 0 1-2-1.8L3.5 6z"
+              />
+              <path d="M8.5 10a3.5 3.5 0 0 0 7 0" />
+            </svg>
+          </div>
+          <span class="dt-logo-text">BlueWear</span>
         </div>
-        <nav class="admin-nav">
-          <a href="index.html">Dashboard</a>
-          <a href="products.html" class="active">Add Products</a>
-          <a href="banners.html">Banners</a>
-          <a href="orders.html">Orders</a>
-          <a href="customers.html">Customers</a>
-          <a href="coupons.html">Coupons</a>
-        </nav>
-        <div class="admin-sidebar-bottom">
-          <button id="logout-btn">Logout</button>
-          <a href="../index.html">‹ View store</a>
+
+        <div class="dt-nav-section-title">General</div>
+        <a href="index.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <rect x="3" y="3" width="8" height="8" rx="1.5" />
+            <rect x="13" y="3" width="8" height="8" rx="1.5" />
+            <rect x="3" y="13" width="8" height="8" rx="1.5" />
+            <rect x="13" y="13" width="8" height="8" rx="1.5" />
+          </svg>
+          <span class="nav-label">Dashboard</span>
+        </a>
+
+        <div class="dt-nav-section-title">Catalog</div>
+        <a href="products.html" class="dt-nav-item active">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M4 8h16l-1 12H5L4 8z" />
+            <path d="M8 8V6a4 4 0 0 1 8 0v2" />
+          </svg>
+          <span class="nav-label">Products</span>
+        </a>
+        <a href="banners.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <circle cx="8.5" cy="8.5" r="1.5" />
+            <path d="M21 15l-5-5L5 21" />
+          </svg>
+          <span class="nav-label">Banners</span>
+        </a>
+        <a href="categories.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path
+              d="M20.6 12.6L12.7 4.7a2 2 0 0 0-1.4-.6H5a1 1 0 0 0-1 1v6.3c0 .5.2 1 .6 1.4l7.9 7.9a2 2 0 0 0 2.8 0l5.3-5.3a2 2 0 0 0 0-2.8z"
+            />
+            <circle cx="8" cy="8" r="1.2" />
+          </svg>
+          <span class="nav-label">Categories</span>
+        </a>
+        <a href="attributes.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M3 3h18v6H3z" />
+            <path d="M3 15h18v6H3z" />
+          </svg>
+          <span class="nav-label">Attributes</span>
+        </a>
+        <a href="coupons.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path
+              d="M21 12a2 2 0 0 1 0-4V5a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v3a2 2 0 0 1 0 4v3a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-3z"
+            />
+          </svg>
+          <span class="nav-label">Coupons</span>
+        </a>
+        <a href="campaigns.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" />
+          </svg>
+          <span class="nav-label">Campaigns</span>
+        </a>
+
+        <div class="dt-nav-section-title">Sales</div>
+        <a href="orders.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 7v5l3 3" />
+          </svg>
+          <span class="nav-label">Orders</span>
+        </a>
+        <a href="delivery-boys.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <rect x="1" y="7" width="13" height="9" rx="1" />
+            <path d="M14 10h4l3 3v3h-7z" />
+            <circle cx="6" cy="18" r="1.6" />
+            <circle cx="17" cy="18" r="1.6" />
+          </svg>
+          <span class="nav-label">Delivery Boys</span>
+        </a>
+        <a href="customers.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+          </svg>
+          <span class="nav-label">Customers</span>
+        </a>
+        <a href="staff.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          <span class="nav-label">Our Staff</span>
+        </a>
+
+        <div class="dt-nav-section-title">Settings</div>
+        <a href="settings.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <circle cx="12" cy="12" r="3" />
+            <path
+              d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"
+            />
+          </svg>
+          <span class="nav-label">Settings</span>
+        </a>
+        <a href="store-customization.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M3 8h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z" />
+            <path d="M3 8l2-5h14l2 5" />
+            <path d="M12 8v12" />
+          </svg>
+          <span class="nav-label">Store Customization</span>
+        </a>
+        <a href="localization.html" class="dt-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <circle cx="12" cy="12" r="9" />
+            <path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18" />
+          </svg>
+          <span class="nav-label">Localization</span>
+        </a>
+        <a href="../pages/shop.html" class="dt-nav-item" target="_blank">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+            <circle cx="12" cy="12" r="3" />
+          </svg>
+          <span class="nav-label">View Store</span>
+        </a>
+
+        <div class="dt-sidebar-profile-wrap">
+          <div class="dt-profile-popup" id="profile-popup">
+            <div class="dt-profile-popup-head">
+              <div class="dt-sidebar-avatar" id="popup-avatar">?</div>
+              <div>
+                <div class="dt-sidebar-profile-name" id="popup-name">Admin</div>
+                <div class="dt-sidebar-profile-email" id="popup-email">—</div>
+              </div>
+            </div>
+            <a href="index.html" class="dt-profile-popup-item">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <rect x="3" y="3" width="8" height="8" rx="1.5" />
+                <rect x="13" y="3" width="8" height="8" rx="1.5" />
+                <rect x="3" y="13" width="8" height="8" rx="1.5" />
+                <rect x="13" y="13" width="8" height="8" rx="1.5" />
+              </svg>
+              Dashboard
+            </a>
+            <a href="profile.html" class="dt-profile-popup-item">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <circle cx="12" cy="12" r="3" />
+                <path
+                  d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"
+                />
+              </svg>
+              Edit Profile
+            </a>
+            <div class="dt-profile-popup-divider"></div>
+            <button
+              type="button"
+              class="dt-profile-popup-item danger"
+              id="popup-logout"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                <path d="M16 17l5-5-5-5" />
+                <path d="M21 12H9" />
+              </svg>
+              Log out
+            </button>
+          </div>
+
+          <button type="button" class="dt-sidebar-profile" id="profile-trigger">
+            <div class="dt-sidebar-avatar" id="sidebar-avatar">?</div>
+            <div>
+              <div class="dt-sidebar-profile-name" id="sidebar-name">Admin</div>
+              <div class="dt-sidebar-profile-email" id="sidebar-email">—</div>
+            </div>
+            <span class="dt-profile-chevron">
+              <svg
+                viewBox="0 0 24 24"
+                width="14"
+                height="14"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M8 9l4-4 4 4M8 15l4 4 4-4" />
+              </svg>
+            </span>
+          </button>
         </div>
       </aside>
 
-      <div class="admin-main">
-        <!-- TOPBAR HEADER -->
-        <div
-          class="admin-topbar"
-          style="
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            flex-wrap: wrap;
-            padding: 12px 20px;
-          "
-        >
-          <!-- Left Side: Hamburger, Title & Nav Links (Shifted right) -->
-          <div style="display: flex; align-items: center">
-            <button class="admin-hamburger" id="admin-hamburger">☰</button>
-            <div class="admin-page-title" style="margin-left: 8px">
-              Products
-            </div>
-
-            <!-- Links moved further to the right -->
-            <nav
-              style="
-                display: flex;
-                gap: 20px;
-                align-items: center;
-                margin-left: 45px;
-              "
+      <!-- MAIN CONTENT -->
+      <div class="dt-main" id="dt-main">
+        <!-- TOPBAR -->
+        <div class="dt-topbar" id="dt-topbar">
+          <div class="dt-topbar-left">
+            <button
+              class="dt-icon-btn"
+              id="sidebar-toggle"
+              title="Toggle sidebar"
             >
-              
-                <a href="../index.html"
-                style="
-                  text-decoration: none;
-                  color: #475467;
-                  font-weight: 500;
-                  font-size: 14.5px;
-                "
-                >Home</a
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
               >
-              
-                <a href="../pages/shop.html"
-                style="
-                  text-decoration: none;
-                  color: #475467;
-                  font-weight: 500;
-                  font-size: 14.5px;
-                "
-                >Shop</a
+                <rect x="3" y="4" width="18" height="16" rx="2" />
+                <path d="M9 4v16" />
+              </svg>
+            </button>
+            <div class="dt-search-box">
+              <svg
+                viewBox="0 0 24 24"
+                width="15"
+                height="15"
+                fill="none"
+                stroke="#98A2B3"
+                stroke-width="2"
               >
-              
-                <a href="about.html"
-                style="
-                  text-decoration: none;
-                  color: #475467;
-                  font-weight: 500;
-                  font-size: 14.5px;
-                "
-                >About Us</a
-              >
-            </nav>
+                <circle cx="11" cy="11" r="7" />
+                <path d="M21 21l-4.3-4.3" />
+              </svg>
+              <input type="text" placeholder="Search" disabled />
+              <span class="dt-search-kbd">⌘K</span>
+            </div>
           </div>
+          <div class="dt-topbar-right">
+            <button class="dt-lang-pill" title="Language (coming soon)">
+              EN
+            </button>
 
-          <!-- Right Side: Search Bar + Add Product + Profile Icon -->
-          <div style="display: flex; align-items: center; gap: 18px">
-            <!-- Search Box with Magnifying Glass Icon -->
-            <div style="position: relative; display: flex; align-items: center">
-              <input
-                type="text"
-                id="search-input"
-                class="search-input"
-                placeholder="Search products..."
-                style="
-                  padding: 8px 36px 8px 16px;
-                  border-radius: 20px;
-                  border: 1px solid #e4e7ec;
-                  background: #f9fafb;
-                  outline: none;
-                  font-size: 13.5px;
-                  width: 230px;
-                  margin: 0;
-                "
-              />
-              <span
-                style="
-                  position: absolute;
-                  right: 12px;
-                  pointer-events: none;
-                  color: #667085;
-                  font-size: 14px;
-                "
-                >🔍</span
+            <button class="dt-theme-btn light active" title="Light mode">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
               >
+                <circle cx="12" cy="12" r="4" />
+                <path
+                  d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+                />
+              </svg>
+            </button>
+            <button class="dt-theme-btn dark" title="Dark mode (coming soon)">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M21 12.5A9 9 0 1 1 11.5 3a7 7 0 0 0 9.5 9.5z" />
+              </svg>
+            </button>
+
+            <div class="dt-bell-wrap">
+              <button class="dt-icon-btn" title="Notifications (coming soon)">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
+                  <path d="M13.7 21a2 2 0 0 1-3.4 0" />
+                </svg>
+              </button>
+              <span class="dt-bell-badge" id="pending-badge">0</span>
             </div>
 
-            <!-- Add Product Button -->
-
-            
-              <a href="add_products.html"
-              class="btn-admin-primary"
-              style="
-                text-decoration: none;
-                display: inline-block;
-                white-space: nowrap;
-              "
-              >+ Add Product</a
-            >
-
-            <!-- Profile Icon Only (No Email Text) -->
-            
-              <a href="profile.html"
-              title="Profile Account"
-              style="
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-decoration: none;
-                background: #f2f4f7;
-                width: 38px;
-                height: 38px;
-                border-radius: 50%;
-                font-size: 18px;
-                transition: background 0.2s;
-              "
-            >
-              <span>👤</span>
-              <!-- Hidden span to prevent JS email errors -->
-              <span id="admin-email" style="display: none"></span>
-            </a>
+            <div class="dt-topbar-avatar" id="topbar-avatar">?</div>
           </div>
         </div>
 
-        <div class="admin-content">
-          <div class="card-block">
-            <table class="admin-table">
+        <div class="dt-content">
+          <!-- PAGE HEADER -->
+          <div class="dt-page-header-wrap">
+            <div>
+              <h1 class="dt-page-heading">Products</h1>
+              <p class="dt-page-subheading">Manage your products inventory</p>
+            </div>
+            <div class="dt-header-buttons">
+              <button class="btn-dt-action btn-dt-add" id="open-add-modal">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+                Add Product
+              </button>
+              <button class="btn-dt-action" id="export-btn">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"
+                  />
+                </svg>
+                Export
+              </button>
+              <button class="btn-dt-action" id="import-btn">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"
+                  />
+                </svg>
+                Import
+              </button>
+              <button class="btn-dt-action btn-dt-bulk" id="bulk-btn">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"
+                  />
+                  <path
+                    d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"
+                  />
+                </svg>
+                Bulk Action
+              </button>
+              <button
+                class="btn-dt-action btn-dt-delete"
+                id="delete-selected-btn"
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <polyline points="3 6 5 6 21 6" />
+                  <path
+                    d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                  />
+                </svg>
+                Delete
+              </button>
+            </div>
+          </div>
+
+          <!-- FILTER BAR -->
+          <div class="dt-filter-card">
+            <div class="dt-filter-left">
+              <div class="dt-search-input-wrap">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+                <input
+                  type="text"
+                  id="search-input"
+                  placeholder="Search products"
+                />
+              </div>
+              <select class="dt-filter-select" id="category-filter">
+                <option value="">Category</option>
+              </select>
+              <select class="dt-filter-select" id="sort-select">
+                <option value="">Price</option>
+                <option value="low-high">Low to High</option>
+                <option value="high-low">High to Low</option>
+                <option value="stock">Stock Quantity</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- PRODUCTS TABLE -->
+          <div class="dt-table-card">
+            <table class="dt-table">
+              <colgroup>
+                <col style="width: 4%" />
+                <!-- Checkbox -->
+                <col style="width: 25%" />
+                <!-- PRODUCT (ছবি ও নামের জন্য বেশি জায়গা প্রয়োজন) -->
+                <col style="width: 14%" />
+                <!-- CATEGORY -->
+                <col style="width: 9%" />
+                <!-- PRICE -->
+                <col style="width: 9%" />
+                <!-- SALE -->
+                <col style="width: 7%" />
+                <!-- STOCK -->
+                <col style="width: 9%" />
+                <!-- STATUS -->
+                <col style="width: 5%" />
+                <!-- VIEW -->
+                <col style="width: 6%" />
+                <!-- PUBLISH -->
+                <col style="width: 6%" />
+                <!-- FEATURE -->
+                <col style="width: 6%" />
+                <!-- ACTIONS -->
+              </colgroup>
               <thead>
                 <tr>
-                  <th></th>
-                  <th>Name</th>
-                  <th>SKU</th>
-                  <th>Category</th>
-                  <th>Price</th>
-                  <th>Stock</th>
-                  <th>Status</th>
-                  <th>
-                    <select
-                      id="sort-select"
-                      style="
-                        padding: 5px 8px;
-                        border-radius: 6px;
-                        border: 1px solid #e4e7ec;
-                        background: #f9fafb;
-                        outline: none;
-                        font-size: 11.5px;
-                        color: #172033;
-                        text-transform: none;
-                        font-weight: 500;
-                      "
-                    >
-                      <option value="default">Sort by</option>
-                      <option value="stock">Stock</option>
-                      <option value="featured">Featured Product</option>
-                      <option value="regular">Regular Product</option>
-                      <option value="name">Name: A-Z</option>
-                    </select>
-                  </th>
+                  <th><input type="checkbox" id="select-all" /></th>
+                  <th>PRODUCT</th>
+                  <th>CATEGORY</th>
+                  <th>PRICE</th>
+                  <th>SALE</th>
+                  <th>STOCK</th>
+                  <th>STATUS</th>
+                  <th style="text-align: center">VIEW</th>
+                  <th style="text-align: center">PUBLISH</th>
+                  <th style="text-align: center">FEATURE</th>
+                  <th style="text-align: right">ACTIONS</th>
                 </tr>
               </thead>
               <tbody id="products-body">
                 <tr>
-                  <td colspan="8" style="color: #999">Loading…</td>
+                  <td
+                    colspan="11"
+                    style="text-align: center; color: #9ca3af; padding: 10px"
+                  >
+                    Loading products…
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -213,9 +1054,192 @@
       </div>
     </div>
 
-    <!-- Edit modal -->
+    <!-- VIEW PRODUCT DETAILS MODAL -->
+    <div class="modal-overlay" id="view-modal-overlay">
+      <div class="modal-box" style="max-width: 820px">
+        <div class="modal-head">
+          <div class="modal-title">Product Details</div>
+          <button id="view-modal-close">✕</button>
+        </div>
+
+        <div class="view-details-grid">
+          <div>
+            <img id="view-image" class="view-image" />
+          </div>
+          <div>
+            <div class="view-top-row">
+              <h2 id="view-name" style="margin: 0; font-size: 22px"></h2>
+              <span id="view-published-badge" class="dt-status-pill"></span>
+            </div>
+            <div style="margin: 8px 0; font-size: 12px; color: #6b7280">
+              SKU: <span id="view-sku" class="view-sku-chip"></span>
+            </div>
+            <div
+              id="view-price"
+              style="
+                font-size: 26px;
+                font-weight: 700;
+                color: #2563eb;
+                margin: 10px 0;
+              "
+            ></div>
+            <div
+              style="
+                display: flex;
+                gap: 10px;
+                margin-bottom: 14px;
+                align-items: center;
+              "
+            >
+              <span id="view-stock-badge" class="dt-status-pill"></span>
+              <span style="font-size: 13px; color: #374151">
+                Quantity: <strong id="view-qty"></strong>
+              </span>
+            </div>
+            <p
+              id="view-description"
+              style="font-size: 13.5px; color: #4b5563; line-height: 1.6"
+            ></p>
+
+            <div class="view-meta-block">
+              <div>
+                <div class="view-meta-label">Category</div>
+                <div
+                  style="margin-top: 6px; font-size: 13.5px"
+                  id="view-category"
+                ></div>
+              </div>
+              <div>
+                <div class="view-meta-label">Colors</div>
+                <div style="margin-top: 6px" id="view-colors"></div>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 10px; margin-top: 22px">
+              <button
+                class="btn-admin-primary"
+                id="view-edit-btn"
+                style="flex: 1"
+              >
+                Edit Product
+              </button>
+              <button
+                class="btn-admin-outline"
+                id="view-duplicate-btn"
+                style="flex: 1"
+              >
+                Duplicate Product
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADD PRODUCT MODAL -->
+    <div class="modal-overlay" id="add-modal-overlay">
+      <div class="modal-box" style="max-width: 650px">
+        <div class="modal-head">
+          <div class="modal-title">Add Product</div>
+          <button id="add-modal-close">✕</button>
+        </div>
+
+        <div class="form-error" id="form-error"></div>
+        <div class="form-success" id="form-success"></div>
+
+        <div class="form-row">
+          <label>Product image</label>
+          <div class="image-upload-box" id="upload-box">
+            <span id="upload-label">Click to choose an image</span>
+            <input
+              type="file"
+              id="image-input"
+              accept="image/*"
+              style="display: none"
+            />
+          </div>
+          <img id="image-preview" class="image-preview" />
+          <div class="upload-status" id="upload-status"></div>
+        </div>
+
+        <div class="form-row">
+          <label>Product name</label>
+          <input type="text" id="name" placeholder="Enter product title" />
+        </div>
+
+        <div class="form-grid">
+          <div class="form-row">
+            <label>Category</label>
+            <select id="category">
+              <option value="">Select category</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>Stock quantity</label>
+            <input type="number" id="stock" value="10" min="0" />
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-row">
+            <label>Price (৳)</label>
+            <input type="number" id="price" />
+          </div>
+          <div class="form-row">
+            <label>Discount price (৳, optional)</label>
+            <input type="number" id="discountPrice" />
+          </div>
+        </div>
+
+        <div class="form-row sizes-featured-row">
+          <div class="sizes-col">
+            <label>Sizes</label>
+            <div class="chip-row" id="sizes-row"></div>
+          </div>
+          <div class="featured-col">
+            <label>Product Type</label>
+            <div class="featured-toggle-box" id="featured-toggle-box">
+              <button
+                type="button"
+                class="featured-option selected"
+                data-value="false"
+              >
+                Regular
+              </button>
+              <button type="button" class="featured-option" data-value="true">
+                Featured
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label>Colors (comma separated)</label>
+          <input type="text" id="colors" placeholder="Black, White, Navy" />
+        </div>
+
+        <div class="form-row">
+          <label>Description</label>
+          <textarea id="description" rows="3"></textarea>
+        </div>
+
+        <div
+          class="form-submit-row"
+          style="display: flex; gap: 10px; justify-content: flex-end"
+        >
+          <button class="btn-admin-outline" id="add-modal-cancel">
+            Cancel
+          </button>
+          <button class="btn-admin-primary" id="submit-btn">
+            Save Product
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDIT MODAL -->
     <div class="modal-overlay" id="edit-overlay">
-      <div class="modal-box">
+      <div class="modal-box" style="max-width: 650px">
         <div class="modal-head">
           <div class="modal-title">Edit Product</div>
           <button id="edit-close">✕</button>
@@ -270,9 +1294,22 @@
           </div>
         </div>
 
-        <div class="form-row">
-          <label>Sizes</label>
-          <div class="chip-row" id="edit-sizes-row"></div>
+        <div class="form-row sizes-featured-row">
+          <div class="sizes-col">
+            <label>Sizes</label>
+            <div class="chip-row" id="edit-sizes-row"></div>
+          </div>
+          <div class="featured-col">
+            <label>Product Type</label>
+            <div class="featured-toggle-box" id="edit-featured-toggle-box">
+              <button type="button" class="featured-option" data-value="false">
+                Regular
+              </button>
+              <button type="button" class="featured-option" data-value="true">
+                Featured
+              </button>
+            </div>
+          </div>
         </div>
 
         <div class="form-row">
@@ -285,23 +1322,16 @@
           <textarea id="edit-description" rows="3"></textarea>
         </div>
 
-        <div class="form-row">
-          <label>Status</label>
-          <select id="edit-status">
-            <option value="active">Active</option>
-            <option value="draft">Draft</option>
-          </select>
-        </div>
-
-        <div style="display: flex; gap: 10px">
+        <div style="display: flex; gap: 10px; justify-content: flex-end">
+          <button class="btn-admin-outline" id="edit-cancel-btn">Cancel</button>
           <button class="btn-admin-primary" id="edit-save-btn">
             Save changes
           </button>
-          <button class="btn-admin-outline" id="edit-cancel-btn">Cancel</button>
         </div>
       </div>
     </div>
 
+    <!-- FIREBASE & JS LOGIC -->
     <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
@@ -311,13 +1341,18 @@
     <script>
       let allProducts = [];
       const ALL_SIZES = ["S", "M", "L", "XL", "XXL"];
+      const selectedSizes = new Set();
       const editSelectedSizes = new Set();
       let editingId = null;
+      let uploadedImageUrl = null;
       let editUploadedImageUrl = null;
+      let isFeatured = false;
+      let editIsFeatured = false;
 
-      /* ============================================================
-         CATEGORY (single dropdown, grouped by Main Category)
-         ============================================================ */
+      const ICON_EDIT = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>`;
+      const ICON_DUP = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
+      const ICON_DEL = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>`;
+
       const CATEGORY_MAP = {
         Men: [
           "Half Sleeve T-Shirt",
@@ -387,42 +1422,83 @@
             .join("");
       }
 
+      function populateFilterCategories(selectEl) {
+        selectEl.innerHTML =
+          `<option value="">Category</option>` +
+          Object.entries(CATEGORY_MAP)
+            .map(([main, subs]) =>
+              subs.map((s) => `<option value="${s}">${s}</option>`).join(""),
+            )
+            .join("");
+      }
+
+      const categorySelect = document.getElementById("category");
       const editCategorySelect = document.getElementById("edit-category");
+      const categoryFilter = document.getElementById("category-filter");
+      buildCategoryOptions(categorySelect);
       buildCategoryOptions(editCategorySelect);
+      populateFilterCategories(categoryFilter);
 
       requireAdmin().then(async (user) => {
         document.getElementById("admin-loading").style.display = "none";
         document.getElementById("admin-shell").style.display = "block";
-        document.getElementById("admin-email").textContent = user.email;
+
+        const name = user.email.split("@")[0];
+        document.getElementById("sidebar-name").textContent = name;
+        document.getElementById("sidebar-email").textContent = user.email;
+        document.getElementById("sidebar-avatar").textContent = name
+          .charAt(0)
+          .toUpperCase();
+        document.getElementById("topbar-avatar").textContent = name
+          .charAt(0)
+          .toUpperCase();
+        document.getElementById("popup-name").textContent = name;
+        document.getElementById("popup-email").textContent = user.email;
+        document.getElementById("popup-avatar").textContent = name
+          .charAt(0)
+          .toUpperCase();
+
         await loadProducts();
       });
 
-      // drawer toggle
-      const drawer = document.getElementById("admin-drawer");
-      const overlay = document.getElementById("admin-drawer-overlay");
+      // Sidebar Toggle
       document
-        .getElementById("admin-hamburger")
+        .getElementById("sidebar-toggle")
         .addEventListener("click", () => {
-          drawer.classList.add("open");
-          overlay.classList.add("open");
+          document.getElementById("dt-sidebar").classList.toggle("collapsed");
+          document
+            .getElementById("dt-main")
+            .classList.toggle("sidebar-collapsed");
+          document
+            .getElementById("dt-topbar")
+            .classList.toggle("sidebar-collapsed");
         });
-      document
-        .getElementById("admin-drawer-close")
-        .addEventListener("click", closeAdminDrawer);
-      overlay.addEventListener("click", closeAdminDrawer);
-      function closeAdminDrawer() {
-        drawer.classList.remove("open");
-        overlay.classList.remove("open");
-      }
+
+      // Profile Popup
+      const profileTrigger = document.getElementById("profile-trigger");
+      const profilePopup = document.getElementById("profile-popup");
+
+      profileTrigger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        profilePopup.classList.toggle("open");
+      });
+      document.addEventListener("click", (e) => {
+        if (
+          !profilePopup.contains(e.target) &&
+          !profileTrigger.contains(e.target)
+        ) {
+          profilePopup.classList.remove("open");
+        }
+      });
 
       document
-        .getElementById("logout-btn")
+        .getElementById("popup-logout")
         .addEventListener("click", async () => {
           await logoutUser();
-          window.location.href = "../pages/login.html";
+          window.location.href = "login.html";
         });
 
-      // ---------- load & render ----------
+      // Load products
       async function loadProducts() {
         const snap = await db
           .collection("products")
@@ -432,61 +1508,139 @@
         renderTable(allProducts);
       }
 
-      function totalStockLabel(p) {
-        return p.stock ?? 0;
-      }
-
       function renderTable(list) {
         const body = document.getElementById("products-body");
         if (!list.length) {
-          body.innerHTML = `<tr><td colspan="8" style="color:#999;">No products found.</td></tr>`;
+          body.innerHTML = `<tr><td colspan="11" style="text-align:center; color:#9ca3af; padding:30px;">No products found.</td></tr>`;
           return;
         }
+
         body.innerHTML = list
           .map((p) => {
-            const stock = totalStockLabel(p);
-            const stockColor =
-              stock === 0
-                ? "var(--a-danger)"
-                : stock <= 5
-                  ? "var(--a-warning)"
-                  : "var(--a-ink)";
+            const stock = p.stock ?? 0;
+            const isPublished = p.status === "active";
+            const isFeat = !!p.featured;
+
+            const statusBadge =
+              stock > 0
+                ? `<span class="dt-status-pill active" style="background:#d1fae5; color:#065f46; font-weight:600;">Selling</span>`
+                : `<span class="dt-status-pill expired" style="background:#fee2e2; color:#991b1b; font-weight:600;">Sold Out</span>`;
+
             return `
-        <tr>
-          <td><img src="${p.image}" style="width:34px;height:40px;object-fit:cover;border-radius:4px;" /></td>
-          <td style="font-weight:600;">${escapeHtml(p.name)}</td>
-          <td style="color:var(--a-ink-soft);">${escapeHtml(p.sku || "")}</td>
-          <td>${escapeHtml(p.category)}</td>
-          <td>${p.discountPrice ? `৳${p.discountPrice} <span style="color:var(--a-ink-soft);text-decoration:line-through;font-size:11px;">৳${p.price}</span>` : `৳${p.price}`}</td>
-          <td style="color:${stockColor};">${stock}</td>
-          <td><span class="pill ${p.status === "active" ? "pill-active" : "pill-pending"}">${p.status || "active"}</span></td>
-          <td style="white-space:nowrap;">
-            <button onclick="openEdit('${p.id}')" title="Edit" style="background:none;border:none;cursor:pointer;font-size:22px;margin-right:12px;vertical-align:middle;">✎</button>
-            <button onclick="deleteProduct('${p.id}')" title="Delete" style="background:none;border:none;cursor:pointer;color:var(--a-danger);font-size:22px;vertical-align:middle;">🗑</button>
-          </td>
-        </tr>`;
+            <tr>
+              <td data-label="Select"><input type="checkbox" class="prod-checkbox" value="${p.id}" /></td>
+              <td data-label="Product">
+                <div class="dt-campaign-cell">
+                  <img src="${p.image}" class="dt-campaign-thumb" style="width:30px; height:30px; border-radius:6px; object-fit:cover; flex-shrink:0;" />
+                  <span class="prod-name-cell">${escapeHtml(p.name)}</span>
+                </div>
+              </td>
+              <td data-label="Category" style="color:#4b5563;">${escapeHtml(p.category)}</td>
+              <td data-label="Price" style="font-weight:600;">৳${Number(p.price || 0).toLocaleString()}</td>
+              <td data-label="Sale Price" style="font-weight:600;">৳${Number(p.discountPrice || p.price || 0).toLocaleString()}</td>
+              <td data-label="Stock" style="font-weight:600;">${stock}</td>
+              <td data-label="Status">${statusBadge}</td>
+              <td data-label="View" style="text-align: center;">
+                <button class="view-icon-btn" onclick="openView('${p.id}')" title="View Details">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </button>
+              </td>
+              <td data-label="Published" style="text-align: center;">
+                <label class="switch">
+                  <input type="checkbox" ${isPublished ? "checked" : ""} onchange="togglePublished('${p.id}', this.checked)">
+                  <span class="slider"></span>
+                </label>
+              </td>
+              <td data-label="Featured" style="text-align: center;">
+                <label class="switch">
+                  <input type="checkbox" ${isFeat ? "checked" : ""} onchange="toggleFeatured('${p.id}', this.checked)">
+                  <span class="slider featured-slider"></span>
+                </label>
+              </td>
+              <td data-label="Actions" style="text-align: right;">
+                <div class="dt-row-menu-wrap">
+                  <button class="dt-row-menu-btn row-menu-toggle" data-id="${p.id}">⋯</button>
+                  <div class="dt-row-menu" id="menu-${p.id}">
+                    <button class="row-edit-btn" data-id="${p.id}">${ICON_EDIT} Edit</button>
+                    <button class="row-duplicate-btn" data-id="${p.id}">${ICON_DUP} Duplicate</button>
+                    <button class="danger row-delete-btn" data-id="${p.id}">${ICON_DEL} Delete</button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          `;
           })
           .join("");
+
+        body.querySelectorAll(".row-menu-toggle").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const menu = document.getElementById(`menu-${btn.dataset.id}`);
+            document.querySelectorAll(".dt-row-menu.open").forEach((m) => {
+              if (m !== menu) m.classList.remove("open");
+            });
+            menu.classList.toggle("open");
+          });
+        });
+        body.querySelectorAll(".row-edit-btn").forEach((btn) => {
+          btn.addEventListener("click", () => openEdit(btn.dataset.id));
+        });
+        body.querySelectorAll(".row-duplicate-btn").forEach((btn) => {
+          btn.addEventListener("click", () => duplicateProduct(btn.dataset.id));
+        });
+        body.querySelectorAll(".row-delete-btn").forEach((btn) => {
+          btn.addEventListener("click", () => deleteProduct(btn.dataset.id));
+        });
       }
 
-      function applySortAndSearch() {
-        const q = document.getElementById("search-input").value.toLowerCase();
-        const sortValue = document.getElementById("sort-select").value;
+      document.addEventListener("click", () => {
+        document
+          .querySelectorAll(".dt-row-menu.open")
+          .forEach((m) => m.classList.remove("open"));
+      });
 
-        let list = allProducts.filter(
-          (p) =>
-            p.name.toLowerCase().includes(q) ||
-            (p.sku || "").toLowerCase().includes(q),
-        );
+      // Quick Toggles directly from table
+      async function togglePublished(id, checked) {
+        const newStatus = checked ? "active" : "draft";
+        await db.collection("products").doc(id).update({ status: newStatus });
+        const p = allProducts.find((x) => x.id === id);
+        if (p) p.status = newStatus;
+      }
 
-        if (sortValue === "stock") {
-          list = [...list].sort((a, b) => (a.stock ?? 0) - (b.stock ?? 0));
-        } else if (sortValue === "featured") {
-          list = list.filter((p) => p.featured === true);
-        } else if (sortValue === "regular") {
-          list = list.filter((p) => !p.featured);
-        } else if (sortValue === "name") {
-          list = [...list].sort((a, b) => a.name.localeCompare(b.name));
+      async function toggleFeatured(id, checked) {
+        await db.collection("products").doc(id).update({ featured: checked });
+        const p = allProducts.find((x) => x.id === id);
+        if (p) p.featured = checked;
+      }
+
+      // Filter & Search
+      function applyFilterAndSearch() {
+        const query = document
+          .getElementById("search-input")
+          .value.toLowerCase();
+        const cat = categoryFilter.value;
+        const sort = document.getElementById("sort-select").value;
+
+        let list = allProducts.filter((p) => {
+          const matchName =
+            (p.name || "").toLowerCase().includes(query) ||
+            (p.sku || "").toLowerCase().includes(query);
+          const matchCat = cat ? p.category === cat : true;
+          return matchName && matchCat;
+        });
+
+        if (sort === "low-high") {
+          list.sort(
+            (a, b) =>
+              (a.discountPrice || a.price) - (b.discountPrice || b.price),
+          );
+        } else if (sort === "high-low") {
+          list.sort(
+            (a, b) =>
+              (b.discountPrice || b.price) - (a.discountPrice || a.price),
+          );
+        } else if (sort === "stock") {
+          list.sort((a, b) => (b.stock ?? 0) - (a.stock ?? 0));
         }
 
         renderTable(list);
@@ -494,25 +1648,244 @@
 
       document
         .getElementById("search-input")
-        .addEventListener("input", () => {
-          applySortAndSearch();
-        });
-
+        .addEventListener("input", applyFilterAndSearch);
+      categoryFilter.addEventListener("change", applyFilterAndSearch);
       document
         .getElementById("sort-select")
-        .addEventListener("change", () => {
-          applySortAndSearch();
+        .addEventListener("change", applyFilterAndSearch);
+
+      // Select all
+      document.getElementById("select-all").addEventListener("change", (e) => {
+        document
+          .querySelectorAll(".prod-checkbox")
+          .forEach((cb) => (cb.checked = e.target.checked));
+      });
+
+      // Delete selected
+      document
+        .getElementById("delete-selected-btn")
+        .addEventListener("click", async () => {
+          const ids = Array.from(
+            document.querySelectorAll(".prod-checkbox:checked"),
+          ).map((cb) => cb.value);
+          if (!ids.length) {
+            alert("Select at least one product first.");
+            return;
+          }
+          if (
+            !confirm(`Delete ${ids.length} product(s)? This can't be undone.`)
+          )
+            return;
+          const batch = db.batch();
+          ids.forEach((id) => batch.delete(db.collection("products").doc(id)));
+          await batch.commit();
+          allProducts = allProducts.filter((p) => !ids.includes(p.id));
+          renderTable(allProducts);
         });
 
-      // ---------- delete ----------
+      // Export CSV
+      document.getElementById("export-btn").addEventListener("click", () => {
+        const rows = allProducts.map(
+          (p) =>
+            `${p.sku || ""},"${(p.name || "").replace(/"/g, '""')}",${p.category || ""},${p.price || 0},${p.discountPrice || p.price || 0},${p.stock ?? 0},${p.status || ""},${p.featured ? "Yes" : "No"}`,
+        );
+        const csv =
+          "SKU,Name,Category,Price,Sale Price,Stock,Status,Featured\n" +
+          rows.join("\n");
+        const blob = new Blob([csv], { type: "text/csv" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "products.csv";
+        a.click();
+      });
+
+      document
+        .getElementById("import-btn")
+        .addEventListener("click", () =>
+          alert("Import isn't built yet — coming soon."),
+        );
+      document
+        .getElementById("bulk-btn")
+        .addEventListener("click", () =>
+          alert("Bulk actions aren't built yet — coming soon."),
+        );
+
+      // DUPLICATE LOGIC
+      async function duplicateProduct(id) {
+        const p = allProducts.find((x) => x.id === id);
+        if (!p) return;
+        if (!confirm(`Duplicate "${p.name}"?`)) return;
+
+        try {
+          const { id: _oldId, ...data } = p;
+          const mainCat = data.mainCategory || "GEN";
+          const newSku = `BW-${mainCat.slice(0, 3).toUpperCase()}-${Math.floor(1000 + Math.random() * 9000)}`;
+
+          await db.collection("products").add({
+            ...data,
+            name: `${data.name} (Copy)`,
+            sku: newSku,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+          });
+
+          await loadProducts();
+        } catch (err) {
+          alert("Failed to duplicate product: " + err.message);
+        }
+      }
+
+      // ADD PRODUCT MODAL
+      const addModal = document.getElementById("add-modal-overlay");
+      document
+        .getElementById("open-add-modal")
+        .addEventListener("click", () => addModal.classList.add("open"));
+      document
+        .getElementById("add-modal-close")
+        .addEventListener("click", () => addModal.classList.remove("open"));
+      document
+        .getElementById("add-modal-cancel")
+        .addEventListener("click", () => addModal.classList.remove("open"));
+
+      const sizesRow = document.getElementById("sizes-row");
+      sizesRow.innerHTML = ALL_SIZES.map(
+        (s) => `<div class="chip" data-size="${s}">${s}</div>`,
+      ).join("");
+      sizesRow.querySelectorAll(".chip").forEach((chip) => {
+        chip.addEventListener("click", () => {
+          const s = chip.dataset.size;
+          if (selectedSizes.has(s)) {
+            selectedSizes.delete(s);
+            chip.classList.remove("selected");
+          } else {
+            selectedSizes.add(s);
+            chip.classList.add("selected");
+          }
+        });
+      });
+
+      const featuredBox = document.getElementById("featured-toggle-box");
+      featuredBox.querySelectorAll(".featured-option").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          featuredBox
+            .querySelectorAll(".featured-option")
+            .forEach((b) => b.classList.remove("selected"));
+          btn.classList.add("selected");
+          isFeatured = btn.dataset.value === "true";
+        });
+      });
+
+      const uploadBox = document.getElementById("upload-box");
+      const imageInput = document.getElementById("image-input");
+      const imagePreview = document.getElementById("image-preview");
+      const uploadStatus = document.getElementById("upload-status");
+      const uploadLabel = document.getElementById("upload-label");
+
+      uploadBox.addEventListener("click", () => imageInput.click());
+      imageInput.addEventListener("change", async () => {
+        const file = imageInput.files[0];
+        if (!file) return;
+
+        imagePreview.src = URL.createObjectURL(file);
+        imagePreview.style.display = "block";
+        uploadLabel.textContent = file.name;
+        uploadStatus.textContent = "Optimizing image…";
+
+        try {
+          const jpegFile = await resizeAndConvertToJPEG(file);
+          uploadStatus.textContent = "Uploading…";
+          uploadedImageUrl = await uploadToImgBB(jpegFile);
+          uploadStatus.textContent = "Uploaded ✓";
+        } catch (err) {
+          uploadStatus.textContent = "Upload failed: " + err.message;
+          uploadedImageUrl = null;
+        }
+      });
+
+      document
+        .getElementById("submit-btn")
+        .addEventListener("click", async () => {
+          const errorEl = document.getElementById("form-error");
+          const successEl = document.getElementById("form-success");
+          showError(errorEl, "");
+          showError(successEl, "");
+
+          const name = document.getElementById("name").value.trim();
+          const price = Number(document.getElementById("price").value);
+          const discountPrice = document.getElementById("discountPrice").value;
+          const category = categorySelect.value;
+          const selectedOption =
+            categorySelect.options[categorySelect.selectedIndex];
+          const mainCategory = selectedOption.parentElement
+            ? selectedOption.parentElement.label || ""
+            : "";
+          const stock = Number(document.getElementById("stock").value);
+          const colors = document
+            .getElementById("colors")
+            .value.split(",")
+            .map((c) => c.trim())
+            .filter(Boolean);
+          const description = document
+            .getElementById("description")
+            .value.trim();
+
+          if (!name || !price)
+            return showError(errorEl, "Name and price are required.");
+          if (!category) return showError(errorEl, "Please select a category.");
+          if (!uploadedImageUrl)
+            return showError(
+              errorEl,
+              "Please wait for the image to finish uploading.",
+            );
+          if (selectedSizes.size === 0)
+            return showError(errorEl, "Select at least one size.");
+          if (isNaN(stock) || stock < 0)
+            return showError(errorEl, "Stock quantity can't be negative.");
+
+          const btn = document.getElementById("submit-btn");
+          btn.disabled = true;
+          btn.textContent = "Saving…";
+
+          try {
+            await db.collection("products").add({
+              name,
+              price,
+              discountPrice: discountPrice ? Number(discountPrice) : null,
+              mainCategory,
+              category,
+              stock,
+              sizes: Array.from(selectedSizes),
+              colors,
+              description,
+              featured: isFeatured,
+              image: uploadedImageUrl,
+              sku: `BW-${mainCategory.slice(0, 3).toUpperCase()}-${Math.floor(1000 + Math.random() * 9000)}`,
+              status: "active",
+              createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            });
+
+            showError(successEl, "Product saved successfully.");
+            await loadProducts();
+            setTimeout(() => {
+              addModal.classList.remove("open");
+              btn.disabled = false;
+              btn.textContent = "Save Product";
+            }, 800);
+          } catch (err) {
+            showError(errorEl, err.message);
+            btn.disabled = false;
+            btn.textContent = "Save Product";
+          }
+        });
+
+      // Delete single product
       async function deleteProduct(id) {
-        if (!confirm("Delete this product? This can't be undone.")) return;
+        if (!confirm("Delete this product?")) return;
         await db.collection("products").doc(id).delete();
         allProducts = allProducts.filter((p) => p.id !== id);
         renderTable(allProducts);
       }
 
-      // ---------- edit modal ----------
+      // Edit Product
       const editOverlay = document.getElementById("edit-overlay");
       const editSizesRow = document.getElementById("edit-sizes-row");
       editSizesRow.innerHTML = ALL_SIZES.map(
@@ -528,6 +1901,19 @@
             editSelectedSizes.add(s);
             chip.classList.add("selected");
           }
+        });
+      });
+
+      const editFeaturedBox = document.getElementById(
+        "edit-featured-toggle-box",
+      );
+      editFeaturedBox.querySelectorAll(".featured-option").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          editFeaturedBox
+            .querySelectorAll(".featured-option")
+            .forEach((b) => b.classList.remove("selected"));
+          btn.classList.add("selected");
+          editIsFeatured = btn.dataset.value === "true";
         });
       });
 
@@ -550,13 +1936,9 @@
           ", ",
         );
         document.getElementById("edit-description").value = p.description || "";
-        document.getElementById("edit-status").value = p.status || "active";
 
         const preview = document.getElementById("edit-image-preview");
         preview.src = p.image;
-        document.getElementById("edit-upload-status").textContent = "";
-        document.getElementById("edit-upload-label").textContent =
-          "Click to change image";
 
         editSelectedSizes.clear();
         editSizesRow.querySelectorAll(".chip").forEach((c) => {
@@ -568,44 +1950,24 @@
             editSelectedSizes.add(c.dataset.size);
         });
 
+        editIsFeatured = !!p.featured;
+        editFeaturedBox.querySelectorAll(".featured-option").forEach((b) => {
+          b.classList.toggle(
+            "selected",
+            b.dataset.value === String(editIsFeatured),
+          );
+        });
+
+        document.getElementById("view-modal-overlay").classList.remove("open");
         editOverlay.classList.add("open");
       }
 
       document
         .getElementById("edit-close")
-        .addEventListener("click", closeEdit);
+        .addEventListener("click", () => editOverlay.classList.remove("open"));
       document
         .getElementById("edit-cancel-btn")
-        .addEventListener("click", closeEdit);
-      function closeEdit() {
-        editOverlay.classList.remove("open");
-        editingId = null;
-      }
-
-      document
-        .getElementById("edit-upload-box")
-        .addEventListener("click", () => {
-          document.getElementById("edit-image-input").click();
-        });
-      document
-        .getElementById("edit-image-input")
-        .addEventListener("change", async (e) => {
-          const file = e.target.files[0];
-          if (!file) return;
-          const preview = document.getElementById("edit-image-preview");
-          const status = document.getElementById("edit-upload-status");
-          preview.src = URL.createObjectURL(file);
-          document.getElementById("edit-upload-label").textContent = file.name;
-          status.textContent = "Optimizing image…";
-          try {
-            const jpegFile = await resizeAndConvertToJPEG(file);
-            status.textContent = "Uploading…";
-            editUploadedImageUrl = await uploadToImgBB(jpegFile);
-            status.textContent = "Uploaded ✓";
-          } catch (err) {
-            status.textContent = "Upload failed: " + err.message;
-          }
-        });
+        .addEventListener("click", () => editOverlay.classList.remove("open"));
 
       document
         .getElementById("edit-save-btn")
@@ -619,12 +1981,12 @@
           const price = Number(document.getElementById("edit-price").value);
           const discountPrice =
             document.getElementById("edit-discountPrice").value;
-
           const category = editCategorySelect.value;
           const selectedOption =
             editCategorySelect.options[editCategorySelect.selectedIndex];
-          const mainCategory = selectedOption.parentElement.label || "";
-
+          const mainCategory = selectedOption.parentElement
+            ? selectedOption.parentElement.label || ""
+            : "";
           const stock = Number(document.getElementById("edit-stock").value);
           const colors = document
             .getElementById("edit-colors")
@@ -634,24 +1996,12 @@
           const description = document
             .getElementById("edit-description")
             .value.trim();
-          const status = document.getElementById("edit-status").value;
 
-          if (!name || !price) {
-            showError(errorEl, "Name and price are required.");
-            return;
-          }
-          if (!category) {
-            showError(errorEl, "Please select a category.");
-            return;
-          }
-          if (editSelectedSizes.size === 0) {
-            showError(errorEl, "Select at least one size.");
-            return;
-          }
-          if (isNaN(stock) || stock < 0) {
-            showError(errorEl, "Stock quantity can't be negative.");
-            return;
-          }
+          if (!name || !price)
+            return showError(errorEl, "Name and price are required.");
+          if (!category) return showError(errorEl, "Please select a category.");
+          if (isNaN(stock) || stock < 0)
+            return showError(errorEl, "Stock quantity can't be negative.");
 
           const btn = document.getElementById("edit-save-btn");
           btn.disabled = true;
@@ -671,19 +2021,92 @@
                 sizes: Array.from(editSelectedSizes),
                 colors,
                 description,
-                status,
+                featured: editIsFeatured,
                 image: editUploadedImageUrl,
               });
+
             showError(successEl, "Product updated.");
             await loadProducts();
-            setTimeout(closeEdit, 700);
+            setTimeout(() => {
+              editOverlay.classList.remove("open");
+              btn.disabled = false;
+              btn.textContent = "Save changes";
+            }, 700);
           } catch (err) {
             showError(errorEl, err.message);
-          } finally {
             btn.disabled = false;
             btn.textContent = "Save changes";
           }
         });
+
+      // View Details modal
+      const viewOverlay = document.getElementById("view-modal-overlay");
+
+      function openView(id) {
+        const p = allProducts.find((x) => x.id === id);
+        if (!p) return;
+
+        document.getElementById("view-image").src = p.image || "";
+        document.getElementById("view-name").textContent = p.name || "";
+        document.getElementById("view-sku").textContent = p.sku || "N/A";
+
+        const publishedBadge = document.getElementById("view-published-badge");
+        if (p.status === "active") {
+          publishedBadge.textContent = "Showing";
+          publishedBadge.className = "dt-status-pill active";
+          publishedBadge.style.background = "#d1fae5";
+          publishedBadge.style.color = "#065f46";
+        } else {
+          publishedBadge.textContent = "Hidden";
+          publishedBadge.className = "dt-status-pill expired";
+          publishedBadge.style.background = "#fee2e2";
+          publishedBadge.style.color = "#991b1b";
+        }
+
+        const price = p.discountPrice || p.price || 0;
+        document.getElementById("view-price").textContent =
+          `৳${Number(price).toLocaleString()}`;
+
+        const stock = p.stock ?? 0;
+        const stockBadge = document.getElementById("view-stock-badge");
+        if (stock > 0) {
+          stockBadge.textContent = "In Stock";
+          stockBadge.style.background = "#d1fae5";
+          stockBadge.style.color = "#065f46";
+        } else {
+          stockBadge.textContent = "Out of Stock";
+          stockBadge.style.background = "#fee2e2";
+          stockBadge.style.color = "#991b1b";
+        }
+        document.getElementById("view-qty").textContent = stock;
+
+        document.getElementById("view-description").textContent =
+          p.description || "No description provided.";
+        document.getElementById("view-category").textContent =
+          p.category || "—";
+
+        const colorsEl = document.getElementById("view-colors");
+        colorsEl.innerHTML =
+          (p.colors || [])
+            .map((c) => `<span class="view-color-chip">${escapeHtml(c)}</span>`)
+            .join("") || "—";
+
+        document.getElementById("view-edit-btn").onclick = () => {
+          viewOverlay.classList.remove("open");
+          openEdit(p.id);
+        };
+
+        document.getElementById("view-duplicate-btn").onclick = () => {
+          viewOverlay.classList.remove("open");
+          duplicateProduct(p.id);
+        };
+
+        viewOverlay.classList.add("open");
+      }
+
+      document
+        .getElementById("view-modal-close")
+        .addEventListener("click", () => viewOverlay.classList.remove("open"));
 
       function escapeHtml(str) {
         return String(str || "").replace(
