@@ -1,43 +1,71 @@
 /* ============================================================
-   Styles for the secure checkout page.
-   ============================================================ */
+   BLUEWEAR — CHECKOUT
+============================================================ */
 
 .checkout-page {
-    padding: 50px 0;
+    padding: 55px 0 90px;
+}
+
+/* ============================================================
+   HEADER
+============================================================ */
+
+.checkout-header {
+    margin-bottom: 35px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #e5eaf1;
 }
 
 .checkout-header h1 {
-    font-size: 32px;
-    margin-bottom: 30px;
-    color: #172033;
+    margin: 0;
+    color: #081a33;
+    font-size: clamp(32px, 5vw, 42px);
+    line-height: 1.1;
+    letter-spacing: -1px;
+    font-weight: 800;
 }
+
+/* ============================================================
+   LAYOUT
+============================================================ */
 
 .checkout-layout {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 40px;
+    grid-template-columns: minmax(0, 1.5fr) minmax(320px, 1fr);
+    gap: 28px;
+    align-items: start;
 }
 
-/* ----- Form Section ----- */
+/* ============================================================
+   FORM SECTION
+============================================================ */
+
 .checkout-form-section {
-    background: #ffffff;
     padding: 30px;
-    border: 1px solid #d8e4ef;
-    border-radius: 8px;
+    background: #ffffff;
+    border: 1px solid #e5eaf1;
+    border-radius: 16px;
+    box-shadow: 0 3px 12px rgba(23, 32, 51, 0.035);
 }
 
 .checkout-form-section h3 {
-    margin-bottom: 20px;
-    font-size: 20px;
-    color: #1769aa;
-    border-bottom: 1px solid #d8e4ef;
-    padding-bottom: 10px;
-    margin-top: 25px;
+    margin: 28px 0 20px;
+    padding-bottom: 12px;
+
+    color: #172033;
+    font-size: 18px;
+    font-weight: 750;
+
+    border-bottom: 1px solid #e5eaf1;
 }
 
 .checkout-form-section h3:first-child {
     margin-top: 0;
 }
+
+/* ============================================================
+   FORM FIELDS
+============================================================ */
 
 .form-group {
     margin-bottom: 18px;
@@ -46,177 +74,346 @@
 .form-group label {
     display: block;
     margin-bottom: 8px;
-    font-size: 14px;
-    font-weight: 600;
+
     color: #172033;
+    font-size: 13px;
+    font-weight: 700;
 }
 
-/* UPDATE: Added .form-group select to match text inputs perfectly */
-.form-group input, 
+.form-group input,
 .form-group textarea,
 .form-group select {
     width: 100%;
-    padding: 12px;
+    box-sizing: border-box;
+
+    padding: 12px 13px;
+
     border: 1px solid #d8e4ef;
-    border-radius: 4px;
-    font-family: inherit;
-    box-sizing: border-box; /* This ensures padding doesn't break the layout */
-}
+    border-radius: 8px;
 
-/* UPDATE: Specific styling for the dropdown */
-select#ship-city {
-    height: 43px; /* Standardizes the height with adjacent text inputs */
-    background-color: #ffffff;
+    background: #ffffff;
     color: #172033;
+
+    font-family: Helvetica, Arial, sans-serif;
     font-size: 14px;
-    cursor: pointer;
-    outline: none;
-    transition: border-color 0.2s ease;
+
+    transition:
+        border-color 0.18s ease,
+        box-shadow 0.18s ease;
 }
 
-select#ship-city:focus,
+.form-group textarea {
+    min-height: 95px;
+    resize: vertical;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #98a2b3;
+}
+
 .form-group input:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.form-group select:focus {
     border-color: #1769aa;
     outline: none;
+    box-shadow: 0 0 0 3px rgba(23, 105, 170, 0.08);
 }
+
+select#ship-city {
+    height: 43px;
+    cursor: pointer;
+}
+
+/* ============================================================
+   FORM ROW
+============================================================ */
 
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 18px;
 }
 
-/* =====================================
-    Payment Methods Styling
-   ===================================== */
+/* ============================================================
+   PAYMENT METHODS
+============================================================ */
+
 .payment-methods-container {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
     margin-bottom: 25px;
 }
 
 .payment-method {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 15px;
-    border: 1px solid #d8e4ef;
-    border-radius: 4px;
-    background: #f7fbff;
-    cursor: pointer;
-    font-size: 14px;
+    gap: 11px;
+
+    padding: 14px 15px;
+
+    border: 1px solid #e5eaf1;
+    border-radius: 10px;
+
+    background: #f8fbff;
+
     color: #172033;
-    transition: all 0.2s ease;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.18s ease,
+        background 0.18s ease,
+        box-shadow 0.18s ease;
 }
 
 .payment-method:hover {
+    border-color: #b9d1e8;
+    background: #f3f8fd;
+}
+
+.payment-method:has(input:checked) {
     border-color: #1769aa;
     background: #eef7ff;
+    box-shadow: 0 0 0 2px rgba(23, 105, 170, 0.06);
 }
 
 .payment-method input[type="radio"] {
-    width: auto; /* Fixes input stretching issue */
+    width: auto;
+    margin: 0;
+    accent-color: #1769aa;
     cursor: pointer;
 }
 
+/* ============================================================
+   PLACE ORDER
+============================================================ */
+
 .place-order-btn {
-    width: 100%;
-    font-size: 16px;
-    padding: 15px;
+    background: var(--blue);
+    border-color: var(--blue);
+    color: #ffffff;
 }
 
-/* ----- Summary Section ----- */
+.place-order-btn:hover {
+    background: var(--blue-dark);
+    border-color: var(--blue-dark);
+    color: #ffffff;
+}
+
+/* ============================================================
+   ORDER SUMMARY
+============================================================ */
+
 .checkout-summary-section {
-    background: #f7fbff;
-    padding: 30px;
-    border: 1px solid #d8e4ef;
-    border-radius: 8px;
-    height: fit-content;
+    position: sticky;
+    top: 90px;
+    align-self: start;
+
+    padding: 26px;
+
+    background: #f8fbff;
+    border: 1px solid #e5eaf1;
+    border-radius: 16px;
+
+    box-shadow: 0 4px 16px rgba(23, 32, 51, 0.045);
 }
 
 .checkout-summary-section h3 {
-    margin-bottom: 20px;
+    margin: 0 0 22px;
+
+    color: #172033;
+    font-size: 18px;
+    font-weight: 750;
 }
+
+/* ============================================================
+   CHECKOUT ITEMS
+============================================================ */
 
 .checkout-item {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 15px;
+
+    margin-bottom: 16px;
+
     font-size: 14px;
 }
 
 .checkout-item-img {
-    width: 48px;
-    height: 56px;
-    object-fit: cover;
-    border-radius: 4px;
-    border: 1px solid #d8e4ef;
-    background: #edf6fd;
+    width: 52px;
+    height: 62px;
+
     flex-shrink: 0;
+
+    object-fit: cover;
+
+    border: 1px solid #e5eaf1;
+    border-radius: 8px;
+
+    background: #edf6fd;
 }
 
 .checkout-item-info {
     flex: 1;
+
     display: flex;
     flex-direction: column;
-}
-
-.checkout-item-price {
-    font-weight: 600;
-    color: #172033;
-}
-
-.checkout-item-name {
-    color: #172033;
-    font-weight: 600;
-}
-
-.checkout-item-qty {
-    color: #667085;
-}
-
-.summary-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 12px;
-    color: #667085;
-}
-
-.summary-divider {
-    border: 0;
-    border-top: 1px solid #d8e4ef;
-    margin: 20px 0;
-}
-
-.summary-total {
-    font-size: 18px;
-    font-weight: 700;
-    color: #172033;
-}
-
-
-/* ============================================================
-   Checkout Layout Adjustments & Sticky Summary
-   ============================================================ */
-.checkout-summary-section {
-    position: sticky;
-    top: 90px; /* Keeps the summary visible while scrolling */
-    align-self: start;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    min-width: 0;
 }
 
 .checkout-item-name {
     display: block;
-    line-height: 1.4;
+
     margin-bottom: 4px;
+
+    color: #172033;
+    font-weight: 700;
+    line-height: 1.4;
 }
 
+.checkout-item-qty {
+    color: #667085;
+    font-size: 12px;
+}
+
+.checkout-item-price {
+    color: #172033;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* ============================================================
+   SUMMARY
+============================================================ */
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+
+    margin-bottom: 12px;
+
+    color: #667085;
+    font-size: 14px;
+}
+
+.summary-divider {
+    margin: 20px 0;
+
+    border: 0;
+    border-top: 1px solid #dfe6ee;
+}
+
+.summary-total {
+    margin-bottom: 0;
+
+    color: #081a33;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+/* ============================================================
+   AUTH LOADING
+============================================================ */
+
+#auth-loading {
+    padding: 100px 20px !important;
+
+    color: #667085 !important;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px !important;
+    text-align: center;
+}
+
+/* ============================================================
+   TABLET / MOBILE
+============================================================ */
 
 @media (max-width: 900px) {
+
+    .checkout-page {
+        padding: 42px 0 70px;
+    }
+
     .checkout-layout {
         grid-template-columns: 1fr;
+        gap: 20px;
     }
+
+    .checkout-summary-section {
+        position: static;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .checkout-page {
+        padding: 35px 0 60px;
+    }
+
+    .checkout-header {
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+    }
+
+    .checkout-header h1 {
+        font-size: 32px;
+    }
+
+    .checkout-form-section,
+    .checkout-summary-section {
+        padding: 20px;
+        border-radius: 14px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .checkout-form-section h3 {
+        font-size: 17px;
+    }
+
+}
+
+/* ============================================================
+   CHECKOUT — PROFILE DRAWER HEADER FIX
+============================================================ */
+
+.checkout-page ~ .profile-drawer .drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 25px;
+    background: var(--navy);
+    color: #ffffff;
+}
+
+.checkout-page ~ .profile-drawer .drawer-header h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.checkout-page ~ .profile-drawer .drawer-close {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
 }

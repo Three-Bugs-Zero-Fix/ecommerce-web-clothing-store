@@ -161,10 +161,18 @@ font-weight: 700;
 color: #172033;
 }
 
+/* Checkout Button */
+
 .checkout-btn {
-width: 100%;
-margin-top: 20px;
-text-align: center;
+    background: var(--blue);
+    border-color: var(--blue);
+    color: #ffffff;
+}
+
+.checkout-btn:hover {
+    background: var(--blue-dark);
+    border-color: var(--blue-dark);
+    color: #ffffff;
 }
 
 /* ----- Responsive / Mobile ----- */
@@ -186,3 +194,37 @@ justify-content: space-between;
 }
 }
 
+/* ============================================================
+   CART — PROFILE DRAWER HEADER FIX
+============================================================ */
+
+.cart-page ~ .profile-drawer .drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 25px;
+    background: var(--navy);
+    color: #ffffff;
+}
+
+.cart-page ~ .profile-drawer .drawer-head span {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.cart-page ~ .profile-drawer .drawer-head button {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+}

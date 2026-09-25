@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,16 +8,59 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/checkout.css">
 </head>
+
 <body>
 
-    <!-- NAVBAR (Standard Layout) -->
+    <!-- NAVBAR -->
     <header class="navbar">
         <div class="container navbar-inner">
-            <a href="../index.html" class="logo">BLUEWEAR</a>
+
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M6 2l1.5 4h9L18 2" />
+                        <path d="M3.5 6h17l-1.2 13a2 2 0 0 1-2 1.8H6.7a2 2 0 0 1-2-1.8L3.5 6z" />
+                        <path d="M8.5 10a3.5 3.5 0 0 0 7 0" />
+                    </svg>
+                </span>
+
+                <span class="logo-text">BlueWear</span>
+            </a>
+
+            <nav class="nav-menu" aria-label="Main navigation">
+                <a href="../index.html">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="../index.html#categories">Categories</a>
+                <a href="../index.html#about">About</a>
+            </nav>
+
             <div class="nav-actions">
-                <a href="cart.html" class="cart-btn" style="text-decoration: none; display: flex; align-items: center;">
-                    Cart (<span id="nav-cart-count">0</span>)
+
+                <!-- CART -->
+                <a href="cart.html" class="cart-btn" id="cart-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        aria-hidden="true">
+                        <path d="M16 5h6" />
+                        <path d="M19 2v6" />
+                        <path d="m2.05 2.05 1.099-.028a1 1 0 011.008.815l2.69 14.347A1 1 0 007.83 18H18" />
+                        <path d="M4.564 5H12" />
+                        <path d="M6.25 14h12.712a2 2 0 001.991-1.57l.172-1.041" />
+                        <circle cx="18" cy="20" r="2" />
+                        <circle cx="8" cy="20" r="2" />
+                    </svg>
+
+                    <span>
+                        Cart (<span id="nav-cart-count">0</span>)
+                    </span>
                 </a>
+
+                <!-- PROFILE -->
+                <button type="button" class="profile-btn profile-btn-guest" id="profile-btn"
+                    aria-label="Open account menu">
+                    <span id="profile-btn-content">👤</span>
+                </button>
+
             </div>
         </div>
     </header>
@@ -28,18 +72,18 @@
         </div>
 
         <div class="checkout-layout">
-            
+
             <!-- Left Side: Shipping & Payment Form -->
             <div class="checkout-form-section">
                 <form id="checkout-form">
-                    
+
                     <h3>Shipping Information</h3>
-                    
+
                     <div class="form-group">
                         <label>Full Name</label>
                         <input type="text" id="ship-name" required placeholder="e.g. John Doe">
                     </div>
-                    
+
                     <div class="form-group">
                         <label>Phone Number</label>
                         <input type="tel" id="ship-phone" required placeholder="017XXXXXXXX">
@@ -58,7 +102,7 @@
                                 <option value="" disabled selected>Select your district...</option>
                                 <!-- Inside Dhaka -->
                                 <option value="Dhaka">Dhaka</option>
-                                
+
                                 <!-- Outside Dhaka -->
                                 <option value="Bagerhat">Bagerhat</option>
                                 <option value="Bandarban">Bandarban</option>
@@ -125,7 +169,7 @@
                                 <option value="Thakurgaon">Thakurgaon</option>
                             </select>
                         </div>
-                        
+
                         <div class="form-group">
                             <label>Postal Code</label>
                             <input type="text" id="ship-zip" required placeholder="1200">
@@ -135,19 +179,19 @@
                     <!-- Updated Payment Methods -->
                     <h3>Payment Method</h3>
                     <div class="payment-methods-container">
-    
+
                         <label class="payment-method">
-                        <input type="radio" name="payment" value="COD" checked>
+                            <input type="radio" name="payment" value="COD" checked>
                             Cash on Delivery (COD)
                         </label>
 
                         <label class="payment-method">
-                        <input type="radio" name="payment" value="bKash">
+                            <input type="radio" name="payment" value="bKash">
                             bKash
                         </label>
 
                         <label class="payment-method">
-                        <input type="radio" name="payment" value="SSLCOMMERZ">
+                            <input type="radio" name="payment" value="SSLCOMMERZ">
                             SSLCOMMERZ (Visa / MasterCard)
                         </label>
 
@@ -165,21 +209,21 @@
                 <div id="checkout-items-container">
                     <!-- JS will load items here -->
                 </div>
-                
+
                 <hr class="summary-divider">
 
                 <div class="summary-row">
                     <span>Subtotal</span>
                     <span id="checkout-subtotal">৳0</span>
                 </div>
-                
+
                 <div class="summary-row">
                     <span>Shipping Fee</span>
                     <span id="checkout-shipping">৳60</span>
                 </div>
-                
+
                 <hr class="summary-divider">
-                
+
                 <div class="summary-row summary-total">
                     <span>Total</span>
                     <span id="checkout-total">৳0</span>
@@ -189,6 +233,8 @@
         </div>
     </main>
 
+    <!-- PROFILE DRAWER -->
+    
     <!-- Loading Screen (Shows while checking auth) -->
     <div id="auth-loading" style="text-align: center; padding: 100px 0; font-size: 18px; color: #666;">
         Checking secure connection...
@@ -198,13 +244,13 @@
     <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
-    <script src="../js/firebase.js"></script>
-    
-    <!-- To get cart items -->
-    <script src="../js/cart.js"></script> 
 
-    <!-- Checkout logic -->
-    <script src="../js/checkout.js"></script> 
-    
+    <script src="../js/firebase.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/profile_drawer.js"></script>
+    <script src="../js/checkout.js"></script>
+
 </body>
+
 </html>
