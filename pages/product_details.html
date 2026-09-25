@@ -154,6 +154,27 @@
 
     </main>
 
+    <!-- =========================
+     PROFILE DRAWER
+========================== -->
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+
+    <div class="profile-drawer" id="profile-drawer">
+        <div class="drawer-head">
+            <span>MY ACCOUNT</span>
+
+            <button type="button" id="drawer-close" aria-label="Close account menu">
+                ✕
+            </button>
+        </div>
+
+        <div class="drawer-body" id="drawer-body">
+            <p class="drawer-loading">
+                Checking your session…
+            </p>
+        </div>
+    </div>
+
     <!-- FIREBASE & JS -->
     <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
@@ -161,6 +182,8 @@
     <script src="../js/firebase.js"></script>
     <script src="../js/cart.js"></script>
     <script src="../js/products.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/profile_drawer.js"></script>
 
 </body>
 
