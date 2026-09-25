@@ -1,23 +1,42 @@
 /* ================================
-   HEADER SEARCH BAR
+   SHOP SEARCH BAR
 ================================ */
 
 .header-search-wrapper {
   position: relative;
   display: flex;
   align-items: center;
-  margin-right: 12px;
+  width: 100%;
+  max-width: 520px;
 }
 
 .header-search-input {
-  padding: 9px 40px 9px 16px;
-  border-radius: 20px;
-  border: 1px solid #d0d5dd;
-  background: #f9fafb;
+  width: 100%;
+  height: 44px;
+  padding: 0 44px 0 16px;
+
+  border: 1px solid #d8e4ef;
+  border-radius: 10px;
+
+  background: #f8fbff;
+  color: #172033;
+
   outline: none;
+  font-family: var(--body-font);
   font-size: 14px;
-  width: 350px;
-  transition: all 0.2s ease;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.header-search-input::placeholder {
+  color: #98a2b3;
+}
+
+.header-search-input:hover {
+  border-color: #b8cfe3;
 }
 
 .header-search-input:focus {
@@ -28,10 +47,21 @@
 
 .search-icon-inside {
   position: absolute;
-  right: 14px;
-  pointer-events: none;
+  right: 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   color: #667085;
-  font-size: 14px;
+  font-size: 15px;
+  pointer-events: none;
+
+  transition: color 0.2s ease;
+}
+
+.header-search-wrapper:focus-within .search-icon-inside {
+  color: #1769aa;
 }
 
 /* ================================
@@ -187,7 +217,7 @@
 }
 
 /* ================================
-   PRODUCT BADGE (discount %)
+   PRODUCT BADGE
 ================================ */
 
 .shop-products .product-badge {
@@ -230,7 +260,7 @@
 }
 
 /* ================================
-   SAVE BADGE + PRICE ROW + CART ICON
+   SAVE BADGE + PRICE ROW + CART
 ================================ */
 
 .save-badge {
@@ -268,24 +298,30 @@
 
 .price-discount {
   font-size: 12.5px;
-  color: #f43f7a;
+  color: #1769aa;
   font-weight: 700;
   margin-left: 6px;
 }
 
-/* CART BUTTON & SVG ALIGNMENT */
+/* ================================
+   CART BUTTON
+================================ */
+
 .cart-icon-btn {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   background: #172033;
-  color: #fff;
+  color: #ffffff;
   border: none;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   cursor: pointer;
   flex-shrink: 0;
+
   transition:
     background 0.15s ease,
     transform 0.15s ease;
@@ -370,13 +406,20 @@
 }
 
 /* ================================
+   CART SVG
+================================ */
+
+.cart-btn svg {
+  stroke: currentColor;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* ================================
    RESPONSIVE DESIGN
 ================================ */
 
 @media (max-width: 900px) {
-  .header-search-input {
-    width: 220px;
-  }
 
   .shop-layout {
     grid-template-columns: 180px 1fr;
@@ -388,16 +431,11 @@
   }
 }
 
-@media (max-width: 600px) {
-  .header-search-wrapper {
-    width: 100%;
-    margin-right: 0;
-    margin-bottom: 10px;
-  }
+/* ================================
+   MOBILE
+================================ */
 
-  .header-search-input {
-    width: 100%;
-  }
+@media (max-width: 600px) {
 
   .shop-header {
     padding: 50px 0;
@@ -438,10 +476,42 @@
     align-items: flex-start;
     gap: 15px;
   }
+
+  /* Search */
+
+  .header-search-wrapper {
+    width: 100%;
+    max-width: none;
+  }
+
+  .header-search-input {
+    height: 40px;
+    padding: 0 36px 0 12px;
+    font-size: 12px;
+    border-radius: 9px;
+  }
+
+  .search-icon-inside {
+    right: 11px;
+    font-size: 13px;
+  }
 }
 
-.cart-btn svg {
-  stroke: currentColor;
-  display: inline-block;
-  vertical-align: middle;
+/* ================================
+   VERY SMALL PHONES
+================================ */
+
+@media (max-width: 400px) {
+
+  .header-search-input {
+    height: 38px;
+    padding-left: 10px;
+    padding-right: 32px;
+    font-size: 11px;
+  }
+
+  .search-icon-inside {
+    right: 9px;
+    font-size: 12px;
+  }
 }
