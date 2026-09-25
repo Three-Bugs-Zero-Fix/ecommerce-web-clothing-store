@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,83 +9,60 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/cart.css">
 </head>
+
 <body>
 
- <!-- NAVBAR -->
-<header class="navbar">
-    <div class="container navbar-inner">
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="container navbar-inner">
 
-        <a href="../index.html" class="logo">
-            <span class="logo-icon">
-                <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    aria-hidden="true"
-                >
-                    <path d="M6 2l1.5 4h9L18 2" />
-                    <path
-                        d="M3.5 6h17l-1.2 13a2 2 0 0 1-2 1.8H6.7a2 2 0 0 1-2-1.8L3.5 6z"
-                    />
-                    <path d="M8.5 10a3.5 3.5 0 0 0 7 0" />
-                </svg>
-            </span>
-
-            <span class="logo-text">BlueWear</span>
-        </a>
-
-        <nav class="nav-menu" aria-label="Main navigation">
-            <a href="../index.html">Home</a>
-            <a href="shop.html">Shop</a>
-            <a href="../index.html#categories">Categories</a>
-            <a href="../index.html#about">About</a>
-        </nav>
-
-        <div class="nav-actions">
-
-            <a href="cart.html" class="cart-btn" id="cart-btn">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                >
-                    <path d="M16 5h6" />
-                    <path d="M19 2v6" />
-                    <path
-                        d="m2.05 2.05 1.099-.028a1 1 0 011.008.815l2.69 14.347A1 1 0 007.83 18H18"
-                    />
-                    <path d="M4.564 5H12" />
-                    <path
-                        d="M6.25 14h12.712a2 2 0 001.991-1.57l.172-1.041"
-                    />
-                    <circle cx="18" cy="20" r="2" />
-                    <circle cx="8" cy="20" r="2" />
-                </svg>
-
-                <span>
-                    Cart (<span id="nav-cart-count">0</span>)
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M6 2l1.5 4h9L18 2" />
+                        <path d="M3.5 6h17l-1.2 13a2 2 0 0 1-2 1.8H6.7a2 2 0 0 1-2-1.8L3.5 6z" />
+                        <path d="M8.5 10a3.5 3.5 0 0 0 7 0" />
+                    </svg>
                 </span>
+
+                <span class="logo-text">BlueWear</span>
             </a>
 
-            <a
-                href="login.html"
-                class="profile-btn profile-btn-guest"
-                aria-label="Open account"
-            >
-                <span id="profile-btn-content">👤</span>
-            </a>
+            <nav class="nav-menu" aria-label="Main navigation">
+                <a href="../index.html">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="../index.html#categories">Categories</a>
+                <a href="../index.html#about">About</a>
+            </nav>
 
+            <div class="nav-actions">
+
+                <a href="cart.html" class="cart-btn" id="cart-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        aria-hidden="true">
+                        <path d="M16 5h6" />
+                        <path d="M19 2v6" />
+                        <path d="m2.05 2.05 1.099-.028a1 1 0 011.008.815l2.69 14.347A1 1 0 007.83 18H18" />
+                        <path d="M4.564 5H12" />
+                        <path d="M6.25 14h12.712a2 2 0 001.991-1.57l.172-1.041" />
+                        <circle cx="18" cy="20" r="2" />
+                        <circle cx="8" cy="20" r="2" />
+                    </svg>
+
+                    <span>
+                        Cart (<span id="nav-cart-count">0</span>)
+                    </span>
+                </a>
+
+                <button type="button" class="profile-btn profile-btn-guest" id="profile-btn"
+                    aria-label="Open account menu">
+                    <span id="profile-btn-content">👤</span>
+                </button>
+
+            </div>
         </div>
-    </div>
-</header>
+    </header>
 
 
     <!-- CART MAIN SECTION -->
@@ -103,19 +81,19 @@
             <!-- Right side: Order Summary -->
             <div class="cart-summary-section">
                 <h3>Order Summary</h3>
-                
+
                 <div class="summary-row">
                     <span>Subtotal</span>
                     <span id="summary-subtotal">৳0</span>
                 </div>
-                
+
                 <div class="summary-row">
                     <span>Shipping</span>
                     <span>Calculated at checkout</span>
                 </div>
-                
+
                 <hr class="summary-divider">
-                
+
                 <div class="summary-row summary-total">
                     <span>Total</span>
                     <span id="summary-total">৳0</span>
@@ -126,7 +104,20 @@
         </div>
     </main>
 
-    <!-- JS Files -->
-    <script src="../js/cart.js"></script>
+    
+
+    <!-- Firebase Scripts -->
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+<script src="../js/firebase.js"></script>
+
+<!-- Cart -->
+<script src="../js/cart.js"></script>
+
+<!-- Authentication + Profile Drawer -->
+<script src="../js/auth.js"></script>
+<script src="../js/profile_drawer.js"></script>
 </body>
+
 </html>
