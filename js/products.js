@@ -154,12 +154,66 @@ function renderProduct() {
         });
     }
 
-    // Wishlist heart toggle
-    document.getElementById("wishlist-btn").addEventListener("click", (e) => {
-        const btn = e.currentTarget;
-        btn.classList.toggle("active");
-        btn.textContent = btn.classList.contains("active") ? "♥" : "♡";
-    });
+    // ===================================
+    // 🌟 TASK 4: WISHLIST FEATURE (Users Only)
+    // ===================================
+    const wishlistBtn = document.getElementById("wishlist-btn");
+    
+    if (wishlistBtn) {
+        // Check initial wishlist status from Firestore
+        auth.onAuthStateChanged((user) => {
+            if (user && p.id) {
+                db.collection("users").doc(user.uid).collection("wishlist").doc(p.id).get().then(doc => {
+                    if (doc.exists) {
+                        wishlistBtn.classList.add("active");
+                        wishlistBtn.textContent = "♥";
+                    }
+                });
+            }
+        });
+
+        // Handle Wishlist Click
+        wishlistBtn.addEventListener("click", async (e) => {
+            const user = auth.currentUser;
+            
+            // Guard: Prevent guests from using wishlist
+            if (!user) {
+                alert("Please log in to save items to your wishlist.");
+                window.location.href = "login.html";
+                return;
+            }
+
+            const btn = e.currentTarget;
+            btn.disabled = true; // Prevent double clicks
+
+            const wishlistRef = db.collection("users").doc(user.uid).collection("wishlist").doc(p.id);
+
+            try {
+                if (btn.classList.contains("active")) {
+                    // Remove from wishlist
+                    await wishlistRef.delete();
+                    btn.classList.remove("active");
+                    btn.textContent = "♡";
+                } else {
+                    // Add to wishlist
+                    await wishlistRef.set({
+                        productId: p.id,
+                        name: p.name,
+                        price: currentPrice,
+                        image: p.image || "",
+                        addedAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                    btn.classList.add("active");
+                    btn.textContent = "♥";
+                }
+            } catch (error) {
+                console.error("Wishlist error:", error);
+                alert("Something went wrong. Please try again.");
+            } finally {
+                btn.disabled = false;
+            }
+        });
+    }
 
     // Description
     renderDescription(p.description || "");
