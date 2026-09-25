@@ -24,7 +24,7 @@
   --success: #16804a;
   --danger: #c93636;
 
-  --body-font: Arial, Helvetica, sans-serif;
+  --body-font: Helvetica, Arial,  sans-serif;
 
   --radius-sm: 10px;
   --radius-md: 18px;
@@ -61,8 +61,14 @@ a {
   text-decoration: none;
 }
 
-button {
+button,
+input,
+select,
+textarea {
   font-family: inherit;
+}
+
+button {
   cursor: pointer;
 }
 

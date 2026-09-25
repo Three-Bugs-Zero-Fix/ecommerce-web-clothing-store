@@ -75,7 +75,7 @@ function signedInHTML(user) {
       </a>
       <a href="/pages/wishlist.html" class="menu-item">
         <span class="menu-icon">${icon("heart")}</span>
-        <span class="menu-label">Saved Designs</span>
+        <span class="menu-label">Wishlist</span>
         <span class="menu-arrow">›</span>
       </a>
 
@@ -118,6 +118,6 @@ function icon(name) {
 
 function escapeHtml(str) {
   return String(str || "").replace(/[&<>"']/g, c => ({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
   }[c]));
 }
