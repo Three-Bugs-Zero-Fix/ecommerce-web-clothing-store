@@ -6,6 +6,8 @@
 .status-pending { background-color: #fef3c7; color: #b45309; }
 .status-processing { background-color: #e0f2fe; color: #0284c7; }
 .status-delivered { background-color: #d1fae5; color: #059669; }
+.status-canceled { background-color: #fee2e2; color: #b91c1c; }
+.status-returned { background-color: #f3f4f6; color: #374151; }
 
 /* Modal Details Styles */
 .order-detail-row {
@@ -68,18 +70,278 @@
   border-color: #2e90fa;
   background: #ffffff;
 }
-.dt-filter-select {
-  padding: 8px 12px;
+
+/* =========================================
+   Overview Card New Layout & Fullscreen
+========================================= */
+.dt-overview-card {
+  background: #ffffff;
+  border-radius: 12px;
   border: 1px solid #e5e7eb;
-  border-radius: 8px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  transition: all 0.3s ease;
+}
+.overview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 16px;
+}
+.overview-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.overview-select {
+  padding: 6px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
   font-size: 13px;
   background: #ffffff;
   color: #374151;
   cursor: pointer;
   outline: none;
-  min-width: 140px;
-  transition: border-color 0.2s;
 }
-.dt-filter-select:focus {
+.overview-select:focus {
   border-color: #2e90fa;
+}
+.overview-icon-btn {
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+.overview-icon-btn:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.overview-body {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+.total-section {
+  min-width: 120px;
+}
+.total-section .total-label {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+.total-section .total-value {
+  font-size: 36px;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1;
+}
+.breakdown-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-left: 2px solid #f3f4f6;
+  padding-left: 30px;
+  flex: 1;
+}
+.breakdown-stats {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.breakdown-item {
+  font-size: 14px;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+.breakdown-item strong {
+  color: #111827;
+  font-size: 18px;
+  margin-left: 4px;
+}
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.dot.pending { background-color: #f59e0b; }
+.dot.processing { background-color: #3b82f6; }
+.dot.delivered { background-color: #10b981; }
+
+/* Status Color Bar */
+.status-color-bar {
+  display: flex;
+  height: 8px;
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: #e5e7eb;
+}
+.bar-segment {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+.bar-segment.pending { background-color: #f59e0b; }
+.bar-segment.processing { background-color: #3b82f6; }
+.bar-segment.delivered { background-color: #10b981; }
+
+/* Fullscreen Mode Styles (Fixed) */
+.dt-overview-card.is-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999999;
+  margin: 0;
+  border-radius: 0;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding: 40px; 
+}
+.dt-overview-card.is-fullscreen .overview-body {
+  flex: 1;
+  justify-content: center;
+  align-content: center;
+}
+.dt-overview-card.is-fullscreen .total-section .total-value {
+  font-size: 80px;
+}
+.dt-overview-card.is-fullscreen .total-section .total-label {
+  font-size: 20px;
+}
+.dt-overview-card.is-fullscreen .breakdown-item {
+  font-size: 20px;
+}
+.dt-overview-card.is-fullscreen .breakdown-item strong {
+  font-size: 32px;
+}
+.dt-overview-card.is-fullscreen .status-color-bar {
+  height: 16px; 
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .breakdown-section {
+    border-left: none;
+    padding-left: 0;
+    margin-top: 10px;
+  }
+}
+
+/* =========================================
+   Tabs Navigation (Picture Style)
+========================================= */
+.dt-tabs-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #f3f4f6;
+  padding-bottom: 12px;
+}
+.dt-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f9fafb;
+  padding: 4px;
+  border-radius: 8px;
+}
+.dt-tab-btn {
+  padding: 8px 16px;
+  border: none;
+  background: transparent;
+  color: #6b7280;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.dt-tab-btn:hover {
+  color: #111827;
+}
+.dt-tab-btn.active {
+  background: #ffffff;
+  color: #111827;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  font-weight: 600;
+}
+
+/* =========================================
+   Sort & Filter Dropdown Menu
+========================================= */
+.filter-dropdown-wrap {
+  position: relative;
+  display: inline-block;
+}
+.filter-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+  width: 220px;
+  z-index: 100;
+  display: none;
+  flex-direction: column;
+  padding: 8px 0;
+}
+.filter-dropdown.show {
+  display: flex;
+}
+.filter-dropdown-title {
+  padding: 4px 16px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #f3f4f6;
+  margin-bottom: 4px;
+}
+.filter-item {
+  padding: 8px 16px;
+  font-size: 13px;
+  color: #374151;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.filter-item:hover {
+  background: #f9fafb;
+  color: #111827;
+}
+.filter-item.active {
+  background: #f0f9ff;
+  color: #0284c7;
+  font-weight: 600;
+}
+.filter-item.active::after {
+  content: "✓";
+  font-weight: bold;
 }
