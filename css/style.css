@@ -86,12 +86,18 @@ button {
 ============================================================ */
 
 .navbar {
-  position: relative;
-  z-index: 20;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
   width: 100%;
   background: rgba(255, 255, 255, 0.94);
   border-bottom: 1px solid rgba(229, 234, 241, 0.8);
   backdrop-filter: blur(16px);
+}
+
+body {
+  padding-top: 76px;
 }
 
 .navbar-inner {
@@ -130,6 +136,19 @@ button {
   font-size: 21px;
   font-weight: 800;
   letter-spacing: -0.7px;
+  animation: bluewearSlide 0.7s ease-out;
+}
+
+@keyframes bluewearSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .nav-menu {
