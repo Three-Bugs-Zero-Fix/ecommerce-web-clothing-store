@@ -1586,13 +1586,7 @@ table.admin-table td {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(
-    90deg,
-    #2452d9,
-    #16c08c,
-    #6941c6,
-    #f79009
-  );
+  background: linear-gradient(90deg, #2452d9, #16c08c, #6941c6, #f79009);
 }
 
 .banner-admin-form .admin-section-title {
@@ -1607,11 +1601,7 @@ table.admin-table td {
   border: 2px dashed #cdd6e5;
   border-radius: 14px;
   padding: 30px 20px;
-  background: linear-gradient(
-    145deg,
-    #f8faff,
-    #f5fbf9
-  );
+  background: linear-gradient(145deg, #f8faff, #f5fbf9);
   transition:
     border-color 0.2s ease,
     background 0.2s ease,
@@ -1707,11 +1697,7 @@ table.admin-table td {
 .banner-admin-form .btn-admin-primary {
   min-width: 180px;
   border-radius: 9px;
-  background: linear-gradient(
-    135deg,
-    #2452d9,
-    #6941c6
-  );
+  background: linear-gradient(135deg, #2452d9, #6941c6);
   box-shadow: 0 6px 16px rgba(36, 82, 217, 0.18);
   transition:
     transform 0.2s ease,
@@ -1719,11 +1705,7 @@ table.admin-table td {
 }
 
 .banner-admin-form .btn-admin-primary:hover {
-  background: linear-gradient(
-    135deg,
-    #1b3fa8,
-    #5933ad
-  );
+  background: linear-gradient(135deg, #1b3fa8, #5933ad);
   transform: translateY(-1px);
   box-shadow: 0 8px 20px rgba(36, 82, 217, 0.23);
 }
@@ -1938,5 +1920,392 @@ table.admin-table td {
 
   .banner-admin-actions .btn-admin-outline {
     width: 100%;
+  }
+}
+
+/* ============================================================
+   FULL-WIDTH FIX + BIGGER DASHBOARD CARDS
+   ============================================================ */
+
+/* works whether .dt-shell ends up flex or block */
+.dt-main {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.dt-content {
+  padding: 28px 32px;
+}
+
+/* ---------- top gradient stat cards ---------- */
+.dt-stat-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+/* ============================================================
+   ONLY STAT CARDS HEIGHT REDUCTION
+   ============================================================ */
+
+.dt-stat-card {
+  min-height: 150px; /* ২৬০px থেকে কমিয়ে ১৫০px করা হয়েছে */
+  padding: 16px 18px; /* ওপর-নিচের অতিরিক্ত খালি প্যাডিং কমানো হয়েছে */
+}
+
+/* Stat card general smooth animation & dark text for pastel background */
+.dt-stat-card {
+  transition:
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow;
+  color: #0f172a !important; /* Pastel soft background-e lekha thikbabe dekhar jonno dark color */
+  border: 1px solid rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Card Subtitle/Breakdown text styling */
+.dt-stat-label,
+.dt-stat-breakdown {
+  color: #475569 !important;
+}
+
+/* Icon circular white badge (Chobi-r moto) */
+.dt-stat-icon {
+  background: #ffffff !important;
+  color: #334155 !important;
+  border-radius: 50% !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.dt-stat-card:hover {
+  transform: translateY(-4px) scale(1.025);
+}
+
+/* 1. Today Orders (Soft Ice Blue / Cyan) */
+.dt-stat-card.c1 {
+  background: linear-gradient(
+    135deg,
+    #26547c 0%,
+    #ef476f 50%,
+    #ffd166 100%
+  ) !important;
+}
+.dt-stat-card.c1:hover {
+  box-shadow:
+    0 12px 24px -4px rgba(186, 230, 253, 0.8),
+    0 0 20px rgba(191, 219, 254, 0.9);
+}
+
+/* 2. Yesterday Orders (Soft Mint / Light Lime) */
+.dt-stat-card.c2 {
+  background: linear-gradient(
+    135deg,
+    #a6e1e7 0%,
+    #91c3d5 50%,
+    #da9fc2 100%
+  ) !important;
+}
+.dt-stat-card.c2:hover {
+  box-shadow:
+    0 12px 24px -4px rgba(187, 247, 208, 0.8),
+    0 0 20px rgba(153, 246, 228, 0.9);
+}
+
+/* 3. This Month (Soft Peach / Coral Pink) */
+.dt-stat-card.c3 {
+  background: linear-gradient(
+    135deg,
+    #ffe4e6 0%,
+    #fce7f3 50%,
+    #f3e8ff 100%
+  ) !important;
+}
+.dt-stat-card.c3:hover {
+  box-shadow:
+    0 12px 24px -4px rgba(251, 207, 232, 0.8),
+    0 0 20px rgba(233, 213, 255, 0.9);
+}
+
+/* 4. Last Month (Soft Cyan / Light Emerald) */
+/* Only for Card 4 (.c4) - Glacier Mist Aura */
+.dt-stat-card.c4 {
+  position: relative;
+  overflow: hidden;
+  background-color: #faf8f2 !important;
+  color: #0f172a !important;
+  border: 1px solid rgba(91, 110, 245, 0.2) !important;
+  z-index: 1;
+}
+
+/* Card Content Layering */
+.dt-stat-card.c4 > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Glacier Mist - Layer 1 */
+.dt-stat-card.c4::before {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  background: linear-gradient(
+    135deg,
+    rgba(77, 210, 255, 0.35) 0%,
+    rgba(53, 230, 192, 0.45) 50%,
+    rgba(91, 110, 245, 0.45) 100%
+  );
+  mix-blend-mode: multiply;
+  filter: blur(25px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Glacier Mist - Layer 2 */
+.dt-stat-card.c4::after {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(53, 230, 192, 0.3) 60%,
+    rgba(91, 110, 245, 0.25) 100%
+  );
+  mix-blend-mode: multiply;
+  filter: blur(20px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Hover Effect for C4 */
+.dt-stat-card.c4:hover {
+  box-shadow:
+    0 12px 24px -4px rgba(53, 230, 192, 0.35),
+    0 0 20px rgba(91, 110, 245, 0.3);
+}
+
+/* 5. All-Time Sales (Soft Lavender / Light Pink) */
+/* Only for Card 5 (.c5) - Ember Glow Aura */
+.dt-stat-card.c5 {
+  position: relative;
+  overflow: hidden;
+  background-color: #faf8f2 !important;
+  color: #0f172a !important;
+  border: 1px solid rgba(255, 106, 61, 0.2) !important;
+  z-index: 1;
+}
+
+/* Card Content Layering */
+.dt-stat-card.c5 > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Ember Glow - Layer 1 */
+.dt-stat-card.c5::before {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 106, 61, 0.35) 0%,
+    rgba(255, 201, 77, 0.45) 50%,
+    rgba(255, 61, 119, 0.45) 100%
+  );
+  mix-blend-mode: multiply;
+  filter: blur(22px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ember Glow - Layer 2 */
+.dt-stat-card.c5::after {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(255, 201, 77, 0.35) 60%,
+    rgba(255, 61, 119, 0.25) 100%
+  );
+  mix-blend-mode: multiply;
+  filter: blur(18px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Warm Glow Hover Effect for C5 */
+.dt-stat-card.c5:hover {
+  box-shadow:
+    0 12px 24px -4px rgba(255, 106, 61, 0.35),
+    0 0 20px rgba(255, 61, 119, 0.3);
+}
+
+.dt-stat-amount {
+  margin-top: 8px;
+}
+
+.dt-stat-breakdown {
+  margin-top: 8px;
+  padding-top: 8px;
+}
+.dt-stat-icon {
+  width: 44px;
+  height: 44px;
+}
+.dt-stat-icon svg {
+  width: 20px;
+  height: 20px;
+}
+.dt-stat-amount {
+  font-size: 30px;
+  margin-top: 18px;
+}
+.dt-stat-label {
+  font-size: 16px;
+  margin-top: 4px;
+}
+.dt-stat-breakdown {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(23, 32, 51, 0.08);
+  gap: 22px;
+  font-size: 12.5px;
+}
+.dt-stat-breakdown b {
+  font-size: 14px;
+  margin-top: 2px;
+}
+
+/* ---------- summary cards (icon on top, like the reference) ---------- */
+.dt-summary-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.dt-summary-card {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 22px;
+  min-height: 160px;
+  border-radius: 16px;
+}
+.dt-summary-icon {
+  width: 46px;
+  height: 46px;
+}
+.dt-summary-icon svg {
+  width: 21px;
+  height: 21px;
+}
+.dt-summary-label {
+  font-size: 15px;
+}
+.dt-summary-value {
+  font-size: 26px;
+  margin-top: 4px;
+}
+
+/* ---------- charts ---------- */
+.dt-chart-grid {
+  grid-template-columns: 1.4fr 1fr;
+  gap: 18px;
+}
+.dt-chart-card {
+  padding: 24px;
+  border-radius: 16px;
+}
+.dt-chart-title {
+  font-size: 19px;
+}
+
+/* re-declare responsive rules (they must come AFTER the rules above) */
+@media (max-width: 1200px) {
+  .dt-stat-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .dt-summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .dt-chart-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 760px) {
+  .dt-stat-grid,
+  .dt-summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .dt-stat-card {
+    min-height: 200px;
+  }
+}
+
+/* ---------- Chart Section Layout ---------- */
+/* ---------- Sales graph and best selling pie chart ---------- */
+.dt-chart-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 18px;
+  margin-top: 20px;
+}
+
+.dt-chart-card {
+  background: var(--t-sidebar-bg, #ffffff);
+  border: 1px solid var(--t-border, #e5e7eb);
+  border-radius: 16px;
+  padding: 20px 24px;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.dt-chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.dt-chart-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--t-text, #172033);
+}
+
+/* Tabs (Sales / Orders Toggle) */
+.dt-chart-tabs {
+  display: flex;
+  gap: 16px;
+}
+
+.dt-tab-btn {
+  border: none;
+  background: transparent;
+  color: var(--t-text-soft, #6b7280);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.dt-tab-btn.active {
+  color: #10b981; /* Green color */
+  border-bottom-color: #10b981;
+}
+
+.dt-chart-body {
+  position: relative;
+  height: 280px;
+  width: 100%;
+}
+
+/* Responsive Grid */
+@media (max-width: 992px) {
+  .dt-chart-grid {
+    grid-template-columns: 1fr;
   }
 }
