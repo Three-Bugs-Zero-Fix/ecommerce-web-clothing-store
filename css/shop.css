@@ -69,22 +69,137 @@
 ================================ */
 
 .shop-header {
-  padding: 70px 0;
-  background: #eef7ff;
+  position: relative;
+  overflow: hidden;
+  padding: 75px 0;
+  background:
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(255, 255, 255, 0.16),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #061a35 0%,
+      #0a2b55 55%,
+      #1769e0 100%
+    );
   border-bottom: 1px solid #d8e4ef;
+  color: #ffffff;
 }
 
+/* Background glow */
+.shop-header::before {
+  content: "";
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  right: -80px;
+  top: -130px;
+  border-radius: 50%;
+  background: rgba(114, 170, 255, 0.2);
+  filter: blur(25px);
+  animation: shop-header-glow 5s ease-in-out infinite alternate;
+}
+
+.shop-header .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Label */
+#shop-header-label {
+  color: #72aaff;
+  font-size: 12px;
+  letter-spacing: 2.2px;
+  font-weight: 800;
+
+  opacity: 0;
+  transform: translateX(-30px);
+  animation: shop-header-enter 0.7s ease forwards;
+}
+
+/* Title */
 .shop-header h1 {
-  margin-bottom: 10px;
+  margin: 10px 0 12px;
   font-size: 48px;
   line-height: 1.1;
+  letter-spacing: -2px;
+  color: #ffffff;
+
+  opacity: 0;
+  transform: translateX(-35px);
+  animation: shop-header-enter 0.75s ease 0.12s forwards;
 }
 
+/* Description */
 .shop-header p:last-child {
-  color: #667085;
+  max-width: 500px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.76);
   font-size: 15px;
+  line-height: 1.7;
+
+  opacity: 0;
+  transform: translateX(-35px);
+  animation: shop-header-enter 0.75s ease 0.24s forwards;
 }
 
+
+/* ================================
+   SHOP HEADER ANIMATION
+================================ */
+
+@keyframes shop-header-enter {
+  from {
+    opacity: 0;
+    transform: translateX(-35px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes shop-header-glow {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+
+  to {
+    transform: translate(-25px, 25px) scale(1.15);
+  }
+}
+
+
+/* ================================
+   SHOP HEADER - MOBILE
+================================ */
+
+@media (max-width: 768px) {
+
+  .shop-header {
+    padding: 60px 20px;
+  }
+
+  .shop-header h1 {
+    font-size: clamp(40px, 11vw, 52px);
+    letter-spacing: -2px;
+  }
+
+  .shop-header p:last-child {
+    font-size: 14px;
+    max-width: 360px;
+  }
+
+  .shop-header::before {
+    width: 220px;
+    height: 220px;
+    right: -90px;
+    top: -90px;
+  }
+}
 /* ================================
    SHOP SECTION
 ================================ */
@@ -298,7 +413,7 @@
 
 .price-discount {
   font-size: 12.5px;
-  color: #1769aa;
+  color: red;
   font-weight: 700;
   margin-left: 6px;
 }
