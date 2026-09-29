@@ -10,6 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap"
     />
     <link rel="stylesheet" href="../css/admin.css" />
+    
   </head>
   <body>
     <div id="admin-loading" class="admin-loading">Checking admin access…</div>
@@ -576,29 +577,164 @@
             </div>
           </div>
 
-          <!-- CHARTS -->
+          <!-- CHARTS SECTION WITH TOP FILTER HEADER -->
           <div class="dt-chart-grid">
+            <!-- Left Side: Sales / Orders Line Chart -->
             <div class="dt-chart-card">
-              <div class="dt-chart-title">Weekly Sales</div>
-              <div class="dt-chart-tabs">
-                <button class="dt-chart-tab active" data-mode="sales">
-                  Sales
-                </button>
-                <button class="dt-chart-tab" data-mode="orders">Orders</button>
+              <div
+                class="dt-chart-header"
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  margin-bottom: 16px;
+                  flex-wrap: wrap;
+                  gap: 10px;
+                "
+              >
+                <div
+                  class="dt-chart-title"
+                  style="font-weight: 600; font-size: 16px"
+                >
+                  Sales Overview
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px">
+                  <div class="dt-chart-tabs">
+                    <button class="dt-chart-tab active" data-mode="sales">
+                      Sales
+                    </button>
+                    <button class="dt-chart-tab" data-mode="orders">
+                      Orders
+                    </button>
+                  </div>
+                  <select
+                    id="sales-range"
+                    style="
+                      padding: 5px 10px;
+                      border-radius: 6px;
+                      border: 1px solid #d0d5dd;
+                      font-size: 12px;
+                      background: #fff;
+                      outline: none;
+                      cursor: pointer;
+                      color: #344054;
+                      font-weight: 500;
+                      margin-top: -25px;
+                      margin-left: 16px;
+                    "
+                  >
+                    <option value="7" selected>1 Week</option>
+                    <option value="30">1 Month</option>
+                    <option value="365">1 Year</option>
+                    <option value="all">All Time</option>
+                  </select>
+                </div>
               </div>
-              <canvas id="weekly-chart" height="160"></canvas>
+              <div class="dt-chart-wrapper">
+                <canvas id="weekly-chart"></canvas>
+              </div>
             </div>
 
+            <!-- Right Side: Best Selling Products Pie Chart -->
             <div class="dt-chart-card">
-              <div class="dt-chart-title">Best Selling Products</div>
-              <div class="dt-legend" id="best-selling-legend"></div>
-              <canvas id="best-selling-chart" height="220"></canvas>
+              <div
+                class="dt-chart-header"
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  margin-bottom: 12px;
+                  flex-wrap: wrap;
+                  gap: 10px;
+                  margin-top: -6px;
+                "
+              >
+                <div
+                  class="dt-chart-title"
+                  style="font-weight: 600; font-size: 16px"
+                >
+                  Best Selling Products
+                </div>
+                <select
+                  id="best-selling-range"
+                  style="
+                    padding: 6px 12px;
+                    border-radius: 6px;
+                    border: 1px solid #d0d5dd;
+                    font-size: 12px;
+                    background: #fff;
+                    outline: none;
+                    cursor: pointer;
+                    color: #344054;
+                    font-weight: 500;
+                  "
+                >
+                  <option value="7">1 Week</option>
+                  <option value="30">1 Month</option>
+                  <option value="365">1 Year</option>
+                  <option value="all" selected>All Time</option>
+                </select>
+              </div>
+              <div
+                class="dt-legend"
+                id="best-selling-legend"
+                style="
+                  margin-bottom: 14px;
+                  display: flex;
+                  flex-wrap: wrap;
+                  gap: 8px;
+                "
+              ></div>
+              <div class="dt-chart-wrapper" id="best-selling-wrapper">
+                <canvas id="best-selling-chart"></canvas>
+              </div>
               <div
                 id="best-selling-empty"
                 class="dt-empty-note"
-                style="display: none"
+                style="
+                  display: none;
+                  text-align: center;
+                  color: #98a2b3;
+                  padding-top: 40px;
+                  font-size: 13px;
+                "
               >
-                No sales data yet.
+                No sales data yet for this period.
+              </div>
+            </div>
+          </div>
+
+          <!-- RECENT ORDERS SECTION (ADDED BELOW GRAPH & PIE CHART) -->
+          <div class="dt-recent-orders-section">
+            <div class="dt-section-title">Recent Order</div>
+            <div class="dt-table-card">
+              <table class="dt-table">
+                <thead>
+                  <tr>
+                    <th>INVOICE NO</th>
+                    <th>ORDER TIME</th>
+                    <th>CUSTOMER NAME</th>
+                    <th>METHOD</th>
+                    <th>AMOUNT</th>
+                    <th>STATUS</th>
+                    <th>ACTION</th>
+                    <th style="text-align: center">INVOICE</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-orders-tbody">
+                  <!-- JS Dynamic Rows will load here -->
+                </tbody>
+              </table>
+
+              <!-- Pagination -->
+              <div class="dt-pagination">
+                <button type="button" class="dt-page-btn">&lt; Previous</button>
+                <button type="button" class="dt-page-btn active">1</button>
+                <button type="button" class="dt-page-btn">2</button>
+                <button type="button" class="dt-page-btn">3</button>
+                <span>...</span>
+                <button type="button" class="dt-page-btn">42</button>
+                <button type="button" class="dt-page-btn">Next &gt;</button>
               </div>
             </div>
           </div>
@@ -606,13 +742,24 @@
       </div>
     </div>
 
+    <!-- Firebase Scripts -->
     <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+
+    <!-- Chart.js Official CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Local JS Files -->
     <script src="../js/firebase.js"></script>
     <script src="../js/auth.js"></script>
+
     <script>
+      let salesChartInstance = null;
+      let bestSellingChartInstance = null;
+      let salesMode = "sales";
+      let cachedOrders = [];
+
       requireAdmin().then(async (user) => {
         document.getElementById("admin-loading").style.display = "none";
         document.getElementById("admin-shell").style.display = "flex";
@@ -628,7 +775,7 @@
         document.getElementById("popup-name").textContent =
           user.email.split("@")[0];
         document.getElementById("popup-email").textContent = user.email;
-        await loadDashboard();
+        listenToDashboardRealtime();
       });
 
       const profileTrigger = document.getElementById("profile-trigger");
@@ -677,19 +824,31 @@
         return x;
       }
 
-      async function loadDashboard() {
-        const snap = await db
-          .collection("orders")
+      function listenToDashboardRealtime() {
+        db.collection("orders")
           .orderBy("createdAt", "desc")
-          .get();
-        const orders = snap.docs.map((doc) => {
-          const o = doc.data();
-          const created = o.createdAt?.toDate
-            ? o.createdAt.toDate()
-            : new Date();
-          return { ...o, id: doc.id, createdDate: created };
-        });
+          .onSnapshot(
+            (snap) => {
+              cachedOrders = snap.docs.map((doc) => {
+                const o = doc.data();
+                let created = new Date();
+                if (o.createdAt && typeof o.createdAt.toDate === "function") {
+                  created = o.createdAt.toDate();
+                } else if (o.createdAt) {
+                  created = new Date(o.createdAt);
+                }
+                return { ...o, id: doc.id, createdDate: created };
+              });
 
+              updateDashboardData(cachedOrders);
+            },
+            (error) => {
+              console.error("Firebase Realtime Listener Error:", error);
+            },
+          );
+      }
+
+      function updateDashboardData(orders) {
         const now = new Date();
         const todayStart = startOfDay(now);
         const yesterdayStart = new Date(todayStart);
@@ -736,7 +895,6 @@
         renderPaymentBreakdown("stat-today-breakdown", todayOrders);
         renderPaymentBreakdown("stat-yesterday-breakdown", yesterdayOrders);
 
-        // summary cards
         const pending = orders.filter(
           (o) => (o.status || "pending") === "pending",
         );
@@ -754,143 +912,332 @@
           delivered.length;
         document.getElementById("pending-badge").textContent = pending.length;
 
-        renderWeeklyChart(orders);
+        renderSalesChart(orders);
         renderBestSelling(orders);
+        renderRecentOrders(orders);
       }
 
       function renderPaymentBreakdown(elId, list) {
-        const methods = { "Cash on Delivery": 0, bKash: 0, SSLCOMMERZ: 0 };
+        const totals = { COD: 0, bKash: 0, Card: 0 };
+
         list.forEach((o) => {
-          const m = o.paymentMethod || "Cash on Delivery";
-          if (methods[m] === undefined) methods[m] = 0;
-          methods[m] += Number(o.totalAmount || o.total || 0);
+          const raw = o.paymentMethod || "COD";
+          const key =
+            raw === "bKash" ? "bKash" : raw === "SSLCOMMERZ" ? "Card" : "COD";
+          totals[key] += Number(o.totalAmount || o.total || 0);
         });
-        const labels = {
-          "Cash on Delivery": "COD",
-          bKash: "bKash",
-          SSLCOMMERZ: "Card",
-        };
-        document.getElementById(elId).innerHTML = Object.entries(methods)
-          .map(([k, v]) => `<div>${labels[k] || k}<b>${money(v)}</b></div>`)
+
+        document.getElementById(elId).innerHTML = Object.entries(totals)
+          .map(([k, v]) => `<div>${k}<b>${money(v)}</b></div>`)
           .join("");
       }
 
-      let weeklyChartInstance = null;
-      let weeklyMode = "sales";
+      function renderRecentOrders(orders) {
+        const tbody = document.getElementById("recent-orders-tbody");
+        if (!tbody) return;
 
-      function renderWeeklyChart(orders) {
-        const days = [];
-        const labels = [];
-        for (let i = 6; i >= 0; i--) {
-          const d = new Date();
-          d.setDate(d.getDate() - i);
-          days.push(startOfDay(d));
-          labels.push(d.toLocaleDateString("en-US", { weekday: "short" }));
+        if (!orders || orders.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 24px; color: #98a2b3;">No recent orders found.</td></tr>`;
+          return;
         }
 
-        function dataFor(mode) {
-          return days.map((dayStart) => {
+        const recentList = orders.slice(0, 8);
+
+        tbody.innerHTML = recentList
+          .map((o) => {
+            const invoiceNo = o.invoiceNo || o.id.slice(0, 6).toUpperCase();
+            const dateStr = o.createdDate
+              ? o.createdDate.toLocaleString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric",
+                  hour: "numeric",
+                  minute: "2-digit",
+                  hour12: true,
+                })
+              : "—";
+            const customerName =
+              o.customerName ||
+              o.shippingAddress?.fullName ||
+              o.userName ||
+              "Customer";
+            const method = o.paymentMethod || "Cash";
+            const amount = money(o.totalAmount || o.total || 0);
+            const status = (o.status || "pending").toLowerCase();
+
+            let badgeClass = "pending";
+            let statusText = "Pending";
+
+            if (status === "processing") {
+              badgeClass = "processing";
+              statusText = "Processing";
+            } else if (status === "delivered") {
+              badgeClass = "delivered";
+              statusText = "Delivered";
+            } else if (status === "cancel" || status === "cancelled") {
+              badgeClass = "cancel";
+              statusText = "Cancel";
+            } else if (status === "out for delivery" || status === "shipped") {
+              badgeClass = "out-for-delivery";
+              statusText = "Out For Delivery";
+            }
+
+            return `
+              <tr>
+                <td style="font-weight: 600; color: #101828;">${invoiceNo}</td>
+                <td style="color: #475467;">${dateStr}</td>
+                <td style="color: #344054;">${customerName}</td>
+                <td style="font-weight: 600; color: #101828;">${method}</td>
+                <td style="font-weight: 700; color: #101828;">${amount}</td>
+                <td>
+                  <span class="badge-status ${badgeClass}">${statusText}</span>
+                </td>
+                <td>
+                  <select class="status-select" onchange="updateOrderStatus('${o.id}', this.value)">
+                    <option value="pending" ${status === "pending" ? "selected" : ""}>Pending</option>
+                    <option value="processing" ${status === "processing" ? "selected" : ""}>Processing</option>
+                    <option value="delivered" ${status === "delivered" ? "selected" : ""}>Delivered</option>
+                    <option value="out for delivery" ${status === "out for delivery" ? "selected" : ""}>Out For Delivery</option>
+                    <option value="cancel" ${status === "cancel" || status === "cancelled" ? "selected" : ""}>Cancel</option>
+                  </select>
+                </td>
+                <td style="text-align: center;">
+                  <button class="action-icon-btn" title="Print Invoice" onclick="printInvoice('${o.id}')">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                  </button>
+                  <button class="action-icon-btn" title="View Details" onclick="viewOrderDetails('${o.id}')">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+                  </button>
+                </td>
+              </tr>
+            `;
+          })
+          .join("");
+      }
+
+      async function updateOrderStatus(orderId, newStatus) {
+        try {
+          await db.collection("orders").doc(orderId).update({
+            status: newStatus,
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+          });
+        } catch (err) {
+          console.error("Error updating order status:", err);
+          alert("Failed to update status");
+        }
+      }
+
+      function printInvoice(orderId) {
+        window.open(`invoice.html?id=${orderId}`, "_blank");
+      }
+
+      function viewOrderDetails(orderId) {
+        window.location.href = `orders.html?id=${orderId}`;
+      }
+
+      function renderSalesChart(orders) {
+        const rangeVal = document.getElementById("sales-range").value;
+        const labels = [];
+        const chartData = [];
+
+        if (rangeVal === "7" || rangeVal === "30") {
+          const daysCount = Number(rangeVal);
+          for (let i = daysCount - 1; i >= 0; i--) {
+            const d = new Date();
+            d.setDate(d.getDate() - i);
+            const dayStart = startOfDay(d);
             const dayEnd = new Date(dayStart);
             dayEnd.setDate(dayEnd.getDate() + 1);
+
             const dayOrders = orders.filter(
               (o) => o.createdDate >= dayStart && o.createdDate < dayEnd,
             );
-            return mode === "sales"
-              ? dayOrders.reduce(
-                  (a, o) => a + Number(o.totalAmount || o.total || 0),
-                  0,
-                )
-              : dayOrders.length;
-          });
+            labels.push(
+              d.toLocaleDateString("en-US", { month: "short", day: "numeric" }),
+            );
+
+            const value =
+              salesMode === "sales"
+                ? dayOrders.reduce(
+                    (a, o) => a + Number(o.totalAmount || o.total || 0),
+                    0,
+                  )
+                : dayOrders.length;
+            chartData.push(value);
+          }
+        } else if (rangeVal === "365" || rangeVal === "all") {
+          const monthsCount = rangeVal === "365" ? 12 : 24;
+          for (let i = monthsCount - 1; i >= 0; i--) {
+            const d = new Date();
+            d.setMonth(d.getMonth() - i);
+            const mStart = new Date(d.getFullYear(), d.getMonth(), 1);
+            const mEnd = new Date(d.getFullYear(), d.getMonth() + 1, 1);
+
+            const mOrders = orders.filter(
+              (o) => o.createdDate >= mStart && o.createdDate < mEnd,
+            );
+            labels.push(
+              d.toLocaleDateString("en-US", {
+                month: "short",
+                year: "2-digit",
+              }),
+            );
+
+            const value =
+              salesMode === "sales"
+                ? mOrders.reduce(
+                    (a, o) => a + Number(o.totalAmount || o.total || 0),
+                    0,
+                  )
+                : mOrders.length;
+            chartData.push(value);
+          }
         }
 
         const ctx = document.getElementById("weekly-chart").getContext("2d");
-        if (weeklyChartInstance) weeklyChartInstance.destroy();
-        weeklyChartInstance = new Chart(ctx, {
+        if (salesChartInstance) salesChartInstance.destroy();
+
+        salesChartInstance = new Chart(ctx, {
           type: "line",
           data: {
             labels,
             datasets: [
               {
-                label: weeklyMode === "sales" ? "Sales (৳)" : "Orders",
-                data: dataFor(weeklyMode),
-                borderColor: "#16C08C",
-                backgroundColor: "rgba(22,192,140,0.08)",
-                tension: 0.35,
+                label: salesMode === "sales" ? "Sales (৳)" : "Orders",
+                data: chartData,
+                borderColor: "#10b981",
+                backgroundColor: "rgba(16, 185, 129, 0.08)",
+                borderWidth: 2,
+                tension: 0.2,
                 fill: true,
                 pointRadius: 3,
+                pointBackgroundColor: "#10b981",
               },
             ],
           },
           options: {
             responsive: true,
-            plugins: { legend: { display: false } },
-            scales: { y: { beginAtZero: true } },
+            maintainAspectRatio: false,
+            plugins: { legend: { display: true, position: "top" } },
+            scales: {
+              y: { beginAtZero: true, grid: { color: "rgba(0, 0, 0, 0.05)" } },
+              x: { grid: { display: false } },
+            },
           },
-        });
-
-        document.querySelectorAll(".dt-chart-tab").forEach((tab) => {
-          tab.onclick = () => {
-            document
-              .querySelectorAll(".dt-chart-tab")
-              .forEach((t) => t.classList.remove("active"));
-            tab.classList.add("active");
-            weeklyMode = tab.dataset.mode;
-            renderWeeklyChart(orders);
-          };
         });
       }
 
+      document.querySelectorAll(".dt-chart-tab").forEach((tab) => {
+        tab.onclick = () => {
+          document
+            .querySelectorAll(".dt-chart-tab")
+            .forEach((t) => t.classList.remove("active"));
+          tab.classList.add("active");
+          salesMode = tab.dataset.mode;
+          if (cachedOrders.length > 0) {
+            renderSalesChart(cachedOrders);
+          }
+        };
+      });
+
+      document.getElementById("sales-range").addEventListener("change", () => {
+        if (cachedOrders.length > 0) renderSalesChart(cachedOrders);
+      });
+
       function renderBestSelling(orders) {
+        const rangeVal = document.getElementById("best-selling-range").value;
+        let filteredOrders = orders;
+
+        if (rangeVal !== "all") {
+          const limitDate = new Date();
+          limitDate.setDate(limitDate.getDate() - Number(rangeVal));
+          limitDate.setHours(0, 0, 0, 0);
+          filteredOrders = orders.filter(
+            (o) => o.createdDate && o.createdDate >= limitDate,
+          );
+        }
+
         const counts = {};
-        orders.forEach((o) => {
-          (o.items || []).forEach((item) => {
-            const name = item.name || "Unknown";
+        filteredOrders.forEach((o) => {
+          const items = o.items || o.cart || o.cartItems || o.products || [];
+          items.forEach((item) => {
+            const name = item.name || item.title || "Unknown";
             counts[name] =
-              (counts[name] || 0) + Number(item.quantity || item.qty || 1);
+              (counts[name] || 0) +
+              Number(item.quantity || item.qty || item.count || 1);
           });
         });
 
         const sorted = Object.entries(counts)
           .sort((a, b) => b[1] - a[1])
           .slice(0, 5);
-        const canvas = document.getElementById("best-selling-chart");
+
+        const wrapper = document.getElementById("best-selling-wrapper");
         const emptyNote = document.getElementById("best-selling-empty");
         const legendEl = document.getElementById("best-selling-legend");
 
         if (sorted.length === 0) {
-          canvas.style.display = "none";
-          emptyNote.style.display = "block";
-          legendEl.innerHTML = "";
+          if (wrapper) wrapper.style.display = "none";
+          if (emptyNote) emptyNote.style.display = "block";
+          if (legendEl) legendEl.innerHTML = "";
+          if (bestSellingChartInstance) {
+            bestSellingChartInstance.destroy();
+            bestSellingChartInstance = null;
+          }
           return;
         }
 
-        canvas.style.display = "block";
-        emptyNote.style.display = "none";
+        if (wrapper) wrapper.style.display = "block";
+        if (emptyNote) emptyNote.style.display = "none";
 
-        const colors = ["#16C08C", "#2E90FA", "#F97066", "#F79009", "#7A5AF8"];
+        const colors = ["#10b981", "#3b82f6", "#f97316", "#06b6d4", "#a855f7"];
         const labels = sorted.map((s) => s[0]);
         const data = sorted.map((s) => s[1]);
 
-        legendEl.innerHTML = labels
-          .map(
-            (l, i) =>
-              `<span><i style="background:${colors[i]}"></i>${l}</span>`,
-          )
-          .join("");
+        if (legendEl) {
+          legendEl.innerHTML = labels
+            .map(
+              (l, i) =>
+                `<span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; background: #F2F4F7; padding: 4px 10px; border-radius: 6px; color: #344054; font-weight: 500;"><i style="background:${colors[i]}; width: 10px; height: 10px; border-radius: 50%; display: inline-block;"></i>${l} (${data[i]})</span>`,
+            )
+            .join("");
+        }
 
-        new Chart(canvas.getContext("2d"), {
-          type: "doughnut",
+        if (bestSellingChartInstance) {
+          bestSellingChartInstance.destroy();
+        }
+
+        const canvas = document.getElementById("best-selling-chart");
+        if (!canvas) return;
+
+        bestSellingChartInstance = new Chart(canvas, {
+          type: "pie",
           data: {
             labels,
-            datasets: [{ data, backgroundColor: colors, borderWidth: 0 }],
+            datasets: [
+              {
+                data,
+                backgroundColor: colors,
+                borderWidth: 2,
+                borderColor: "#ffffff",
+              },
+            ],
           },
           options: {
             responsive: true,
-            plugins: { legend: { display: false } },
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+            },
           },
         });
       }
+
+      document
+        .getElementById("best-selling-range")
+        .addEventListener("change", () => {
+          if (cachedOrders.length > 0) renderBestSelling(cachedOrders);
+        });
     </script>
   </body>
 </html>
