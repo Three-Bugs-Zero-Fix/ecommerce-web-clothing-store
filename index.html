@@ -185,6 +185,29 @@
             </div>
           </a>
 
+          <a href="pages/shop.html?category=Teens" class="category-card">
+            <div class="category-image">
+              <img src="assets/image/teen.jpg" alt="Teens Collection" loading="lazy" decoding="async" />
+
+              <div class="category-overlay">
+                <h3>Teens</h3>
+                <p>Explore Collection →</p>
+              </div>
+            </div>
+          </a>
+
+
+          <a href="pages/shop.html?category=Masks" class="category-card">
+            <div class="category-image">
+              <img src="assets/image/mask.jpg" alt="Masks Collection" loading="lazy" decoding="async" />
+
+              <div class="category-overlay">
+                <h3>Masks</h3>
+                <p>Explore Collection →</p>
+              </div>
+            </div>
+          </a>
+
         </div>
       </div>
     </section>
@@ -392,6 +415,65 @@
   <script src="/js/cart.js"></script>
   <script src="/js/featured.js"></script>
   <script src="/js/banners.js"></script>
+
+
+  <script>
+    /* ============================================================
+       CATEGORY SLIDER
+    ============================================================ */
+
+    const categoryGrid =
+      document.querySelector(".category-grid");
+
+    const categoryCards =
+      document.querySelectorAll(".category-card");
+
+    if (categoryGrid && categoryCards.length > 0) {
+
+      let activeIndex = 0;
+
+      categoryCards[activeIndex].classList.add("active");
+
+
+      setInterval(() => {
+
+        const firstCard =
+          categoryGrid.firstElementChild;
+
+        categoryGrid.style.transition =
+          "transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1)";
+
+        const cardWidth =
+          firstCard.offsetWidth + 16;
+
+        categoryGrid.style.transform =
+          `translateX(-${cardWidth}px)`;
+
+
+        setTimeout(() => {
+
+          categoryGrid.appendChild(firstCard);
+
+          categoryGrid.style.transition = "none";
+          categoryGrid.style.transform = "translateX(0)";
+
+
+          activeIndex =
+            (activeIndex + 1) % categoryCards.length;
+
+
+          categoryCards.forEach(card => {
+            card.classList.remove("active");
+          });
+
+
+          categoryGrid.firstElementChild.classList.add("active");
+
+        }, 800);
+
+      }, 2800);
+    }
+  </script>
 
 </body>
 
