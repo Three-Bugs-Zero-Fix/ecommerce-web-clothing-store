@@ -1984,9 +1984,9 @@ table.admin-table td {
 .dt-stat-card.c1 {
   background: linear-gradient(
     135deg,
-    #26547c 0%,
-    #ef476f 50%,
-    #ffd166 100%
+    #7fc1fb 0%,
+    #ef9eb1 50%,
+    #f8d88e 100%
   ) !important;
 }
 .dt-stat-card.c1:hover {
@@ -1999,9 +1999,9 @@ table.admin-table td {
 .dt-stat-card.c2 {
   background: linear-gradient(
     135deg,
-    #a6e1e7 0%,
-    #91c3d5 50%,
-    #da9fc2 100%
+    #c2eff4 0%,
+    #68d3fa 50%,
+    #f430a9 100%
   ) !important;
 }
 .dt-stat-card.c2:hover {
@@ -2014,9 +2014,9 @@ table.admin-table td {
 .dt-stat-card.c3 {
   background: linear-gradient(
     135deg,
-    #ffe4e6 0%,
-    #fce7f3 50%,
-    #f3e8ff 100%
+    #f24f5a 0%,
+    #f6a5d3 50%,
+    #cfb0f0 100%
   ) !important;
 }
 .dt-stat-card.c3:hover {
@@ -2067,8 +2067,8 @@ table.admin-table td {
   background: linear-gradient(
     45deg,
     rgba(255, 255, 255, 0.8) 0%,
-    rgba(53, 230, 192, 0.3) 60%,
-    rgba(91, 110, 245, 0.25) 100%
+    rgba(92, 254, 219, 0.989) 60%,
+    rgb(112, 127, 245) 100%
   );
   mix-blend-mode: multiply;
   filter: blur(20px);
@@ -2107,9 +2107,9 @@ table.admin-table td {
   inset: -10px;
   background: linear-gradient(
     135deg,
-    rgba(255, 106, 61, 0.35) 0%,
-    rgba(255, 201, 77, 0.45) 50%,
-    rgba(255, 61, 119, 0.45) 100%
+    rgba(149, 239, 242, 0.981) 0%,
+    rgb(215, 184, 234) 50%,
+    rgb(255, 61, 119) 100%
   );
   mix-blend-mode: multiply;
   filter: blur(22px);
@@ -2308,4 +2308,345 @@ table.admin-table td {
   .dt-chart-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* ============================================================
+              RECENT ORDRER SECTION IN ADMIN PANEL
+   ============================================================ */
+
+.dt-chart-wrapper {
+  position: relative !important;
+  width: 100% !important;
+  height: 260px !important;
+}
+
+/* RECENT ORDER SECTION STYLES */
+.dt-recent-orders-section {
+  margin-top: 32px;
+}
+.dt-section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #101828;
+  margin-bottom: 16px;
+}
+.dt-table-card {
+  background: #ffffff;
+  border: 1px solid #eaecf0;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.05);
+  overflow-x: auto;
+}
+.dt-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13px;
+  color: #344054;
+}
+.dt-table th {
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
+  color: #667085;
+  padding: 12px 16px;
+  border-bottom: 1px solid #eaecf0;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+.dt-table td {
+  padding: 16px;
+  border-bottom: 1px solid #f2f4f7;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.dt-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Status Badges */
+.badge-status {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+}
+.badge-status.processing {
+  background-color: #ec4899;
+}
+.badge-status.delivered {
+  background-color: #10b981;
+}
+.badge-status.pending {
+  background-color: #f97316;
+}
+.badge-status.cancel {
+  background-color: #ef4444;
+}
+.badge-status.out-for-delivery {
+  background-color: #3b82f6;
+}
+
+/* Action Controls */
+.status-select {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #d0d5dd;
+  font-size: 12px;
+  color: #344054;
+  background: #fff;
+  outline: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+.action-icon-btn {
+  background: transparent;
+  border: none;
+  color: #667085;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 4px;
+  transition: color 0.2s;
+}
+.action-icon-btn:hover {
+  color: #101828;
+}
+
+/* Pagination */
+.dt-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 24px;
+  font-size: 13px;
+  color: #475467;
+}
+.dt-page-btn {
+  padding: 6px 12px;
+  border: 1px solid #d0d5dd;
+  background: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  color: #344054;
+}
+.dt-page-btn.active {
+  background: #f9fafb;
+  border-color: #d0d5dd;
+  font-weight: 600;
+}
+
+/* ============================================================
+        Lighting effect for oder,processing, deliveried
+   ============================================================ */
+
+.dt-chart-wrapper {
+  position: relative !important;
+  width: 100% !important;
+  height: 260px !important;
+}
+
+/* SUMMARY CARDS BORDER LIGHT FLOW ANIMATION */
+.dt-summary-card {
+  position: relative !important;
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden !important;
+  z-index: 1;
+  border: 1px solid #eaecf0;
+}
+
+.dt-summary-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg 280deg,
+    rgba(59, 130, 246, 0.15) 320deg,
+    rgba(59, 130, 246, 0.9) 360deg
+  );
+  animation: borderLightFlow 2.0s linear infinite;
+  z-index: -2;
+}
+
+.dt-summary-card::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  background: #ffffff;
+  border-radius: 13px;
+  z-index: -1;
+}
+
+/* Card Specific Light Colors */
+.dt-summary-card:nth-child(1)::before {
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg 280deg,
+    rgba(249, 115, 22, 0.2) 320deg,
+    rgba(249, 115, 22, 0.9) 360deg
+  );
+}
+.dt-summary-card:nth-child(2)::before {
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg 280deg,
+    rgba(59, 130, 246, 0.2) 320deg,
+    rgba(59, 130, 246, 0.9) 360deg
+  );
+}
+.dt-summary-card:nth-child(3)::before {
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg 280deg,
+    rgba(168, 85, 247, 0.2) 320deg,
+    rgba(168, 85, 247, 0.9) 360deg
+  );
+}
+.dt-summary-card:nth-child(4)::before {
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg 280deg,
+    rgba(16, 185, 129, 0.2) 320deg,
+    rgba(16, 185, 129, 0.9) 360deg
+  );
+}
+
+@keyframes borderLightFlow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* RECENT ORDER SECTION STYLES */
+.dt-recent-orders-section {
+  margin-top: 32px;
+}
+.dt-section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #101828;
+  margin-bottom: 16px;
+}
+.dt-table-card {
+  background: #ffffff;
+  border: 1px solid #eaecf0;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.05);
+  overflow-x: auto;
+}
+.dt-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13px;
+  color: #344054;
+}
+.dt-table th {
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
+  color: #667085;
+  padding: 12px 16px;
+  border-bottom: 1px solid #eaecf0;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+.dt-table td {
+  padding: 16px;
+  border-bottom: 1px solid #f2f4f7;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.dt-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Status Badges */
+.badge-status {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+}
+.badge-status.processing {
+  background-color: #ec4899;
+}
+.badge-status.delivered {
+  background-color: #10b981;
+}
+.badge-status.pending {
+  background-color: #f97316;
+}
+.badge-status.cancel {
+  background-color: #ef4444;
+}
+.badge-status.out-for-delivery {
+  background-color: #3b82f6;
+}
+
+/* Action Controls */
+.status-select {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #d0d5dd;
+  font-size: 12px;
+  color: #344054;
+  background: #fff;
+  outline: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+.action-icon-btn {
+  background: transparent;
+  border: none;
+  color: #667085;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 4px;
+  transition: color 0.2s;
+}
+.action-icon-btn:hover {
+  color: #101828;
+}
+
+/* Pagination */
+.dt-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 24px;
+  font-size: 13px;
+  color: #475467;
+}
+.dt-page-btn {
+  padding: 6px 12px;
+  border: 1px solid #d0d5dd;
+  background: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  color: #344054;
+}
+.dt-page-btn.active {
+  background: #f9fafb;
+  border-color: #d0d5dd;
+  font-weight: 600;
 }
