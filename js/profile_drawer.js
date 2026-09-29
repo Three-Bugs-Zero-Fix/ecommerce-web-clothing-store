@@ -83,45 +83,127 @@ overlay.addEventListener("click", closeDrawer);
    AUTH STATE
 ============================================================ */
 
-auth.onAuthStateChanged((user) => {
-
-  updateProfileButton(user);
+auth.onAuthStateChanged(async (user) => {
 
   if (!user) {
-    drawerBody.innerHTML = signedOutHTML();
+
+    updateProfileButton(null);
+
+    drawerBody.innerHTML =
+      signedOutHTML();
+
     return;
   }
 
-  drawerBody.innerHTML = signedInHTML(user);
+
+  let photoUrl = "";
+
+
+  try {
+
+    const profileDoc =
+      await db
+        .collection("users")
+        .doc(user.uid)
+        .get();
+
+
+    if (profileDoc.exists) {
+
+      const data =
+        profileDoc.data();
+
+      photoUrl =
+        data.photoUrl || "";
+    }
+
+  } catch (error) {
+
+    console.error(
+      "Failed to load profile photo:",
+      error
+    );
+  }
+
+
+  updateProfileButton(
+    user,
+    photoUrl
+  );
+
+
+  drawerBody.innerHTML =
+    signedInHTML(
+      user,
+      photoUrl
+    );
+
 
   wireEvents();
 });
+
 
 
 /* ============================================================
    PROFILE BUTTON
 ============================================================ */
 
-function updateProfileButton(user) {
+function updateProfileButton(user, photoUrl = "") {
+
+  if (!profileBtnContent || !profileBtn) {
+    return;
+  }
 
   if (user) {
 
-    const name = user.displayName || user.email || "?";
+    const name =
+      user.displayName ||
+      user.email ||
+      "?";
 
-    profileBtnContent.textContent =
+    const initial =
       name.charAt(0).toUpperCase();
 
-    profileBtn.classList.remove("profile-btn-guest");
-    profileBtn.classList.add("profile-btn-avatar");
+
+    if (photoUrl) {
+
+      profileBtnContent.innerHTML = `
+        <img
+          src="${escapeHtml(photoUrl)}"
+          alt="Profile"
+        >
+      `;
+
+    } else {
+
+      profileBtnContent.textContent =
+        initial;
+    }
+
+
+    profileBtn.classList.remove(
+      "profile-btn-guest"
+    );
+
+    profileBtn.classList.add(
+      "profile-btn-avatar"
+    );
 
   } else {
 
-    profileBtnContent.textContent = "👤";
+    profileBtnContent.textContent =
+      "👤";
 
-    profileBtn.classList.remove("profile-btn-avatar");
-    profileBtn.classList.add("profile-btn-guest");
+    profileBtn.classList.remove(
+      "profile-btn-avatar"
+    );
+
+    profileBtn.classList.add(
+      "profile-btn-guest"
+    );
   }
 }
+
 
 
 /* ============================================================
@@ -163,16 +245,33 @@ function signedOutHTML() {
    SIGNED IN DRAWER
 ============================================================ */
 
-function signedInHTML(user) {
+function signedInHTML(user, photoUrl = "") {
 
-  const name = user.displayName || "Unnamed customer";
-  const initial = name.charAt(0).toUpperCase();
+  const name =
+    user.displayName ||
+    "Unnamed customer";
+
+  const initial =
+    name.charAt(0).toUpperCase();
+
+
+  const avatarHTML = photoUrl
+
+    ? `
+      <img
+        src="${escapeHtml(photoUrl)}"
+        alt="Profile picture"
+      >
+    `
+
+    : initial;
+
 
   return `
     <div class="drawer-profile-head">
 
       <div class="drawer-avatar">
-        ${initial}
+        ${avatarHTML}
       </div>
 
       <div>
@@ -193,15 +292,15 @@ function signedInHTML(user) {
     <nav class="account-menu">
 
       <a
-        href="/pages/dashboard.html"
+        href="/pages/profile.html"
         class="menu-item"
       >
         <span class="menu-icon">
-          ${icon("dashboard")}
+          ${icon("profile")}
         </span>
 
         <span class="menu-label">
-          Dashboard
+          My Profile
         </span>
 
         <span class="menu-arrow">
@@ -307,6 +406,7 @@ function signedInHTML(user) {
 }
 
 
+
 /* ============================================================
    EVENTS
 ============================================================ */
@@ -344,6 +444,18 @@ function wireEvents() {
 function icon(name) {
 
   const icons = {
+
+    profile: `
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.8"
+  >
+    <circle cx="12" cy="8" r="4"/>
+    <path d="M4 21a8 8 0 0 1 16 0"/>
+  </svg>
+`,
 
     dashboard: `
       <svg
