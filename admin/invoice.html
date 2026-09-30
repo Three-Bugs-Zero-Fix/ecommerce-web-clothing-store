@@ -62,7 +62,7 @@
           <tbody id="inv-items-body"></tbody>
         </table>
 
-        <!-- 💳 Summary Card Section (Fixed Alignment & Thicker Border) -->
+        <!-- 💳 Summary Card Section -->
         <div class="summary-card">
           <div class="summary-item">
             <span class="summary-label">Payment Method</span>
@@ -161,8 +161,10 @@
         document.getElementById("loading").style.display = "none";
         document.getElementById("invoice-content").style.display = "block";
 
-        document.getElementById("inv-number").textContent =
-          "#" + (o.orderNumber || id.slice(0, 8).toUpperCase());
+        // Ensures exact sync with orders page format (#id)
+        const invoiceNo = o.invoiceNo || `#${id.slice(0, 6).toUpperCase()}`;
+        document.getElementById("inv-number").textContent = invoiceNo;
+
         const createdDate = o.createdAt?.toDate
           ? o.createdAt.toDate()
           : new Date();

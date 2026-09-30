@@ -199,7 +199,7 @@ function applyAllFilters() {
   let filtered = allOrders.filter((order) => {
     const matchSearch =
       (order.customerName || "").toLowerCase().includes(query) ||
-      (order.id || "").toLowerCase().includes(query) ||
+      (order.invoiceNo || order.id || "").toLowerCase().includes(query) ||
       (order.phone || "").toLowerCase().includes(query);
 
     let matchStatus = true;
@@ -323,13 +323,19 @@ function capitalizeStatus(status) {
     .join(" ");
 }
 
+// 📌 Uniform helper function to get or ensure the exact Invoice No across all views
+function getInvoiceNo(order) {
+  if (order.invoiceNo) return order.invoiceNo;
+  return `#${(order.id || "").slice(0, 6).toUpperCase()}`;
+}
+
 function sortOrders(field, direction) {
   allOrders.sort((a, b) => {
     let valA = "",
       valB = "";
     if (field === "invoice") {
-      valA = a.id || "";
-      valB = b.id || "";
+      valA = getInvoiceNo(a);
+      valB = getInvoiceNo(b);
     } else if (field === "time") {
       valA = a.createdAt ? a.createdAt.toMillis() : 0;
       valB = b.createdAt ? b.createdAt.toMillis() : 0;
@@ -360,14 +366,29 @@ function sortOrders(field, direction) {
   applyAllFilters();
 }
 
-/* ---------- LOAD ORDERS ---------- */
+/* ---------- LOAD ORDERS & SYNC INVOICE NO TO FIREBASE ---------- */
 async function loadOrders() {
   try {
     const snap = await db
       .collection("orders")
       .orderBy("createdAt", "desc")
       .get();
-    allOrders = snap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      
+    allOrders = await Promise.all(snap.docs.map(async (docSnap) => {
+      let data = docSnap.data();
+      let orderId = docSnap.id;
+      
+      // If invoiceNo is missing in Firebase, generate and update it automatically
+      let invNo = data.invoiceNo;
+      if (!invNo) {
+        invNo = `#${orderId.slice(0, 6).toUpperCase()}`;
+        // Update database with the standard invoiceNo
+        await db.collection("orders").doc(orderId).update({ invoiceNo: invNo }).catch(err => console.error("Error updating invoiceNo:", err));
+      }
+
+      return { id: orderId, invoiceNo: invNo, ...data };
+    }));
+
     renderTable(allOrders);
   } catch (error) {
     const body = document.getElementById("orders-body");
@@ -517,7 +538,7 @@ function downloadAllOrdersCSV() {
     const dateStr = o.createdAt
       ? o.createdAt.toDate().toLocaleString().replace(/,/g, "")
       : "";
-    const invoiceId = `#${(o.id || "").slice(0, 6)}`;
+    const invoiceId = getInvoiceNo(o);
     const customer = `"${(o.customerName || "").replace(/"/g, '""')}"`;
     const phone = `"${(o.phone || "").replace(/"/g, '""')}"`;
     const method = (o.paymentMethod || "COD").toUpperCase();
@@ -540,12 +561,10 @@ function downloadAllOrdersCSV() {
 }
 
 /* ---------- PAGE NAVIGATION HANDLERS ---------- */
-// 👁️ View Order Details Page (Opens invoice.html in a new tab)
 function viewOrderDetails(orderId) {
   window.open(`invoice.html?id=${orderId}`, "_blank");
 }
 
-// 🖨️ Print Invoice Page (Opens print_invoice.html in a new tab)
 function printOrderInvoice(orderId) {
   window.open(`print_invoice.html?id=${orderId}`, "_blank");
 }
@@ -575,6 +594,7 @@ function renderTable(list) {
       const totalQuantity = getOrderQuantity(order);
       const orderStatusText = capitalizeStatus(order.status);
       const lowerStatus = orderStatusText.toLowerCase();
+      const invoiceDisplay = getInvoiceNo(order);
 
       let statusBg = "#fef3c7",
         statusColor = "#b45309";
@@ -597,7 +617,7 @@ function renderTable(list) {
         <td style="padding: 15px 12px; text-align: center;">
           <input type="checkbox" class="order-checkbox" value="${order.id}" onchange="updateTopCounts()">
         </td>
-        <td class="col-invoice" style="padding: 15px 12px; font-weight: 600; color: #2563eb;">#${order.id.slice(0, 6)}</td>
+        <td class="col-invoice" style="padding: 15px 12px; font-weight: 600; color: #2563eb;">${invoiceDisplay}</td>
         <td class="col-time" style="padding: 15px 12px; color: #4b5563; font-size: 13px;">${timeStr}</td>
         <td class="col-customer" style="padding: 15px 12px;">
           <div style="font-weight: 600; color: #111827;">${escapeHtml(order.customerName)}</div>
@@ -672,7 +692,7 @@ function openOrderModal(id) {
   const modalContent = document.getElementById("order-modal-content");
   if (modalContent) {
     modalContent.innerHTML = `
-      <div class="order-detail-row"><span class="order-label">Order ID:</span> <span class="order-value">#${order.id}</span></div>
+      <div class="order-detail-row"><span class="order-label">Order ID:</span> <span class="order-value">${getInvoiceNo(order)}</span></div>
       <div class="order-detail-row"><span class="order-label">Customer Name:</span> <span class="order-value">${escapeHtml(order.customerName)}</span></div>
       <div class="order-detail-row"><span class="order-label">Phone:</span> <span class="order-value">${escapeHtml(order.phone)}</span></div>
       <div class="order-detail-row"><span class="order-label">Payment Method:</span> <span class="order-value" style="text-transform: uppercase;">${escapeHtml(order.paymentMethod)}</span></div>
