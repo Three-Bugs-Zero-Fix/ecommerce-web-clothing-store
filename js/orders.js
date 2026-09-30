@@ -281,6 +281,11 @@ function getOrderQuantity(order) {
   return qty;
 }
 
+function capitalizeStatus(status) {
+  if (!status) return 'Pending';
+  return status.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');
+}
+
 function sortOrders(field, direction) {
   allOrders.sort((a, b) => {
     let valA = '', valB = '';
@@ -414,7 +419,7 @@ function downloadAllOrdersCSV() {
     const method = (o.paymentMethod || 'COD').toUpperCase();
     const amount = o.totalAmount || 0;
     const qty = getOrderQuantity(o);
-    const status = o.status || 'Pending';
+    const status = capitalizeStatus(o.status);
     const delivery = `"${(o.deliveryBoy || 'Unassign').replace(/"/g, '""')}"`;
 
     csvContent += `${invoiceId},"${dateStr}",${customer},${phone},${method},${amount},${qty},${status},${delivery}\n`;
@@ -522,12 +527,14 @@ function renderTable(list) {
     const assignedRider = order.deliveryBoy ? `<span style="color: #0284c7; font-weight: 500;">${escapeHtml(order.deliveryBoy)}</span>` : `<span style="color: #ef4444; font-size: 12px;">Unassign</span>`;
     
     const totalQuantity = getOrderQuantity(order);
+    const orderStatusText = capitalizeStatus(order.status);
+    const lowerStatus = orderStatusText.toLowerCase();
 
-    let statusBg = "#fef3c7", statusColor = "#b45309", statusText = order.status || 'Pending';
-    if (order.status === "processing" || order.status === "Processing") { statusBg = "#e0f2fe"; statusColor = "#0284c7"; statusText = "Processing"; }
-    else if (order.status === "delivered" || order.status === "Delivered") { statusBg = "#d1fae5"; statusColor = "#059669"; statusText = "Delivered"; }
-    else if (order.status === "out for delivery" || order.status === "Out For Delivery") { statusBg = "#ede9fe"; statusColor = "#7c3aed"; statusText = "Out For Delivery"; }
-    else if (order.status === "canceled" || order.status === "Cancel") { statusBg = "#fee2e2"; statusColor = "#b91c1c"; statusText = "Cancel"; }
+    let statusBg = "#fef3c7", statusColor = "#b45309";
+    if (lowerStatus.includes("processing")) { statusBg = "#e0f2fe"; statusColor = "#0284c7"; }
+    else if (lowerStatus.includes("delivered")) { statusBg = "#d1fae5"; statusColor = "#059669"; }
+    else if (lowerStatus.includes("out for delivery")) { statusBg = "#ede9fe"; statusColor = "#7c3aed"; }
+    else if (lowerStatus.includes("cancel")) { statusBg = "#fee2e2"; statusColor = "#b91c1c"; }
 
     return `
       <tr style="border-bottom: 1px solid #f3f4f6;">
@@ -545,17 +552,17 @@ function renderTable(list) {
         <td class="col-quantity" style="padding: 15px 12px; font-weight: 600; color: #374151; text-align: center;">${totalQuantity}</td>
         <td class="col-status" style="padding: 15px 12px;">
           <span style="background: ${statusBg}; color: ${statusColor}; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600;">
-            ${statusText}
+            ${orderStatusText}
           </span>
         </td>
         <td class="col-delivery" style="padding: 15px 12px; font-size: 13px;">${assignedRider}</td>
         <td style="padding: 15px 12px;">
           <select onchange="updateOrderStatus('${order.id}', this.value)" style="padding: 6px 10px; font-size: 13px; font-weight: 500; border-radius: 6px; border: 1px solid #cbd5e1; outline: none; background: #fff; cursor: pointer;">
-              <option value="Pending" ${order.status === 'Pending' ? 'selected' : ''}>Pending</option>
-              <option value="Processing" ${order.status === 'Processing' ? 'selected' : ''}>Processing</option>
-              <option value="Out For Delivery" ${order.status === 'Out For Delivery' ? 'selected' : ''}>Out For Delivery</option>
-              <option value="Delivered" ${order.status === 'Delivered' ? 'selected' : ''}>Delivered</option>
-              <option value="Cancel" ${order.status === 'Cancel' ? 'selected' : ''}>Cancel</option>
+              <option value="Pending" ${lowerStatus === 'pending' ? 'selected' : ''}>Pending</option>
+              <option value="Processing" ${lowerStatus === 'processing' ? 'selected' : ''}>Processing</option>
+              <option value="Out For Delivery" ${lowerStatus === 'out for delivery' ? 'selected' : ''}>Out For Delivery</option>
+              <option value="Delivered" ${lowerStatus === 'delivered' ? 'selected' : ''}>Delivered</option>
+              <option value="Cancel" ${lowerStatus === 'cancel' ? 'selected' : ''}>Cancel</option>
           </select>
         </td>
         <td class="col-invoice-col" style="padding: 15px 12px; text-align: center;">
