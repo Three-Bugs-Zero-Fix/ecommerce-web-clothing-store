@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Orders — Admin</title>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
       rel="stylesheet"
@@ -18,14 +18,20 @@
     <div id="admin-loading" class="admin-loading">Checking admin access…</div>
 
     <div class="dt-shell" id="admin-shell" style="display: none">
-      
       <!-- SIDEBAR -->
       <aside class="dt-sidebar" id="dt-sidebar">
         <div class="dt-logo">
           <div class="dt-logo-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
               <path d="M6 2l1.5 4h9L18 2" />
-              <path d="M3.5 6h17l-1.2 13a2 2 0 0 1-2 1.8H6.7a2 2 0 0 1-2-1.8L3.5 6z" />
+              <path
+                d="M3.5 6h17l-1.2 13a2 2 0 0 1-2 1.8H6.7a2 2 0 0 1-2-1.8L3.5 6z"
+              />
               <path d="M8.5 10a3.5 3.5 0 0 0 7 0" />
             </svg>
           </div>
@@ -34,69 +40,199 @@
 
         <div class="dt-nav-section-title">General</div>
         <a href="index.html" class="dt-nav-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="8" height="8" rx="1.5" /><rect x="13" y="3" width="8" height="8" rx="1.5" /><rect x="3" y="13" width="8" height="8" rx="1.5" /><rect x="13" y="13" width="8" height="8" rx="1.5" /></svg>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <rect x="3" y="3" width="8" height="8" rx="1.5" />
+            <rect x="13" y="3" width="8" height="8" rx="1.5" />
+            <rect x="3" y="13" width="8" height="8" rx="1.5" />
+            <rect x="13" y="13" width="8" height="8" rx="1.5" />
+          </svg>
           <span class="nav-label">Dashboard</span>
         </a>
 
         <div class="dt-nav-section-title">Catalog</div>
         <a href="products.html" class="dt-nav-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 8h16l-1 12H5L4 8z" /><path d="M8 8V6a4 4 0 0 1 8 0v2" /></svg>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M4 8h16l-1 12H5L4 8z" />
+            <path d="M8 8V6a4 4 0 0 1 8 0v2" />
+          </svg>
           <span class="nav-label">Products</span>
         </a>
         <a href="banners.html" class="dt-nav-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5L5 21" /></svg>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <circle cx="8.5" cy="8.5" r="1.5" />
+            <path d="M21 15l-5-5L5 21" />
+          </svg>
           <span class="nav-label">Banners</span>
         </a>
         <a href="categories.html" class="dt-nav-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.6 12.6L12.7 4.7a2 2 0 0 0-1.4-.6H5a1 1 0 0 0-1 1v6.3c0 .5.2 1 .6 1.4l7.9 7.9a2 2 0 0 0 2.8 0l5.3-5.3a2 2 0 0 0 0-2.8z" /><circle cx="8" cy="8" r="1.2" /></svg>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path
+              d="M20.6 12.6L12.7 4.7a2 2 0 0 0-1.4-.6H5a1 1 0 0 0-1 1v6.3c0 .5.2 1 .6 1.4l7.9 7.9a2 2 0 0 0 2.8 0l5.3-5.3a2 2 0 0 0 0-2.8z"
+            />
+            <circle cx="8" cy="8" r="1.2" />
+          </svg>
           <span class="nav-label">Categories</span>
         </a>
         <a href="attributes.html" class="dt-nav-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3h18v6H3z" /><path d="M3 15h18v6H3z" /></svg>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M3 3h18v6H3z" />
+            <path d="M3 15h18v6H3z" />
+          </svg>
           <span class="nav-label">Attributes</span>
         </a>
         <a href="coupons.html" class="dt-nav-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12a2 2 0 0 1 0-4V5a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v3a2 2 0 0 1 0 4v3a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-3z" /></svg>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path
+              d="M21 12a2 2 0 0 1 0-4V5a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v3a2 2 0 0 1 0 4v3a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-3z"
+            />
+          </svg>
           <span class="nav-label">Coupons</span>
         </a>
         <a href="campaigns.html" class="dt-nav-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" /></svg>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" />
+          </svg>
           <span class="nav-label">Campaigns</span>
         </a>
 
         <div class="dt-nav-section-title">Sales</div>
         <a href="orders.html" class="dt-nav-item active">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></svg>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 7v5l3 3" />
+          </svg>
           <span class="nav-label">Orders</span>
         </a>
         <a href="delivery-boys.html" class="dt-nav-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="7" width="13" height="9" rx="1" /><path d="M14 10h4l3 3v3h-7z" /><circle cx="6" cy="18" r="1.6" /><circle cx="17" cy="18" r="1.6" /></svg>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <rect x="1" y="7" width="13" height="9" rx="1" />
+            <path d="M14 10h4l3 3v3h-7z" />
+            <circle cx="6" cy="18" r="1.6" />
+            <circle cx="17" cy="18" r="1.6" />
+          </svg>
           <span class="nav-label">Delivery Boys</span>
         </a>
         <a href="customers.html" class="dt-nav-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /></svg>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+          </svg>
           <span class="nav-label">Customers</span>
         </a>
         <a href="staff.html" class="dt-nav-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
           <span class="nav-label">Our Staff</span>
         </a>
 
         <div class="dt-nav-section-title">Settings</div>
         <a href="settings.html" class="dt-nav-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l-.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" /></svg>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <circle cx="12" cy="12" r="3" />
+            <path
+              d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l-.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"
+            />
+          </svg>
           <span class="nav-label">Settings</span>
         </a>
         <a href="store-customization.html" class="dt-nav-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z" /><path d="M3 8l2-5h14l2 5" /><path d="M12 8v12" /></svg>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M3 8h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z" />
+            <path d="M3 8l2-5h14l2 5" />
+            <path d="M12 8v12" />
+          </svg>
           <span class="nav-label">Store Customization</span>
         </a>
         <a href="localization.html" class="dt-nav-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18" /></svg>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <circle cx="12" cy="12" r="9" />
+            <path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18" />
+          </svg>
           <span class="nav-label">Localization</span>
         </a>
         <a href="../pages/shop.html" class="dt-nav-item" target="_blank">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" /><circle cx="12" cy="12" r="3" /></svg>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+            <circle cx="12" cy="12" r="3" />
+          </svg>
           <span class="nav-label">View Store</span>
         </a>
 
@@ -111,12 +247,35 @@
               </div>
             </div>
             <a href="index.html" class="dt-profile-popup-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <rect x="3" y="3" width="8" height="8" rx="1.5" />
+                <rect x="13" y="3" width="8" height="8" rx="1.5" />
+                <rect x="3" y="13" width="8" height="8" rx="1.5" />
+                <rect x="13" y="13" width="8" height="8" rx="1.5" />
+              </svg>
               Dashboard
             </a>
             <div class="dt-profile-popup-divider"></div>
-            <button type="button" class="dt-profile-popup-item danger" id="popup-logout">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+            <button
+              type="button"
+              class="dt-profile-popup-item danger"
+              id="popup-logout"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                <path d="M16 17l5-5-5-5" />
+                <path d="M21 12H9" />
+              </svg>
               Log out
             </button>
           </div>
@@ -128,7 +287,16 @@
               <div class="dt-sidebar-profile-email" id="sidebar-email">—</div>
             </div>
             <span class="dt-profile-chevron">
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 9l4-4 4 4M8 15l4 4 4-4"/></svg>
+              <svg
+                viewBox="0 0 24 24"
+                width="14"
+                height="14"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M8 9l4-4 4 4M8 15l4 4 4-4" />
+              </svg>
             </span>
           </button>
         </div>
@@ -136,30 +304,73 @@
 
       <!-- MAIN CONTENT -->
       <div class="dt-main" id="dt-main">
-        
         <!-- TOPBAR -->
         <div class="dt-topbar" id="dt-topbar">
           <div class="dt-topbar-left">
-            <button class="dt-icon-btn" id="sidebar-toggle" title="Toggle sidebar">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M9 4v16" /></svg>
+            <button
+              class="dt-icon-btn"
+              id="sidebar-toggle"
+              title="Toggle sidebar"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <rect x="3" y="4" width="18" height="16" rx="2" />
+                <path d="M9 4v16" />
+              </svg>
             </button>
             <div class="dt-search-box">
-              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#98A2B3" stroke-width="2"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /></svg>
+              <svg
+                viewBox="0 0 24 24"
+                width="15"
+                height="15"
+                fill="none"
+                stroke="#98A2B3"
+                stroke-width="2"
+              >
+                <circle cx="11" cy="11" r="7" />
+                <path d="M21 21l-4.3-4.3" />
+              </svg>
               <input type="text" placeholder="Search" disabled />
               <span class="dt-search-kbd">⌘K</span>
             </div>
           </div>
           <div class="dt-topbar-right">
-            <button class="dt-lang-pill" title="Language (coming soon)">EN</button>
+            <button class="dt-lang-pill" title="Language (coming soon)">
+              EN
+            </button>
             <button class="dt-theme-btn light active" title="Light mode">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></svg>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <circle cx="12" cy="12" r="4" />
+                <path
+                  d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+                />
+              </svg>
             </button>
             <button class="dt-theme-btn dark" title="Dark mode (coming soon)">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.5A9 9 0 1 1 11.5 3a7 7 0 0 0 9.5 9.5z" /></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M21 12.5A9 9 0 1 1 11.5 3a7 7 0 0 0 9.5 9.5z" />
+              </svg>
             </button>
             <div class="dt-bell-wrap">
               <button class="dt-icon-btn" title="Notifications (coming soon)">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" /><path d="M13.7 21a2 2 0 0 1-3.4 0" /></svg>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
+                  <path d="M13.7 21a2 2 0 0 1-3.4 0" />
+                </svg>
               </button>
               <span class="dt-bell-badge" id="pending-badge">0</span>
             </div>
@@ -168,7 +379,6 @@
         </div>
 
         <div class="dt-content">
-
           <!-- PAGE HEADER -->
           <div class="orders-header-wrap">
             <div>
@@ -178,54 +388,180 @@
 
             <!-- Top Action Bar Buttons -->
             <div class="orders-action-group">
-              
               <!-- Bulk Action Dropdown -->
               <div class="filter-dropdown-wrap">
                 <button id="btn-top-bulk" class="orders-btn-secondary">
                   Bulk Action (<span id="top-bulk-count">0</span>)
-                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 6px;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="14"
+                    height="14"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    style="margin-left: 6px"
+                  >
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
                 </button>
                 <div id="top-bulk-menu" class="filter-dropdown">
                   <div class="filter-dropdown-title">Change Status</div>
-                  <div class="filter-item" onclick="executeBulkStatus('Pending')">Mark Pending</div>
-                  <div class="filter-item" onclick="executeBulkStatus('Processing')">Mark Processing</div>
-                  <div class="filter-item" onclick="executeBulkStatus('Out For Delivery')">Mark Out For Delivery</div>
-                  <div class="filter-item" onclick="executeBulkStatus('Delivered')">Mark Delivered</div>
-                  <div class="filter-item" onclick="executeBulkStatus('Cancel')" style="color: #ef4444;">Mark Cancel</div>
+                  <div
+                    class="filter-item"
+                    onclick="executeBulkStatus('Pending')"
+                  >
+                    Mark Pending
+                  </div>
+                  <div
+                    class="filter-item"
+                    onclick="executeBulkStatus('Processing')"
+                  >
+                    Mark Processing
+                  </div>
+                  <div
+                    class="filter-item"
+                    onclick="executeBulkStatus('Out For Delivery')"
+                  >
+                    Mark Out For Delivery
+                  </div>
+                  <div
+                    class="filter-item"
+                    onclick="executeBulkStatus('Delivered')"
+                  >
+                    Mark Delivered
+                  </div>
+                  <div
+                    class="filter-item"
+                    onclick="executeBulkStatus('Cancel')"
+                    style="color: #ef4444"
+                  >
+                    Mark Cancel
+                  </div>
                 </div>
               </div>
 
               <!-- Assign Delivery Dropdown -->
               <div class="filter-dropdown-wrap">
                 <button id="btn-top-assign" class="orders-btn-secondary">
-                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px;"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="15"
+                    height="15"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    style="margin-right: 6px"
+                  >
+                    <rect x="1" y="3" width="15" height="13"></rect>
+                    <polygon
+                      points="16 8 20 8 23 11 23 16 16 16 16 8"
+                    ></polygon>
+                    <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                    <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                  </svg>
                   AssignDelivery (<span id="top-assign-count">0</span>)
-                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 6px;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="14"
+                    height="14"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    style="margin-left: 6px"
+                  >
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
                 </button>
                 <div id="top-assign-menu" class="filter-dropdown">
                   <div class="filter-dropdown-title">Select Rider</div>
-                  <div class="filter-item" onclick="executeBulkAssign('Alex Thompson')">Alex Thompson</div>
-                  <div class="filter-item" onclick="executeBulkAssign('Michael Chen')">Michael Chen</div>
-                  <div class="filter-item" onclick="executeBulkAssign('James Rodriguez')">James Rodriguez</div>
-                  <div class="filter-item" onclick="executeBulkAssign('Rana Das')">Rana Das</div>
+                  <div
+                    class="filter-item"
+                    onclick="executeBulkAssign('Alex Thompson')"
+                  >
+                    Alex Thompson
+                  </div>
+                  <div
+                    class="filter-item"
+                    onclick="executeBulkAssign('Michael Chen')"
+                  >
+                    Michael Chen
+                  </div>
+                  <div
+                    class="filter-item"
+                    onclick="executeBulkAssign('James Rodriguez')"
+                  >
+                    James Rodriguez
+                  </div>
+                  <div
+                    class="filter-item"
+                    onclick="executeBulkAssign('Rana Das')"
+                  >
+                    Rana Das
+                  </div>
                 </div>
               </div>
 
               <!-- Unassign Button -->
-              <button id="btn-top-unassign" onclick="executeBulkUnassign()" class="orders-btn-danger-outline">
-                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px;"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="18" y1="8" x2="23" y2="13"></line><line x1="23" y1="8" x2="18" y2="13"></line></svg>
+              <button
+                id="btn-top-unassign"
+                onclick="executeBulkUnassign()"
+                class="orders-btn-danger-outline"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="15"
+                  height="15"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  style="margin-right: 6px"
+                >
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="8.5" cy="7" r="4"></circle>
+                  <line x1="18" y1="8" x2="23" y2="13"></line>
+                  <line x1="23" y1="8" x2="18" y2="13"></line>
+                </svg>
                 Unassign (<span id="top-unassign-count">0</span>)
               </button>
 
               <!-- Delete Button -->
-              <button id="btn-top-delete" onclick="deleteSelectedOrders()" class="orders-btn-secondary">
-                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px;"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+              <button
+                id="btn-top-delete"
+                onclick="deleteSelectedOrders()"
+                class="orders-btn-secondary"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="15"
+                  height="15"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  style="margin-right: 6px"
+                >
+                  <polyline points="3 6 5 6 21 6"></polyline>
+                  <path
+                    d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                  ></path>
+                </svg>
                 Delete
               </button>
 
               <!-- Download All Orders Button -->
               <button id="btn-download-all" class="orders-btn-primary">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                <svg
+                  viewBox="0 0 24 24"
+                  width="16"
+                  height="16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  style="margin-right: 8px"
+                >
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
                 Download All Orders
               </button>
             </div>
@@ -236,65 +572,180 @@
             <div class="orders-date-row">
               <div>
                 <label class="orders-label">Start Date</label>
-                <input type="date" id="filter-start-date" onchange="applyAllFilters()" class="orders-date-input" />
+                <input
+                  type="date"
+                  id="filter-start-date"
+                  onchange="applyAllFilters()"
+                  class="orders-date-input"
+                />
               </div>
               <div>
                 <label class="orders-label">End Date</label>
-                <input type="date" id="filter-end-date" onchange="applyAllFilters()" class="orders-date-input" />
+                <input
+                  type="date"
+                  id="filter-end-date"
+                  onchange="applyAllFilters()"
+                  class="orders-date-input"
+                />
               </div>
             </div>
 
             <div class="orders-filter-row">
               <div class="orders-filter-left">
                 <div class="dt-search-input-wrap">
-                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
-                  <input type="text" id="search-input" placeholder="Search by Customer Name" />
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="14"
+                    height="14"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  </svg>
+                  <input
+                    type="text"
+                    id="search-input"
+                    placeholder="Search by Customer Name"
+                  />
                 </div>
 
                 <!-- Status Filter -->
                 <div class="filter-dropdown-wrap">
-                  <button id="btn-filter-status" onclick="toggleFilterMenu(event, 'menu-filter-status')" class="orders-pill-btn">
-                    <span class="orders-pill-plus">+</span> Status <span id="badge-status" class="orders-badge"></span>
+                  <button
+                    id="btn-filter-status"
+                    onclick="toggleFilterMenu(event, 'menu-filter-status')"
+                    class="orders-pill-btn"
+                  >
+                    <span class="orders-pill-plus">+</span> Status
+                    <span id="badge-status" class="orders-badge"></span>
                   </button>
                   <div id="menu-filter-status" class="filter-pop-menu">
-                    <div class="filter-pop-item" onclick="selectStatusFilter('Delivered')">Delivered</div>
-                    <div class="filter-pop-item" onclick="selectStatusFilter('Pending')">Pending</div>
-                    <div class="filter-pop-item" onclick="selectStatusFilter('Processing')">Processing</div>
-                    <div class="filter-pop-item" onclick="selectStatusFilter('Out For Delivery')">Out For Delivery</div>
-                    <div class="filter-pop-item" onclick="selectStatusFilter('Cancel')">Cancel</div>
-                    <div class="filter-pop-item" onclick="selectStatusFilter('')" style="color: #ef4444; border-top: 1px solid #f3f4f6;">Clear filters</div>
+                    <div
+                      class="filter-pop-item"
+                      onclick="selectStatusFilter('Delivered')"
+                    >
+                      Delivered
+                    </div>
+                    <div
+                      class="filter-pop-item"
+                      onclick="selectStatusFilter('Pending')"
+                    >
+                      Pending
+                    </div>
+                    <div
+                      class="filter-pop-item"
+                      onclick="selectStatusFilter('Processing')"
+                    >
+                      Processing
+                    </div>
+                    <div
+                      class="filter-pop-item"
+                      onclick="selectStatusFilter('Out For Delivery')"
+                    >
+                      Out For Delivery
+                    </div>
+                    <div
+                      class="filter-pop-item"
+                      onclick="selectStatusFilter('Cancel')"
+                    >
+                      Cancel
+                    </div>
+                    <div
+                      class="filter-pop-item"
+                      onclick="selectStatusFilter('')"
+                      style="color: #ef4444; border-top: 1px solid #f3f4f6"
+                    >
+                      Clear filters
+                    </div>
                   </div>
                 </div>
 
                 <!-- Order Limits Filter -->
                 <div class="filter-dropdown-wrap">
-                  <button id="btn-filter-limits" onclick="toggleFilterMenu(event, 'menu-filter-limits')" class="orders-pill-btn">
-                    <span class="orders-pill-plus">+</span> Order limits <span id="badge-limits" class="orders-badge"></span>
+                  <button
+                    id="btn-filter-limits"
+                    onclick="toggleFilterMenu(event, 'menu-filter-limits')"
+                    class="orders-pill-btn"
+                  >
+                    <span class="orders-pill-plus">+</span> Order limits
+                    <span id="badge-limits" class="orders-badge"></span>
                   </button>
                   <div id="menu-filter-limits" class="filter-pop-menu">
-                    <div class="filter-pop-item" onclick="selectLimitFilter(5)">Last 5 days orders</div>
-                    <div class="filter-pop-item" onclick="selectLimitFilter(7)">Last 7 days orders</div>
-                    <div class="filter-pop-item" onclick="selectLimitFilter(15)">Last 15 days orders</div>
-                    <div class="filter-pop-item" onclick="selectLimitFilter(30)">Last 30 days orders</div>
-                    <div class="filter-pop-item" onclick="selectLimitFilter(0)" style="color: #ef4444; border-top: 1px solid #f3f4f6;">Clear filters</div>
+                    <div class="filter-pop-item" onclick="selectLimitFilter(5)">
+                      Last 5 days orders
+                    </div>
+                    <div class="filter-pop-item" onclick="selectLimitFilter(7)">
+                      Last 7 days orders
+                    </div>
+                    <div
+                      class="filter-pop-item"
+                      onclick="selectLimitFilter(15)"
+                    >
+                      Last 15 days orders
+                    </div>
+                    <div
+                      class="filter-pop-item"
+                      onclick="selectLimitFilter(30)"
+                    >
+                      Last 30 days orders
+                    </div>
+                    <div
+                      class="filter-pop-item"
+                      onclick="selectLimitFilter(0)"
+                      style="color: #ef4444; border-top: 1px solid #f3f4f6"
+                    >
+                      Clear filters
+                    </div>
                   </div>
                 </div>
 
                 <!-- Method Filter -->
                 <div class="filter-dropdown-wrap">
-                  <button id="btn-filter-method" onclick="toggleFilterMenu(event, 'menu-filter-method')" class="orders-pill-btn">
-                    <span class="orders-pill-plus">+</span> Method <span id="badge-method" class="orders-badge"></span>
+                  <button
+                    id="btn-filter-method"
+                    onclick="toggleFilterMenu(event, 'menu-filter-method')"
+                    class="orders-pill-btn"
+                  >
+                    <span class="orders-pill-plus">+</span> Method
+                    <span id="badge-method" class="orders-badge"></span>
                   </button>
                   <div id="menu-filter-method" class="filter-pop-menu">
-                    <div class="filter-pop-item" onclick="selectMethodFilter('COD')">COD</div>
-                    <div class="filter-pop-item" onclick="selectMethodFilter('BKASH')">BKASH</div>
-                    <div class="filter-pop-item" onclick="selectMethodFilter('SSLCOMMERZ')">SSLCOMMERZ</div>
-                    <div class="filter-pop-item" onclick="selectMethodFilter('')" style="color: #ef4444; border-top: 1px solid #f3f4f6;">Clear filters</div>
+                    <div
+                      class="filter-pop-item"
+                      onclick="selectMethodFilter('COD')"
+                    >
+                      COD
+                    </div>
+                    <div
+                      class="filter-pop-item"
+                      onclick="selectMethodFilter('BKASH')"
+                    >
+                      BKASH
+                    </div>
+                    <div
+                      class="filter-pop-item"
+                      onclick="selectMethodFilter('SSLCOMMERZ')"
+                    >
+                      SSLCOMMERZ
+                    </div>
+                    <div
+                      class="filter-pop-item"
+                      onclick="selectMethodFilter('')"
+                      style="color: #ef4444; border-top: 1px solid #f3f4f6"
+                    >
+                      Clear filters
+                    </div>
                   </div>
                 </div>
 
                 <!-- Reset Button -->
-                <button id="btn-reset-filters" onclick="resetAllFilters()" class="orders-reset-btn">
+                <button
+                  id="btn-reset-filters"
+                  onclick="resetAllFilters()"
+                  class="orders-reset-btn"
+                >
                   Reset ✕
                 </button>
               </div>
@@ -302,137 +753,417 @@
               <!-- Column View Toggle Button -->
               <div class="filter-dropdown-wrap">
                 <button id="btn-view-toggle" class="orders-view-btn">
-                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7l-4-4z"></path><polyline points="17 3 17 8 12 8"></polyline></svg> View
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="14"
+                    height="14"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M17 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7l-4-4z"
+                    ></path>
+                    <polyline points="17 3 17 8 12 8"></polyline>
+                  </svg>
+                  View
                 </button>
                 <div id="view-dropdown-menu" class="view-dropdown-menu-box">
                   <div class="view-dropdown-title">Toggle columns</div>
-                  <label class="view-dropdown-label"><input type="checkbox" class="col-toggle" data-col="col-invoice" checked /> Invoice</label>
-                  <label class="view-dropdown-label"><input type="checkbox" class="col-toggle" data-col="col-time" checked /> Order Time</label>
-                  <label class="view-dropdown-label"><input type="checkbox" class="col-toggle" data-col="col-customer" checked /> Customer Name</label>
-                  <label class="view-dropdown-label"><input type="checkbox" class="col-toggle" data-col="col-method" checked /> Method</label>
-                  <label class="view-dropdown-label"><input type="checkbox" class="col-toggle" data-col="col-amount" checked /> Amount</label>
-                  <label class="view-dropdown-label"><input type="checkbox" class="col-toggle" data-col="col-quantity" checked /> Quantity</label>
-                  <label class="view-dropdown-label"><input type="checkbox" class="col-toggle" data-col="col-status" checked /> Status</label>
-                  <label class="view-dropdown-label"><input type="checkbox" class="col-toggle" data-col="col-delivery" checked /> Delivery</label>
-                  <label class="view-dropdown-label"><input type="checkbox" class="col-toggle" data-col="col-invoice-col" checked /> Invoice Column</label>
+                  <label class="view-dropdown-label"
+                    ><input
+                      type="checkbox"
+                      class="col-toggle"
+                      data-col="col-invoice"
+                      checked
+                    />
+                    Invoice</label
+                  >
+                  <label class="view-dropdown-label"
+                    ><input
+                      type="checkbox"
+                      class="col-toggle"
+                      data-col="col-time"
+                      checked
+                    />
+                    Order Time</label
+                  >
+                  <label class="view-dropdown-label"
+                    ><input
+                      type="checkbox"
+                      class="col-toggle"
+                      data-col="col-customer"
+                      checked
+                    />
+                    Customer Name</label
+                  >
+                  <label class="view-dropdown-label"
+                    ><input
+                      type="checkbox"
+                      class="col-toggle"
+                      data-col="col-method"
+                      checked
+                    />
+                    Method</label
+                  >
+                  <label class="view-dropdown-label"
+                    ><input
+                      type="checkbox"
+                      class="col-toggle"
+                      data-col="col-amount"
+                      checked
+                    />
+                    Amount</label
+                  >
+                  <label class="view-dropdown-label"
+                    ><input
+                      type="checkbox"
+                      class="col-toggle"
+                      data-col="col-quantity"
+                      checked
+                    />
+                    Quantity</label
+                  >
+                  <label class="view-dropdown-label"
+                    ><input
+                      type="checkbox"
+                      class="col-toggle"
+                      data-col="col-status"
+                      checked
+                    />
+                    Status</label
+                  >
+                  <label class="view-dropdown-label"
+                    ><input
+                      type="checkbox"
+                      class="col-toggle"
+                      data-col="col-delivery"
+                      checked
+                    />
+                    Delivery</label
+                  >
+                  <label class="view-dropdown-label"
+                    ><input
+                      type="checkbox"
+                      class="col-toggle"
+                      data-col="col-invoice-col"
+                      checked
+                    />
+                    Invoice Column</label
+                  >
                 </div>
               </div>
-
             </div>
           </div>
 
           <!-- ORDERS TABLE SECTION -->
           <div class="orders-table-card">
-            
             <table class="dt-table">
               <thead>
                 <tr>
-                  <th style="padding: 12px; width: 40px; text-align: center;"><input type="checkbox" id="select-all"></th>
-                  
-                  <th class="col-invoice orders-th-drop" onclick="toggleThDropdown(event, 'dropdown-invoice')">
+                  <th style="padding: 12px; width: 40px; text-align: center">
+                    <input type="checkbox" id="select-all" />
+                  </th>
+
+                  <th
+                    class="col-invoice orders-th-drop"
+                    onclick="toggleThDropdown(event, 'dropdown-invoice')"
+                  >
                     INVOICE NO ↕
                     <div id="dropdown-invoice" class="th-dropdown-box">
-                      <div class="th-dropdown-item" onclick="sortOrders('invoice', 'asc')">↑ Asc</div>
-                      <div class="th-dropdown-item" onclick="sortOrders('invoice', 'desc')">↓ Desc</div>
-                      <div class="th-dropdown-item hide-opt" onclick="hideColumn('col-invoice')">∅ Hide</div>
+                      <div
+                        class="th-dropdown-item"
+                        onclick="sortOrders('invoice', 'asc')"
+                      >
+                        ↑ Asc
+                      </div>
+                      <div
+                        class="th-dropdown-item"
+                        onclick="sortOrders('invoice', 'desc')"
+                      >
+                        ↓ Desc
+                      </div>
+                      <div
+                        class="th-dropdown-item hide-opt"
+                        onclick="hideColumn('col-invoice')"
+                      >
+                        ∅ Hide
+                      </div>
                     </div>
                   </th>
 
-                  <th class="col-time orders-th-drop" onclick="toggleThDropdown(event, 'dropdown-time')">
+                  <th
+                    class="col-time orders-th-drop"
+                    onclick="toggleThDropdown(event, 'dropdown-time')"
+                  >
                     ORDER TIME ↕
                     <div id="dropdown-time" class="th-dropdown-box">
-                      <div class="th-dropdown-item" onclick="sortOrders('time', 'asc')">↑ Asc</div>
-                      <div class="th-dropdown-item" onclick="sortOrders('time', 'desc')">↓ Desc</div>
-                      <div class="th-dropdown-item hide-opt" onclick="hideColumn('col-time')">∅ Hide</div>
+                      <div
+                        class="th-dropdown-item"
+                        onclick="sortOrders('time', 'asc')"
+                      >
+                        ↑ Asc
+                      </div>
+                      <div
+                        class="th-dropdown-item"
+                        onclick="sortOrders('time', 'desc')"
+                      >
+                        ↓ Desc
+                      </div>
+                      <div
+                        class="th-dropdown-item hide-opt"
+                        onclick="hideColumn('col-time')"
+                      >
+                        ∅ Hide
+                      </div>
                     </div>
                   </th>
 
-                  <th class="col-customer orders-th-drop" onclick="toggleThDropdown(event, 'dropdown-customer')">
+                  <th
+                    class="col-customer orders-th-drop"
+                    onclick="toggleThDropdown(event, 'dropdown-customer')"
+                  >
                     CUSTOMER NAME ↕
                     <div id="dropdown-customer" class="th-dropdown-box">
-                      <div class="th-dropdown-item" onclick="sortOrders('customer', 'asc')">↑ Asc</div>
-                      <div class="th-dropdown-item" onclick="sortOrders('customer', 'desc')">↓ Desc</div>
-                      <div class="th-dropdown-item hide-opt" onclick="hideColumn('col-customer')">∅ Hide</div>
+                      <div
+                        class="th-dropdown-item"
+                        onclick="sortOrders('customer', 'asc')"
+                      >
+                        ↑ Asc
+                      </div>
+                      <div
+                        class="th-dropdown-item"
+                        onclick="sortOrders('customer', 'desc')"
+                      >
+                        ↓ Desc
+                      </div>
+                      <div
+                        class="th-dropdown-item hide-opt"
+                        onclick="hideColumn('col-customer')"
+                      >
+                        ∅ Hide
+                      </div>
                     </div>
                   </th>
 
-                  <th class="col-method orders-th-drop" onclick="toggleThDropdown(event, 'dropdown-method')">
+                  <th
+                    class="col-method orders-th-drop"
+                    onclick="toggleThDropdown(event, 'dropdown-method')"
+                  >
                     METHOD ↕
                     <div id="dropdown-method" class="th-dropdown-box">
-                      <div class="th-dropdown-item" onclick="sortOrders('method', 'asc')">↑ Asc</div>
-                      <div class="th-dropdown-item" onclick="sortOrders('method', 'desc')">↓ Desc</div>
-                      <div class="th-dropdown-item hide-opt" onclick="hideColumn('col-method')">∅ Hide</div>
+                      <div
+                        class="th-dropdown-item"
+                        onclick="sortOrders('method', 'asc')"
+                      >
+                        ↑ Asc
+                      </div>
+                      <div
+                        class="th-dropdown-item"
+                        onclick="sortOrders('method', 'desc')"
+                      >
+                        ↓ Desc
+                      </div>
+                      <div
+                        class="th-dropdown-item hide-opt"
+                        onclick="hideColumn('col-method')"
+                      >
+                        ∅ Hide
+                      </div>
                     </div>
                   </th>
 
-                  <th class="col-amount orders-th-drop" onclick="toggleThDropdown(event, 'dropdown-amount')">
+                  <th
+                    class="col-amount orders-th-drop"
+                    onclick="toggleThDropdown(event, 'dropdown-amount')"
+                  >
                     AMOUNT ↕
                     <div id="dropdown-amount" class="th-dropdown-box">
-                      <div class="th-dropdown-item" onclick="sortOrders('amount', 'asc')">↑ Asc</div>
-                      <div class="th-dropdown-item" onclick="sortOrders('amount', 'desc')">↓ Desc</div>
-                      <div class="th-dropdown-item hide-opt" onclick="hideColumn('col-amount')">∅ Hide</div>
+                      <div
+                        class="th-dropdown-item"
+                        onclick="sortOrders('amount', 'asc')"
+                      >
+                        ↑ Asc
+                      </div>
+                      <div
+                        class="th-dropdown-item"
+                        onclick="sortOrders('amount', 'desc')"
+                      >
+                        ↓ Desc
+                      </div>
+                      <div
+                        class="th-dropdown-item hide-opt"
+                        onclick="hideColumn('col-amount')"
+                      >
+                        ∅ Hide
+                      </div>
                     </div>
                   </th>
 
-                  <th class="col-quantity orders-th-drop" onclick="toggleThDropdown(event, 'dropdown-quantity')">
+                  <th
+                    class="col-quantity orders-th-drop"
+                    onclick="toggleThDropdown(event, 'dropdown-quantity')"
+                  >
                     QUANTITY ↕
                     <div id="dropdown-quantity" class="th-dropdown-box">
-                      <div class="th-dropdown-item" onclick="sortOrders('quantity', 'asc')">↑ Asc</div>
-                      <div class="th-dropdown-item" onclick="sortOrders('quantity', 'desc')">↓ Desc</div>
-                      <div class="th-dropdown-item hide-opt" onclick="hideColumn('col-quantity')">∅ Hide</div>
+                      <div
+                        class="th-dropdown-item"
+                        onclick="sortOrders('quantity', 'asc')"
+                      >
+                        ↑ Asc
+                      </div>
+                      <div
+                        class="th-dropdown-item"
+                        onclick="sortOrders('quantity', 'desc')"
+                      >
+                        ↓ Desc
+                      </div>
+                      <div
+                        class="th-dropdown-item hide-opt"
+                        onclick="hideColumn('col-quantity')"
+                      >
+                        ∅ Hide
+                      </div>
                     </div>
                   </th>
 
-                  <th class="col-status orders-th-drop" onclick="toggleThDropdown(event, 'dropdown-status')">
+                  <th
+                    class="col-status orders-th-drop"
+                    onclick="toggleThDropdown(event, 'dropdown-status')"
+                  >
                     STATUS ↕
                     <div id="dropdown-status" class="th-dropdown-box">
-                      <div class="th-dropdown-item" onclick="sortOrders('status', 'asc')">↑ Asc</div>
-                      <div class="th-dropdown-item" onclick="sortOrders('status', 'desc')">↓ Desc</div>
-                      <div class="th-dropdown-item hide-opt" onclick="hideColumn('col-status')">∅ Hide</div>
+                      <div
+                        class="th-dropdown-item"
+                        onclick="sortOrders('status', 'asc')"
+                      >
+                        ↑ Asc
+                      </div>
+                      <div
+                        class="th-dropdown-item"
+                        onclick="sortOrders('status', 'desc')"
+                      >
+                        ↓ Desc
+                      </div>
+                      <div
+                        class="th-dropdown-item hide-opt"
+                        onclick="hideColumn('col-status')"
+                      >
+                        ∅ Hide
+                      </div>
                     </div>
                   </th>
 
-                  <th class="col-delivery orders-th-drop" onclick="toggleThDropdown(event, 'dropdown-delivery')">
+                  <th
+                    class="col-delivery orders-th-drop"
+                    onclick="toggleThDropdown(event, 'dropdown-delivery')"
+                  >
                     DELIVERY ↕
                     <div id="dropdown-delivery" class="th-dropdown-box">
-                      <div class="th-dropdown-item" onclick="sortOrders('delivery', 'asc')">↑ Asc</div>
-                      <div class="th-dropdown-item" onclick="sortOrders('delivery', 'desc')">↓ Desc</div>
-                      <div class="th-dropdown-item hide-opt" onclick="hideColumn('col-delivery')">∅ Hide</div>
+                      <div
+                        class="th-dropdown-item"
+                        onclick="sortOrders('delivery', 'asc')"
+                      >
+                        ↑ Asc
+                      </div>
+                      <div
+                        class="th-dropdown-item"
+                        onclick="sortOrders('delivery', 'desc')"
+                      >
+                        ↓ Desc
+                      </div>
+                      <div
+                        class="th-dropdown-item hide-opt"
+                        onclick="hideColumn('col-delivery')"
+                      >
+                        ∅ Hide
+                      </div>
                     </div>
                   </th>
 
-                  <th style="padding: 12px; color: #6b7280; font-size: 12px; font-weight: 600; text-transform: uppercase;">ACTION</th>
-                  <th class="col-invoice-col" style="padding: 12px; color: #6b7280; font-size: 12px; font-weight: 600; text-transform: uppercase; text-align: center;">INVOICE</th>
+                  <th
+                    style="
+                      padding: 12px;
+                      color: #6b7280;
+                      font-size: 12px;
+                      font-weight: 600;
+                      text-transform: uppercase;
+                    "
+                  >
+                    ACTION
+                  </th>
+                  <th
+                    class="col-invoice-col"
+                    style="
+                      padding: 12px;
+                      color: #6b7280;
+                      font-size: 12px;
+                      font-weight: 600;
+                      text-transform: uppercase;
+                      text-align: center;
+                    "
+                  >
+                    INVOICE
+                  </th>
                 </tr>
               </thead>
               <tbody id="orders-body">
-                <tr><td colspan="11" style="text-align: center; color: #9ca3af; padding: 30px;">Loading orders…</td></tr>
+                <tr>
+                  <td
+                    colspan="11"
+                    style="text-align: center; color: #9ca3af; padding: 30px"
+                  >
+                    Loading orders…
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
-
         </div>
       </div>
     </div>
 
     <!-- ORDER DETAILS MODAL -->
     <div class="modal-overlay" id="order-modal-overlay">
-      <div class="modal-box" style="max-width: 550px;">
+      <div class="modal-box" style="max-width: 550px">
         <div class="modal-head">
           <div class="modal-title">Order Full Info</div>
-          <button id="order-modal-close" style="background:none; border:none; font-size:18px; cursor:pointer;">✕</button>
+          <button
+            id="order-modal-close"
+            style="
+              background: none;
+              border: none;
+              font-size: 18px;
+              cursor: pointer;
+            "
+          >
+            ✕
+          </button>
         </div>
-        
-        <div id="order-modal-content" style="padding: 10px 0;"></div>
 
-        <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
-          <button class="btn-admin-primary" id="order-modal-ok-btn" style="padding: 8px 16px; border-radius: 6px; border: none; background: #101828; color: white; cursor: pointer;">Close</button>
+        <div id="order-modal-content" style="padding: 10px 0"></div>
+
+        <div style="display: flex; justify-content: flex-end; margin-top: 20px">
+          <button
+            class="btn-admin-primary"
+            id="order-modal-ok-btn"
+            style="
+              padding: 8px 16px;
+              border-radius: 6px;
+              border: none;
+              background: #101828;
+              color: white;
+              cursor: pointer;
+            "
+          >
+            Close
+          </button>
         </div>
       </div>
     </div>
 
     <!-- HIDDEN PRINT RECEIPT CONTAINER -->
-    <div id="print-receipt-container" style="display: none;"></div>
+    <div id="print-receipt-container" style="display: none"></div>
 
     <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
