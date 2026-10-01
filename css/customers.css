@@ -1,0 +1,514 @@
+/* ============================================================
+   css/customers.css
+   Customers admin page
+============================================================ */
+
+
+/* ============================================================
+   PAGE HEADER
+============================================================ */
+
+.dt-page-actions {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+
+/* ============================================================
+   CUSTOMER ACTIONS
+============================================================ */
+
+.customer-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+
+/* ============================================================
+   IMPORT PANEL
+============================================================ */
+
+.customer-import-card {
+    background: #ffffff;
+    border: 1px solid #eaecf0;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.customer-import-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.customer-import-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #101828;
+    margin-bottom: 5px;
+}
+
+.customer-import-subtitle {
+    font-size: 13px;
+    color: #667085;
+}
+
+.customer-import-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.customer-import-controls input[type="file"] {
+    min-height: 40px;
+    padding: 7px 10px;
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #344054;
+    font-family: inherit;
+    font-size: 13px;
+}
+
+
+/* ============================================================
+   SEARCH TOOLBAR
+============================================================ */
+
+.customer-toolbar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.customer-search {
+    width: 100%;
+    max-width: 500px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;
+
+    padding: 0 13px;
+
+    background: #ffffff;
+
+    transition: 0.2s ease;
+}
+
+.customer-search:focus-within {
+    border-color: #1769e0;
+    box-shadow: 0 0 0 3px rgba(23, 105, 224, 0.08);
+}
+
+.customer-search svg {
+    flex-shrink: 0;
+}
+
+.customer-search input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+
+    font-family: inherit;
+    font-size: 14px;
+    color: #101828;
+}
+
+.customer-search input::placeholder {
+    color: #98a2b3;
+}
+
+
+/* ============================================================
+   CUSTOMER TABLE
+============================================================ */
+
+.customer-table-card {
+    background: #ffffff;
+    border: 1px solid #eaecf0;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.customer-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.customer-table {
+    width: 100%;
+    min-width: 850px;
+    border-collapse: collapse;
+}
+
+
+/* ---------- TABLE HEADER ---------- */
+
+.customer-table th {
+    padding: 13px 18px;
+
+    background: #f9fafb;
+    border-bottom: 1px solid #eaecf0;
+
+    color: #667085;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    text-align: left;
+    white-space: nowrap;
+}
+
+
+/* ---------- TABLE CELLS ---------- */
+
+.customer-table td {
+    padding: 16px 18px;
+
+    border-bottom: 1px solid #f2f4f7;
+
+    color: #344054;
+
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+.customer-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.customer-table tbody tr:hover {
+    background: #fcfcfd;
+}
+
+
+/* ============================================================
+   SELECT COLUMN
+============================================================ */
+
+.customer-table .select-column {
+    width: 45px;
+    padding-left: 18px;
+    padding-right: 8px;
+}
+
+.customer-table input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+
+    cursor: pointer;
+
+    accent-color: #1769e0;
+}
+
+
+/* ============================================================
+   CUSTOMER ID
+============================================================ */
+
+.customer-id {
+    font-family: monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475467;
+}
+
+
+/* ============================================================
+   CUSTOMER NAME
+============================================================ */
+
+.customer-name {
+    color: #101828;
+    font-weight: 600;
+}
+
+
+/* ============================================================
+   CUSTOMER EMAIL
+============================================================ */
+
+.customer-table td:nth-child(5) {
+    color: #475467;
+}
+
+
+/* ============================================================
+   CUSTOMER PHONE
+============================================================ */
+
+.customer-table td:nth-child(6) {
+    white-space: nowrap;
+}
+
+
+/* ============================================================
+   ACTIONS
+============================================================ */
+/* ---------- CUSTOMER VIEW BUTTON ---------- */
+
+.customer-view-btn {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: 1px solid #d0d5dd;
+    border-radius: 7px;
+    background: #ffffff;
+    color: #475467;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.customer-view-btn:hover {
+    background: #f9fafb;
+    border-color: #b8c0cc;
+    color: #1769e0;
+}
+
+.customer-view-btn svg {
+    width: 16px;
+    height: 16px;
+}
+/* ============================================================
+   EMPTY / LOADING
+============================================================ */
+
+.customer-empty {
+    padding: 50px 20px !important;
+
+    text-align: center;
+
+    color: #667085 !important;
+
+    font-size: 14px !important;
+}
+
+
+/* ============================================================
+   DELETE BUTTON
+============================================================ */
+
+#delete-selected-btn {
+    color: #d92d20;
+    border-color: #fecdca;
+}
+
+#delete-selected-btn:hover:not(:disabled) {
+    background: #fef3f2;
+    border-color: #fecdca;
+}
+
+#delete-selected-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+/* ============================================================
+   GENERAL BUTTON STATES
+============================================================ */
+
+.customer-actions .dt-btn {
+    white-space: nowrap;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 900px) {
+
+    .customer-import-content {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .customer-import-controls {
+        width: 100%;
+    }
+
+}
+
+
+@media (max-width: 768px) {
+
+    .dt-page-actions {
+        flex-direction: column;
+    }
+
+    .customer-actions {
+        width: 100%;
+    }
+
+    .customer-actions .dt-btn {
+        flex: 1;
+    }
+
+    .customer-import-controls {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .customer-import-controls input[type="file"] {
+        width: 100%;
+    }
+
+    .customer-toolbar {
+        width: 100%;
+    }
+
+    .customer-search {
+        max-width: none;
+    }
+
+}
+/* ============================================================
+   CUSTOMER DETAILS MODAL
+============================================================ */
+
+.customer-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(16, 24, 40, 0.45);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.customer-modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.customer-modal {
+    width: min(620px, 100%);
+    max-height: 90vh;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #eaecf0;
+    border-radius: 14px;
+    box-shadow: 0 20px 40px rgba(16, 24, 40, 0.15);
+    transform: translateY(10px);
+    transition: transform 0.2s ease;
+}
+
+.customer-modal-overlay.show .customer-modal {
+    transform: translateY(0);
+}
+
+.customer-modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px 22px;
+    border-bottom: 1px solid #eaecf0;
+}
+
+.customer-modal-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #101828;
+}
+
+.customer-modal-subtitle {
+    margin-top: 4px;
+    font-size: 13px;
+    color: #667085;
+}
+
+.customer-modal-close {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #d0d5dd;
+    border-radius: 7px;
+    background: #ffffff;
+    color: #667085;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.customer-modal-close:hover {
+    background: #f9fafb;
+    color: #101828;
+}
+
+.customer-modal-close svg {
+    width: 17px;
+    height: 17px;
+}
+
+.customer-modal-body {
+    padding: 30px 22px;
+    overflow-y: auto;
+}
+
+.customer-modal-placeholder {
+    text-align: center;
+    padding: 25px 10px;
+}
+
+.customer-modal-placeholder-icon {
+    width: 54px;
+    height: 54px;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #eff6ff;
+    color: #1769e0;
+}
+
+.customer-modal-placeholder-icon svg {
+    width: 26px;
+    height: 26px;
+}
+
+.customer-modal-placeholder-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #101828;
+}
+
+.customer-modal-placeholder-text {
+    max-width: 420px;
+    margin: 8px auto 0;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #667085;
+}
+
+.customer-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px 22px;
+    border-top: 1px solid #eaecf0;
+}
