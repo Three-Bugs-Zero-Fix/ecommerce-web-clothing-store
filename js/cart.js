@@ -56,13 +56,9 @@ function updateQuantity(index, action) {
 // ========================================
 function updateItemOption(index, field, newValue) {
     if (cart[index]) {
-        // Update the specific field (color or size) immediately
         cart[index][field] = newValue;
-        
-        // Save to localStorage immediately so checkout page gets the updated value
         saveCart();
 
-        // Check if duplicate item exists with same options after change
         const duplicateIndex = cart.findIndex((item, idx) => 
             idx !== index && 
             item.id === cart[index].id && 
@@ -112,7 +108,7 @@ function updateCartIconCount() {
 }
 
 // ========================================
-// RENDER CART PAGE UI (Fetching Firebase Options)
+// RENDER CART PAGE UI (Responsive Clean Structure)
 // ========================================
 async function renderCartPage() {
     const container = document.getElementById("cart-items-container");
@@ -137,7 +133,7 @@ async function renderCartPage() {
         const item = cart[index];
         subtotal += item.price * item.quantity;
 
-        const imageHTML = item.image ? `<img src="${item.image}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover;">` : `IMAGE`;
+        const imageHTML = item.image ? `<img src="${item.image}" alt="${item.name}">` : `IMAGE`;
         
         const isMinQty = item.quantity <= 1;
         const minusBtnStyle = isMinQty ? 'opacity: 0.4; cursor: pointer;' : '';
@@ -172,25 +168,25 @@ async function renderCartPage() {
         let sizeOptionsHtml = sizes.map(s => `<option value="${s}" ${item.size === s ? 'selected' : ''}>${s}</option>`).join('');
 
         html += `
-            <div class="cart-item" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e5eaf1; padding: 18px 0; flex-wrap: wrap; gap: 15px;">
-                <div class="cart-item-info" style="display: flex; align-items: flex-start; gap: 15px; flex: 1; min-width: 250px;">
-                    <div class="cart-item-image" style="width: 75px; height: 75px; border-radius: 8px; overflow: hidden; background: #f1f5f9; flex-shrink: 0;">
+            <div class="cart-item">
+                <div class="cart-item-info">
+                    <div class="cart-item-image">
                         ${imageHTML}
                     </div>
-                    <div class="cart-item-details" style="flex: 1;">
-                        <h4 style="margin: 0 0 4px; font-size: 16px; color: #172033; font-weight: 600;">${item.name}</h4>
-                        <p style="margin: 0 0 10px; font-weight: 600; color: #2563eb; font-size: 14px;">৳${item.price.toLocaleString()}</p>
+                    <div class="cart-item-details">
+                        <h4>${item.name}</h4>
+                        <p style="font-weight: 600; color: #2563eb; margin-bottom: 8px;">৳${item.price.toLocaleString()}</p>
                         
-                        <div style="display: flex; gap: 12px; align-items: center; font-size: 13px; flex-wrap: wrap;">
+                        <div class="cart-item-options">
                             <div>
-                                <span style="color: #64748b; font-size: 11px; text-transform: uppercase; font-weight: 600; margin-right: 4px;">Color:</span>
-                                <select onchange="updateItemOption(${index}, 'color', this.value)" style="padding: 4px 8px; border-radius: 6px; border: 1px solid #cbd5e1; background: #fff; font-size: 12px; cursor: pointer; outline: none;">
+                                <span class="option-label">Color:</span>
+                                <select onchange="updateItemOption(${index}, 'color', this.value)" class="option-select">
                                     ${colorOptionsHtml}
                                 </select>
                             </div>
                             <div>
-                                <span style="color: #64748b; font-size: 11px; text-transform: uppercase; font-weight: 600; margin-right: 4px;">Size:</span>
-                                <select onchange="updateItemOption(${index}, 'size', this.value)" style="padding: 4px 8px; border-radius: 6px; border: 1px solid #cbd5e1; background: #fff; font-size: 12px; cursor: pointer; outline: none;">
+                                <span class="option-label">Size:</span>
+                                <select onchange="updateItemOption(${index}, 'size', this.value)" class="option-select">
                                     ${sizeOptionsHtml}
                                 </select>
                             </div>
@@ -198,13 +194,13 @@ async function renderCartPage() {
                     </div>
                 </div>
 
-                <div class="cart-item-actions" style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
-                    <div class="quantity-control" style="display: flex; align-items: center; border: 1px solid #cbd5e1; border-radius: 8px; overflow: hidden; background: #fff;">
-                        <button onclick="updateQuantity(${index}, 'decrease')" style="${minusBtnStyle} padding: 6px 12px; background: #f8fafc; border: none; cursor: pointer; font-weight: bold;">-</button>
-                        <input type="text" value="${item.quantity}" readonly style="width: 35px; text-align: center; border: none; background: #fff; font-weight: 600; font-size: 13.5px;">
-                        <button onclick="updateQuantity(${index}, 'increase')" style="padding: 6px 12px; background: #f8fafc; border: none; cursor: pointer; font-weight: bold;">+</button>
+                <div class="cart-item-actions">
+                    <div class="quantity-control">
+                        <button onclick="updateQuantity(${index}, 'decrease')" style="${minusBtnStyle}">-</button>
+                        <input type="text" value="${item.quantity}" readonly>
+                        <button onclick="updateQuantity(${index}, 'increase')">+</button>
                     </div>
-                    <button class="remove-btn" onclick="removeItem(${index})" style="background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; padding: 7px 14px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-decoration: none; outline: none;">Remove</button>
+                    <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
                 </div>
             </div>
         `;
