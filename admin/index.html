@@ -10,7 +10,6 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap"
     />
     <link rel="stylesheet" href="../css/admin.css" />
-    
   </head>
   <body>
     <div id="admin-loading" class="admin-loading">Checking admin access…</div>
@@ -1027,12 +1026,19 @@
         }
       }
 
+      // 🔍 View Icon Click Event (Dashtar Visual Design)
+      function viewInvoice(orderId) {
+        window.open(`invoice.html?order=${orderId}`, "_blank");
+      }
+
+      // 🖨️ Print Icon Click Event (Ager Classic Printable Sheet Design)
+
       function printInvoice(orderId) {
-        window.open(`invoice.html?id=${orderId}`, "_blank");
+        window.open(`print_invoice.html?order=${orderId}`, "_blank");
       }
 
       function viewOrderDetails(orderId) {
-        window.location.href = `orders.html?id=${orderId}`;
+        window.location.href = `invoice.html?id=${orderId}`;
       }
 
       function renderSalesChart(orders) {

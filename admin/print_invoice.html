@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Print Invoice — BlueWear</title>
+    <link rel="stylesheet" href="../css/invoice.css" />
+  </head>
+  <body>
+    <div id="loading" class="invoice-loading">Loading printable invoice…</div>
+    <div id="not-found" class="invoice-loading" style="display: none">
+      Order not found.
+    </div>
+
+    <div class="invoice-page" id="invoice-page" style="display: none">
+      <div class="invoice-sheet">
+        <!-- 🏆 Header Section -->
+        <div class="invoice-header">
+          <div class="invoice-brand">
+            <img
+              src="../images/logo.png"
+              alt="BlueWear Logo"
+              class="brand-logo-img"
+              onerror="
+                this.style.display = 'none';
+                document.getElementById('drawer-icon-badge').style.display =
+                  'flex';
+              "
+            />
+            <div
+              class="brand-logo-badge"
+              id="drawer-icon-badge"
+              style="display: none"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M6 2l1.5 4h9L18 2" />
+                <path
+                  d="M3.5 6h17l-1.2 13a2 2 0 0 1-2 1.8H6.7a2 2 0 0 1-2-1.8L3.5 6z"
+                />
+                <path d="M8.5 10a3.5 3.5 0 0 0 7 0" />
+              </svg>
+            </div>
+            <div class="invoice-brand-name">BlueWear</div>
+          </div>
+
+          <div class="invoice-title">Invoice Copy</div>
+        </div>
+
+        <!-- 📋 Company & Invoice Meta Card -->
+        <div class="invoice-meta-card">
+          <div class="company-details">
+            <strong>BLUEWEAR</strong>
+            <div>House 12, Road 5, Banani, Dhaka</div>
+            <div>(+880) 1234-567890</div>
+          </div>
+          <div class="invoice-details">
+            <div>
+              <span>Invoice #:</span> <strong id="invoice-number">—</strong>
+            </div>
+            <div><span>Date:</span> <strong id="invoice-date">—</strong></div>
+            <div>
+              <span>Status:</span> <strong id="invoice-status">—</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- 👤 Client Information Card -->
+        <div class="invoice-card">
+          <div class="section-title">Client Information</div>
+          <table class="kv-table">
+            <tr>
+              <td class="kv-label">Name</td>
+              <td id="client-name"></td>
+            </tr>
+            <tr>
+              <td class="kv-label">Address</td>
+              <td id="client-address"></td>
+            </tr>
+            <tr>
+              <td class="kv-label">Phone</td>
+              <td id="client-phone"></td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- 🛍️ Order Information Card -->
+        <div class="invoice-card">
+          <div class="section-title">Order Information</div>
+          <table class="items-table">
+            <thead>
+              <tr>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th style="text-align: right">Total</th>
+              </tr>
+            </thead>
+            <tbody id="items-body"></tbody>
+          </table>
+        </div>
+
+        <!-- 🚚 Shipping & Payment Cards (Two Column) -->
+        <div class="invoice-two-col">
+          <div class="invoice-card">
+            <div class="section-title">Shipping Info</div>
+            <table class="kv-table">
+              <tr>
+                <td class="kv-label">Method</td>
+                <td>Courier</td>
+              </tr>
+              <tr>
+                <td class="kv-label">City</td>
+                <td id="ship-city"></td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="invoice-card">
+            <div class="section-title">Payment Info</div>
+            <table class="kv-table">
+              <tr>
+                <td class="kv-label">Subtotal</td>
+                <td id="pay-subtotal"></td>
+              </tr>
+              <tr>
+                <td class="kv-label">Shipping</td>
+                <td id="pay-shipping"></td>
+              </tr>
+              <tr style="font-weight: 700; font-size: 15px">
+                <td class="kv-label" style="color: #0f172a">TOTAL</td>
+                <td id="pay-total" style="color: #16a34a"></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- 📌 Notes Card -->
+        <div class="notes-card">
+          <strong>Note:</strong> This invoice confirms your order with BlueWear.
+          Please pay the total amount upon receiving the cash-on-delivery
+          package.
+        </div>
+
+        <!-- 🖨️ Action Bar -->
+        <div class="invoice-toolbar no-print" style="margin-top: 24px">
+          <button onclick="window.print()">🖨 Print / Save as PDF</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+    <script src="../js/firebase.js"></script>
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const orderId = urlParams.get("order") || urlParams.get("id");
+
+      async function loadInvoice() {
+        if (!orderId) return showNotFound();
+        try {
+          const doc = await db.collection("orders").doc(orderId).get();
+          if (!doc.exists) return showNotFound();
+          renderInvoice(doc.id, doc.data());
+        } catch (err) {
+          showNotFound();
+        }
+      }
+
+      function showNotFound() {
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("not-found").style.display = "flex";
+      }
+
+      function money(n) {
+        return `৳${Number(n || 0).toLocaleString("en-BD")}`;
+      }
+
+      function renderInvoice(id, o) {
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("invoice-page").style.display = "block";
+
+        document.getElementById("invoice-number").textContent =
+          "INV-" + id.slice(0, 8).toUpperCase();
+        const createdDate = o.createdAt?.toDate
+          ? o.createdAt.toDate()
+          : new Date();
+        document.getElementById("invoice-date").textContent =
+          createdDate.toLocaleDateString("en-GB");
+        document.getElementById("invoice-status").textContent =
+          o.status || "Pending";
+
+        document.getElementById("client-name").textContent =
+          o.customerName || o.userName || "—";
+        document.getElementById("client-address").textContent =
+          o.address || o.shippingAddress?.address || "—";
+        document.getElementById("client-phone").textContent =
+          o.phone || o.shippingAddress?.phone || "—";
+        document.getElementById("ship-city").textContent =
+          o.city || o.shippingAddress?.city || "—";
+
+        const items = Array.isArray(o.items)
+          ? o.items
+          : Array.isArray(o.cart)
+            ? o.cart
+            : [];
+        document.getElementById("items-body").innerHTML = items
+          .map((item) => {
+            const qty = item.quantity || item.qty || 1;
+            const price = Number(item.price || 0);
+            return `
+        <tr>
+          <td>${item.name || item.title || "Product"}</td>
+          <td>${money(price)}</td>
+          <td>${qty}</td>
+          <td class="total-cell" style="text-align: right;">${money(price * qty)}</td>
+        </tr>
+      `;
+          })
+          .join("");
+
+        const shipping = Number(o.shippingFee || o.deliveryCharge || 0);
+        const subtotal = Number(o.subtotal || 0);
+        const total = Number(o.totalAmount || o.total || 0);
+
+        document.getElementById("pay-subtotal").textContent = money(subtotal);
+        document.getElementById("pay-shipping").textContent = money(shipping);
+        document.getElementById("pay-total").textContent = money(total);
+      }
+
+      loadInvoice();
+    </script>
+  </body>
+</html>

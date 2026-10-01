@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoice Details — BlueWear</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/invoice.css" />
+  </head>
+  <body>
+    <div id="loading" class="status-screen">Loading invoice details…</div>
+    <div id="not-found" class="status-screen" style="display: none">
+      Order not found.
+    </div>
+
+    <div class="invoice-container" id="invoice-content" style="display: none">
+      <div class="invoice-card">
+        <div class="header-row">
+          <div>
+            <div class="inv-brand-title">PURCHASE ORDER DETAILS</div>
+            <span id="inv-status-badge" class="status-badge status-pending"
+              >pending</span
+            >
+          </div>
+          <div class="company-info">
+            <div class="company-logo">BlueWear</div>
+            <div>House 12, Road 5, Banani</div>
+            <div>Dhaka, Bangladesh</div>
+            <div>+880 1234-567890</div>
+          </div>
+        </div>
+
+        <div class="meta-grid">
+          <div>
+            <div class="meta-label">Date</div>
+            <div class="meta-value" id="inv-date">—</div>
+          </div>
+          <div style="text-align: center">
+            <div class="meta-label">Invoice No</div>
+            <div class="meta-value" id="inv-number">—</div>
+          </div>
+          <div class="meta-col-right">
+            <div class="meta-label">Invoice To</div>
+            <div class="meta-value" id="inv-client">—</div>
+          </div>
+        </div>
+
+        <!-- 🛒 Order Table -->
+        <table class="items-table">
+          <thead>
+            <tr>
+              <th style="width: 60px" class="text-center">SR.</th>
+              <th>PRODUCT TITLE</th>
+              <th class="text-center" style="width: 120px">QUANTITY</th>
+              <th class="text-right" style="width: 140px">ITEM PRICE</th>
+              <th class="text-right" style="width: 140px">AMOUNT</th>
+            </tr>
+          </thead>
+          <tbody id="inv-items-body"></tbody>
+        </table>
+
+        <!-- 💳 Summary Card Section -->
+        <div class="summary-card">
+          <div class="summary-item">
+            <span class="summary-label">Payment Method</span>
+            <span class="summary-val" id="sum-payment">—</span>
+          </div>
+          <div class="summary-item align-center">
+            <span class="summary-label">Shipping Cost</span>
+            <span class="summary-val" id="sum-shipping">৳0.00</span>
+          </div>
+          <div class="summary-item align-center">
+            <span class="summary-label">Discount</span>
+            <span class="summary-val" id="sum-discount">৳0.00</span>
+          </div>
+          <div class="summary-item align-right">
+            <span class="summary-label">Total Amount</span>
+            <span class="summary-val total-highlight" id="sum-total"
+              >৳0.00</span
+            >
+          </div>
+        </div>
+
+        <!-- 🚚 Tracking Card Section -->
+        <div class="tracking-card">
+          <div class="tracking-title">🚚 Delivery & Tracking</div>
+          <div class="tracking-grid">
+            <div class="tracking-box">
+              <div class="summary-label">Tracking ID</div>
+              <div class="tracking-id-text" id="track-id">—</div>
+            </div>
+            <div class="tracking-box">
+              <div class="summary-label">Tracking Status</div>
+              <div id="track-status" style="margin-top: 2px">
+                <span
+                  class="status-badge status-pending"
+                  id="track-status-badge"
+                  >Pending</span
+                >
+              </div>
+            </div>
+            <div class="tracking-box">
+              <div class="summary-label">Delivery Partner</div>
+              <div class="summary-val" style="font-size: 12px">
+                Steadfast Courier
+              </div>
+            </div>
+            <div class="tracking-box">
+              <div class="summary-label">Delivered At</div>
+              <div
+                class="summary-val"
+                id="track-delivered-at"
+                style="font-size: 12px"
+              >
+                —
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+    <script src="../js/firebase.js"></script>
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const orderId = urlParams.get("order") || urlParams.get("id");
+
+      async function loadInvoice() {
+        if (!orderId) {
+          showError();
+          return;
+        }
+        try {
+          const doc = await db.collection("orders").doc(orderId).get();
+          if (!doc.exists) {
+            showError();
+            return;
+          }
+          renderData(doc.id, doc.data());
+        } catch (err) {
+          showError();
+        }
+      }
+
+      function showError() {
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("not-found").style.display = "flex";
+      }
+
+      function money(n) {
+        return `৳${Number(n || 0).toLocaleString("en-BD", { minimumFractionDigits: 2 })}`;
+      }
+
+      function renderData(id, o) {
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("invoice-content").style.display = "block";
+
+        // Ensures exact sync with orders page format (#id)
+        const invoiceNo = o.invoiceNo || `#${id.slice(0, 6).toUpperCase()}`;
+        document.getElementById("inv-number").textContent = invoiceNo;
+
+        const createdDate = o.createdAt?.toDate
+          ? o.createdAt.toDate()
+          : new Date();
+        document.getElementById("inv-date").textContent =
+          createdDate.toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          });
+
+        const status = (o.status || "pending").toLowerCase();
+        const statusBadge = document.getElementById("inv-status-badge");
+        statusBadge.textContent =
+          status.charAt(0).toUpperCase() + status.slice(1);
+        statusBadge.className = `status-badge status-${status}`;
+
+        const trackBadge = document.getElementById("track-status-badge");
+        trackBadge.textContent =
+          status.charAt(0).toUpperCase() + status.slice(1);
+        trackBadge.className = `status-badge status-${status}`;
+
+        const name =
+          o.customerName ||
+          o.userName ||
+          o.shippingAddress?.fullName ||
+          "Guest";
+        const phone = o.phone || o.shippingAddress?.phone || "";
+        const address = [
+          o.address || o.shippingAddress?.address,
+          o.city || o.shippingAddress?.city,
+        ]
+          .filter(Boolean)
+          .join(", ");
+        document.getElementById("inv-client").innerHTML =
+          `<strong>${name}</strong><br>${phone}<br>${address}`;
+
+        const items = Array.isArray(o.items)
+          ? o.items
+          : Array.isArray(o.cart)
+            ? o.cart
+            : [];
+
+        document.getElementById("inv-items-body").innerHTML = items
+          .map((item, idx) => {
+            const qty = item.quantity || item.qty || 1;
+            const price = Number(item.price || 0);
+            return `
+          <tr>
+            <td class="text-center">${idx + 1}</td>
+            <td><strong>${item.name || item.title || "Product"}</strong></td>
+            <td class="text-center">${qty}</td>
+            <td class="text-right">${money(price)}</td>
+            <td class="text-right price-amount">${money(price * qty)}</td>
+          </tr>
+        `;
+          })
+          .join("");
+
+        const shipping = Number(o.shippingFee || o.deliveryCharge || 0);
+        const discount = Number(o.discount || 0);
+        const total = Number(o.totalAmount || o.total || 0);
+
+        document.getElementById("sum-payment").textContent =
+          o.paymentMethod || "COD";
+        document.getElementById("sum-shipping").textContent = money(shipping);
+        document.getElementById("sum-discount").textContent = money(discount);
+        document.getElementById("sum-total").textContent = money(total);
+
+        document.getElementById("track-id").textContent =
+          o.trackingId || `BW-${id.slice(0, 10).toUpperCase()}`;
+        document.getElementById("track-delivered-at").textContent =
+          status === "delivered"
+            ? createdDate.toLocaleDateString("en-US")
+            : "—";
+      }
+
+      loadInvoice();
+    </script>
+  </body>
+</html>
