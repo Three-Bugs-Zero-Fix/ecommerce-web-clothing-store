@@ -84,9 +84,13 @@
                         <input type="text" id="ship-name" required placeholder="e.g. John Doe">
                     </div>
 
+                    <!-- Updated Phone Number Field with +880 Prefix -->
                     <div class="form-group">
                         <label>Phone Number</label>
-                        <input type="tel" id="ship-phone" required placeholder="017XXXXXXXX">
+                        <div style="display: flex; align-items: center; border: 1px solid #cbd5e1; border-radius: 8px; overflow: hidden; background: #f8fafc;">
+                            <span style="padding: 8px 12px; background: #e2e8f0; color: #334151; font-weight: 600; font-size: 14px; border-right: 1px solid #cbd5e1;">+880</span>
+                            <input type="tel" id="ship-phone" required maxlength="10" placeholder="17XXXXXXXX" style="border: none; outline: none; padding: 8px 12px; flex: 1; background: #fff; font-size: 14px;">
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -95,15 +99,11 @@
                     </div>
 
                     <div class="form-row">
-                        <!-- UPDATE: Changed input-group to form-group and removed inline styles -->
                         <div class="form-group">
                             <label for="ship-city">City / District</label>
                             <select id="ship-city" required>
                                 <option value="" disabled selected>Select your district...</option>
-                                <!-- Inside Dhaka -->
                                 <option value="Dhaka">Dhaka</option>
-
-                                <!-- Outside Dhaka -->
                                 <option value="Bagerhat">Bagerhat</option>
                                 <option value="Bandarban">Bandarban</option>
                                 <option value="Barguna">Barguna</option>
@@ -176,7 +176,7 @@
                         </div>
                     </div>
 
-                    <!-- Updated Payment Methods -->
+                    <!-- Payment Methods -->
                     <h3>Payment Method</h3>
                     <div class="payment-methods-container">
 
@@ -233,9 +233,7 @@
         </div>
     </main>
 
-    <!-- PROFILE DRAWER -->
-    
-    <!-- Loading Screen (Shows while checking auth) -->
+    <!-- Loading Screen -->
     <div id="auth-loading" style="text-align: center; padding: 100px 0; font-size: 18px; color: #666;">
         Checking secure connection...
     </div>
