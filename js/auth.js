@@ -33,9 +33,18 @@ function friendlyAuthError(error) {
 /* ---------- Register ---------- */
 async function registerUser({ name, email, password }) {
   const cred = await auth.createUserWithEmailAndPassword(email, password);
+
   if (name) {
     await cred.user.updateProfile({ displayName: name });
   }
+
+  await db.collection("users").doc(cred.user.uid).set({
+    name: name || "",
+    email: email,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+  });
+
   return cred.user;
 }
 

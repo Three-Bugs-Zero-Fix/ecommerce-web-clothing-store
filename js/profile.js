@@ -378,38 +378,28 @@ if (profilePhotoInput) {
 ============================================================ */
 
 function updatePhotoPreview(url) {
-
-    if (!profilePhoto ||
-        !profilePhotoPlaceholder) {
-
+    if (!profilePhoto || !profilePhotoPlaceholder) {
         return;
     }
 
-
     if (url) {
-
-        profilePhoto.src =
-            url;
-
-        profilePhoto.style.display =
-            "block";
-
-        profilePhotoPlaceholder.style.display =
-            "none";
-
+        profilePhoto.src = url;
+        profilePhoto.style.display = "block";
+        profilePhotoPlaceholder.style.display = "none";
     } else {
+        profilePhoto.src = "";
+        profilePhoto.style.display = "none";
+        profilePhotoPlaceholder.style.display = "flex";
 
-        profilePhoto.src =
-            "";
+        const name =
+            profileName?.value?.trim() ||
+            currentUser?.displayName ||
+            "User";
 
-        profilePhoto.style.display =
-            "none";
-
-        profilePhotoPlaceholder.style.display =
-            "flex";
+        profilePhotoPlaceholder.textContent =
+            name.charAt(0).toUpperCase();
     }
 }
-
 
 /* ============================================================
    PHOTO LOADING
