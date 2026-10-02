@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders — BlueWear</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/shop.css">
+    <style>
+        .my-orders-page {
+            padding: 50px 0;
+            min-height: 65vh;
+        }
+        .my-orders-header {
+            margin-bottom: 20px;
+        }
+        .my-orders-header h1 {
+            font-size: 32px;
+            color: #172033;
+        }
+        /* Filter Controls Styling */
+        .orders-filter-bar {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            background: #fff;
+            padding: 15px 20px;
+            border-radius: 12px;
+            border: 1px solid #e5eaf1;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.01);
+            align-items: flex-end;
+        }
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .filter-group label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+        }
+        .filter-group input, .filter-group select {
+            padding: 8px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 13.5px;
+            color: #334151;
+            outline: none;
+            background: #f8fafc;
+        }
+        .filter-group input:focus, .filter-group select:focus {
+            border-color: #2563eb;
+            background: #fff;
+        }
+        .filter-reset-btn {
+            padding: 9px 16px;
+            background: #f1f5f9;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: none; /* Initially hidden */
+            height: 38px;
+        }
+        .filter-reset-btn:hover {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+
+        .orders-table-wrap {
+            background: #fff;
+            border: 1px solid #e5eaf1;
+            border-radius: 12px;
+            overflow-x: auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        }
+        .orders-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            white-space: nowrap;
+        }
+        .orders-table th {
+            padding: 14px 18px;
+            background: #f8fafc;
+            color: #64748b;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-bottom: 1px solid #e5eaf1;
+        }
+        .orders-table td {
+            padding: 16px 18px;
+            font-size: 13.5px;
+            color: #334151;
+            border-bottom: 1px solid #f1f5f9;
+            vertical-align: middle;
+        }
+        .orders-table tbody tr:hover {
+            background: #fcfcfd;
+        }
+        .order-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11.5px;
+            font-weight: 700;
+            text-transform: capitalize;
+        }
+        .status-pending { background: #fef3c7; color: #b45309; }
+        .status-processing { background: #e0f2fe; color: #0284c7; }
+        .status-out-for-delivery { background: #ede9fe; color: #7c3aed; }
+        .status-delivered { background: #d1fae5; color: #059669; }
+        .status-cancel, .status-cancelled { background: #fee2e2; color: #b91c1c; }
+
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: #f1f5f9;
+            color: #334151;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 12.5px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .action-btn:hover {
+            background: #1769e0;
+            color: #fff;
+            border-color: #1769e0;
+        }
+        .empty-orders {
+            text-align: center;
+            padding: 60px 20px;
+            color: #64748b;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+    <header class="navbar">
+        <div class="container navbar-inner">
+
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M6 2l1.5 4h9L18 2" />
+                        <path d="M3.5 6h17l-1.2 13a2 2 0 0 1-2 1.8H6.7a2 2 0 0 1-2-1.8L3.5 6z" />
+                        <path d="M8.5 10a3.5 3.5 0 0 0 7 0" />
+                    </svg>
+                </span>
+
+                <span class="logo-text">BlueWear</span>
+            </a>
+
+            <nav class="nav-menu" aria-label="Main navigation">
+                <a href="../index.html">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="../index.html#categories">Categories</a>
+                <a href="../index.html#about">About</a>
+            </nav>
+
+            <div class="nav-actions">
+
+                <a href="cart.html" class="cart-btn" id="cart-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        aria-hidden="true">
+                        <path d="M16 5h6" />
+                        <path d="M19 2v6" />
+                        <path d="m2.05 2.05 1.099-.028a1 1 0 011.008.815l2.69 14.347A1 1 0 007.83 18H18" />
+                        <path d="M4.564 5H12" />
+                        <path d="M6.25 14h12.712a2 2 0 001.991-1.57l.172-1.041" />
+                        <circle cx="18" cy="20" r="2" />
+                        <circle cx="8" cy="20" r="2" />
+                    </svg>
+
+                    <span>
+                        Cart (<span id="nav-cart-count">0</span>)
+                    </span>
+                </a>
+
+                <button type="button" class="profile-btn profile-btn-guest" id="profile-btn"
+                    aria-label="Open account menu">
+                    <span id="profile-btn-content">👤</span>
+                </button>
+
+            </div>
+        </div>
+    </header>
+
+
+    <!-- =========================================================
+       MY ORDERS CONTENT
+    ========================================================== -->
+    <main class="container my-orders-page">
+        <div class="my-orders-header">
+            <h1>My Orders</h1>
+            <p style="color: #667085; font-size: 14px; margin-top: 4px;">Track and view your previous purchases.</p>
+        </div>
+
+        <!-- Filter Bar with Reset button placed next to amount sort dropdown -->
+        <div class="orders-filter-bar" id="orders-filter-bar" style="display: none;">
+            <div class="filter-group">
+                <label for="filter-date">Filter by Date</label>
+                <input type="date" id="filter-date">
+            </div>
+
+            <div class="filter-group" style="display: flex; flex-direction: row; align-items: flex-end; gap: 10px;">
+                <div>
+                    <label for="filter-amount">Sort by Amount</label>
+                    <select id="filter-amount">
+                        <option value="">Default (Newest)</option>
+                        <option value="low-high">Amount: Low to High</option>
+                        <option value="high-low">Amount: High to Low</option>
+                    </select>
+                </div>
+                <button type="button" class="filter-reset-btn" id="reset-filters">Reset Filters</button>
+            </div>
+        </div>
+
+        <div id="orders-loading" style="text-align: center; padding: 40px; color: #667085;">Loading your orders...</div>
+
+        <div class="orders-table-wrap" id="orders-table-card" style="display: none;">
+            <table class="orders-table">
+                <thead>
+                    <tr>
+                        <th>Invoice No</th>
+                        <th>Date</th>
+                        <th>Total Amount</th>
+                        <th>Payment</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="customer-orders-body">
+                    <!-- Dynamic Orders Will Be Rendered Here -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+    <footer class="footer">
+        <div class="container footer-inner">
+
+            <div class="footer-brand">
+                <h2>BLUEWEAR</h2>
+                <p>Simple clothing for everyday life.</p>
+            </div>
+
+            <div class="footer-column">
+                <h3>Shop</h3>
+                <a href="shop.html?category=Men">Men</a>
+                <a href="shop.html?category=Women">Women</a>
+                <a href="shop.html?category=Kids">Kids</a>
+                <a href="shop.html?category=Accessories">Accessories</a>
+            </div>
+
+            <div class="footer-column">
+                <h3>Help</h3>
+                <a href="#">Contact</a>
+                <a href="#">Shipping</a>
+                <a href="#">Returns</a>
+                <a href="#">FAQ</a>
+            </div>
+
+            <div class="footer-column">
+                <h3>Company</h3>
+                <a href="#">About Us</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms</a>
+            </div>
+
+        </div>
+
+        <div class="container footer-bottom">
+            <p>© 2026 BlueWear. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <!-- =========================
+         PROFILE DRAWER
+    ========================== -->
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+
+    <div class="profile-drawer" id="profile-drawer">
+        <div class="drawer-head">
+            <span>MY ACCOUNT</span>
+            <button type="button" id="drawer-close" aria-label="Close account menu">✕</button>
+        </div>
+        <div class="drawer-body" id="drawer-body">
+            <p class="drawer-loading">Checking your session…</p>
+        </div>
+    </div>
+
+
+    <!-- =========================
+         FIREBASE & SCRIPTS
+    ========================== -->
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+
+    <script src="../js/firebase.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/profile_drawer.js"></script>
+
+    <script>
+        let allCustomerOrders = [];
+
+        // Ensure user is authenticated before loading orders
+        requireAuth("login.html").then(user => {
+            loadCustomerOrders(user);
+        });
+
+        // Function to fetch customer orders securely
+        async function loadCustomerOrders(user) {
+            const loadingEl = document.getElementById("orders-loading");
+            const tableCard = document.getElementById("orders-table-card");
+            const filterBar = document.getElementById("orders-filter-bar");
+
+            try {
+                // Fetch all orders from database to perform client-side filtering and sorting
+                const snapshot = await db.collection("orders").get();
+
+                loadingEl.style.display = "none";
+
+                let ordersList = [];
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    
+                    // Match order with user using UID or Email variations
+                    const isMatch = 
+                        (data.userId && data.userId === user.uid) ||
+                        (data.uid && data.uid === user.uid) ||
+                        (data.customerUid && data.customerUid === user.uid) ||
+                        (data.userEmail && data.userEmail === user.email) ||
+                        (data.email && data.email === user.email);
+
+                    if (isMatch) {
+                        ordersList.push({ id: doc.id, ...data });
+                    }
+                });
+
+                // Display empty state if no matching orders found
+                if (ordersList.length === 0) {
+                    tableCard.style.display = "block";
+                    tableCard.innerHTML = `
+                        <div class="empty-orders">
+                            <h3>No orders found</h3>
+                            <p style="margin: 8px 0 16px; font-size: 13px;">You haven't placed any orders yet.</p>
+                            <a href="shop.html" class="primary-btn" style="display:inline-block; text-decoration:none;">Start Shopping</a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                allCustomerOrders = ordersList;
+                tableCard.style.display = "block";
+                filterBar.style.display = "flex";
+
+                // Render orders initially
+                renderOrders(allCustomerOrders);
+
+                // Setup filter event listeners
+                document.getElementById("filter-date").addEventListener("change", applyFilters);
+                document.getElementById("filter-amount").addEventListener("change", applyFilters);
+                document.getElementById("reset-filters").addEventListener("click", resetFilters);
+
+            } catch (error) {
+                console.error("Error loading customer orders:", error);
+                loadingEl.style.display = "none";
+                tableCard.style.display = "block";
+                tableCard.innerHTML = `
+                    <div class="empty-orders">
+                        <h3>No orders found</h3>
+                        <p style="margin: 8px 0 16px; font-size: 13px;">You haven't placed any orders yet.</p>
+                        <a href="shop.html" class="primary-btn" style="display:inline-block; text-decoration:none;">Start Shopping</a>
+                    </div>
+                `;
+            }
+        }
+
+        // Function to filter and sort orders based on user inputs
+        function applyFilters() {
+            const dateValue = document.getElementById("filter-date").value;
+            const amountSort = document.getElementById("filter-amount").value;
+            const resetBtn = document.getElementById("reset-filters");
+
+            // Show reset button if any filter or sort option is active
+            if (dateValue || amountSort) {
+                resetBtn.style.display = "block";
+            } else {
+                resetBtn.style.display = "none";
+            }
+
+            let filtered = [...allCustomerOrders];
+
+            // Filter by date if selected
+            if (dateValue) {
+                filtered = filtered.filter(order => {
+                    if (!order.createdAt?.toDate) return false;
+                    const orderDate = order.createdAt.toDate().toISOString().split('T')[0];
+                    return orderDate === dateValue;
+                });
+            }
+
+            // Sort by total amount if selected
+            if (amountSort === "low-high") {
+                filtered.sort((a, b) => (a.totalAmount || 0) - (b.totalAmount || 0));
+            } else if (amountSort === "high-low") {
+                filtered.sort((a, b) => (b.totalAmount || 0) - (a.totalAmount || 0));
+            } else {
+                // Default: Sort by creation date newest first
+                filtered.sort((a, b) => {
+                    const timeA = a.createdAt?.toMillis ? a.createdAt.toMillis() : 0;
+                    const timeB = b.createdAt?.toMillis ? b.createdAt.toMillis() : 0;
+                    return timeB - timeA;
+                });
+            }
+
+            renderOrders(filtered);
+        }
+
+        // Function to reset all filters
+        function resetFilters() {
+            document.getElementById("filter-date").value = "";
+            document.getElementById("filter-amount").value = "";
+            document.getElementById("reset-filters").style.display = "none"; // Hide reset button again
+            
+            // Sort back to default (newest first)
+            allCustomerOrders.sort((a, b) => {
+                const timeA = a.createdAt?.toMillis ? a.createdAt.toMillis() : 0;
+                const timeB = b.createdAt?.toMillis ? b.createdAt.toMillis() : 0;
+                return timeB - timeA;
+            });
+
+            renderOrders(allCustomerOrders);
+        }
+
+        // Function to render orders into the table body
+        function renderOrders(orders) {
+            const tbody = document.getElementById("customer-orders-body");
+
+            if (orders.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: 30px; color: #64748b;">No orders match the selected filter.</td>
+                    </tr>
+                `;
+                return;
+            }
+
+            let html = "";
+            orders.forEach(order => {
+                const orderId = order.id;
+                const invoiceNo = order.invoiceNo || `#${orderId.slice(0, 6).toUpperCase()}`;
+                const dateStr = order.createdAt?.toDate ? order.createdAt.toDate().toLocaleDateString("en-US", { month: 'short', day: 'numeric', year: 'numeric' }) : 'Recent';
+                const status = (order.status || "Pending").toLowerCase();
+                const statusText = order.status ? order.status.charAt(0).toUpperCase() + order.status.slice(1) : "Pending";
+                
+                html += `
+                    <tr>
+                        <td style="font-weight: 600; color: #2563eb;">${invoiceNo}</td>
+                        <td>${dateStr}</td>
+                        <td style="font-weight: 600;">৳${(order.totalAmount || 0).toLocaleString()}</td>
+                        <td style="text-transform: uppercase; font-size: 12px; font-weight: 600;">${order.paymentMethod || 'COD'}</td>
+                        <td>
+                            <span class="order-badge status-${status.replace(/\s+/g, '-')}">
+                                ${statusText}
+                            </span>
+                        </td>
+                        <td>
+                            <div style="display: flex; gap: 8px;">
+                                <a href="../admin/invoice.html?id=${orderId}" target="_blank" class="action-btn" title="View Invoice">
+                                    View Details
+                                </a>
+                                <a href="track-order.html?id=${orderId}" class="action-btn" title="Track Order" style="background: #eef2ff; color: #4f46e5; border-color: #c7d2fe;">
+                                    Track
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = html;
+        }
+    </script>
+</body>
+
+</html>
