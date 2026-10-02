@@ -1,5 +1,5 @@
 /* ============================================================
-   Handles checkout authentication, summary loading, and order placement.
+   Handles checkout authentication guard, summary loading, and order placement (Supports Guest Checkout).
    ============================================================ */
 
 const checkoutMain = document.getElementById("checkout-main");
@@ -12,15 +12,12 @@ let cartItems = JSON.parse(localStorage.getItem("blueWearCart")) || [];
 let shippingFee = 0;
 
 // ========================================
-// 1. AUTHENTICATION GUARD & AUTO-FILL
+// 1. AUTH STATE CHECK (Allowing Guest Checkout)
 // ========================================
 auth.onAuthStateChanged((user) => {
-  if (!user) {
-    alert("Please login to proceed to checkout.");
-    window.location.href = "login.html";
-  } else {
-    currentUser = user;
+    currentUser = user; // Can be null if guest
 
+    // Always fetch latest cart data from localStorage
     cartItems = JSON.parse(localStorage.getItem("blueWearCart")) || [];
 
     if (cartItems.length === 0) {
@@ -29,16 +26,17 @@ auth.onAuthStateChanged((user) => {
       return;
     }
 
+    // Show the checkout page and hide loading screen for everyone (Guests & Logged-in users)
     authLoading.style.display = "none";
     checkoutMain.style.display = "block";
 
+    // If user is logged in, auto-fill their name
     const shipNameInput = document.getElementById("ship-name");
-    if (shipNameInput && user.displayName) {
+    if (shipNameInput && user && user.displayName) {
         shipNameInput.value = user.displayName;
     }
 
     loadOrderSummary();
-  }
 });
 
 // ========================================
@@ -102,6 +100,7 @@ async function loadOrderSummary() {
   const container = document.getElementById("checkout-items-container");
   let subtotal = 0;
 
+  if (!container) return;
   container.innerHTML = "";
 
   for (let index = 0; index < cartItems.length; index++) {
@@ -181,26 +180,22 @@ async function loadOrderSummary() {
 }
 
 // ========================================
-// 6. HANDLE FORM SUBMISSION (PLACE ORDER)
+// 6. HANDLE FORM SUBMISSION (PLACE ORDER FOR GUESTS & USERS)
 // ========================================
 checkoutForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  if (!currentUser) return;
-    
   if (shippingFee === 0) {
       alert("Please select a city/district for delivery.");
       return;
   }
 
-  // Validate phone number (must be exactly 10 digits after +880)
   const phoneInputVal = document.getElementById("ship-phone").value.trim();
   if (!/^\d{10}$/.test(phoneInputVal)) {
       alert("Please enter a valid 10-digit phone number after +880 (e.g., 017XXXXXXXX).");
       return;
   }
 
-  // Final full phone number format
   const fullPhoneNumber = "+880" + phoneInputVal;
 
   placeOrderBtn.disabled = true;
@@ -210,10 +205,10 @@ checkoutForm.addEventListener("submit", async (e) => {
       const subtotalCalc = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         
       const orderData = {
-          userId: currentUser.uid,
-          userEmail: currentUser.email,
+          userId: currentUser ? currentUser.uid : "guest-user",
+          userEmail: currentUser ? currentUser.email : "guest@bluewear.com",
           customerName: document.getElementById("ship-name").value.trim(),
-          phone: fullPhoneNumber, // Saved with +880 prefix
+          phone: fullPhoneNumber,
           address: document.getElementById("ship-address").value.trim(),
           city: document.getElementById("ship-city").value,
           zip: document.getElementById("ship-zip").value.trim(),
