@@ -576,9 +576,19 @@
 
 .customer-order-table-wrap {
     width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
     overflow-x: auto;
+
     border: 1px solid #e7eaf0;
     border-radius: 10px;
+}
+
+.customer-order-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: #f8fafc;
 }
 
 .customer-order-table {
