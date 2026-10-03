@@ -254,11 +254,9 @@
 
   text-align: center;
 
-  background: linear-gradient(
-    180deg,
-    #f8fbff 0%,
-    #ffffff 100%
-  );
+  background: linear-gradient(180deg,
+      #f8fbff 0%,
+      #ffffff 100%);
 
   border: 1px dashed #cdd9e8;
   border-radius: 20px;
