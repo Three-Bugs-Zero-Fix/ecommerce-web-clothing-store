@@ -1103,7 +1103,27 @@
 
         <div class="customer-modal-section">
 
-            <div class="customer-info-grid">
+    <div class="customer-profile-header">
+
+    <div class="customer-profile-avatar">
+        ${
+            customer.photoUrl
+                ? `<img src="${escapeHtml(customer.photoUrl)}" alt="Customer profile">`
+                : `<span>${escapeHtml(
+                    (customer.name || customer.email || "?")
+                        .charAt(0)
+                        .toUpperCase()
+                )}</span>`
+        }
+    </div>
+
+    <div class="customer-profile-name">
+        ${escapeHtml(customer.name || "Customer")}
+    </div>
+
+</div>
+
+    <div class="customer-info-grid">
 
                 <div class="customer-info-item">
                     <span class="customer-info-label">Name</span>
@@ -1128,9 +1148,9 @@
 
                 <div class="customer-info-item">
                     <span class="customer-info-label">Customer ID</span>
-<span class="customer-info-value">
-    ${escapeHtml(customer.id.slice(0, 8).toUpperCase())}
-</span>
+                    <span class="customer-info-value">
+                  ${escapeHtml(customer.id.slice(0, 8).toUpperCase())}
+                    </span>
                 </div>
 
             </div>
