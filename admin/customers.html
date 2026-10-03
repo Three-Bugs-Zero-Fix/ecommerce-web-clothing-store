@@ -182,87 +182,83 @@
                 <span class="nav-label">View Store</span>
             </a>
 
-            <div class="dt-sidebar-profile-wrap" style="margin-top: 30px;">
-
-                <div class="dt-profile-popup" id="profile-popup">
-
-                    <div class="dt-profile-popup-head">
-
-                        <div class="dt-sidebar-avatar" id="popup-avatar">
-                            ?
-                        </div>
-
-                        <div>
-                            <div class="dt-sidebar-profile-name" id="popup-name">
-                                Admin
-                            </div>
-
-                            <div class="dt-sidebar-profile-email" id="popup-email">
-                                —
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <a href="index.html" class="dt-profile-popup-item">
-
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                            <rect x="3" y="3" width="8" height="8" rx="1.5" />
-                            <rect x="13" y="3" width="8" height="8" rx="1.5" />
-                            <rect x="3" y="13" width="8" height="8" rx="1.5" />
-                            <rect x="13" y="13" width="8" height="8" rx="1.5" />
-                        </svg>
-
-                        Dashboard
-
-                    </a>
-
-                    <div class="dt-profile-popup-divider"></div>
-
-                    <button type="button" class="dt-profile-popup-item danger" id="popup-logout">
-
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                            <path d="M16 17l5-5-5-5" />
-                            <path d="M21 12H9" />
-                        </svg>
-
-                        Log out
-
-                    </button>
-
-                </div>
-
-                <button type="button" class="dt-sidebar-profile" id="profile-trigger">
-
-                    <div class="dt-sidebar-avatar" id="sidebar-avatar">
-                        ?
-                    </div>
-
-                    <div>
-
-                        <div class="dt-sidebar-profile-name" id="sidebar-name">
-                            Admin
-                        </div>
-
-                        <div class="dt-sidebar-profile-email" id="sidebar-email">
-                            —
-                        </div>
-
-                    </div>
-
-                    <span class="dt-profile-chevron">
-
-                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M8 9l4-4 4 4M8 15l4 4 4-4" />
-                        </svg>
-
-                    </span>
-
-                </button>
-
+            <div class="dt-sidebar-profile-wrap">
+          <div class="dt-profile-popup" id="profile-popup">
+            <div class="dt-profile-popup-head">
+              <div class="dt-sidebar-avatar" id="popup-avatar">?</div>
+              <div>
+                <div class="dt-sidebar-profile-name" id="popup-name">Admin</div>
+                <div class="dt-sidebar-profile-email" id="popup-email">—</div>
+              </div>
             </div>
+            <a href="index.html" class="dt-profile-popup-item">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <rect x="3" y="3" width="8" height="8" rx="1.5" />
+                <rect x="13" y="3" width="8" height="8" rx="1.5" />
+                <rect x="3" y="13" width="8" height="8" rx="1.5" />
+                <rect x="13" y="13" width="8" height="8" rx="1.5" />
+              </svg>
+              Dashboard
+            </a>
+            <a href="profile.html" class="dt-profile-popup-item">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <circle cx="12" cy="12" r="3" />
+                <path
+                  d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"
+                />
+              </svg>
+              Edit Profile
+            </a>
+            <div class="dt-profile-popup-divider"></div>
+            <button
+              type="button"
+              class="dt-profile-popup-item danger"
+              id="popup-logout"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                <path d="M16 17l5-5-5-5" />
+                <path d="M21 12H9" />
+              </svg>
+              Log out
+            </button>
+          </div>
+
+          <button type="button" class="dt-sidebar-profile" id="profile-trigger">
+            <div class="dt-sidebar-avatar" id="sidebar-avatar">?</div>
+            <div>
+              <div class="dt-sidebar-profile-name" id="sidebar-name">Admin</div>
+              <div class="dt-sidebar-profile-email" id="sidebar-email">—</div>
+            </div>
+            <span class="dt-profile-chevron">
+              <svg
+                viewBox="0 0 24 24"
+                width="14"
+                height="14"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M8 9l4-4 4 4M8 15l4 4 4-4" />
+              </svg>
+            </span>
+          </button>
+        </div>
 
         </aside>
 
